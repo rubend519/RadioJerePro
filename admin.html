@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radio Jere Pro — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--bg4:#1f1f35;--accent:#e94560;--green:#00e676;--gold:#ffd740;--text:#f0f0f8;--text2:#8899bb;--text3:#4a5070;--card:#161625;--border:#ffffff10;--border2:#ffffff22;--r:12px}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+
+/* LOGIN */
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:36px 32px;width:100%;max-width:380px;text-align:center}
+.login-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:6px}
+.login-logo span{color:var(--accent)}
+.login-sub{font-size:13px;color:var(--text2);margin-bottom:28px}
+.login-box input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:11px 14px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px}
+.login-box input:focus{border-color:var(--accent)}
+.btn-primary{width:100%;background:var(--accent);border:none;color:white;border-radius:var(--r);padding:12px;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:.2s}
+.btn-primary:hover{opacity:.9}
+.login-err{color:#e94560;font-size:12px;margin-top:8px;display:none}
+
+/* MAIN APP */
+#app{display:none}
+.header{background:var(--bg2);border-bottom:1px solid var(--border2);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.header-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px}
+.header-logo span{color:var(--accent)}
+.header-logo small{font-size:11px;color:var(--text2);font-weight:400;margin-left:6px}
+.hdr-right{display:flex;gap:8px;align-items:center}
+.btn-sm{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s}
+.btn-sm:hover{border-color:var(--accent);color:var(--text)}
+.badge-count{background:var(--accent);color:white;border-radius:20px;padding:2px 8px;font-size:11px;font-weight:700}
+
+.main{max-width:1000px;margin:0 auto;padding:20px 16px 80px}
+
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:5px}
+.tab{flex:1;padding:9px;text-align:center;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--text3);cursor:pointer;border-radius:9px;transition:.2s;border:none;background:none}
+.tab.active{background:var(--accent);color:white}
+.panel{display:none}.panel.active{display:block}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.stat-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:4px}
+.stat-label{font-size:11px;color:var(--text2)}
+
+/* STATION LIST */
+.list-toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.search-box{flex:1;min-width:160px;background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:9px 14px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.search-box:focus{border-color:var(--accent)}
+.filter-sel{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:9px 12px;color:var(--text2);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;cursor:pointer}
+
+.station-row{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;transition:.2s}
+.station-row:hover{border-color:var(--border2)}
+.s-logo{width:40px;height:40px;border-radius:8px;background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden}
+.s-logo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.s-info{flex:1;min-width:0}
+.s-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-meta{font-size:11px;color:var(--text2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-url{font-size:10px;color:var(--text3);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.s-badges{display:flex;gap:4px;flex-shrink:0;align-items:center}
+.badge{padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700}
+.badge-ok{background:#00e67622;color:var(--green);border:1px solid #00e67633}
+.badge-pending{background:#ffd74022;color:var(--gold);border:1px solid #ffd74033}
+.badge-err{background:#e9456022;color:var(--accent);border:1px solid #e9456033}
+.s-actions{display:flex;gap:5px;flex-shrink:0}
+.btn-icon{width:30px;height:30px;border-radius:8px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+.btn-icon:hover{border-color:var(--accent);color:var(--text)}
+.btn-icon.danger:hover{border-color:#e94560;color:#e94560}
+
+/* SEARCH PANEL */
+.search-form{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px;margin-bottom:16px}
+.form-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:14px;color:var(--text)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-row.three{grid-template-columns:2fr 1fr 1fr}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select{background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group select option{background:var(--bg3)}
+.btn-search{background:var(--accent);border:none;color:white;border-radius:9px;padding:10px 20px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:.2s;white-space:nowrap}
+.btn-search:hover{opacity:.9}
+.btn-search:disabled{opacity:.5;cursor:not-allowed}
+
+/* SEARCH RESULTS */
+.results-wrap{margin-top:12px}
+.result-item{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:7px;cursor:pointer;transition:.2s}
+.result-item:hover{border-color:var(--accent)}
+.result-item.selected{border-color:var(--green);background:var(--bg4)}
+.result-name{font-family:'Syne',sans-serif;font-weight:700;font-size:12px}
+.result-url{font-size:10px;color:var(--text3);margin-top:2px;word-break:break-all}
+.result-votes{font-size:10px;color:var(--text2);flex-shrink:0}
+
+/* MANUAL ADD FORM */
+.manual-form{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px}
+.manual-form .form-row{grid-template-columns:1fr 1fr}
+
+/* SAVE BAR */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border2);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:100}
+.save-info{font-size:13px;color:var(--text2)}
+.save-info strong{color:var(--gold)}
+.btn-save{background:var(--green);border:none;color:#000;border-radius:var(--r);padding:10px 24px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:.2s}
+.btn-save:hover{opacity:.9}
+.btn-save:disabled{opacity:.4;cursor:not-allowed}
+.btn-export{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:var(--r);padding:10px 18px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:.2s}
+.btn-export:hover{border-color:var(--accent);color:var(--text)}
+
+/* GH CONFIG */
+.gh-form{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:16px;margin-bottom:16px}
+.gh-status{padding:10px 14px;border-radius:9px;font-size:12px;margin-top:10px;display:none}
+.gh-status.ok{background:#00e67614;border:1px solid #00e67633;color:var(--green)}
+.gh-status.err{background:#e9456014;border:1px solid #e9456033;color:var(--accent)}
+
+/* TOAST */
+.toast{position:fixed;top:20px;right:20px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:12px 18px;font-size:13px;z-index:999;transform:translateX(200%);transition:.3s;max-width:300px}
+.toast.show{transform:translateX(0)}
+.toast.ok{border-color:var(--green);color:var(--green)}
+.toast.err{border-color:var(--accent);color:var(--accent)}
+
+/* EDIT MODAL */
+.modal-backdrop{display:none;position:fixed;inset:0;background:#00000088;z-index:200;align-items:flex-end;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}
+.modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:16px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.btn-cancel{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:9px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+.btn-save-modal{background:var(--accent);border:none;color:white;border-radius:9px;padding:10px 22px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:14px}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .form-row,.form-row.three{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Radio Jere <span>Pro</span></div>
+    <div class="login-sub">Panel de administración</div>
+    <input type="password" id="loginPass" placeholder="Contraseña de admin" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-primary" onclick="doLogin()">Entrar</button>
+    <div class="login-err" id="loginErr">Contraseña incorrecta</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="header">
+    <div class="header-logo">Radio Jere <span>Pro</span> <small>Admin</small></div>
+    <div class="hdr-right">
+      <span class="badge-count" id="totalBadge">0</span>
+      <button class="btn-sm" onclick="showTab('config')">⚙ GitHub</button>
+      <button class="btn-sm" onclick="doLogout()">Salir</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <button class="tab active" id="tab-list" onclick="showTab('list')">📋 Emisoras</button>
+      <button class="tab" id="tab-search" onclick="showTab('search')">🔍 Buscar y agregar</button>
+      <button class="tab" id="tab-manual" onclick="showTab('manual')">✏️ Manual</button>
+      <button class="tab" id="tab-config" onclick="showTab('config')">⚙ GitHub</button>
+    </div>
+
+    <!-- PANEL: LISTA -->
+    <div class="panel active" id="panel-list">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num" id="statTotal" style="color:var(--text)">0</div><div class="stat-label">Total</div></div>
+        <div class="stat-card"><div class="stat-num" id="statVerified" style="color:var(--green)">0</div><div class="stat-label">Verificadas</div></div>
+        <div class="stat-card"><div class="stat-num" id="statPending" style="color:var(--gold)">0</div><div class="stat-label">Sin verificar</div></div>
+        <div class="stat-card"><div class="stat-num" id="statUnsaved" style="color:var(--accent)">0</div><div class="stat-label">Sin guardar</div></div>
+      </div>
+      <div class="list-toolbar">
+        <input class="search-box" type="text" placeholder="🔎 Buscar por nombre, ciudad, género..." oninput="filterList(this.value)" id="listSearch">
+        <select class="filter-sel" onchange="filterByState(this.value)" id="stateFilter">
+          <option value="">Todas las ciudades</option>
+        </select>
+        <select class="filter-sel" onchange="filterByVerified(this.value)">
+          <option value="">Todas</option>
+          <option value="true">✓ Verificadas</option>
+          <option value="false">⚠ Sin verificar</option>
+        </select>
+      </div>
+      <div id="stationList"><div class="empty">Cargando emisoras...</div></div>
+    </div>
+
+    <!-- PANEL: BUSCAR -->
+    <div class="panel" id="panel-search">
+      <div class="search-form">
+        <div class="form-title">🔍 Buscar en Radio Browser API</div>
+        <div class="form-row three">
+          <div class="form-group">
+            <label>Nombre de la emisora</label>
+            <input type="text" id="rbName" placeholder="Ej: La Mega Bogotá" onkeydown="if(event.key==='Enter')searchRadioBrowser()">
+          </div>
+          <div class="form-group">
+            <label>País</label>
+            <select id="rbCountry">
+              <option value="Colombia" selected>Colombia</option>
+              <option value="Mexico">México</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Peru">Perú</option>
+              <option value="Chile">Chile</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Panama">Panamá</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="">Todos los países</option>
+            </select>
+          </div>
+          <div class="form-group" style="justify-content:flex-end">
+            <label>&nbsp;</label>
+            <button class="btn-search" id="btnSearch" onclick="searchRadioBrowser()">Buscar</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Género / Tags (opcional)</label>
+            <input type="text" id="rbTags" placeholder="salsa, noticias, rock...">
+          </div>
+          <div class="form-group">
+            <label>Ciudad / Estado (opcional)</label>
+            <input type="text" id="rbState" placeholder="Bucaramanga, Bogotá...">
+          </div>
+        </div>
+      </div>
+
+      <div class="results-wrap" id="rbResults">
+        <div class="empty" style="padding:20px">Ingresa un nombre y haz clic en Buscar para encontrar emisoras en Radio Browser.</div>
+      </div>
+
+      <div id="selectedPreview" style="display:none">
+        <div class="search-form" style="border-color:var(--green)44">
+          <div class="form-title" style="color:var(--green)">✓ Emisora seleccionada — confirma los datos</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" id="prevName">
+            </div>
+            <div class="form-group">
+              <label>Ciudad / Estado</label>
+              <input type="text" id="prevState">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>URL del stream</label>
+              <input type="text" id="prevUrl">
+            </div>
+            <div class="form-group">
+              <label>Tags / Género</label>
+              <input type="text" id="prevTags">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>País</label>
+              <input type="text" id="prevCountry" value="Colombia">
+            </div>
+            <div class="form-group">
+              <label>Favicon URL</label>
+              <input type="text" id="prevFavicon">
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+            <button class="btn-cancel" onclick="clearPreview()">Cancelar</button>
+            <button class="btn-search" onclick="addFromPreview()">➕ Agregar emisora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: MANUAL -->
+    <div class="panel" id="panel-manual">
+      <div class="manual-form">
+        <div class="form-title">✏️ Agregar emisora manualmente</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre *</label>
+            <input type="text" id="mName" placeholder="Ej: El Sol Bucaramanga 103.7 FM">
+          </div>
+          <div class="form-group">
+            <label>Ciudad / Estado *</label>
+            <input type="text" id="mState" placeholder="Bucaramanga">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>URL del stream *</label>
+            <input type="text" id="mUrl" placeholder="https://stream.zeno.fm/...">
+          </div>
+          <div class="form-group">
+            <label>URL fallback (opcional)</label>
+            <input type="text" id="mUrlResolved" placeholder="/stream-proxy?id=co-XXX">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tags / Género</label>
+            <input type="text" id="mTags" placeholder="salsa,tropical,pop">
+          </div>
+          <div class="form-group">
+            <label>País</label>
+            <select id="mCountry">
+              <option value="Colombia" selected>Colombia</option>
+              <option value="Mexico">México</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Peru">Perú</option>
+              <option value="Chile">Chile</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Favicon URL (opcional)</label>
+            <input type="text" id="mFavicon" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label>ID personalizado (opcional)</label>
+            <input type="text" id="mId" placeholder="co-036 (se genera automático)">
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button class="btn-cancel" onclick="clearManualForm()">Limpiar</button>
+          <button class="btn-search" onclick="addManual()">➕ Agregar emisora</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: CONFIG GITHUB -->
+    <div class="panel" id="panel-config">
+      <div class="gh-form">
+        <div class="form-title">⚙ Configuración de GitHub</div>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">
+          Para guardar cambios directamente en tu repositorio necesitas un token de GitHub con permiso <code style="background:var(--bg3);padding:1px 5px;border-radius:4px">repo</code>.
+          El token se guarda solo en tu navegador (localStorage), nunca se envía a terceros.
+        </p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Usuario GitHub</label>
+            <input type="text" id="ghUser" placeholder="rubend519">
+          </div>
+          <div class="form-group">
+            <label>Repositorio</label>
+            <input type="text" id="ghRepo" placeholder="radiojerepro">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ruta del archivo</label>
+            <input type="text" id="ghPath" placeholder="stations.json" value="stations.json">
+          </div>
+          <div class="form-group">
+            <label>Rama</label>
+            <input type="text" id="ghBranch" placeholder="main" value="main">
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+          <label>Token de acceso personal (GitHub PAT)</label>
+          <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxx">
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-search" onclick="saveGhConfig()">Guardar configuración</button>
+          <button class="btn-cancel" onclick="testGhConnection()">Probar conexión</button>
+        </div>
+        <div class="gh-status" id="ghStatus"></div>
+      </div>
+
+      <div class="gh-form">
+        <div class="form-title">📦 Exportar / Importar</div>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6">
+          Descarga el <code style="background:var(--bg3);padding:1px 5px;border-radius:4px">stations.json</code> con todos los cambios actuales para subirlo manualmente a GitHub si prefieres no usar el token.
+        </p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-export" onclick="downloadJSON()">⬇ Descargar stations.json</button>
+          <label class="btn-export" style="cursor:pointer">
+            ⬆ Importar stations.json
+            <input type="file" accept=".json" style="display:none" onchange="importJSON(this)">
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVE BAR -->
+  <div class="save-bar" id="saveBar" style="display:none">
+    <div class="save-info">
+      <strong id="unsavedCount">0</strong> cambios sin guardar en GitHub
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn-export" onclick="downloadJSON()">⬇ Descargar JSON</button>
+      <button class="btn-save" id="btnSaveGh" onclick="saveToGitHub()">Guardar en GitHub ↑</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-backdrop" id="editModal" onclick="if(event.target===this)closeEdit()">
+  <div class="modal-box">
+    <div class="modal-title">✏️ Editar emisora</div>
+    <input type="hidden" id="editUuid">
+    <div class="form-row">
+      <div class="form-group"><label>Nombre</label><input type="text" id="editName"></div>
+      <div class="form-group"><label>Ciudad / Estado</label><input type="text" id="editState"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>URL principal</label><input type="text" id="editUrl"></div>
+      <div class="form-group"><label>URL fallback</label><input type="text" id="editUrlR"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Tags</label><input type="text" id="editTags"></div>
+      <div class="form-group"><label>País</label><input type="text" id="editCountry"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Favicon URL</label><input type="text" id="editFavicon"></div>
+      <div class="form-group"><label>Verificada</label>
+        <select id="editVerified">
+          <option value="true">✓ Verificada</option>
+          <option value="false">⚠ Sin verificar</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEdit()">Cancelar</button>
+      <button class="btn-save-modal" onclick="saveEdit()">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────
+const ADMIN_PASS = 'jere2025';
+const STATIONS_URL = '/stations.json';
+const RB_SERVERS = ['de1.api.radio-browser.info','nl1.api.radio-browser.info','at1.api.radio-browser.info'];
+
+// ─── STATE ────────────────────────────────────────────
+let stations = [];
+let filtered = [];
+let unsavedChanges = 0;
+let ghConfig = {};
+let selectedRbStation = null;
+let listSearchQ = '';
+let listStateFilter = '';
+let listVerifiedFilter = '';
+
+// ─── LOGIN ────────────────────────────────────────────
+function doLogin() {
+  const pass = document.getElementById('loginPass').value;
+  if (pass === ADMIN_PASS) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadGhConfig();
+    loadStations();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+    document.getElementById('loginPass').value = '';
+  }
+}
+function doLogout() {
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('loginPass').value = '';
+}
+
+// ─── TABS ─────────────────────────────────────────────
+function showTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ─── LOAD STATIONS ────────────────────────────────────
+async function loadStations() {
+  try {
+    const cache = localStorage.getItem('rjp_admin_stations');
+    if (cache) {
+      stations = JSON.parse(cache);
+    } else {
+      const res = await fetch(STATIONS_URL + '?_=' + Date.now());
+      const data = await res.json();
+      stations = data.stations || data;
+    }
+    renderStats();
+    renderList();
+    populateStateFilter();
+  } catch(e) {
+    document.getElementById('stationList').innerHTML = '<div class="empty">⚠ No se pudo cargar stations.json. Verifica que el archivo existe en la raíz del sitio.</div>';
+  }
+}
+
+function saveLocal() {
+  localStorage.setItem('rjp_admin_stations', JSON.stringify(stations));
+}
+
+// ─── STATS ────────────────────────────────────────────
+function renderStats() {
+  const total = stations.length;
+  const verified = stations.filter(s => s.verified).length;
+  const pending = total - verified;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statVerified').textContent = verified;
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('statUnsaved').textContent = unsavedChanges;
+  document.getElementById('totalBadge').textContent = total;
+  document.getElementById('unsavedCount').textContent = unsavedChanges;
+  document.getElementById('saveBar').style.display = unsavedChanges > 0 ? 'flex' : 'none';
+}
+
+// ─── RENDER LIST ──────────────────────────────────────
+function filterList(q) {
+  listSearchQ = q.toLowerCase();
+  renderList();
+}
+function filterByState(v) {
+  listStateFilter = v;
+  renderList();
+}
+function filterByVerified(v) {
+  listVerifiedFilter = v;
+  renderList();
+}
+
+function renderList() {
+  filtered = stations.filter(s => {
+    const q = listSearchQ;
+    const matchQ = !q || s.name.toLowerCase().includes(q) || (s.state||'').toLowerCase().includes(q) || (s.tags||'').toLowerCase().includes(q);
+    const matchState = !listStateFilter || (s.state||'') === listStateFilter;
+    const matchVerified = !listVerifiedFilter || String(s.verified) === listVerifiedFilter;
+    return matchQ && matchState && matchVerified;
+  });
+
+  const el = document.getElementById('stationList');
+  if (!filtered.length) { el.innerHTML = '<div class="empty">No se encontraron emisoras con ese filtro.</div>'; return; }
+  el.innerHTML = filtered.map(s => stationRowHTML(s)).join('');
+}
+
+function stationRowHTML(s) {
+  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.style.display='none'" alt="">` : '📻';
+  const badge = s.verified
+    ? `<span class="badge badge-ok">✓ verificada</span>`
+    : `<span class="badge badge-pending">⚠ pendiente</span>`;
+  const urlShort = (s.url||'').replace('https://','').substring(0,50);
+  return `<div class="station-row">
+    <div class="s-logo">${logo}</div>
+    <div class="s-info">
+      <div class="s-name">${s.name}</div>
+      <div class="s-meta">${[s.country, s.state, s.tags].filter(Boolean).join(' · ')} ${badge}</div>
+      <div class="s-url">${urlShort}</div>
+    </div>
+    <div class="s-actions">
+      <button class="btn-icon" title="Probar stream" onclick="testStream('${s.stationuuid}')">▶</button>
+      <button class="btn-icon" title="Editar" onclick='openEdit(${JSON.stringify(s).replace(/"/g,"&quot;")})'>✏</button>
+      <button class="btn-icon danger" title="Eliminar" onclick="deleteStation('${s.stationuuid}')">🗑</button>
+    </div>
+  </div>`;
+}
+
+function populateStateFilter() {
+  const states = [...new Set(stations.map(s => s.state).filter(Boolean))].sort();
+  const sel = document.getElementById('stateFilter');
+  sel.innerHTML = '<option value="">Todas las ciudades</option>' +
+    states.map(st => `<option value="${st}">${st}</option>`).join('');
+}
+
+// ─── TEST STREAM ──────────────────────────────────────
+let testAudio = new Audio();
+function testStream(uuid) {
+  const s = stations.find(x => x.stationuuid === uuid);
+  if (!s) return;
+  testAudio.pause();
+  testAudio.src = s.url;
+  testAudio.play()
+    .then(() => showToast('▶ Reproduciendo: ' + s.name, 'ok'))
+    .catch(() => {
+      if (s.url_resolved) {
+        testAudio.src = s.url_resolved;
+        testAudio.play()
+          .then(() => showToast('▶ OK (fallback): ' + s.name, 'ok'))
+          .catch(() => showToast('✗ Sin señal: ' + s.name, 'err'));
+      } else {
+        showToast('✗ Sin señal: ' + s.name, 'err');
+      }
+    });
+}
+
+// ─── DELETE ───────────────────────────────────────────
+function deleteStation(uuid) {
+  if (!confirm('¿Eliminar esta emisora?')) return;
+  stations = stations.filter(s => s.stationuuid !== uuid);
+  unsavedChanges++;
+  saveLocal();
+  renderStats();
+  renderList();
+  showToast('Emisora eliminada', 'ok');
+}
+
+// ─── EDIT MODAL ───────────────────────────────────────
+function openEdit(s) {
+  if (typeof s === 'string') s = JSON.parse(s);
+  document.getElementById('editUuid').value = s.stationuuid;
+  document.getElementById('editName').value = s.name || '';
+  document.getElementById('editState').value = s.state || '';
+  document.getElementById('editUrl').value = s.url || '';
+  document.getElementById('editUrlR').value = s.url_resolved || '';
+  document.getElementById('editTags').value = s.tags || '';
+  document.getElementById('editCountry').value = s.country || 'Colombia';
+  document.getElementById('editFavicon').value = s.favicon || '';
+  document.getElementById('editVerified').value = String(s.verified || false);
+  document.getElementById('editModal').classList.add('open');
+}
+function closeEdit() {
+  document.getElementById('editModal').classList.remove('open');
+}
+function saveEdit() {
+  const uuid = document.getElementById('editUuid').value;
+  const idx = stations.findIndex(s => s.stationuuid === uuid);
+  if (idx < 0) return;
+  stations[idx] = {
+    ...stations[idx],
+    name: document.getElementById('editName').value,
+    state: document.getElementById('editState').value,
+    url: document.getElementById('editUrl').value,
+    url_resolved: document.getElementById('editUrlR').value || undefined,
+    tags: document.getElementById('editTags').value,
+    country: document.getElementById('editCountry').value,
+    favicon: document.getElementById('editFavicon').value,
+    verified: document.getElementById('editVerified').value === 'true',
+  };
+  unsavedChanges++;
+  saveLocal();
+  renderStats();
+  renderList();
+  closeEdit();
+  showToast('Cambios guardados localmente', 'ok');
+}
+
+// ─── RADIO BROWSER SEARCH ─────────────────────────────
+async function searchRadioBrowser() {
+  const name = document.getElementById('rbName').value.trim();
+  if (!name) { showToast('Escribe el nombre de la emisora', 'err'); return; }
+  const country = document.getElementById('rbCountry').value;
+  const tags = document.getElementById('rbTags').value.trim();
+  const state = document.getElementById('rbState').value.trim();
+
+  const btn = document.getElementById('btnSearch');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Buscando...';
+  document.getElementById('rbResults').innerHTML = '<div class="empty"><span class="spinner"></span> Consultando Radio Browser...</div>';
+  clearPreview();
+
+  let results = [];
+  for (const server of RB_SERVERS) {
+    try {
+      let url = `https://${server}/json/stations/search?name=${encodeURIComponent(name)}&hidebroken=true&limit=15&order=votes&reverse=true`;
+      if (country) url += `&country=${encodeURIComponent(country)}`;
+      if (tags) url += `&tag=${encodeURIComponent(tags)}`;
+      if (state) url += `&state=${encodeURIComponent(state)}`;
+      const res = await fetch(url, { headers: { 'User-Agent': 'RadioJerePro/2.0' }, signal: AbortSignal.timeout(7000) });
+      if (!res.ok) continue;
+      results = await res.json();
+      if (results.length) break;
+    } catch { continue; }
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Buscar';
+
+  if (!results.length) {
+    document.getElementById('rbResults').innerHTML = '<div class="empty">No se encontraron resultados en Radio Browser. Prueba con otro nombre o agrega la emisora manualmente.</div>';
+    return;
+  }
+
+  const alreadyIds = new Set(stations.map(s => s.stationuuid));
+  document.getElementById('rbResults').innerHTML = results.map(r => {
+    const already = alreadyIds.has(r.stationuuid);
+    const rJ = JSON.stringify(r).replace(/"/g, '&quot;');
+    return `<div class="result-item${already ? ' selected' : ''}" onclick='selectRbResult(${rJ})'>
+      <div style="flex:1;min-width:0">
+        <div class="result-name">${r.name} ${already ? '<span style="color:var(--green);font-size:10px">✓ ya existe</span>' : ''}</div>
+        <div class="result-url">${r.url_resolved || r.url}</div>
+        <div style="font-size:10px;color:var(--text2);margin-top:2px">${[r.country, r.state, r.tags].filter(Boolean).join(' · ')}</div>
+      </div>
+      <div class="result-votes">▲ ${r.votes || 0}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectRbResult(r) {
+  if (typeof r === 'string') r = JSON.parse(r);
+  selectedRbStation = r;
+  document.querySelectorAll('.result-item').forEach(el => el.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+
+  document.getElementById('prevName').value = r.name;
+  document.getElementById('prevState').value = r.state || '';
+  document.getElementById('prevUrl').value = r.url_resolved || r.url;
+  document.getElementById('prevTags').value = r.tags || '';
+  document.getElementById('prevCountry').value = r.country || 'Colombia';
+  document.getElementById('prevFavicon').value = r.favicon || '';
+  document.getElementById('selectedPreview').style.display = 'block';
+}
+
+function clearPreview() {
+  selectedRbStation = null;
+  document.getElementById('selectedPreview').style.display = 'none';
+}
+
+function addFromPreview() {
+  const name = document.getElementById('prevName').value.trim();
+  if (!name) { showToast('El nombre es obligatorio', 'err'); return; }
+  const existing = stations.find(s => s.name.toLowerCase() === name.toLowerCase());
+  if (existing && !confirm(`Ya existe "${existing.name}". ¿Agregar de todos modos?`)) return;
+
+  const newStation = {
+    stationuuid: selectedRbStation?.stationuuid || genId(),
+    name,
+    url: document.getElementById('prevUrl').value,
+    country: document.getElementById('prevCountry').value || 'Colombia',
+    state: document.getElementById('prevState').value,
+    tags: document.getElementById('prevTags').value,
+    favicon: document.getElementById('prevFavicon').value,
+    verified: false,
+  };
+
+  stations.push(newStation);
+  unsavedChanges++;
+  saveLocal();
+  renderStats();
+  renderList();
+  clearPreview();
+  showToast('✓ ' + newStation.name + ' agregada', 'ok');
+  showTab('list');
+}
+
+// ─── MANUAL ADD ───────────────────────────────────────
+function addManual() {
+  const name = document.getElementById('mName').value.trim();
+  const url = document.getElementById('mUrl').value.trim();
+  if (!name || !url) { showToast('Nombre y URL son obligatorios', 'err'); return; }
+
+  const customId = document.getElementById('mId').value.trim();
+  const urlR = document.getElementById('mUrlResolved').value.trim();
+  const newStation = {
+    stationuuid: customId || genId(),
+    name,
+    url,
+    country: document.getElementById('mCountry').value,
+    state: document.getElementById('mState').value,
+    tags: document.getElementById('mTags').value,
+    favicon: document.getElementById('mFavicon').value,
+    verified: false,
+  };
+  if (urlR) newStation.url_resolved = urlR;
+
+  stations.push(newStation);
+  unsavedChanges++;
+  saveLocal();
+  renderStats();
+  renderList();
+  clearManualForm();
+  showToast('✓ ' + newStation.name + ' agregada', 'ok');
+  showTab('list');
+}
+
+function clearManualForm() {
+  ['mName','mState','mUrl','mUrlResolved','mTags','mFavicon','mId'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('mCountry').value = 'Colombia';
+}
+
+function genId() {
+  const coIds = stations.filter(s => s.stationuuid.startsWith('co-')).map(s => parseInt(s.stationuuid.replace('co-',''))).filter(n => !isNaN(n));
+  const next = coIds.length ? Math.max(...coIds) + 1 : 36;
+  return 'co-' + String(next).padStart(3, '0');
+}
+
+// ─── GITHUB CONFIG ────────────────────────────────────
+function saveGhConfig() {
+  ghConfig = {
+    user: document.getElementById('ghUser').value.trim(),
+    repo: document.getElementById('ghRepo').value.trim(),
+    path: document.getElementById('ghPath').value.trim() || 'stations.json',
+    branch: document.getElementById('ghBranch').value.trim() || 'main',
+    token: document.getElementById('ghToken').value.trim(),
+  };
+  localStorage.setItem('rjp_gh_config', JSON.stringify({ ...ghConfig, token: '' }));
+  localStorage.setItem('rjp_gh_token', ghConfig.token);
+  showToast('Configuración de GitHub guardada', 'ok');
+}
+
+function loadGhConfig() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('rjp_gh_config') || '{}');
+    const token = localStorage.getItem('rjp_gh_token') || '';
+    ghConfig = { ...saved, token };
+    if (ghConfig.user) document.getElementById('ghUser').value = ghConfig.user;
+    if (ghConfig.repo) document.getElementById('ghRepo').value = ghConfig.repo;
+    if (ghConfig.path) document.getElementById('ghPath').value = ghConfig.path;
+    if (ghConfig.branch) document.getElementById('ghBranch').value = ghConfig.branch;
+    if (ghConfig.token) document.getElementById('ghToken').value = ghConfig.token;
+  } catch {}
+}
+
+async function testGhConnection() {
+  saveGhConfig();
+  const { user, repo, token } = ghConfig;
+  if (!user || !repo || !token) { showGhStatus('Completa usuario, repositorio y token', false); return; }
+  try {
+    const res = await fetch(`https://api.github.com/repos/${user}/${repo}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (res.ok) showGhStatus('✓ Conexión exitosa con GitHub', true);
+    else showGhStatus('✗ Error ' + res.status + ': verifica el token y el repositorio', false);
+  } catch(e) {
+    showGhStatus('✗ No se pudo conectar: ' + e.message, false);
+  }
+}
+
+function showGhStatus(msg, ok) {
+  const el = document.getElementById('ghStatus');
+  el.textContent = msg;
+  el.className = 'gh-status ' + (ok ? 'ok' : 'err');
+  el.style.display = 'block';
+}
+
+// ─── SAVE TO GITHUB ───────────────────────────────────
+async function saveToGitHub() {
+  const { user, repo, path, branch, token } = ghConfig;
+  if (!user || !repo || !token) {
+    showToast('Configura GitHub primero (tab ⚙)', 'err');
+    showTab('config');
+    return;
+  }
+
+  const btn = document.getElementById('btnSaveGh');
+  btn.disabled = true;
+  btn.textContent = 'Guardando...';
+
+  try {
+    // Obtener SHA actual del archivo
+    let sha = '';
+    try {
+      const getRes = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}?ref=${branch}`, {
+        headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (getRes.ok) {
+        const fileData = await getRes.json();
+        sha = fileData.sha;
+      }
+    } catch {}
+
+    // Construir JSON final
+    const jsonContent = buildFinalJSON();
+    const encoded = btoa(unescape(encodeURIComponent(jsonContent)));
+
+    const body = {
+      message: `admin: actualización de emisoras (${stations.length} total)`,
+      content: encoded,
+      branch,
+    };
+    if (sha) body.sha = sha;
+
+    const putRes = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${token}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (putRes.ok) {
+      unsavedChanges = 0;
+      localStorage.removeItem('rjp_admin_stations');
+      renderStats();
+      showToast('✓ stations.json guardado en GitHub. Netlify desplegará en ~1 min.', 'ok');
+    } else {
+      const err = await putRes.json();
+      showToast('✗ Error GitHub: ' + (err.message || putRes.status), 'err');
+    }
+  } catch(e) {
+    showToast('✗ Error: ' + e.message, 'err');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Guardar en GitHub ↑';
+}
+
+function buildFinalJSON() {
+  const data = {
+    _meta: {
+      version: '1.0',
+      description: 'Radio Jere Pro — emisoras curadas',
+      last_updated: new Date().toISOString().split('T')[0],
+      total: stations.length,
+      maintainer: 'Radio Jere Pro Admin'
+    },
+    stations
+  };
+  return JSON.stringify(data, null, 2);
+}
+
+// ─── DOWNLOAD / IMPORT ────────────────────────────────
+function downloadJSON() {
+  const blob = new Blob([buildFinalJSON()], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'stations.json';
+  a.click();
+}
+
+function importJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      const imported = data.stations || data;
+      if (!Array.isArray(imported)) throw new Error('Formato inválido');
+      stations = imported;
+      unsavedChanges = imported.length;
+      saveLocal();
+      renderStats();
+      renderList();
+      populateStateFilter();
+      showToast('✓ ' + imported.length + ' emisoras importadas', 'ok');
+    } catch(err) {
+      showToast('✗ JSON inválido: ' + err.message, 'err');
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+// ─── TOAST ────────────────────────────────────────────
+let toastTimer;
+function showToast(msg, type = 'ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+// ─── INIT ─────────────────────────────────────────────
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+</script>
+</body>
+</html>
