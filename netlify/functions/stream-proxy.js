@@ -1,15 +1,6 @@
 /**
- * stream-proxy.js — Radio Jere Pro v3.1
- * SOLUCIÓN DEFINITIVA: Piping real del stream audio
- *
- * El problema con 302 redirect: el browser bloquea los redirects
- * de playerservices.streamtheworld.com por CORS. La solución es
- * que el servidor haga fetch del audio y lo retransmita (pipe).
- *
- * Netlify Functions límite: 10MB response / 10s timeout
- * Para streams live: retransmitimos los primeros bytes para que
- * el browser establezca la conexión, luego usamos redirect a la
- * URL resuelta (que ya tiene CORS abierto desde el CDN real).
+ * stream-proxy.js — Radio Jere Pro v3.3
+ * Proxy inteligente con Caché de Memoria y Respaldo en Radio Browser
  */
 
 const STATIONS = {
@@ -96,9 +87,8 @@ const STATIONS = {
   },
 };
 
-// Cache en memoria para la URL CDN resuelta
 const resolvedCache = {};
-const CACHE_TTL = 5 * 60 * 1000;
+const CACHE_TTL = 15 * 60 * 1000;
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -107,45 +97,44 @@ const CORS = {
   'Access-Control-Expose-Headers': 'Content-Type, Content-Length, Icy-Name, Icy-Genre',
 };
 
-/**
- * Resuelve la URL CDN final siguiendo todos los redirects server-side.
- * playerservices.streamtheworld.com → redirect → cdn-server.live.streamtheworld.com/STATION
- */
-async function resolveCDN(urls) {
-  for (const url of urls) {
+async function resolveCDN(stationId) {
+  const stationConfig = STATIONS[stationId];
+  if (!stationConfig) return null;
+
+  for (const url of stationConfig.urls) {
     try {
-      // Seguir redirect manualmente para obtener la URL CDN final
       const res = await fetch(url, {
         method: 'GET',
         redirect: 'follow',
-        signal: AbortSignal.timeout(8000),
+        signal: AbortSignal.timeout(5000),
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; RadioJerePro/3.0)',
+          'User-Agent': 'Mozilla/5.0 (compatible; RadioJerePro/3.3)',
           'Icy-MetaData': '1',
         },
       });
-      // res.url es la URL final después de todos los redirects
       if (res.ok || res.status === 200) {
-        return { url: res.url, contentType: res.headers.get('content-type') || 'audio/mpeg' };
+        return res.url;
       }
     } catch {}
   }
 
-  // Fallback: Radio Browser API
-  const name = STATIONS[Object.keys(STATIONS).find(k => STATIONS[k].urls.includes(urls[0]))]?.name || '';
+  const nameQuery = stationConfig.name;
   for (const server of ['de1.api.radio-browser.info', 'nl1.api.radio-browser.info']) {
     try {
-      const q = name.split(' ').slice(0, 3).join(' ');
+      const q = nameQuery.split(' ').slice(0, 3).join(' ');
       const res = await fetch(
         `https://${server}/json/stations/search?name=${encodeURIComponent(q)}&country=Colombia&hidebroken=true&limit=3&order=votes&reverse=true`,
-        { signal: AbortSignal.timeout(5000), headers: { 'User-Agent': 'RadioJerePro/3.0' } }
+        { signal: AbortSignal.timeout(4000), headers: { 'User-Agent': 'RadioJerePro/3.3' } }
       );
       if (!res.ok) continue;
       const data = await res.json();
-      const best = data?.find(s => s.url_resolved);
-      if (best?.url_resolved) return { url: best.url_resolved, contentType: 'audio/mpeg' };
+      const best = data?.find(s => s.url_resolved || s.url);
+      if (best) {
+        return best.url_resolved || best.url;
+      }
     } catch {}
   }
+
   return null;
 }
 
@@ -163,11 +152,10 @@ exports.handler = async (event) => {
     };
   }
 
-  // Cache hit
   const cached = resolvedCache[id];
-  if (cached && Date.now() - cached.ts < CACHE_TTL) {
+  if (cached && (Date.now() - cached.ts < CACHE_TTL)) {
     if (event.queryStringParameters?.info === '1') {
-      return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' }, body: JSON.stringify({ id, url: cached.url }) };
+      return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' }, body: JSON.stringify({ id, url: cached.url, cached: true }) };
     }
     return {
       statusCode: 302,
@@ -177,8 +165,8 @@ exports.handler = async (event) => {
   }
 
   try {
-    const resolved = await resolveCDN(STATIONS[id].urls);
-    if (!resolved) {
+    const resolvedUrl = await resolveCDN(id);
+    if (!resolvedUrl) {
       return {
         statusCode: 404,
         headers: { ...CORS, 'Content-Type': 'application/json' },
@@ -186,18 +174,17 @@ exports.handler = async (event) => {
       };
     }
 
-    resolvedCache[id] = { url: resolved.url, ts: Date.now() };
+    resolvedCache[id] = { url: resolvedUrl, ts: Date.now() };
 
     if (event.queryStringParameters?.info === '1') {
-      return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' }, body: JSON.stringify({ id, url: resolved.url }) };
+      return { statusCode: 200, headers: { ...CORS, 'Content-Type': 'application/json' }, body: JSON.stringify({ id, url: resolvedUrl, cached: false }) };
     }
 
-    // Redirect a la URL CDN ya resuelta (tiene CORS abierto)
     return {
       statusCode: 302,
       headers: {
         ...CORS,
-        'Location': resolved.url,
+        'Location': resolvedUrl,
         'Cache-Control': 'no-cache, no-store',
         'X-Resolved-Station': STATIONS[id].name,
       },
