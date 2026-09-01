@@ -683,6 +683,22 @@ async function apiFetch(path,si=0){
   catch(e){clearTimeout(to); return apiFetch(path,si+1);}
 }
 
+// Función para filtrar emisoras repetidas por nombre/ciudad de forma limpia
+function filterUniqueStations(stations) {
+  const seenNames = new Set();
+  const seenUrls = new Set();
+  return stations.filter(s => {
+    const cleanName = (s.name || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 18);
+    const url = s.url_resolved || s.url || '';
+    if (!cleanName || (seenNames.has(cleanName) || (url && seenUrls.has(url)))) {
+      return false;
+    }
+    seenNames.add(cleanName);
+    if (url) seenUrls.add(url);
+    return true;
+  });
+}
+
 async function init(){
   setStatus('Conectando...','loading');
   await loadStationsJSON();
@@ -780,7 +796,7 @@ async function selectCountry(name, continent, pushNav=true){
   try{
     if(name === 'Colombia') {
       await loadStationsJSON();
-      allStations = [...COLOMBIA_CURADA];
+      allStations = filterUniqueStations([...COLOMBIA_CURADA]);
       filteredStations = [...allStations];
       renderStations(filteredStations, 'stationsList');
       setStStatus(`Cargando más emisoras de Colombia...`, 'loading');
@@ -808,9 +824,9 @@ async function selectCountry(name, continent, pushNav=true){
         !curadaIds.has(s.stationuuid) &&
         !curadaNames.has(s.name.toLowerCase().slice(0,15))
       );
-      allStations = [...COLOMBIA_CURADA, ...apiFiltered];
+      allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiFiltered]);
     } else {
-      allStations = apiStations;
+      allStations = filterUniqueStations(apiStations);
     }
 
     filteredStations = [...allStations];
@@ -923,7 +939,7 @@ function filterStations(){
       (s.state||'').toLowerCase().includes(ql)
     );
     if(localResults.length > 0) {
-      filteredStations = localResults;
+      filteredStations = filterUniqueStations(localResults);
       sortStations(currentSort, null);
     }
     try {
@@ -936,7 +952,7 @@ function filterStations(){
         navPush({ type:'search', data:{ q } });
         const uuids = new Set(localResults.map(s=>s.stationuuid));
         const fresh = rbResults.filter(s=>!uuids.has(s.stationuuid));
-        filteredStations = [...localResults, ...fresh];
+        filteredStations = filterUniqueStations([...localResults, ...fresh]);
         allStations = filteredStations;
         sortStations(currentSort, null);
         setStStatus(`${filteredStations.length} resultados para "${q}"`, 'ok');
@@ -1189,27 +1205,32 @@ async function _handleStreamError(s) {
     return;
   }
 
-  document.getElementById('pStatus').textContent = `⟳ Buscando señal alternativa (${attempt}/${MAX_RETRIES})...`;
+  document.getElementById('pStatus').textContent = `⟳ Buscando enlace nuevo (${attempt}/${MAX_RETRIES})...`;
   updateStreamBadge(s.stationuuid, 'retrying');
 
-  let nextUrl;
+  let nextUrl = null;
 
-  if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
-    nextUrl = await resolveProxyUrl(s);
-  } else if(attempt === 1 && DYNAMIC_RESOLVE_MAP[s.stationuuid]) {
-    nextUrl = await resolveStreamUrl(s);
-  } else if(attempt === 2 && PROXY_STATION_IDS.has(s.stationuuid)) {
+  // En los dos primeros intentos fallidos, buscamos activamente una URL fresca en la API
+  if(attempt <= 2) {
     try {
-      const res = await fetch(`/stream-proxy?id=${s.stationuuid}&info=1`);
-      if(res.ok) {
-        const data = await res.json();
-        nextUrl = data.url;
+      const results = await apiFetch(`/stations/search?name=${encodeURIComponent(s.name)}&limit=8&hidebroken=true`);
+      if(Array.isArray(results) && results.length > 0) {
+        const fresh = results.find(r => (r.url_resolved || r.url) && (r.url_resolved || r.url) !== audio.src);
+        if(fresh) {
+          nextUrl = fresh.url_resolved || fresh.url;
+          saveUrlOverride(s.stationuuid, nextUrl);
+        }
       }
     } catch(e) {}
-    if(!nextUrl) nextUrl = getProxyUrl(s.stationuuid);
-  } else {
-    const urls = await getAlternativeUrl(s);
-    nextUrl = urls[attempt - 1];
+  }
+
+  if(!nextUrl) {
+    if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
+      nextUrl = await resolveProxyUrl(s);
+    } else {
+      const urls = await getAlternativeUrl(s);
+      nextUrl = urls[attempt - 1];
+    }
   }
 
   if(!nextUrl) {
@@ -1424,10 +1445,10 @@ async function findNearbyExplore() {
       }
 
       const seen = new Set();
-      nearbyExploreData = found.filter(s => {
+      nearbyExploreData = filterUniqueStations(found.filter(s => {
         if(seen.has(s.stationuuid)) return false;
         seen.add(s.stationuuid); return true;
-      });
+      }));
 
       const santanderCuradas = COLOMBIA_CURADA.filter(s =>
         s.state && (
@@ -1438,7 +1459,7 @@ async function findNearbyExplore() {
       );
       const curadaIds = new Set(nearbyExploreData.map(s => s.stationuuid));
       const toAdd = santanderCuradas.filter(s => !curadaIds.has(s.stationuuid));
-      nearbyExploreData = [...toAdd, ...nearbyExploreData];
+      nearbyExploreData = filterUniqueStations([...toAdd, ...nearbyExploreData]);
 
       const label = locationLabel ? `📍 ${locationLabel}` : '📍 Tu ubicación';
       sub.textContent = `${label} · ${nearbyExploreData.length} emisoras cercanas`;
@@ -1509,7 +1530,7 @@ async function findNearbyStations() {
       btn.disabled = false;
 
       const serverRes = await apiFetch(`/stations/search?limit=300&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(countryName)}`);
-      nearbyStations = Array.isArray(serverRes) ? serverRes : [];
+      nearbyStations = filterUniqueStations(Array.isArray(serverRes) ? serverRes : []);
 
       let nearbyEl = document.getElementById('nearbyResults');
       if(!nearbyEl) {
@@ -1550,7 +1571,7 @@ function renderFavLocal(){
     ? [...COLOMBIA_CURADA, ...allStations]
     : [...allStations];
   const seen = new Set();
-  const unique = localSrc.filter(s=>{ if(seen.has(s.stationuuid)) return false; seen.add(s.stationuuid); return true; });
+  const unique = filterUniqueStations(localSrc.filter(s=>{ if(seen.has(s.stationuuid)) return false; seen.add(s.stationuuid); return true; }));
   const favS = unique.filter(s => favorites.includes(s.stationuuid));
   document.getElementById('favLocalCount').textContent = favS.length + ' emisoras';
   if(!favS.length){
