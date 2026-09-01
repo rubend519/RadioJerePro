@@ -628,8 +628,8 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-016',name:'Señal Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÑAL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
   {stationuuid:'co-017',name:'Oxígeno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'Bogotá',tags:'alternativa,pop',favicon:''},
   {stationuuid:'co-018',name:'Rumba Estéreo Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:''},
-  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'/stream-proxy?id=co-019',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'/stream-proxy?id=co-020',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://stream.zeno.fm/f392822xevduv',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://stream.zeno.fm/yariguies',url_resolved:'https://19843.live.streamtheworld.com/YARIGUIES_SC',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://cdn.radoxo.com/images/colombia/yariguies-stereo.webp',geo_lat:7.0653,geo_long:-73.8547},
   {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
@@ -1150,17 +1150,25 @@ async function playStation(s){
 
 async function _loadStream(s, url) {
   if(!url || typeof url !== 'string' || url.trim() === '') {
-    console.warn('[RJP] _loadStream: URL inválida para', s.name, '→', url);
     _handleStreamError(s);
     return;
   }
+  
+  let finalUrl = url.trim();
+  if (finalUrl.includes('streamtheworld.com') || finalUrl.includes('rcnradio.com') || finalUrl.includes('caracol.com.co')) {
+    if (urlOverrides[s.stationuuid]) {
+      finalUrl = urlOverrides[s.stationuuid];
+    }
+  }
+
   audio.pause();
-  audio.src = url.trim();
+  audio.src = finalUrl;
   audio.volume = document.getElementById('volSlider').value;
   document.getElementById('pName').textContent = s.name;
   document.getElementById('pStatus').textContent = '⟳ Conectando...';
   document.getElementById('nowName').textContent = s.name;
   document.getElementById('headerWave').classList.remove('idle');
+  
   const img = document.getElementById('pLogoImg');
   img.onerror = function() {
     this.onerror = null;
@@ -1168,6 +1176,7 @@ async function _loadStream(s, url) {
   };
   img.src = s.favicon || ICON;
   updateStreamBadge(s.stationuuid, null);
+  
   try {
     await audio.play();
     document.getElementById('pStatus').textContent = '▶ Reproduciendo';
@@ -1210,7 +1219,6 @@ async function _handleStreamError(s) {
 
   let nextUrl = null;
 
-  // En los dos primeros intentos fallidos, buscamos activamente una URL fresca en la API
   if(attempt <= 2) {
     try {
       const results = await apiFetch(`/stations/search?name=${encodeURIComponent(s.name)}&limit=8&hidebroken=true`);
