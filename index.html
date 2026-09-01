@@ -106,8 +106,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .p-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .vol-wrap{display:flex;align-items:center;gap:4px}
 .vol-wrap span{font-size:12px;color:var(--text2)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:60px;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
 .btn-stop{background:var(--accent);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 /* STATUS */
 .status-bar{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:8px 11px;font-size:11px;color:var(--text2);margin-bottom:11px;display:flex;align-items:center;gap:6px}
@@ -514,24 +514,18 @@ const audio = document.getElementById('audioPlayer');
 let allStations=[], filteredStations=[], currentStation=null, playing=false;
 let allCountries=[], currentContinent='', currentCountry='';
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
-// favStore guarda el objeto completo de cada emisora favorita para acceso global
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
 let favPaises = JSON.parse(localStorage.getItem('rjp_favpaises')||'["Colombia","Mexico","Argentina","Spain","United States"]');
 let liveListeners = parseInt(localStorage.getItem('rjp_live')||'0');
-// Conteo de reproducciones por emisora
 let playCounts = JSON.parse(localStorage.getItem('rjp_playcounts')||'{}');
-// Orden manual de favoritos
 let favOrder = JSON.parse(localStorage.getItem('rjp_favorder')||'[]');
-// Modo de orden de favoritos
 let currentFavSort = 'manual';
-// Overrides manuales de URL por stationuuid (persisten en localStorage)
 let urlOverrides = JSON.parse(localStorage.getItem('rjp_url_overrides')||'{}');
 function saveUrlOverride(uuid, url) {
   urlOverrides[uuid] = url;
   localStorage.setItem('rjp_url_overrides', JSON.stringify(urlOverrides));
 }
 
-// Oyentes en vivo — simulado localmente con BroadcastChannel
 let listenerChannel;
 try {
   listenerChannel = new BroadcastChannel('rjp_listeners');
@@ -540,18 +534,15 @@ try {
 } catch(e){}
 let liveCount = 1;
 function updateLiveCount(n){ document.getElementById('liveCount').textContent = n; }
-// Contador real con Firebase Realtime Database (gratis)
 const FB_URL = 'https://radiojere-live-default-rtdb.firebaseio.com';
 const sessionId = 'sess_' + Math.random().toString(36).slice(2) + '_' + Date.now();
 
 async function pingLive() {
   try {
-    // Registrar esta sesión con timestamp
     await fetch(`${FB_URL}/listeners/${sessionId}.json`, {
       method: 'PUT',
       body: JSON.stringify({ ts: Date.now() })
     });
-    // Leer todos los listeners activos (últimos 30 segundos)
     const r = await fetch(`${FB_URL}/listeners.json`);
     const data = await r.json();
     if (data) {
@@ -560,12 +551,10 @@ async function pingLive() {
       updateLiveCount(activos.length);
     }
   } catch(e) {
-    // fallback local
     updateLiveCount(1);
   }
 }
 
-// Al cerrar/salir, eliminar la sesión
 window.addEventListener('beforeunload', () => {
   navigator.sendBeacon(`${FB_URL}/listeners/${sessionId}.json?x-http-method-override=DELETE`, '');
 });
@@ -573,11 +562,9 @@ window.addEventListener('beforeunload', () => {
 pingLive();
 setInterval(pingLive, 15000);
 
-// Ícono
 document.getElementById('logoImg').src=ICON;
 document.getElementById('pLogoImg').src=ICON;
 
-// Nombres alternativos que usa la API para algunos paises
 const COUNTRY_ALIASES = {
   'South Korea': ['South Korea','Korea, Republic of','The Republic Of Korea','Korea','Republic of Korea','Korean'],
   'North Korea': ['North Korea','Korea, Democratic','Democratic People'],
@@ -603,7 +590,6 @@ const CONTINENTS = {
   'Oceanía': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
 };
 
-// ── SISTEMA HÍBRIDO: carga dinámica desde stations.json ──────────────────
 let _stationsLoaded = false;
 async function loadStationsJSON() {
   if (_stationsLoaded) return;
@@ -623,7 +609,6 @@ async function loadStationsJSON() {
   }
 }
 
-// Emisoras colombianas curadas — FALLBACK si stations.json no carga
 const COLOMBIA_CURADA = [
   {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'Bogotá',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
   {stationuuid:'co-002',name:'Tropicana Bogotá 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'Bogotá',tags:'tropical,salsa',favicon:'https://www.tropicanafm.com/wp-content/uploads/2023/04/cropped-favicon-tropicana-32x32.png'},
@@ -976,7 +961,7 @@ function stationCard(s){
   const isFav=favorites.includes(s.stationuuid);
   const isPlaying=currentStation&&currentStation.stationuuid===s.stationuuid&&playing;
   const id=s.stationuuid;
-  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.style.display='none'" alt="">`:'📻';
+  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'📻';
   const tags=(s.tags||'').split(',').slice(0,1).filter(Boolean).map(t=>`<span class="tag">${t.trim()}</span>`).join('');
   return `<div class="scard${isPlaying?' playing':''}" id="card-${id}">
     <div class="scard-logo">${logo}</div>
@@ -1161,7 +1146,11 @@ async function _loadStream(s, url) {
   document.getElementById('nowName').textContent = s.name;
   document.getElementById('headerWave').classList.remove('idle');
   const img = document.getElementById('pLogoImg');
-  img.src = s.favicon||ICON; img.onerror=()=>{img.src=ICON};
+  img.onerror = function() {
+    this.onerror = null;
+    this.src = ICON;
+  };
+  img.src = s.favicon || ICON;
   updateStreamBadge(s.stationuuid, null);
   try {
     await audio.play();
@@ -1358,7 +1347,7 @@ function favCard(s, idx, total) {
   _registerStation(s);
   const id = s.stationuuid;
   const isPlaying = currentStation && currentStation.stationuuid === id && playing;
-  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.style.display='none'" alt="">` : '📻';
+  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : '📻';
   const playCount = playCounts[id] || 0;
   const playLabel = playCount > 0 ? `<span style="font-size:9px;color:var(--accent)">▶ ${playCount}×</span>` : '';
   const showReorder = currentFavSort === 'manual';
