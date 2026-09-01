@@ -106,7 +106,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .p-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .vol-wrap{display:flex;align-items:center;gap:4px}
 .vol-wrap span{font-size:12px;color:var(--text2)}
-input[type=range]{-webkit-appearance:none;width:60px;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
 .btn-stop{background:var(--accent);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 /* STATUS */
@@ -491,7 +491,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
   </div>
 </div>
 
-<div class="player">
+<div class="player" id="player">
   <div class="player-inner">
     <div class="p-logo"><img id="pLogoImg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:7px"></div>
     <div class="p-info">
@@ -508,7 +508,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
 <audio id="audioPlayer" preload="none"></audio>
 
 <script>
-const ICON = 'data:image/png;base64,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';
+const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUJcukKIqkeK6W597cY3Zmdu6evup67+WPquruofxhexylnKEISgGEXK7D36mJjO0fS74s8kLff/I8+ZsfIu6XgI04A/e7E993P7z+c3P0q5q1tQ/28lIu1tI9r7n8c2/b/Peb+s/J4+n52jN0N3+l//Ww96U0jXqQAAAABJRU5ErkJggg==';
 const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
 const audio = document.getElementById('audioPlayer');
 let allStations=[], filteredStations=[], currentStation=null, playing=false;
@@ -604,8 +604,6 @@ const CONTINENTS = {
 };
 
 // ── SISTEMA HÍBRIDO: carga dinámica desde stations.json ──────────────────
-// Al iniciar la app, loadStationsJSON() carga el JSON externo y sobreescribe
-// este array. Si falla (offline / 404), el array hardcodeado actúa de fallback.
 let _stationsLoaded = false;
 async function loadStationsJSON() {
   if (_stationsLoaded) return;
@@ -645,10 +643,6 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-016',name:'Señal Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÑAL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
   {stationuuid:'co-017',name:'Oxígeno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'Bogotá',tags:'alternativa,pop',favicon:''},
   {stationuuid:'co-018',name:'Rumba Estéreo Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:''},
-  // Bucaramanga / Santander / Girón / Floridablanca / Barrancabermeja
-  // ESTRATEGIA: url = stream directo verificado (Zeno.fm u otros CDN sin bloqueo CORS)
-  //             url_resolved = fallback vía proxy Netlify (que resuelve streamtheworld server-side)
-  // El proxy en /stream-proxy hace la resolución server-side para evitar el bloqueo CORS del browser.
   {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'/stream-proxy?id=co-019',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'/stream-proxy?id=co-020',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
@@ -706,7 +700,6 @@ async function apiFetch(path,si=0){
 
 async function init(){
   setStatus('Conectando...','loading');
-  // Cargar stations.json externo en paralelo con Radio Browser API
   await loadStationsJSON();
   try{
     allCountries=await apiFetch('/countries?hidebroken=true&order=name');
@@ -734,7 +727,6 @@ function selectContinent(c){
 function showCountriesOf(continent){
   const names=CONTINENTS[continent]||[];
   const countries=names.map(n=>{
-    // buscar con aliases
     const aliases=COUNTRY_ALIASES[n]||[n];
     return allCountries.find(c=>aliases.some(a=>c.name.toLowerCase()===a.toLowerCase()));
   }).filter(Boolean);
@@ -768,7 +760,6 @@ function toggleFavPais(name,btn){
   renderFavPaisPanel();
 }
 
-// FAVPAIS PANEL
 let allCountriesForPanel=[];
 function openFavPais(){
   allCountriesForPanel=[...allCountries];
@@ -802,7 +793,6 @@ async function selectCountry(name, continent, pushNav=true){
   setStStatus(`Cargando ${name}...`,'loading');
   document.getElementById('stationsList').innerHTML='<div class="loading-box"><div class="spinner"></div>Buscando...</div>';
   try{
-    // Para Colombia: asegurar que stations.json esté cargado, luego mostrar curadas
     if(name === 'Colombia') {
       await loadStationsJSON();
       allStations = [...COLOMBIA_CURADA];
@@ -811,7 +801,6 @@ async function selectCountry(name, continent, pushNav=true){
       setStStatus(`Cargando más emisoras de Colombia...`, 'loading');
     }
 
-    // Buscar con nombre principal y aliases en la API
     const aliases = COUNTRY_ALIASES[name] || [name];
     let allFound = [];
     for(const alias of aliases) {
@@ -821,17 +810,14 @@ async function selectCountry(name, continent, pushNav=true){
       } catch(e) {}
     }
 
-    // Deduplicar por stationuuid
     const seen = new Set();
     const apiStations = allFound.filter(s => {
       if(seen.has(s.stationuuid)) return false;
       seen.add(s.stationuuid); return true;
     });
 
-    // Colombia: curadas primero + API sin duplicar
     if(name === 'Colombia') {
       const curadaIds = new Set(COLOMBIA_CURADA.map(s => s.stationuuid));
-      // También deduplicar por nombre similar para evitar duplicados de la API
       const curadaNames = new Set(COLOMBIA_CURADA.map(s => s.name.toLowerCase().slice(0,15)));
       const apiFiltered = apiStations.filter(s =>
         !curadaIds.has(s.stationuuid) &&
@@ -851,15 +837,10 @@ async function selectCountry(name, continent, pushNav=true){
   }
 }
 
-// ── Sistema de historial de navegación ─────────────────────
-const navHistory = [];   // historial de vistas visitadas
-let navIdx = -1;          // índice actual en el historial
-
-// Cada "vista" es un objeto { type, data }
-// type: 'home' | 'country' | 'search' | 'favs'
+const navHistory = [];
+let navIdx = -1;
 
 function navPush(view) {
-  // Si navegamos desde un punto intermedio, eliminar el "futuro"
   navHistory.splice(navIdx + 1);
   navHistory.push(view);
   navIdx = navHistory.length - 1;
@@ -937,11 +918,8 @@ function _showHome() {
 
 function backToMap(){
   _showHome();
-  // Si hay historial, retroceder un paso
   if(navIdx > 0) { navIdx--; navUpdateButtons(); navUpdateCrumb(); }
 }
-
-
 
 let _searchDebounce;
 function filterStations(){
@@ -954,28 +932,23 @@ function filterStations(){
       sortStations(currentSort, null);
       return;
     }
-    // Filtrar en las ya cargadas
     const localResults = allStations.filter(s=>
       s.name.toLowerCase().includes(ql)||
       (s.tags||'').toLowerCase().includes(ql)||
       (s.state||'').toLowerCase().includes(ql)
     );
-    // Si hay país seleccionado: mostrar resultados locales inmediatamente
     if(localResults.length > 0) {
       filteredStations = localResults;
       sortStations(currentSort, null);
     }
-    // SIEMPRE buscar también en Radio Browser para completar resultados
     try {
       setStStatus('🔎 Buscando en Radio Browser...', 'loading');
       const rbResults = await apiFetch(`/stations/search?name=${encodeURIComponent(q)}&hidebroken=true&order=votes&reverse=true&limit=40`);
       if(Array.isArray(rbResults) && rbResults.length) {
-        // Mostrar vista de emisoras si no está visible
         document.getElementById('view-continents').style.display='none';
         document.getElementById('view-stations').style.display='block';
         document.getElementById('breadcrumb').style.display='none';
         navPush({ type:'search', data:{ q } });
-        // Combinar locales + API sin duplicados
         const uuids = new Set(localResults.map(s=>s.stationuuid));
         const fresh = rbResults.filter(s=>!uuids.has(s.stationuuid));
         filteredStations = [...localResults, ...fresh];
@@ -992,8 +965,6 @@ function filterStations(){
   }, 350);
 }
 
-// Registry global: stationuuid → objeto completo. Evita pasar JSON inline en onclick
-// (los caracteres especiales como é,ó,ú rompen el parse cuando van en atributos HTML).
 const _stationRegistry = {};
 function _registerStation(s){ _stationRegistry[s.stationuuid]=s; return s.stationuuid; }
 function _playById(uuid){ const s=_stationRegistry[uuid]; if(s) playStation(s); }
@@ -1024,30 +995,25 @@ function stationCard(s){
 function renderStations(stations,containerId){
   const el=document.getElementById(containerId);
   if(!stations.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">No se encontraron emisoras</div></div>';return;}
-  // Show first 120, add load more button if there are more
-sortedStations = stations; // sync sorted ref
-const batch = stations.slice(0, 120);
-el.innerHTML = batch.map(stationCard).join('');
-if(stations.length > 120) {
-  el.innerHTML += `<div style="text-align:center;padding:16px">
-    <button class="btn-retry" onclick="loadMore('${containerId}')">
-      ▼ Ver más (${stations.length - 120} restantes)
-    </button></div>`;
-}
+  sortedStations = stations;
+  const batch = stations.slice(0, 120);
+  el.innerHTML = batch.map(stationCard).join('');
+  if(stations.length > 120) {
+    el.innerHTML += `<div style="text-align:center;padding:16px">
+      <button class="btn-retry" onclick="loadMore('${containerId}')">
+        ▼ Ver más (${stations.length - 120} restantes)
+      </button></div>`;
+  }
 }
 
-// ── RESOLUCIÓN DINÁMICA DE URLs PARA EMISORAS CURADAS ROTAS ──
-// Mapa de búsquedas alternativas por stationuuid curado
 const DYNAMIC_RESOLVE_MAP = {
   'co-019': { query: 'El Sol Bucaramanga', country: 'Colombia' },
   'co-012': { query: 'El Sol Bogota salsa', country: 'Colombia' },
 };
 
-// Cache de URLs resueltas dinámicamente (sesión)
 const resolvedUrlCache = {};
 
 async function resolveStreamUrl(station) {
-  // Si ya resolvimos esta sesión, usar cache
   if(resolvedUrlCache[station.stationuuid]) {
     return resolvedUrlCache[station.stationuuid];
   }
@@ -1059,7 +1025,6 @@ async function resolveStreamUrl(station) {
       `/stations/search?name=${encodeURIComponent(map.query)}&country=${encodeURIComponent(map.country)}&hidebroken=true&limit=10&order=votes&reverse=true`
     );
     if(Array.isArray(results) && results.length > 0) {
-      // Buscar la más similar por nombre
       const best = results.find(r =>
         r.name.toLowerCase().includes('bucaramanga') ||
         r.name.toLowerCase().includes('103.7')
@@ -1072,10 +1037,6 @@ async function resolveStreamUrl(station) {
   return station.url_resolved || station.url;
 }
 
-// ── PROXY NETLIFY PARA EMISORAS RCN/CARACOL ──
-// Estas emisoras tienen el proxy como url_resolved (fallback server-side).
-// La url principal es Zeno.fm u otro CDN directo sin CORS.
-// El proxy solo se usa cuando la URL directa falla.
 const PROXY_STATION_IDS = new Set([
   'co-019','co-020','co-021','co-023','co-024',
   'co-025','co-026','co-027','co-028','co-029','co-030','co-012'
@@ -1085,13 +1046,7 @@ function getProxyUrl(stationId) {
   return `/stream-proxy?id=${stationId}`;
 }
 
-// Resuelve la URL efectiva:
-// 1. Override manual del usuario
-// 2. URL cacheada de sesión previa exitosa
-// 3. URL directa (Zeno/CDN sin CORS)
-// El proxy se usa como FALLBACK en _handleStreamError, no como primera opción.
 async function resolveProxyUrl(station) {
-  // Pedir al proxy la URL CDN resuelta en JSON (evita que el browser siga el redirect)
   try {
     const res = await fetch(`/stream-proxy?id=${station.stationuuid}&info=1`, {
       signal: AbortSignal.timeout(8000)
@@ -1116,9 +1071,7 @@ let retryAttempts = {};
 const MAX_RETRIES = 3;
 
 async function getAlternativeUrl(station) {
-  // 1. Intentar url_resolved primero, luego url
   const urls = [station.url_resolved, station.url].filter(Boolean);
-  // 2. Buscar en la API streams alternativos por nombre
   try {
     const results = await apiFetch(`/stations/search?name=${encodeURIComponent(station.name)}&limit=5&hidebroken=true`);
     if(Array.isArray(results)) {
@@ -1127,7 +1080,7 @@ async function getAlternativeUrl(station) {
           urls.push(r.url_resolved);
         }
         if(r.stationuuid === station.stationuuid && r.url_resolved && !urls.includes(r.url_resolved)) {
-          urls.unshift(r.url_resolved); // poner primero la URL fresca de la API
+          urls.unshift(r.url_resolved);
         }
       }
     }
@@ -1136,7 +1089,6 @@ async function getAlternativeUrl(station) {
 }
 
 function updateStreamBadge(uuid, state) {
-  // Actualizar en todas las tarjetas visibles
   document.querySelectorAll(`[id^="card-${uuid}"], [id^="favcard-${uuid}"]`).forEach(card => {
     let badge = card.querySelector('.stream-badge');
     if(!badge) {
@@ -1172,10 +1124,19 @@ async function playStation(s){
 
   let url = getEffectiveUrl(s);
 
-  // Si es una URL proxy (/stream-proxy?id=...), resolver server-side a URL CDN real
   if(url && url.startsWith('/stream-proxy')) {
     document.getElementById('pStatus').textContent = '⟳ Buscando señal...';
-    url = await resolveProxyUrl(s);
+    try {
+      const proxyRes = await fetch(url + '&info=1');
+      const proxyData = await proxyRes.json();
+      if(proxyData && proxyData.url) {
+        url = proxyData.url;
+      } else {
+        url = await resolveProxyUrl(s);
+      }
+    } catch(e) {
+      url = await resolveProxyUrl(s);
+    }
   }
 
   if(!url) {
@@ -1187,7 +1148,6 @@ async function playStation(s){
 }
 
 async function _loadStream(s, url) {
-  // Validar URL antes de intentar reproducir
   if(!url || typeof url !== 'string' || url.trim() === '') {
     console.warn('[RJP] _loadStream: URL inválida para', s.name, '→', url);
     _handleStreamError(s);
@@ -1207,7 +1167,6 @@ async function _loadStream(s, url) {
     await audio.play();
     document.getElementById('pStatus').textContent = '▶ Reproduciendo';
     updateStreamBadge(s.stationuuid, 'ok');
-    // Registrar reproducción
     playCounts[s.stationuuid] = (playCounts[s.stationuuid]||0) + 1;
     localStorage.setItem('rjp_playcounts', JSON.stringify(playCounts));
   } catch(e) {
@@ -1222,7 +1181,6 @@ audio.addEventListener('error', () => {
 
 audio.addEventListener('stalled', () => {
   if(currentStation && playing) {
-    // Dar 8s antes de reintentar por stall
     setTimeout(() => {
       if(currentStation && playing && (audio.readyState < 3)) _handleStreamError(currentStation);
     }, 8000);
@@ -1237,7 +1195,6 @@ async function _handleStreamError(s) {
     playing = false;
     document.getElementById('pStatus').textContent = '✗ Sin señal — intenta otra';
     updateStreamBadge(s.stationuuid, 'error');
-    // Mostrar botón de URL manual en el player
     _showManualUrlBtn(s);
     refreshCards();
     return;
@@ -1249,12 +1206,10 @@ async function _handleStreamError(s) {
   let nextUrl;
 
   if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
-    // Reintento: resolver la URL CDN real a través del proxy
     nextUrl = await resolveProxyUrl(s);
   } else if(attempt === 1 && DYNAMIC_RESOLVE_MAP[s.stationuuid]) {
     nextUrl = await resolveStreamUrl(s);
   } else if(attempt === 2 && PROXY_STATION_IDS.has(s.stationuuid)) {
-    // Segundo reintento: pedir al proxy la URL resuelta en JSON y usarla directamente
     try {
       const res = await fetch(`/stream-proxy?id=${s.stationuuid}&info=1`);
       if(res.ok) {
@@ -1281,7 +1236,6 @@ async function _handleStreamError(s) {
 }
 
 function _showManualUrlBtn(s) {
-  // Mostrar opción de pegar URL manualmente debajo del player
   let bar = document.getElementById('manualUrlBar');
   if(!bar) {
     bar = document.createElement('div');
@@ -1305,7 +1259,6 @@ function _applyManualUrl(uuid) {
   if(!url) return;
   saveUrlOverride(uuid, url);
   document.getElementById('manualUrlBar')?.remove();
-  // Reproducir con la nueva URL
   const s = favStore[uuid] || [...COLOMBIA_CURADA, ...allStations].find(x => x.stationuuid === uuid);
   if(s) {
     retryAttempts[uuid] = 0;
@@ -1326,21 +1279,16 @@ function stopRadio(){
 function toggleFav(uuid, btn, stationObj) {
   const idx = favorites.indexOf(uuid);
   if(idx >= 0) {
-    // Quitar favorito
     favorites.splice(idx, 1);
     favOrder = favOrder.filter(id => id !== uuid);
     if(btn){ btn.textContent='☆'; btn.classList.remove('active'); }
-    // Quitar del almacén
     delete favStore[uuid];
   } else {
-    // Agregar favorito
     favorites.push(uuid);
     if(!favOrder.includes(uuid)) favOrder.push(uuid);
     if(btn){ btn.textContent='★'; btn.classList.add('active'); }
-    // Guardar objeto completo en el almacén
     if(stationObj) favStore[uuid] = stationObj;
     else {
-      // buscar en fuentes disponibles
       const allSrc = [...COLOMBIA_CURADA, ...allStations];
       const found = allSrc.find(s => s.stationuuid === uuid);
       if(found) favStore[uuid] = found;
@@ -1371,7 +1319,6 @@ function showPage(p,btn){
   if(p==='favlocal') renderFavLocal();
 }
 
-// ── FAVORITOS: SORT & REORDER ──
 function setFavSort(mode, btn) {
   currentFavSort = mode;
   document.querySelectorAll('.fav-sort-btn').forEach(b => b.classList.remove('active'));
@@ -1380,7 +1327,6 @@ function setFavSort(mode, btn) {
 }
 
 function moveFav(uuid, dir) {
-  // Sync favOrder with favorites (add missing)
   favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
   favOrder = favOrder.filter(id => favorites.includes(id));
   const idx = favOrder.indexOf(uuid);
@@ -1393,7 +1339,6 @@ function moveFav(uuid, dir) {
 }
 
 function getSortedFavs() {
-  // Sync favOrder
   favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
   favOrder = favOrder.filter(id => favorites.includes(id));
 
@@ -1406,7 +1351,6 @@ function getSortedFavs() {
   } else if(currentFavSort === 'mostused') {
     favS = [...favS].sort((a,b) => (playCounts[b.stationuuid]||0) - (playCounts[a.stationuuid]||0));
   }
-  // 'manual' uses favOrder as-is
   return favS;
 }
 
@@ -1447,7 +1391,6 @@ function renderFavGlobal(){
   el.innerHTML = favS.map((s,i) => favCard(s, i, favS.length)).join('');
 }
 
-// ── CERCA DE MÍ — EXPLORAR (por distancia real GPS) ──
 let nearbyExploreData = [];
 let currentNearbySort = 'popular';
 let nearbyUserLat = null, nearbyUserLng = null;
@@ -1468,7 +1411,6 @@ async function findNearbyExplore() {
     nearbyUserLng = pos.coords.longitude;
     sub.textContent = 'Buscando emisoras más cercanas...';
     try {
-      // Reverse geocoding para mostrar ciudad
       let locationLabel = '';
       try {
         const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${nearbyUserLat}&lon=${nearbyUserLng}&format=json&accept-language=es`);
@@ -1478,10 +1420,8 @@ async function findNearbyExplore() {
         locationLabel = [city, dept].filter(Boolean).join(', ');
       } catch(e) {}
 
-      // Radio Browser: buscar por distancia geográfica real
-      // radio=150 km cubre Bucaramanga, Girón, Floridablanca, Piedecuesta, Barrancabermeja, etc.
       let found = [];
-      const radii = [100, 250, 500]; // expandir si no hay suficientes
+      const radii = [100, 250, 500];
       for(const radius of radii) {
         try {
           const r = await apiFetch(
@@ -1489,20 +1429,17 @@ async function findNearbyExplore() {
           );
           if(Array.isArray(r) && r.length > 0) {
             found = r;
-            if(found.length >= 10) break; // suficientes, no expandir más
+            if(found.length >= 10) break;
           }
         } catch(e) {}
       }
 
-      // Deduplicar por uuid
       const seen = new Set();
       nearbyExploreData = found.filter(s => {
         if(seen.has(s.stationuuid)) return false;
         seen.add(s.stationuuid); return true;
       });
 
-      // Inyectar emisoras curadas colombianas de Bucaramanga/Santander que estén cerca
-      // (estas tienen coords reales o son de la región)
       const santanderCuradas = COLOMBIA_CURADA.filter(s =>
         s.state && (
           s.state.toLowerCase().includes('bucaramanga') ||
@@ -1510,7 +1447,6 @@ async function findNearbyExplore() {
           s.state.toLowerCase().includes('barrancabermeja')
         )
       );
-      // Agregar curadas de Santander al inicio si no están ya
       const curadaIds = new Set(nearbyExploreData.map(s => s.stationuuid));
       const toAdd = santanderCuradas.filter(s => !curadaIds.has(s.stationuuid));
       nearbyExploreData = [...toAdd, ...nearbyExploreData];
@@ -1550,11 +1486,9 @@ function sortNearby(mode, btn) {
   } else if(mode === 'popular') {
     sorted.sort((a,b) => (b.votes||0) - (a.votes||0));
   }
-  // 'distance' usa el orden original de la API (ya viene por distancia)
   renderStations(sorted.slice(0, 100), 'nearbyStationsList');
 }
 
-// ── EMISORAS CERCA DE MÍ ──
 let nearbyStations = [];
 
 async function findNearbyStations() {
@@ -1574,7 +1508,6 @@ async function findNearbyStations() {
     const { latitude: lat, longitude: lng } = pos.coords;
     bar.querySelector('span').textContent = '🌐 Buscando emisoras cercanas...';
     try {
-      // Usar reverse geocoding gratuito para obtener país/ciudad
       const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
       const geo = await geoRes.json();
       const countryName = geo.address?.country || '';
@@ -1586,12 +1519,9 @@ async function findNearbyStations() {
       btn.textContent = '✓ Actualizar';
       btn.disabled = false;
 
-      // Buscar emisoras del país detectado — abrir vista de país si existe
-      // Primero mostrar en un panel expandido debajo
       const serverRes = await apiFetch(`/stations/search?limit=300&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(countryName)}`);
       nearbyStations = Array.isArray(serverRes) ? serverRes : [];
 
-      // Si hay emisoras, mostrarlas en el panel de favoritos debajo
       let nearbyEl = document.getElementById('nearbyResults');
       if(!nearbyEl) {
         nearbyEl = document.createElement('div');
@@ -1627,7 +1557,6 @@ function renderFavLocal(){
     el.innerHTML='<div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">Primero selecciona un continente y país para ver sus favoritos locales.</div></div>';
     return;
   }
-  // Solo favoritos del país actual (de allStations + curadas)
   const localSrc = currentCountry === 'Colombia'
     ? [...COLOMBIA_CURADA, ...allStations]
     : [...allStations];
@@ -1659,7 +1588,7 @@ function loadMore(containerId) {
 }
 
 let currentSort = 'popular';
-let sortedStations = []; // siempre refleja el orden actual
+let sortedStations = [];
 
 function sortStations(mode, btn) {
   currentSort = mode;
@@ -1680,7 +1609,6 @@ function sortStations(mode, btn) {
       return (b.votes||0) - (a.votes||0);
     });
   } else if(mode === 'verified') {
-    // Solo verificadas primero, resto después
     sortedStations.sort((a,b) => {
       const aV = a.stationuuid && a.stationuuid.startsWith('co-') ? 1 : 0;
       const bV = b.stationuuid && b.stationuuid.startsWith('co-') ? 1 : 0;
@@ -1692,7 +1620,6 @@ function sortStations(mode, btn) {
   renderStations(sortedStations, 'stationsList');
 }
 
-// ── SISTEMA DE COMPARTIR ──
 let shareStation = null;
 
 function openShare(s) {
@@ -1701,7 +1628,6 @@ function openShare(s) {
   document.getElementById('shareStationName').textContent = s.name;
   document.getElementById('shareStationSub').textContent = 
     [s.country, s.state].filter(Boolean).join(' · ') || 'Radio Jere Pro';
-  // Link de la app con parámetro de emisora
   const appUrl = `https://radiojerepro.netlify.app?station=${encodeURIComponent(s.name)}`;
   document.getElementById('shareLinkInput').value = appUrl;
   document.getElementById('sharePanel').classList.add('open');
@@ -1714,8 +1640,7 @@ function closeShare() {
 }
 
 function getShareText() {
-  return `🎶 Estoy escuchando "${shareStation?.name}" en Radio Jere Pro
-🔗 https://radiojerepro.netlify.app`;
+  return `🎶 Estoy escuchando "${shareStation?.name}" en Radio Jere Pro\n🔗 https://radiojerepro.netlify.app`;
 }
 
 function shareWhatsApp() {
@@ -1789,10 +1714,8 @@ function showCopied() {
   setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2000);
 }
 
-// ── SISTEMA DE IDIOMAS ──
 let currentLang = 'all';
 
-// Traducciones de la interfaz
 const LANGS = {
   all: {
     explore: '🔍 Explorar', favs: '⭐ Favoritos',
@@ -1862,16 +1785,13 @@ function setLang(lang, btn) {
 function applyLang() {
   const t = LANGS[currentLang] || LANGS.all;
 
-  // Tabs
   const tabs = document.querySelectorAll('.tab');
   if(tabs[0]) tabs[0].textContent = t.explore;
   if(tabs[1]) tabs[1].textContent = t.favs;
 
-  // Search placeholder
   const si = document.getElementById('searchInput');
   if(si) si.placeholder = t.search;
 
-  // Sort bar
   const sortLabel = document.querySelector('.sort-label');
   if(sortLabel) sortLabel.textContent = t.orderLabel;
   const sortBtns = document.querySelectorAll('.sort-btn');
@@ -1880,18 +1800,15 @@ function applyLang() {
   if(sortBtns[2]) sortBtns[2].textContent = t.za;
   if(sortBtns[3]) sortBtns[3].textContent = t.verified;
 
-  // Player
   const pName = document.getElementById('pName');
   if(pName && pName.textContent === LANGS[currentLang === 'all' ? 'es' : 'es'].selectStation
      || (pName && !currentStation)) {
     pName.textContent = t.selectStation;
   }
 
-  // Now playing pill
   const nowName = document.getElementById('nowName');
   if(nowName && !playing) nowName.textContent = t.appName;
 
-  // Continent buttons
   document.querySelectorAll('.cont-btn').forEach(b => {
     const orig = Object.keys(t.continents).find(k => 
       Object.values(LANGS).some(l => l.continents[k] === b.textContent)
@@ -1902,7 +1819,6 @@ function applyLang() {
     }
   });
 
-  // Section labels
   const myC = document.querySelector('#favpais-section .sec-title');
   if(myC) myC.textContent = t.myCountries;
   const editB = document.querySelector('#favpais-section .btn-sm');
@@ -1923,7 +1839,6 @@ function setStStatus(msg,type){
 }
 
 applyTheme(currentTheme);
-// Restore saved language
 const savedLang = localStorage.getItem('rjp_lang') || 'all';
 currentLang = savedLang;
 const langBtns = document.querySelectorAll('.lang-btn');
@@ -1932,7 +1847,6 @@ langBtns.forEach(b => {
   if(b.onclick && b.onclick.toString().includes("'"+savedLang+"'")) b.classList.add('active');
 });
 
-// Migrar: si hay favoritos guardados sin store, reconstruir con curadas
 if(favorites.length > 0 && Object.keys(favStore).length === 0) {
   favorites.forEach(uuid => {
     const found = COLOMBIA_CURADA.find(s => s.stationuuid === uuid);
@@ -1940,17 +1854,11 @@ if(favorites.length > 0 && Object.keys(favStore).length === 0) {
   });
   localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
 }
-// Sincronizar favOrder con favorites
 favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
 favOrder = favOrder.filter(id => favorites.includes(id));
 localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
 
 init();
-
-// ════════════════════════════════════════════════════════════
-// IDENTIFICADOR DE CANCIONES — ACRCloud via proxy Netlify
-// Usa grabación de micrófono + fingerprint de audio
-// ════════════════════════════════════════════════════════════
 
 const shazamState = {
   mediaRecorder: null,
@@ -1964,7 +1872,6 @@ const shazamState = {
 function shazamOpen() {
   document.getElementById('shazamPanel').classList.add('open');
   shazamShowHistory();
-  // Mostrar estado inicial: listo para escuchar
   shazamSetState('idle');
 }
 
@@ -1979,7 +1886,6 @@ async function shazamStart() {
   const btn = document.getElementById('btnShazam');
   btn.classList.add('listening');
 
-  // ── Verificar soporte ──────────────────────────────────
   if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     shazamSetState('error', '🌐',
       'Tu navegador no soporta grabación de audio.<br>' +
@@ -1988,7 +1894,6 @@ async function shazamStart() {
     return;
   }
 
-  // ── Solicitar micrófono con constraints amplios ────────
   let stream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({
@@ -2003,7 +1908,6 @@ async function shazamStart() {
     btn.classList.remove('listening');
     const name = e.name || '';
     const msg = e.message || '';
-    console.warn('[Shazam] getUserMedia error:', name, msg);
 
     if(name === 'NotAllowedError' || name === 'PermissionDeniedError') {
       shazamSetState('error', '🔒',
@@ -2011,7 +1915,7 @@ async function shazamStart() {
         '<b>Paso 1 — Windows:</b> Inicio → Configuración → Privacidad → Micrófono → activa <b>"Permitir que las apps accedan al micrófono"</b> y activa <b>Microsoft Edge</b>.<br><br>' +
         '<b>Paso 2 — Navegador:</b> Haz clic en el 🔒 junto a la URL → Micrófono → <b>Permitir</b> → recarga.<br><br>' +
         'También puedes <b>buscar la canción por nombre</b> aquí abajo ↓',
-        true /* mostrar buscador */);
+        true);
     } else if(name === 'NotFoundError' || name === 'DevicesNotFoundError') {
       shazamSetState('error', '🎤',
         'No se detectó micrófono en tu dispositivo.<br>' +
@@ -2021,7 +1925,6 @@ async function shazamStart() {
         'El micrófono está siendo usado por otra aplicación.<br>' +
         '<small>Cierra otras apps que usen el micrófono (Teams, Zoom, etc.) y recarga.</small>');
     } else if(name === 'OverconstrainedError') {
-      // Reintentar con constraints básicos
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
       } catch(e2) {
@@ -2044,7 +1947,6 @@ async function shazamStart() {
   shazamState.stream = stream;
   shazamState.audioChunks = [];
 
-  // ── Elegir el mejor formato soportado ─────────────────
   let mimeType = '';
   const formats = ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4'];
   for(const f of formats) {
@@ -2062,13 +1964,11 @@ async function shazamStart() {
     if(e.data && e.data.size > 0) shazamState.audioChunks.push(e.data);
   };
   shazamState.mediaRecorder.onerror = e => {
-    console.warn('[Shazam] MediaRecorder error:', e);
     shazamSetState('error', '⚠️', 'Error durante la grabación. Intenta de nuevo.');
     shazamStop();
   };
-  shazamState.mediaRecorder.start(200); // chunks cada 200ms
+  shazamState.mediaRecorder.start(200);
 
-  // ── Cuenta regresiva 8 segundos ───────────────────────
   let secs = 8;
   const timerEl = document.getElementById('shazamTimer');
   if(timerEl) { timerEl.textContent = secs; timerEl.style.fontSize = ''; }
@@ -2107,11 +2007,10 @@ async function shazamIdentify() {
   const audioBlob = new Blob(shazamState.audioChunks, { type: 'audio/webm' });
 
   try {
-    // Usamos AudD API (gratuita, no requiere cuenta para uso básico)
     const formData = new FormData();
     formData.append('file', audioBlob, 'audio.webm');
     formData.append('return', 'apple_music,spotify');
-    formData.append('api_token', 'test'); // token 'test' = 10 req/día gratis
+    formData.append('api_token', 'test');
 
     const res = await fetch('https://api.audd.io/', {
       method: 'POST',
@@ -2126,7 +2025,6 @@ async function shazamIdentify() {
       const r = data.result;
       shazamState.lastResult = r;
       shazamShowResult(r);
-      // Guardar en historial
       const entry = {
         title:    r.title,
         artist:   r.artist,
@@ -2165,7 +2063,6 @@ function shazamShowResult(r) {
   document.getElementById('shazamArtist').textContent = r.artist || 'Artista desconocido';
   document.getElementById('shazamAlbum').textContent  = r.album  ? '💿 ' + r.album : '';
 
-  // Mostrar/ocultar botones según disponibilidad
   const spotify = r.spotify?.external_urls?.spotify;
   document.getElementById('btnShazamSpotify').style.display = spotify ? 'inline-block' : 'none';
   document.getElementById('btnShazamSpotify').dataset.url = spotify || '';
@@ -2190,7 +2087,6 @@ function shazamSetState(state, icon, msg) {
     el.style.display = 'block';
     document.getElementById('shazamErrIcon').textContent = icon || '😕';
     document.getElementById('shazamErrMsg').innerHTML = msg || 'No se pudo identificar la canción';
-    // Mostrar buscador manual si se pide o si es error de permisos/hardware
     const showManual = (arguments[3] === true) || icon === '🔒' || icon === '🎤' || icon === '⚠️';
     const manualEl = document.getElementById('shazamManual');
     if(manualEl) manualEl.style.display = showManual ? 'block' : 'none';
@@ -2237,8 +2133,6 @@ function _timeAgo(ts) {
   return Math.floor(diff/86400) + 'd';
 }
 
-
-// ── Teclado: Alt+← / Alt+→ navegar, Escape cerrar paneles ──
 document.addEventListener('keydown', function(e) {
   if(e.altKey && e.key === 'ArrowLeft')  { e.preventDefault(); if(typeof navBack    === 'function') navBack(); }
   if(e.altKey && e.key === 'ArrowRight') { e.preventDefault(); if(typeof navForward === 'function') navForward(); }
@@ -2251,7 +2145,6 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// ── Búsqueda manual por nombre (alternativa sin micrófono) ────
 async function shazamManualSearch() {
   const input = document.getElementById('shazamManualInput');
   const q = (input?.value || '').trim();
@@ -2262,7 +2155,6 @@ async function shazamManualSearch() {
   resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text2);padding:8px 0">⟳ Buscando...</div>';
 
   try {
-    // Buscar en iTunes Search API (gratuita, sin auth, con CORS abierto)
     const res = await fetch(
       'https://itunes.apple.com/search?term=' + encodeURIComponent(q) +
       '&media=music&limit=6&entity=song',
@@ -2304,13 +2196,11 @@ async function shazamManualSearch() {
 }
 
 function shazamManualPick(title, artist, art, album) {
-  // Mostrar como resultado igual que el reconocimiento por audio
   shazamState.lastResult = { title, artist, album, apple_music: { artwork: { url: art.replace('60x60','300x300') } } };
   document.getElementById('shazamManualResults').innerHTML = '';
   document.getElementById('shazamManualInput').value = '';
   document.getElementById('shazamManual').style.display = 'none';
   shazamShowResult(shazamState.lastResult);
-  // Guardar en historial
   const entry = { title, artist, album, artwork: art, youtube: encodeURIComponent(title+' '+artist), ts: Date.now() };
   shazamState.history.unshift(entry);
   if(shazamState.history.length > 10) shazamState.history.pop();
