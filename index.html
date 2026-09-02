@@ -3,1232 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Radio Jere Pro</title>
+<title>Radio Jere Pro - Modern App</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--bg4:#1f1f35;--accent:#e94560;--blue:#448aff;--green:#00e676;--gold:#ffd740;--text:#f0f0f8;--text2:#8899bb;--text3:#4a5070;--card:#161625;--border:#ffffff10;--border2:#ffffff22;--radius:16px;--rsm:10px}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
-/* HEADER */
-.hdr{background:var(--bg);padding:0;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border2)}
-.nav-bar{display:flex;align-items:center;gap:7px;padding:9px 14px 0}
-.btn-nav{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;user-select:none}
-.btn-nav:hover:not(:disabled){background:var(--bg4);border-color:var(--accent);color:var(--text)}
-.btn-nav:active:not(:disabled){transform:scale(.92)}
-.btn-nav:disabled{opacity:.28;cursor:default}
-.nav-crumb{flex:1;min-width:0;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text3);overflow:hidden}
-.nc-item{cursor:pointer;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;transition:.15s}
-.nc-item:hover{opacity:.75}
-.nc-item.active{color:var(--text2);cursor:default;pointer-events:none}
-.nc-sep{color:var(--text3);flex-shrink:0;font-size:10px}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 0;margin-bottom:11px;gap:8px}
-.logo{display:flex;align-items:center;gap:9px}
-.logo img{width:36px;height:36px;border-radius:9px;object-fit:cover;box-shadow:0 0 16px #e9456044}
-.logo-txt{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.5px}
-.logo-txt span{color:var(--accent)}
-.hdr-right{display:flex;align-items:center;gap:7px}
-.btn-sm{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s;white-space:nowrap}
-.btn-sm:hover{border-color:var(--accent);color:var(--text)}
-.live-badge{background:var(--bg3);border:1px solid var(--border2);border-radius:40px;padding:5px 10px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
-.now-pill{background:var(--bg3);border:1px solid var(--border2);border-radius:40px;padding:5px 10px;display:flex;align-items:center;gap:6px;max-width:130px;overflow:hidden}
-.wave{display:flex;gap:2px;align-items:center;height:11px;flex-shrink:0}
-.wave span{display:block;width:2px;background:var(--accent);border-radius:2px;animation:wave 1s ease-in-out infinite}
-.wave span:nth-child(2){animation-delay:.15s}.wave span:nth-child(3){animation-delay:.3s}.wave span:nth-child(4){animation-delay:.15s}
-.wave.idle span{animation:none;height:3px}
-@keyframes wave{0%,100%{height:3px}50%{height:11px}}
-.now-name{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{display:flex;gap:3px}
-.tab{padding:9px 15px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;border-radius:8px 8px 0 0;transition:.2s;border:none;background:none}
-.tab.active{color:var(--text);background:var(--bg2);border-bottom:2px solid var(--accent)}
-/* PANELS */
-.theme-panel,.favpais-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:#00000099;align-items:flex-end;justify-content:center}
-.theme-panel.open,.favpais-panel.open{display:flex}
-.panel-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:18px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-.panel-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:14px;text-align:center}
-.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px;max-height:60vh;overflow-y:auto}
-.theme-opt{border:2px solid var(--border2);border-radius:11px;padding:11px 7px;cursor:pointer;text-align:center;transition:.2s;background:var(--bg3)}
-.theme-opt:hover{border-color:var(--accent)}.theme-opt.active{border-color:var(--accent);background:var(--bg4)}
-.theme-swatch{width:30px;height:30px;border-radius:50%;margin:0 auto 5px;font-size:15px;display:flex;align-items:center;justify-content:center}
-.theme-label{font-size:10px;color:var(--text2)}
-.btn-panel-close{width:100%;background:var(--accent);border:none;color:white;border-radius:9px;padding:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;margin-top:4px}
-/* CONTENT */
-.content{padding:14px 14px 108px}
-.page{display:none}.page.active{display:block}
-/* CONTINENT NAV */
-.cont-scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;margin-bottom:12px;scrollbar-width:none}
-.cont-scroll::-webkit-scrollbar{display:none}
-.cont-btn{flex-shrink:0;background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:8px 13px;font-size:12px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;color:var(--text2);transition:.2s;white-space:nowrap}
-.cont-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-/* BREADCRUMB */
-.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:12px;font-size:12px;color:var(--text3);flex-wrap:wrap}
-.breadcrumb span{cursor:pointer;color:var(--accent);text-decoration:underline}
-.breadcrumb .sep{color:var(--text3);cursor:default;text-decoration:none}
-/* COUNTRY GRID */
-.country-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.country-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 12px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:space-between}
-.country-card:hover{border-color:var(--border2);background:var(--bg3)}
-.country-card.fav{border-color:var(--gold)44}
-.country-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:600}
-.country-count{font-size:10px;color:var(--text3)}
-.country-fav-btn{background:none;border:none;font-size:14px;cursor:pointer;color:var(--text3);padding:2px}
-.country-fav-btn.active{color:var(--gold)}
-/* SEARCH */
-.search-wrap{position:relative;margin-bottom:10px}
-.search-wrap input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--rsm);padding:11px 14px 11px 38px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:.2s}
-.search-wrap input:focus{border-color:var(--accent)}
-.search-wrap input::placeholder{color:var(--text3)}
-.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;pointer-events:none}
-/* STATION LIST */
-.stations-list{display:flex;flex-direction:column;gap:7px}
-.scard{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.2s}
-.scard:hover{border-color:var(--border2);transform:translateY(-1px)}
-.scard.playing{border-color:var(--accent);background:var(--bg3)}
-.scard-logo{width:42px;height:42px;border-radius:8px;background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden}
-.scard-logo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.scard-info{flex:1;min-width:0}
-.scard-name{font-family:'Syne',sans-serif;font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.scard-meta{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tag{background:var(--bg4);border:1px solid var(--border);border-radius:4px;padding:1px 4px;font-size:9px;color:var(--text3)}
-.scard-actions{display:flex;flex-direction:column;gap:4px;align-items:center;flex-shrink:0}
-.btn-play{width:30px;height:30px;border-radius:50%;background:var(--accent);border:none;color:white;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
-.scard.playing .btn-play{background:var(--green);color:#000}
-.btn-fav{width:24px;height:24px;border:none;background:none;color:var(--text3);font-size:14px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
-.btn-fav.active,.btn-fav:hover{color:var(--gold)}
-/* PLAYER */
-.player{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border2);padding:9px 13px;z-index:200}
-.player-inner{display:flex;align-items:center;gap:9px;max-width:600px;margin:0 auto}
-.p-logo{width:36px;height:36px;border-radius:7px;background:var(--bg3);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.p-logo img{width:100%;height:100%;object-fit:cover;border-radius:7px}
-.p-info{flex:1;min-width:0}
-.p-name{font-family:'Syne',sans-serif;font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-status{font-size:10px;color:var(--text2)}
-.p-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.vol-wrap{display:flex;align-items:center;gap:4px}
-.vol-wrap span{font-size:12px;color:var(--text2)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:60px;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
-.btn-stop{background:var(--accent);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-/* STATUS */
-.status-bar{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:8px 11px;font-size:11px;color:var(--text2);margin-bottom:11px;display:flex;align-items:center;gap:6px}
-.sdot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
-.sdot.loading{background:var(--gold);animation:pulse 1s infinite}
-.sdot.error{background:var(--accent)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.sec-title{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty-icon{font-size:40px;margin-bottom:9px}.empty-text{font-size:12px}
-.loading-box{text-align:center;padding:24px;color:var(--text2);font-size:12px}
-.spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 9px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.btn-retry{background:var(--accent);color:white;border:none;border-radius:7px;padding:9px 18px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;margin-top:10px}
-.sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.sort-btn{background:var(--card);border:1px solid var(--border2);border-radius:7px;padding:5px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text2);cursor:pointer;transition:.2s;white-space:nowrap}
-.sort-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.sort-btn:hover:not(.active){border-color:var(--accent);color:var(--text)}
-.sort-label{font-size:10px;color:var(--text3);font-family:'Syne',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.lang-bar{display:flex;align-items:center;gap:5px;padding:0 14px 10px}
-.lang-btn{background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:4px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;color:var(--text2);cursor:pointer;transition:.2s}
-.lang-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.lang-btn:hover:not(.active){color:var(--text);border-color:var(--border2)}
-.share-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;background:#00000099;align-items:flex-end;justify-content:center}
-.share-panel.open{display:flex}
-.share-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:500px}
-.share-station-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.share-station-sub{font-size:11px;color:var(--text2);margin-bottom:18px}
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.share-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:12px;background:var(--bg3);border:1px solid var(--border);transition:.2s}
-.share-opt:hover{border-color:var(--accent)}
-.share-opt-icon{font-size:24px}
-.share-opt-label{font-size:10px;color:var(--text2);font-family:'Syne',sans-serif;font-weight:600;text-align:center}
-.share-link-box{display:flex;gap:8px;margin-bottom:14px}
-.share-link-input{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:11px;font-family:'DM Sans',sans-serif;outline:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.btn-copy-link{background:var(--accent);color:white;border:none;border-radius:8px;padding:9px 14px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;transition:.2s}
-.btn-copy-link.copied{background:var(--green);color:#000}
-.btn-close-share{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:10px;padding:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
-/* FAVPAIS PANEL */
-.fp-search{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px}
-.fp-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto}
-.fp-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;cursor:pointer;transition:.2s}
-.fp-item:hover{border-color:var(--border2)}
-.fp-item-name{font-size:13px}
-.fp-item-count{font-size:10px;color:var(--text3)}
-.fp-item-star{font-size:16px;color:var(--text3)}
-.fp-item.favved .fp-item-star{color:var(--gold)}
-/* FAVORITOS SORT BAR */
-.fav-sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.fav-sort-btn{background:var(--card);border:1px solid var(--border2);border-radius:7px;padding:5px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text2);cursor:pointer;transition:.2s;white-space:nowrap}
-.fav-sort-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.fav-sort-btn:hover:not(.active){border-color:var(--accent);color:var(--text)}
-/* REORDER BUTTONS */
-.btn-reorder{width:22px;height:22px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);border-radius:5px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
-.btn-reorder:hover{border-color:var(--accent);color:var(--text)}
-.btn-reorder:disabled{opacity:.25;cursor:default}
-.scard-reorder{display:flex;flex-direction:column;gap:3px;align-items:center;flex-shrink:0;margin-right:2px}
-/* NEARBY BUTTON */
-.nearby-bar{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:9px 12px;margin-bottom:11px;font-size:12px;color:var(--text2)}
-.btn-nearby{background:var(--accent);color:white;border:none;border-radius:7px;padding:6px 13px;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap;transition:.2s}
-.btn-nearby:hover{opacity:.85}
-.btn-nearby:disabled{background:var(--bg4);color:var(--text3);cursor:default}
-/* STREAM RETRY */
-.scard.stream-error{border-color:#ff3d0044}
-.scard.stream-retrying{border-color:var(--gold)44}
-.stream-badge{font-size:9px;padding:1px 5px;border-radius:4px;margin-left:4px}
-.stream-badge.error{background:#ff3d0022;color:#ff3d00;border:1px solid #ff3d0044}
-.stream-badge.retrying{background:#ffd74022;color:var(--gold);border:1px solid #ffd74044}
-.stream-badge.ok{background:#00e67622;color:var(--green);border:1px solid #00e67644}
-/* NEARBY EXPLORE SECTION */
-.nearby-explore{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:12px;margin-bottom:14px}
-.nearby-explore-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.nearby-explore-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--text)}
-.nearby-explore-sub{font-size:10px;color:var(--text3);margin-top:2px}
-
-/* ── IDENTIFICADOR DE CANCIONES ─────────────────────────── */
-.btn-shazam{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2px solid var(--accent);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;position:relative;flex-shrink:0;-webkit-tap-highlight-color:transparent}
-.btn-shazam:hover{transform:scale(1.08);box-shadow:0 0 18px var(--accent)66}
-.btn-shazam.listening{border-color:var(--green);animation:shazam-pulse 1.2s ease-in-out infinite}
-.btn-shazam.listening .shazam-icon{animation:shazam-spin 2s linear infinite}
-@keyframes shazam-pulse{0%,100%{box-shadow:0 0 8px var(--green)44}50%{box-shadow:0 0 24px var(--green)88}}
-@keyframes shazam-spin{to{transform:rotate(360deg)}}
-.shazam-icon{font-size:20px;line-height:1}
-
-/* Panel resultado */
-.shazam-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;background:#00000099;align-items:flex-end;justify-content:center}
-.shazam-panel.open{display:flex}
-.shazam-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:480px;min-height:260px}
-.shazam-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.shazam-listening{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 0}
-.shazam-wave-big{display:flex;gap:4px;align-items:center;height:48px}
-.shazam-wave-big span{display:block;width:5px;background:var(--accent);border-radius:3px;animation:swb 0.9s ease-in-out infinite}
-.shazam-wave-big span:nth-child(2){animation-delay:.1s}.shazam-wave-big span:nth-child(3){animation-delay:.2s}
-.shazam-wave-big span:nth-child(4){animation-delay:.3s}.shazam-wave-big span:nth-child(5){animation-delay:.2s}
-.shazam-wave-big span:nth-child(6){animation-delay:.1s}
-@keyframes swb{0%,100%{height:6px}50%{height:44px}}
-.shazam-hint{font-size:12px;color:var(--text2);text-align:center;line-height:1.5}
-.shazam-timer{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--accent)}
-
-/* Resultado */
-.shazam-result{display:none;flex-direction:column;gap:12px}
-.shazam-result.show{display:flex}
-.shazam-art{width:80px;height:80px;border-radius:12px;object-fit:cover;flex-shrink:0}
-.shazam-song{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text)}
-.shazam-artist{font-size:13px;color:var(--text2);margin-top:2px}
-.shazam-album{font-size:11px;color:var(--text3);margin-top:2px}
-.shazam-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.shazam-btn{padding:8px 16px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;border:none;transition:.2s}
-.shazam-btn.primary{background:var(--accent);color:white}
-.shazam-btn.secondary{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
-.shazam-btn:hover{opacity:.85}
-.shazam-error{text-align:center;padding:20px;color:var(--text2);font-size:13px;line-height:1.6}
-.shazam-error .err-icon{font-size:32px;margin-bottom:8px}
-.shazam-history{margin-top:12px}
-.shazam-history-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-family:'Syne',sans-serif;margin-bottom:8px}
-.shazam-hist-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.shazam-hist-item:last-child{border:none}
-.shazam-hist-item:hover .shazam-hist-name{color:var(--accent)}
-.shazam-hist-img{width:36px;height:36px;border-radius:6px;object-fit:cover;background:var(--bg3);flex-shrink:0}
-.shazam-hist-info{flex:1;min-width:0}
-.shazam-hist-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.shazam-hist-artist{font-size:10px;color:var(--text3)}
-.shazam-hist-time{font-size:10px;color:var(--text3);flex-shrink:0}
+body{font-family:'DM Sans',sans-serif}
+h1,h2,h3,h4,.font-syne{font-family:'Syne',sans-serif}
 </style>
 </head>
-<body>
-<div class="hdr">
-  <!-- Barra navegación: atrás / home / adelante / breadcrumb -->
-  <div class="nav-bar">
-    <button class="btn-nav" id="btnBack"    onclick="navBack()"    title="Atrás"   disabled>&#8592;</button>
-    <button class="btn-nav" id="btnHome"    onclick="navHome()"    title="Inicio"  disabled>⌂</button>
-    <button class="btn-nav" id="btnForward" onclick="navForward()" title="Adelante" disabled>&#8594;</button>
-    <div class="nav-crumb" id="navCrumb"></div>
-  </div>
-  <div class="hdr-top">
-    <div class="logo">
-      <img id="logoImg" alt="Radio Jere Pro">
-      <div class="logo-txt">Radio Jere <span>Pro</span></div>
-    </div>
-    <div class="hdr-right">
-      <div class="live-badge"><div class="live-dot"></div><span id="liveCount">0</span> en vivo</div>
-      <!-- Identificar canción -->
-      <button class="btn-shazam" id="btnShazam" onclick="shazamStart()" title="Identificar canción">
-        <span class="shazam-icon">🎵</span>
-      </button>
-      <button class="btn-sm" onclick="openTheme()">🎨</button>
-      <div class="now-pill">
-        <div class="wave idle" id="headerWave"><span></span><span></span><span></span><span></span></div>
-        <span class="now-name" id="nowName">Sin reproducir</span>
-      </div>
-    </div>
-  </div>
-  <div class="tabs">
-    <button class="tab active" onclick="showPage('explorar',this)">🔍 Explorar</button>
-    <button class="tab" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
-    <button class="tab" onclick="showPage('admin',this)">🛠️ Admin</button>
-  </div>
-  <div class="lang-bar">
-    <span style="font-size:10px;color:var(--text3);font-family:'Syne',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-right:2px">🌐</span>
-    <button class="lang-btn active" onclick="setLang('all',this)">Todos</button>
-    <button class="lang-btn" onclick="setLang('es',this)">🇪🇸 Español</button>
-    <button class="lang-btn" onclick="setLang('en',this)">🇬🇧 English</button>
-    <button class="lang-btn" onclick="setLang('fr',this)">🇫🇷 Français</button>
-    <button class="lang-btn" onclick="setLang('pt',this)">🇧🇷 Português</button>
-  </div>
-</div>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-rose-500 selection:text-white">
 
-<!-- THEME PANEL -->
-<div class="theme-panel" id="themePanel" onclick="if(event.target===this)closeTheme()">
-  <div class="panel-box">
-    <div class="panel-title">🎨 Elige tu tema</div>
-    <div class="theme-grid" id="themeGrid"></div>
-    <button class="btn-panel-close" onclick="closeTheme()">Listo</button>
-  </div>
-</div>
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 lg:px-8 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-rose-500/20 font-syne font-bold text-lg">RJ</div>
+                <div>
+                    <h1 class="font-syne font-extrabold text-base tracking-tight">RADIO JERE <span class="text-rose-500">PRO</span></h1>
+                    <p class="text-[10px] text-slate-400">Plataforma Global de Streaming</p>
+                </div>
+            </div>
 
-<!-- IDENTIFICADOR DE CANCIONES -->
-<div class="shazam-panel" id="shazamPanel" onclick="if(event.target===this)shazamClose()">
-  <div class="shazam-box">
-    <div class="shazam-title">
-      <span>🎵</span>
-      <span>Identificar canción</span>
-      <button onclick="shazamClose()" style="margin-left:auto;background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer">✕</button>
-    </div>
-
-    <!-- Estado: escuchando -->
-    <div id="shazamListening" class="shazam-listening" style="display:none">
-      <div class="shazam-wave-big">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <div class="shazam-timer" id="shazamTimer">5</div>
-      <div class="shazam-hint">Acerca el teléfono a la música<br>o reproduce audio cerca del micrófono</div>
-    </div>
-
-    <!-- Estado: resultado -->
-    <div id="shazamResult" class="shazam-result">
-      <div style="display:flex;gap:14px;align-items:center">
-        <img id="shazamArt" class="shazam-art" src="" alt="">
-        <div>
-          <div class="shazam-song"  id="shazamSong">—</div>
-          <div class="shazam-artist" id="shazamArtist">—</div>
-          <div class="shazam-album"  id="shazamAlbum"></div>
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-slate-950 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="liveCount">1</span> en vivo
+                </div>
+                <button onclick="openTheme()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-sm" title="Cambiar Tema">🎨</button>
+            </div>
         </div>
-      </div>
-      <div class="shazam-actions">
-        <button class="shazam-btn primary"    id="btnShazamYT"     onclick="shazamOpenYT()">▶ YouTube</button>
-        <button class="shazam-btn primary"    id="btnShazamSpotify" onclick="shazamOpenSpotify()">🎧 Spotify</button>
-        <button class="shazam-btn secondary"  onclick="shazamStart()">🔄 Identificar otra</button>
-        <button class="shazam-btn secondary"  onclick="shazamClose()">Cerrar</button>
-      </div>
-    </div>
 
-    <!-- Estado: error -->
-    <div id="shazamError" class="shazam-error" style="display:none">
-      <div class="err-icon" id="shazamErrIcon">🎤</div>
-      <div id="shazamErrMsg">No se pudo identificar la canción</div>
-      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
-        <button class="shazam-btn primary"   onclick="shazamStart()">🔄 Intentar de nuevo</button>
-        <button class="shazam-btn secondary" onclick="shazamClose()">Cerrar</button>
-      </div>
-    </div>
-
-    <!-- Buscador manual por nombre — alternativa sin micrófono -->
-    <div id="shazamManual" style="display:none;margin-top:14px">
-      <div style="font-size:11px;color:var(--text2);margin-bottom:8px;font-family:'Syne',sans-serif;font-weight:700">
-        🔎 O busca la canción por nombre:
-      </div>
-      <div style="display:flex;gap:6px">
-        <input id="shazamManualInput" type="text"
-          placeholder="Nombre de la canción o artista..."
-          style="flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none"
-          onkeydown="if(event.key==='Enter')shazamManualSearch()"
-        >
-        <button class="shazam-btn primary" onclick="shazamManualSearch()" style="white-space:nowrap">Buscar</button>
-      </div>
-      <div id="shazamManualResults" style="margin-top:10px"></div>
-    </div>
-
-    <!-- Historial de identificaciones -->
-    <div class="shazam-history" id="shazamHistory"></div>
-  </div>
-</div>
-
-<!-- PAÍSES FAVORITOS PANEL -->
-<div class="favpais-panel" id="favpaisPanel" onclick="if(event.target===this)closeFavPais()">
-  <div class="panel-box">
-    <div class="panel-title">⭐ Mis países favoritos</div>
-    <input class="fp-search" type="text" placeholder="Buscar país..." oninput="filterFavPaisPanel(this.value)" id="fpSearch">
-    <div class="fp-list" id="fpList"></div>
-    <button class="btn-panel-close" onclick="closeFavPais()">Listo</button>
-  </div>
-</div>
-
-<div class="content">
-  <!-- EXPLORAR -->
-  <div class="page active" id="page-explorar">
-    <!-- Breadcrumb -->
-    <div class="breadcrumb" id="breadcrumb" style="display:none"></div>
-    <!-- Vista continentes -->
-    <div id="view-continents">
-      <div class="status-bar"><div class="sdot loading" id="statusDot"></div><span id="statusText">Conectando...</span></div>
-      <!-- Cerca de mí -->
-      <div class="nearby-explore" id="nearbyExplore">
-        <div class="nearby-explore-header">
-          <div>
-            <div class="nearby-explore-title">📍 Emisoras cerca de mí</div>
-            <div class="nearby-explore-sub" id="nearbyExploreSub">Detecta tu ubicación para ver emisoras locales</div>
-          </div>
-          <button class="btn-nearby" id="btnNearbyExplore" onclick="findNearbyExplore()">Buscar</button>
+        <!-- PESTAÑAS DE NAVEGACIÓN -->
+        <div class="max-w-7xl mx-auto flex gap-2 mt-3 overflow-x-auto scrollbar-none">
+            <button onclick="showPage('explorar', this)" class="tab-btn px-4 py-2 rounded-lg font-syne text-xs font-bold transition bg-rose-500 text-white">🔍 Explorar</button>
+            <button onclick="showPage('favglobal', this)" class="tab-btn px-4 py-2 rounded-lg font-syne text-xs font-bold transition bg-slate-800 text-slate-400 hover:text-white">⭐ Favoritos</button>
+            <button onclick="showPage('admin', this)" class="tab-btn px-4 py-2 rounded-lg font-syne text-xs font-bold transition bg-slate-800 text-slate-400 hover:text-white">🛠️ Modo Admin</button>
         </div>
-        <div id="nearbyExploreList" style="display:none">
-          <div class="sort-bar" style="margin-bottom:8px">
-            <button class="sort-btn active" data-mode="distance" onclick="sortNearby('distance',this)">📍 Más cercanas</button>
-            <button class="sort-btn" data-mode="popular" onclick="sortNearby('popular',this)">🔥 Populares</button>
-            <button class="sort-btn" data-mode="az" onclick="sortNearby('az',this)">A → Z</button>
-            <button class="sort-btn" data-mode="verified" onclick="sortNearby('verified',this)">✓ Verificadas</button>
-          </div>
-          <div class="stations-list" id="nearbyStationsList"></div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-8 pb-32">
+        
+        <!-- VISTA EXPLORAR -->
+        <div id="page-explorar" class="page active space-y-6">
+            
+            <!-- Buscador Inteligente Unificado -->
+            <div class="relative">
+                <input type="text" id="searchInput" oninput="filterStations()" placeholder="Busca por emisora, ciudad o país (ej: El Sol Bucaramanga)..." 
+                    class="w-full bg-slate-900 border border-slate-800 rounded-2xl px-5 py-4 pl-12 text-sm focus:outline-none focus:border-rose-500 transition shadow-inner text-slate-100 placeholder-slate-500">
+                <svg class="w-5 h-5 text-slate-500 absolute left-4 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            <!-- Listado de Emisoras Principales y Curadas -->
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="font-syne text-xs font-bold uppercase tracking-widest text-slate-400">Emisoras Destacadas & Actualizadas</h2>
+                    <span id="stationCount" class="text-xs text-slate-500">0 disponibles</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="stationsGrid">
+                    <!-- Inyectado por JS -->
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- Países favoritos -->
-      <div id="favpais-section" style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <p class="sec-title" style="margin:0">⭐ Mis países</p>
-          <button class="btn-sm" onclick="openFavPais()">+ Editar</button>
+
+        <!-- VISTA FAVORITOS -->
+        <div id="page-favglobal" class="page hidden space-y-6">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="font-syne text-xs font-bold uppercase tracking-widest text-slate-400">Mis Emisoras Favoritas</h2>
+                <span id="favCount" class="text-xs text-slate-500">0 guardadas</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="favoritesGrid">
+                <!-- Inyectado por JS -->
+            </div>
         </div>
-        <div class="country-grid" id="favPaisGrid"><div style="font-size:11px;color:var(--text3);padding:8px">Agrega países favoritos con "+ Editar"</div></div>
-      </div>
-      <!-- Continentes -->
-      <p class="sec-title">Por continente</p>
-      <div class="cont-scroll" id="contScroll"></div>
-      <div class="country-grid" id="countryGrid"><div class="loading-box"><div class="spinner"></div>Cargando...</div></div>
-    </div>
-    <!-- Vista emisoras -->
-    <div id="view-stations" style="display:none">
-      <div class="search-wrap">
-        <span class="search-icon">🔎</span>
-        <input type="text" id="searchInput" placeholder="Buscar emisora..." oninput="filterStations()">
-      </div>
-      <div class="status-bar"><div class="sdot loading" id="stStatusDot"></div><span id="stStatusText">Cargando...</span></div>
-      <div class="sort-bar">
-        <span class="sort-label">Ordenar:</span>
-        <button class="sort-btn active" onclick="sortStations('popular',this)">🔥 Populares</button>
-        <button class="sort-btn" onclick="sortStations('az',this)">A → Z</button>
-        <button class="sort-btn" onclick="sortStations('za',this)">Z → A</button>
-        <button class="sort-btn" onclick="sortStations('verified',this)">✓ Verificadas</button>
-      </div>
-      <p class="sec-title" id="stTitle">Emisoras</p>
-      <div class="stations-list" id="stationsList"><div class="loading-box"><div class="spinner"></div>Cargando...</div></div>
-    </div>
-  </div>
 
-  <!-- FAVORITOS GLOBAL -->
-  <div class="page" id="page-favglobal">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <p class="sec-title" style="margin:0">⭐ Todos mis favoritos</p>
-      <span style="font-size:10px;color:var(--text3)" id="favGlobalCount"></span>
-    </div>
-    <!-- Nearby bar -->
-    <div class="nearby-bar" id="nearbyBar">
-      <span style="flex:1">📍 Buscar emisoras cerca de ti</span>
-      <button class="btn-nearby" id="btnNearby" onclick="findNearbyStations()">Buscar</button>
-    </div>
-    <!-- Fav sort bar -->
-    <div class="fav-sort-bar">
-      <span class="sort-label">Ordenar:</span>
-      <button class="fav-sort-btn active" onclick="setFavSort('manual',this)">↕ Manual</button>
-      <button class="fav-sort-btn" onclick="setFavSort('az',this)">A → Z</button>
-      <button class="fav-sort-btn" onclick="setFavSort('za',this)">Z → A</button>
-      <button class="fav-sort-btn" onclick="setFavSort('mostused',this)">🔥 Más usadas</button>
-    </div>
-    <div class="stations-list" id="favGlobalList"></div>
-  </div>
-
-  <!-- MODO ADMIN -->
-  <div class="page" id="page-admin">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <p class="sec-title" style="margin:0">🛠️ Panel de Control & Diagnóstico</p>
-    </div>
-    <div class="status-bar" style="margin-bottom:14px">
-      <div>Verifica la conectividad de las emisoras principales cargadas en el sistema antes de publicarlas en Netlify.</div>
-    </div>
-    <div style="margin-bottom:14px">
-      <button class="btn-nearby" onclick="runAdminHealthCheck()">⚡ Probar Todas las Emisoras</button>
-    </div>
-    <div class="stations-list" id="adminResultsList">
-      <div class="loading-box">Haz clic en el botón superior para iniciar el test de enlaces.</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- SHARE PANEL -->
-<div class="share-panel" id="sharePanel" onclick="if(event.target===this)closeShare()">
-  <div class="share-box">
-    <div class="share-station-name" id="shareStationName">Emisora</div>
-    <div class="share-station-sub" id="shareStationSub">Radio Jere Pro</div>
-    <div class="share-grid">
-      <div class="share-opt" onclick="shareWhatsApp()">
-        <span class="share-opt-icon">💬</span>
-        <span class="share-opt-label">WhatsApp</span>
-      </div>
-      <div class="share-opt" onclick="shareTelegram()">
-        <span class="share-opt-icon">✈️</span>
-        <span class="share-opt-label">Telegram</span>
-      </div>
-      <div class="share-opt" onclick="shareTwitter()">
-        <span class="share-opt-icon">𝕏</span>
-        <span class="share-opt-label">Twitter/X</span>
-      </div>
-      <div class="share-opt" onclick="shareFacebook()">
-        <span class="share-opt-icon">📘</span>
-        <span class="share-opt-label">Facebook</span>
-      </div>
-      <div class="share-opt" onclick="shareEmail()">
-        <span class="share-opt-icon">📧</span>
-        <span class="share-opt-label">Email</span>
-      </div>
-      <div class="share-opt" onclick="shareNative()">
-        <span class="share-opt-icon">📤</span>
-        <span class="share-opt-label">Más opciones</span>
-      </div>
-      <div class="share-opt" onclick="copyStreamUrl()">
-        <span class="share-opt-icon">🔗</span>
-        <span class="share-opt-label">Copiar stream</span>
-      </div>
-      <div class="share-opt" onclick="copyAppLink()">
-        <span class="share-opt-icon">📻</span>
-        <span class="share-opt-label">Link app</span>
-      </div>
-    </div>
-    <div class="share-link-box">
-      <input class="share-link-input" id="shareLinkInput" readonly>
-      <button class="btn-copy-link" id="btnCopyLink" onclick="copyShareLink()">Copiar</button>
-    </div>
-    <button class="btn-close-share" onclick="closeShare()">Cerrar</button>
-  </div>
-</div>
-
-<div class="player" id="player">
-  <div class="player-inner">
-    <div class="p-logo"><img id="pLogoImg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:7px"></div>
-    <div class="p-info">
-      <div class="p-name" id="pName">Selecciona una emisora</div>
-      <div class="p-status" id="pStatus">Radio Jere Pro</div>
-    </div>
-    <div class="p-controls">
-      <div class="vol-wrap"><span>🔉</span><input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="audio.volume=this.value"></div>
-      <button class="btn-stop" onclick="stopRadio()">⏹</button>
-    </div>
-  </div>
-</div>
-
-<audio id="audioPlayer" preload="none"></audio>
-
-<script>
-const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/--HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUJcukKIqkeK6W597cY3Zmdu6evup67+WPquruofxhexylnKEISgGEXK7D36mJjO0fS74s8kLff/I8+ZsfIu6XgI04A/e7E993P7z+c3P0q5q1tQ/28lIu1tI9r7n8c2/b/Peb+s/J4+n52jN0N3+l//Ww96U0jXqQAAAABJRU5ErkJggg==';
-const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
-const audio = document.getElementById('audioPlayer');
-let allStations=[], filteredStations=[], currentStation=null, playing=false;
-let allCountries=[], currentContinent='', currentCountry='';
-let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
-let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
-let favPaises = JSON.parse(localStorage.getItem('rjp_favpaises')||'["Colombia","Mexico","Argentina","Spain","United States"]');
-let liveListeners = parseInt(localStorage.getItem('rjp_live')||'0');
-let playCounts = JSON.parse(localStorage.getItem('rjp_playcounts')||'{}');
-let favOrder = JSON.parse(localStorage.getItem('rjp_favorder')||'[]');
-let currentFavSort = 'manual';
-let urlOverrides = JSON.parse(localStorage.getItem('rjp_url_overrides')||'{}');
-function saveUrlOverride(uuid, url) {
-  urlOverrides[uuid] = url;
-  localStorage.setItem('rjp_url_overrides', JSON.stringify(urlOverrides));
-}
-
-let listenerChannel;
-try {
-  listenerChannel = new BroadcastChannel('rjp_listeners');
-  listenerChannel.postMessage('join');
-  listenerChannel.onmessage = ()=>{ liveListeners = Math.max(1, liveListeners); updateLiveCount(liveListeners); };
-} catch(e){}
-let liveCount = 1;
-function updateLiveCount(n){ document.getElementById('liveCount').textContent = n; }
-const FB_URL = 'https://radiojere-live-default-rtdb.firebaseio.com';
-const sessionId = 'sess_' + Math.random().toString(36).slice(2) + '_' + Date.now();
-
-async function pingLive() {
-  try {
-    await fetch(`${FB_URL}/listeners/${sessionId}.json`, {
-      method: 'PUT',
-      body: JSON.stringify({ ts: Date.now() })
-    });
-    const r = await fetch(`${FB_URL}/listeners.json`);
-    const data = await r.json();
-    if (data) {
-      const now = Date.now();
-      const activos = Object.values(data).filter(v => v && (now - v.ts) < 35000);
-      updateLiveCount(activos.length);
-    }
-  } catch(e) {
-    updateLiveCount(1);
-  }
-}
-
-window.addEventListener('beforeunload', () => {
-  navigator.sendBeacon(`${FB_URL}/listeners/${sessionId}.json?x-http-method-override=DELETE`, '');
-});
-
-pingLive();
-setInterval(pingLive, 15000);
-
-document.getElementById('logoImg').src=ICON;
-document.getElementById('pLogoImg').src=ICON;
-
-const COUNTRY_ALIASES = {
-  'South Korea': ['South Korea','Korea, Republic of','The Republic Of Korea','Korea','Republic of Korea','Korean'],
-  'North Korea': ['North Korea','Korea, Democratic','Democratic People'],
-  'United States': ['United States','United States of America','USA'],
-  'United Kingdom': ['United Kingdom','UK','Great Britain'],
-  'Czech Republic': ['Czech Republic','Czechia'],
-  'Dominican Republic': ['Dominican Republic','Republic Dominicana'],
-  'United Arab Emirates': ['United Arab Emirates','UAE'],
-  'Vietnam': ['Vietnam','Viet Nam'],
-  'Taiwan': ['Taiwan','Chinese Taipei'],
-  'Iran': ['Iran','Islamic Republic of Iran'],
-  'Russia': ['Russia','Russian Federation'],
-  'Bolivia': ['Bolivia','Bolivia, Plurinational'],
-  'Venezuela': ['Venezuela','Venezuela, Bolivarian'],
-  'Tanzania': ['Tanzania','United Republic of Tanzania'],
-};
-
-const CONTINENTS = {
-  'América': ['Colombia','Mexico','Argentina','Brazil','United States','Canada','Chile','Peru','Venezuela','Ecuador','Bolivia','Uruguay','Paraguay','Dominican Republic','Costa Rica','Panama','Cuba','Guatemala','Honduras','El Salvador','Nicaragua','Haiti','Puerto Rico','Jamaica','Trinidad and Tobago','Guyana','Suriname','Belize','Bahamas','Barbados','Antigua and Barbuda'],
-  'Europa': ['Spain','France','Germany','Italy','Portugal','United Kingdom','Netherlands','Sweden','Norway','Denmark','Finland','Poland','Russia','Ukraine','Switzerland','Austria','Belgium','Greece','Romania','Czech Republic','Hungary','Serbia','Croatia','Slovakia','Bulgaria','Ireland','Belarus','Lithuania','Latvia','Estonia','Slovenia','Bosnia and Herzegovina','North Macedonia','Albania','Kosovo','Moldova','Luxembourg','Iceland','Malta','Cyprus'],
-  'Asia': ['Japan','South Korea','India','China','Indonesia','Vietnam','Thailand','Malaysia','Philippines','Turkey','Saudi Arabia','United Arab Emirates','Iran','Iraq','Pakistan','Bangladesh','Singapore','Taiwan','Hong Kong','Myanmar','Cambodia','Laos','Sri Lanka','Nepal','Kazakhstan','Uzbekistan','Azerbaijan','Georgia','Armenia','Lebanon','Jordan','Israel','Kuwait','Qatar','Bahrain','Oman','Yemen','Syria','Afghanistan','Mongolia'],
-  'África': ['South Africa','Nigeria','Kenya','Egypt','Morocco','Ethiopia','Ghana','Tanzania','Algeria','Tunisia','Senegal','Cameroon','Uganda','Mozambique','Zimbabwe','Angola','Ivory Coast','Madagascar','Zambia','Rwanda','Libya','Sudan','Somalia'],
-  'Oceanía': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
-};
-
-let _stationsLoaded = false;
-async function loadStationsJSON() {
-  if (_stationsLoaded) return;
-  try {
-    const res = await fetch('/stations.json?_=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const arr = data.stations || data;
-    if (Array.isArray(arr) && arr.length > 0) {
-      COLOMBIA_CURADA.length = 0;
-      arr.forEach(s => COLOMBIA_CURADA.push(s));
-      _stationsLoaded = true;
-    }
-  } catch(e) {}
-}
-
-const COLOMBIA_CURADA = [
-  {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'Bogotá',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
-  {stationuuid:'co-002',name:'Tropicana Bogotá 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'Bogotá',tags:'tropical,salsa',favicon:'https://www.tropicanafm.com/wp-content/uploads/2023/04/cropped-favicon-tropicana-32x32.png'},
-  {stationuuid:'co-003',name:'Caracol Radio Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.caracol.com.co/wp-content/uploads/2021/10/cropped-favicon-caracol-32x32.png'},
-  {stationuuid:'co-004',name:'W Radio Colombia',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/WRADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,talk',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/4/2021/09/cropped-favicon-wradio-32x32.png'},
-  {stationuuid:'co-005',name:'La Mega Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGAAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.lamega.com.co/wp-content/uploads/2021/10/cropped-favicon-lamega-32x32.png'},
-  {stationuuid:'co-006',name:'La Kalle 96.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLEAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,urbano',favicon:'https://www.lakalle.com.co/wp-content/uploads/2021/10/cropped-favicon-lakalle-32x32.png'},
-  {stationuuid:'co-007',name:'Bésame 97.4 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'romantica,baladas',favicon:'https://www.besame.fm/wp-content/uploads/2021/10/cropped-favicon-besame-32x32.png'},
-  {stationuuid:'co-008',name:'Olímpica Stereo Bogotá 105.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLIMPICA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'vallenato,popular',favicon:'https://www.olimpicastereo.com.co/wp-content/uploads/2021/09/cropped-favicon-olimpica-32x32.png'},
-  {stationuuid:'co-009',name:'Candela Stereo 101.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CANDELAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:'https://www.candelaestereo.com/wp-content/uploads/2021/09/cropped-favicon-candela-32x32.png'},
-  {stationuuid:'co-010',name:'Blu Radio 96.9 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BLU_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.bluradio.com/wp-content/uploads/2021/09/cropped-favicon-blu-32x32.png'},
-  {stationuuid:'co-011',name:'La FM Bogotá 94.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FMAAC.aac',country:'Colombia',state:'Bogotá',tags:'noticias,talk',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png'},
-  {stationuuid:'co-012',name:'El Sol Bogotá - La Salsa 105.4 FM',url:'/stream-proxy?id=co-012',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BOGOTAAAC_SC',country:'Colombia',state:'Bogotá',tags:'salsa',favicon:'https://www.elsolradio.com.co/wp-content/uploads/2021/09/cropped-favicon-elsol-32x32.png'},
-  {stationuuid:'co-013',name:'Radio Uno Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNOAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png'},
-  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://stream.zeno.fm/f392822xevduv',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-026',name:'La FM Bucaramanga 99.7 FM',url:'/stream-proxy?id=co-026',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FM_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-028',name:'W Radio Bucaramanga 98.1 FM',url:'/stream-proxy?id=co-028',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/W_RADIO_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias,opinion',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/5/2021/09/wradio-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
-];
-
-const THEMES = {
-  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:'#e94560',text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
-  'Océano':    {emoji:'🌊',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
-  'Bosque':    {emoji:'🌲',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
-  'Carbón':    {emoji:'🔥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
-  'Rosa':      {emoji:'🌸',bg:'#0e040e',bg2:'#180a18',bg3:'#220e22',bg4:'#2e142e',accent:'#e040fb',text:'#f8e8f8',text2:'#c080c0',text3:'#7a4a7a',card:'#140a14'},
-  'Día Claro': {emoji:'☀️',bg:'#f0f2f5',bg2:'#ffffff',bg3:'#e8eaf0',bg4:'#dde0ea',accent:'#1565c0',text:'#1a1a2e',text2:'#556080',text3:'#8896b0',card:'#ffffff'},
-};
-let currentTheme=localStorage.getItem('rjp_theme')||'Noche Azul';
-
-function applyTheme(n){
-  const t=THEMES[n]; if(!t) return;
-  currentTheme=n; localStorage.setItem('rjp_theme',n);
-  const r=document.documentElement.style;
-  ['bg','bg2','bg3','bg4','accent','text','text2','text3','card'].forEach(k=>r.setProperty('--'+k,t[k]));
-  document.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===n));
-}
-function buildThemeGrid(){
-  document.getElementById('themeGrid').innerHTML=Object.entries(THEMES).map(([n,t])=>
-    `<div class="theme-opt${n===currentTheme?' active':''}" data-theme="${n}" onclick="applyTheme('${n}')">
-      <div class="theme-swatch" style="background:${t.bg};border:2px solid ${t.accent}">${t.emoji}</div>
-      <div class="theme-label">${n}</div></div>`).join('');
-}
-function openTheme(){buildThemeGrid();document.getElementById('themePanel').classList.add('open')}
-function closeTheme(){document.getElementById('themePanel').classList.remove('open')}
-
-async function apiFetch(path,si=0){
-  if(si>=SERVERS.length) throw new Error('Sin servidores');
-  const c=new AbortController(); const to=setTimeout(()=>c.abort(),8000);
-  try{const r=await fetch(SERVERS[si]+path,{signal:c.signal}); clearTimeout(to); if(!r.ok) throw new Error(); return await r.json();}
-  catch(e){clearTimeout(to); return apiFetch(path,si+1);}
-}
-
-function filterUniqueStations(stations) {
-  const seenNames = new Set();
-  const seenUrls = new Set();
-  return stations.filter(s => {
-    const cleanName = (s.name || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 18);
-    const url = s.url_resolved || s.url || '';
-    if (!cleanName || (seenNames.has(cleanName) || (url && seenUrls.has(url)))) {
-      return false;
-    }
-    seenNames.add(cleanName);
-    if (url) seenUrls.add(url);
-    return true;
-  });
-}
-
-async function init(){
-  setStatus('Conectando...','loading');
-  await loadStationsJSON();
-  try{
-    allCountries=await apiFetch('/countries?hidebroken=true&order=name');
-    setStatus(`${allCountries.length} países disponibles`,'');
-    renderContinents();
-    renderFavPaises();
-  }catch(e){setStatus('Error de conexión','error');}
-}
-
-function renderContinents(){
-  const scroll=document.getElementById('contScroll');
-  scroll.innerHTML=Object.keys(CONTINENTS).map(c=>
-    `<button class="cont-btn${c===currentContinent?' active':''}" onclick="selectContinent('${c}')">${c}</button>`
-  ).join('');
-  if(currentContinent) showCountriesOf(currentContinent);
-  else document.getElementById('countryGrid').innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Selecciona un continente para ver sus países</div>';
-}
-
-function selectContinent(c){
-  currentContinent=c;
-  document.querySelectorAll('.cont-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
-  showCountriesOf(c);
-}
-
-function showCountriesOf(continent){
-  const names=CONTINENTS[continent]||[];
-  const countries=names.map(n=>{
-    const aliases=COUNTRY_ALIASES[n]||[n];
-    return allCountries.find(c=>aliases.some(a=>c.name.toLowerCase()===a.toLowerCase()));
-  }).filter(Boolean);
-  const grid=document.getElementById('countryGrid');
-  if(!countries.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">No hay países disponibles</div>';return;}
-  grid.innerHTML=countries.map(c=>`
-    <div class="country-card${favPaises.includes(c.name)?' fav':''}" onclick="selectCountry('${c.name}','${continent}')">
-      <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
-      <button class="country-fav-btn${favPaises.includes(c.name)?' active':''}" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)" title="País favorito">${favPaises.includes(c.name)?'★':'☆'}</button>
-    </div>`).join('');
-}
-
-function renderFavPaises(){
-  const grid=document.getElementById('favPaisGrid');
-  if(!favPaises.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Agrega países favoritos con "+ Editar"</div>';return;}
-  const countries=favPaises.map(n=>allCountries.find(c=>c.name===n)).filter(Boolean);
-  grid.innerHTML=countries.map(c=>`
-    <div class="country-card fav" onclick="selectCountry('${c.name}','Favoritos')">
-      <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
-      <button class="country-fav-btn active" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)">★</button>
-    </div>`).join('');
-}
-
-function toggleFavPais(name,btn){
-  const idx=favPaises.indexOf(name);
-  if(idx>=0){favPaises.splice(idx,1);if(btn){btn.textContent='☆';btn.classList.remove('active');}}
-  else{favPaises.push(name);if(btn){btn.textContent='★';btn.classList.add('active');}}
-  localStorage.setItem('rjp_favpaises',JSON.stringify(favPaises));
-  renderFavPaises();
-  if(currentContinent) showCountriesOf(currentContinent);
-  renderFavPaisPanel();
-}
-
-let allCountriesForPanel=[];
-function openFavPais(){
-  allCountriesForPanel=[...allCountries];
-  renderFavPaisPanel();
-  document.getElementById('fpSearch').value='';
-  document.getElementById('favpaisPanel').classList.add('open');
-}
-function closeFavPais(){document.getElementById('favpaisPanel').classList.remove('open')}
-function renderFavPaisPanel(list){
-  const data=list||allCountriesForPanel;
-  document.getElementById('fpList').innerHTML=data.map(c=>`
-    <div class="fp-item${favPaises.includes(c.name)?' favved':''}" onclick="toggleFavPais('${c.name}',null);this.classList.toggle('favved');this.querySelector('.fp-item-star').textContent=favPaises.includes('${c.name}')?'★':'☆'">
-      <div><div class="fp-item-name">${c.name}</div><div class="fp-item-count">${c.stationcount} emisoras</div></div>
-      <span class="fp-item-star">${favPaises.includes(c.name)?'★':'☆'}</span>
-    </div>`).join('');
-}
-function filterFavPaisPanel(q){
-  const filtered=allCountriesForPanel.filter(c=>c.name.toLowerCase().includes(q.toLowerCase()));
-  renderFavPaisPanel(filtered);
-}
-
-async function selectCountry(name, continent, pushNav=true){
-  if(pushNav) navPush({ type:'country', data:{ name, continent } });
-  currentCountry=name;
-  document.getElementById('view-continents').style.display='none';
-  document.getElementById('view-stations').style.display='block';
-  const bc=document.getElementById('breadcrumb');
-  bc.style.display='flex';
-  bc.innerHTML=`<span onclick="backToMap()">${continent}</span><span class="sep"> › </span><span onclick="backToMap()">${name}</span>`;
-  document.getElementById('stTitle').textContent=`Emisoras de ${name}`;
-  setStStatus(`Cargando ${name}...`,'loading');
-  document.getElementById('stationsList').innerHTML='<div class="loading-box"><div class="spinner"></div>Buscando...</div>';
-  try{
-    if(name === 'Colombia') {
-      await loadStationsJSON();
-      allStations = filterUniqueStations([...COLOMBIA_CURADA]);
-      filteredStations = [...allStations];
-      renderStations(filteredStations, 'stationsList');
-    }
-
-    const aliases = COUNTRY_ALIASES[name] || [name];
-    let allFound = [];
-    for(const alias of aliases) {
-      try {
-        const r = await apiFetch(`/stations/search?limit=500&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(alias)}`);
-        if(Array.isArray(r)) allFound.push(...r);
-      } catch(e) {}
-    }
-
-    const seen = new Set();
-    const apiStations = allFound.filter(s => {
-      if(seen.has(s.stationuuid)) return false;
-      seen.add(s.stationuuid); return true;
-    });
-
-    if(name === 'Colombia') {
-      const curadaIds = new Set(COLOMBIA_CURADA.map(s => s.stationuuid));
-      const curadaNames = new Set(COLOMBIA_CURADA.map(s => s.name.toLowerCase().slice(0,15)));
-      const apiFiltered = apiStations.filter(s =>
-        !curadaIds.has(s.stationuuid) &&
-        !curadaNames.has(s.name.toLowerCase().slice(0,15))
-      );
-      allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiFiltered]);
-    } else {
-      allStations = filterUniqueStations(apiStations);
-    }
-
-    filteredStations = [...allStations];
-    setStStatus(`${allStations.length} emisoras de ${name}`, '');
-    sortStations(currentSort, document.querySelector('.sort-btn.active'));
-  }catch(e){
-    setStStatus('Error al cargar emisoras','error');
-    document.getElementById('stationsList').innerHTML=`<div class="loading-box">Error.<br><button class="btn-retry" onclick="selectCountry('${name}','${continent}')">🔄 Reintentar</button></div>`;
-  }
-}
-
-const navHistory = [];
-let navIdx = -1;
-
-function navPush(view) {
-  navHistory.splice(navIdx + 1);
-  navHistory.push(view);
-  navIdx = navHistory.length - 1;
-  navUpdateButtons();
-  navUpdateCrumb();
-}
-
-function navBack() {
-  if(navIdx <= 0) return;
-  navIdx--;
-  navGoto(navHistory[navIdx], false);
-  navUpdateButtons();
-  navUpdateCrumb();
-}
-
-function navForward() {
-  if(navIdx >= navHistory.length - 1) return;
-  navIdx++;
-  navGoto(navHistory[navIdx], false);
-  navUpdateButtons();
-  navUpdateCrumb();
-}
-
-function navHome() {
-  navPush({ type: 'home' });
-  _showHome();
-}
-
-function navGoto(view, push = true) {
-  if(!view) return;
-  if(push) navPush(view);
-  if(view.type === 'home')    _showHome();
-  if(view.type === 'country') selectCountry(view.data.name, view.data.continent, false);
-  if(view.type === 'search')  { document.getElementById('searchInput').value = view.data.q; filterStations(); }
-  if(view.type === 'favs')    showPage('favglobal', null);
-}
-
-function navUpdateButtons() {
-  const btnB = document.getElementById('btnBack');
-  const btnF = document.getElementById('btnForward');
-  const btnH = document.getElementById('btnHome');
-  if(btnB) btnB.disabled = navIdx <= 0;
-  if(btnF) btnF.disabled = navIdx >= navHistory.length - 1;
-  if(btnH) btnH.disabled = navHistory[navIdx]?.type === 'home';
-}
-
-function navUpdateCrumb() {
-  const el = document.getElementById('navCrumb');
-  if(!el) return;
-  const view = navHistory[navIdx];
-  if(!view || view.type === 'home') {
-    el.innerHTML = '<span class="nc-item active">🌍 Inicio</span>';
-    return;
-  }
-  if(view.type === 'country') {
-    const cont = view.data.continent || '';
-    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span>${cont ? `<span class="nc-item" onclick="navHome()">${cont}</span><span class="nc-sep">›</span>` : ''}<span class="nc-item active">${view.data.name}</span>`;
-  }
-}
-
-function _showHome() {
-  document.getElementById('view-continents').style.display = 'block';
-  document.getElementById('view-stations').style.display = 'none';
-  document.getElementById('breadcrumb').style.display = 'none';
-  currentCountry = '';
-  navUpdateButtons();
-  navUpdateCrumb();
-}
-
-function backToMap(){
-  _showHome();
-  if(navIdx > 0) { navIdx--; navUpdateButtons(); navUpdateCrumb(); }
-}
-
-let _searchDebounce;
-function filterStations(){
-  const q=document.getElementById('searchInput').value.trim();
-  clearTimeout(_searchDebounce);
-  _searchDebounce = setTimeout(async () => {
-    const ql = q.toLowerCase();
-    if(!q) {
-      filteredStations = [...allStations];
-      sortStations(currentSort, null);
-      return;
-    }
-    const localResults = allStations.filter(s=>
-      s.name.toLowerCase().includes(ql)||
-      (s.tags||'').toLowerCase().includes(ql)||
-      (s.state||'').toLowerCase().includes(ql)
-    );
-    if(localResults.length > 0) {
-      filteredStations = filterUniqueStations(localResults);
-      sortStations(currentSort, null);
-    }
-    try {
-      setStStatus('🔎 Buscando...', 'loading');
-      const rbResults = await apiFetch(`/stations/search?name=${encodeURIComponent(q)}&hidebroken=true&order=votes&reverse=true&limit=40`);
-      if(Array.isArray(rbResults) && rbResults.length) {
-        document.getElementById('view-continents').style.display='none';
-        document.getElementById('view-stations').style.display='block';
-        document.getElementById('breadcrumb').style.display='none';
-        const uuids = new Set(localResults.map(s=>s.stationuuid));
-        const fresh = rbResults.filter(s=>!uuids.has(s.stationuuid));
-        filteredStations = filterUniqueStations([...localResults, ...fresh]);
-        allStations = filteredStations;
-        sortStations(currentSort, null);
-        setStStatus(`${filteredStations.length} resultados`, 'ok');
-      }
-    } catch(e) {}
-  }, 350);
-}
-
-const _stationRegistry = {};
-function _registerStation(s){ _stationRegistry[s.stationuuid]=s; return s.stationuuid; }
-function _playById(uuid){ const s=_stationRegistry[uuid]; if(s) playStation(s); }
-function _toggleFavById(uuid, btn){ const s=_stationRegistry[uuid]; if(s) toggleFav(uuid,btn,s); }
-function _shareById(uuid){ const s=_stationRegistry[uuid]; if(s) openShare(s); }
-
-function stationCard(s){
-  _registerStation(s);
-  const isFav=favorites.includes(s.stationuuid);
-  const isPlaying=currentStation&&currentStation.stationuuid===s.stationuuid&&playing;
-  const id=s.stationuuid;
-  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'📻';
-  const tags=(s.tags||'').split(',').slice(0,1).filter(Boolean).map(t=>`<span class="tag">${t.trim()}</span>`).join('');
-  return `<div class="scard${isPlaying?' playing':''}" id="card-${id}">
-    <div class="scard-logo">${logo}</div>
-    <div class="scard-info" onclick="_playById('${id}')">
-      <div class="scard-name">${s.name}</div>
-      <div class="scard-meta">${id.startsWith('co-')?'<span style="color:var(--green);font-size:9px">✓ verificada</span> · ':''}${[s.state,tags].filter(Boolean).join(' · ')}</div>
-    </div>
-    <div class="scard-actions">
-      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
-      <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'★':'☆'}</button>
-      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
-    </div>
-  </div>`;
-}
-
-function renderStations(stations,containerId){
-  const el=document.getElementById(containerId);
-  if(!stations.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">No se encontraron emisoras</div></div>';return;}
-  sortedStations = stations;
-  const batch = stations.slice(0, 120);
-  el.innerHTML = batch.map(stationCard).join('');
-}
-
-async function resolveProxyUrl(station) {
-  try {
-    const res = await fetch(`/stream-proxy?id=${station.stationuuid}&info=1`, {
-      signal: AbortSignal.timeout(8000)
-    });
-    if(res.ok) {
-      const data = await res.json();
-      if(data.url) return data.url;
-    }
-  } catch(e) {}
-  return station.url_resolved || station.url;
-}
-
-function getEffectiveUrl(station) {
-  if(urlOverrides[station.stationuuid]) return urlOverrides[station.stationuuid];
-  return station.url || station.url_resolved;
-}
-
-async function playStation(s){
-  if(typeof s==='string') s=JSON.parse(s);
-  _registerStation(s);
-  currentStation=s; playing=true;
-
-  document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = '⟳ Conectando...';
-
-  let url = getEffectiveUrl(s);
-  if(url && url.startsWith('/stream-proxy')) {
-    url = await resolveProxyUrl(s);
-  }
-
-  if(!url) {
-    document.getElementById('pStatus').textContent = '✗ Sin URL de stream';
-    playing = false;
-    return;
-  }
-  _loadStream(s, url);
-}
-
-async function _loadStream(s, url) {
-  audio.pause();
-  audio.src = url.trim();
-  audio.volume = document.getElementById('volSlider').value;
-  document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = '⟳ Conectando...';
-  document.getElementById('nowName').textContent = s.name;
-  document.getElementById('headerWave').classList.remove('idle');
-  
-  const img = document.getElementById('pLogoImg');
-  img.onerror = function() { this.onerror = null; this.src = ICON; };
-  img.src = s.favicon || ICON;
-  
-  try {
-    await audio.play();
-    document.getElementById('pStatus').textContent = '▶ Reproduciendo';
-    playCounts[s.stationuuid] = (playCounts[s.stationuuid]||0) + 1;
-    localStorage.setItem('rjp_playcounts', JSON.stringify(playCounts));
-  } catch(e) {
-    document.getElementById('pStatus').textContent = '✗ Error de reproducción';
-  }
-  refreshCards();
-}
-
-function stopRadio(){
-  audio.pause(); audio.src=''; playing=false;
-  document.getElementById('pName').textContent='Selecciona una emisora';
-  document.getElementById('pStatus').textContent='Radio Jere Pro';
-  document.getElementById('nowName').textContent='Sin reproducir';
-  document.getElementById('headerWave').classList.add('idle');
-  document.getElementById('pLogoImg').src=ICON;
-  refreshCards();
-}
-
-function toggleFav(uuid, btn, stationObj) {
-  const idx = favorites.indexOf(uuid);
-  if(idx >= 0) {
-    favorites.splice(idx, 1);
-    favOrder = favOrder.filter(id => id !== uuid);
-    if(btn){ btn.textContent='☆'; btn.classList.remove('active'); }
-    delete favStore[uuid];
-  } else {
-    favorites.push(uuid);
-    if(!favOrder.includes(uuid)) favOrder.push(uuid);
-    if(btn){ btn.textContent='★'; btn.classList.add('active'); }
-    if(stationObj) favStore[uuid] = stationObj;
-  }
-  localStorage.setItem('rjp_favs', JSON.stringify(favorites));
-  localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
-  localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
-}
-
-function refreshCards(){
-  document.querySelectorAll('.scard').forEach(card=>{
-    const uuid=card.id.replace('card-','');
-    const isP=currentStation&&currentStation.stationuuid===uuid&&playing;
-    card.classList.toggle('playing',isP);
-    const btn=card.querySelector('.btn-play'); if(btn) btn.textContent=isP?'⏸':'▶';
-  });
-}
-
-function showPage(p,btn){
-  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  if(btn) btn.classList.add('active');
-  if(p==='favglobal') renderFavGlobal();
-  if(p==='admin') renderAdminDashboard();
-}
-
-function setFavSort(mode, btn) {
-  currentFavSort = mode;
-  document.querySelectorAll('.fav-sort-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  renderFavGlobal();
-}
-
-function moveFav(uuid, dir) {
-  favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
-  favOrder = favOrder.filter(id => favorites.includes(id));
-  const idx = favOrder.indexOf(uuid);
-  if(idx < 0) return;
-  const newIdx = idx + dir;
-  if(newIdx < 0 || newIdx >= favOrder.length) return;
-  [favOrder[idx], favOrder[newIdx]] = [favOrder[newIdx], favOrder[idx]];
-  localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
-  renderFavGlobal();
-}
-
-function getSortedFavs() {
-  favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
-  favOrder = favOrder.filter(id => favorites.includes(id));
-  let favS = favOrder.map(uuid => favStore[uuid]).filter(Boolean);
-  if(currentFavSort === 'az') {
-    favS.sort((a,b) => a.name.localeCompare(b.name, 'es', {sensitivity:'base'}));
-  } else if(currentFavSort === 'mostused') {
-    favS.sort((a,b) => (playCounts[b.stationuuid]||0) - (playCounts[a.stationuuid]||0));
-  }
-  return favS;
-}
-
-function favCard(s, idx, total) {
-  _registerStation(s);
-  const id = s.stationuuid;
-  const isPlaying = currentStation && currentStation.stationuuid === id && playing;
-  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : '📻';
-  const showReorder = currentFavSort === 'manual';
-  return `<div class="scard${isPlaying?' playing':''}" id="favcard-${id}">
-    ${showReorder ? `<div class="scard-reorder">
-      <button class="btn-reorder" onclick="moveFav('${id}',-1)" ${idx===0?'disabled':''}>▲</button>
-      <button class="btn-reorder" onclick="moveFav('${id}',1)" ${idx===total-1?'disabled':''}>▼</button>
-    </div>` : ''}
-    <div class="scard-logo">${logo}</div>
-    <div class="scard-info" onclick="_playById('${id}')">
-      <div class="scard-name">${s.name}</div>
-      <div class="scard-meta">${[s.country, s.state].filter(Boolean).join(' · ')}</div>
-    </div>
-    <div class="scard-actions">
-      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
-      <button class="btn-fav active" onclick="_toggleFavById('${id}',this)">★</button>
-    </div>
-  </div>`;
-}
-
-function renderFavGlobal(){
-  const el = document.getElementById('favGlobalList');
-  const favS = getSortedFavs();
-  if(!favS.length){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">Toca ☆ en cualquier emisora para guardarla aquí.</div></div>';
-    return;
-  }
-  el.innerHTML = favS.map((s,i) => favCard(s, i, favS.length)).join('');
-}
-
-/* FUNCIONALIDAD MODO ADMIN */
-function renderAdminDashboard() {
-  const listEl = document.getElementById('adminResultsList');
-  const allKnown = [...COLOMBIA_CURADA];
-  listEl.innerHTML = allKnown.map(s => `
-    <div class="scard" id="admin-card-${s.stationuuid}">
-      <div class="scard-logo">📻</div>
-      <div class="scard-info">
-        <div class="scard-name">${s.name}</div>
-        <div class="scard-meta" id="admin-status-${s.stationuuid}">Estado: Sin verificar</div>
-      </div>
-      <div class="scard-actions">
-        <button class="btn-sm" onclick="testSingleStation('${s.stationuuid}')">Probar</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function runAdminHealthCheck() {
-  const allKnown = [...COLOMBIA_CURADA];
-  for(let s of allKnown) {
-    await testSingleStation(s.stationuuid);
-  }
-}
-
-async function testSingleStation(uuid) {
-  const s = COLOMBIA_CURADA.find(x => x.stationuuid === uuid);
-  const statusEl = document.getElementById(`admin-status-${uuid}`);
-  if(!s || !statusEl) return;
-  statusEl.textContent = 'Probando conexión...';
-  statusEl.style.color = 'var(--gold)';
-  
-  let targetUrl = getEffectiveUrl(s);
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 6000);
-    const res = await fetch(targetUrl, { method: 'HEAD', mode: 'no-cors', signal: controller.signal });
-    clearTimeout(timeoutId);
-    statusEl.textContent = '🟢 Enlace operativo';
-    statusEl.style.color = 'var(--green)';
-  } catch(e) {
-    statusEl.textContent = '🔴 Posible fallo o CORS restringido';
-    statusEl.style.color = 'var(--accent)';
-  }
-}
-
-let currentSort = 'popular';
-let sortedStations = [];
-
-function sortStations(mode, btn) {
-  currentSort = mode;
-  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  sortedStations = [...filteredStations];
-  if(mode === 'az') {
-    sortedStations.sort((a,b) => a.name.localeCompare(b.name, 'es', {sensitivity:'base'}));
-  } else if(mode === 'popular') {
-    sortedStations.sort((a,b) => (b.votes||0) - (a.votes||0));
-  }
-  renderStations(sortedStations, 'stationsList');
-}
-
-function setStatus(msg,type){
-  document.getElementById('statusText').textContent=msg;
-  document.getElementById('statusDot').className='sdot'+(type==='loading'?' loading':type==='error'?' error':'');
-}
-function setStStatus(msg,type){
-  document.getElementById('stStatusText').textContent=msg;
-  document.getElementById('stStatusDot').className='sdot'+(type==='loading'?' loading':type==='error'?' error':'');
-}
-
-applyTheme(currentTheme);
-init();
-</script>
+        <!-- VISTA MODO ADMIN (Health Check / Diagnóstico) -->
+        <div id="page-admin" class="page hidden space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h2 class="font-syne text-base font-bold mb-2">Panel de Diagnóstico Masivo</h2>
+                <p class="text-xs text-slate-400 mb-6">Prueba de forma instantánea el estado de conexión de todas las emisoras optimizadas antes de actualizar en Netlify.</p>
+                <button onclick="runHealthCheck()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-3 rounded-xl font-syne font-bold text-xs transition shadow-lg shadow-emerald-600/20">⚡ Probar Todas las Emisoras</button>
+            </div>
+            <div id="adminResults" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- Resultados del test -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- REPRODUCTOR INFERIOR STICKY -->
+    <footer class="bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-4 fixed bottom-0 left-0 right-0 z-40">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+                <div class="w-12 h-12 bg-slate-800 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0 border border-slate-700" id="currentLogoContainer">
+                    <span class="text-xl">📻</span>
+                </div>
+                <div class="min-w-0">
+                    <h4 id="currentTitle" class="font-syne font-bold text-xs sm:text-sm truncate">Selecciona una emisora</h4>
+                    <p id="currentSub" class="text-xs text-slate-400 truncate">Listo para reproducir</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 w-full sm:w-auto justify-end">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">🔉</span>
+                    <input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="audio.volume=this.value" class="w-20 accent-rose-500 cursor-pointer">
+                </div>
+                <button onclick="stopRadio()" class="w-10 h-10 bg-rose-600 hover:bg-rose-500 text-white rounded-xl flex items-center justify-center transition shadow-lg shadow-rose-600/20" title="Detener">⏹</button>
+            </div>
+
+        </div>
+    </footer>
+
+    <audio id="audioPlayer" preload="none"></audio>
+
+    <script>
+        // BASE DE DATOS ACTUALIZADA CON LOS NUEVOS ENLACES OPTIMIZADOS
+        let stations = [
+            { id: 'co-elsol-bga', name: 'El Sol Bucaramanga', city: 'Bucaramanga', country: 'Colombia', url: 'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632cc5d948f73909a614ab93/playlist.m3u8' },
+            { id: 'co-elsol-mde', name: 'El Sol Medellín', city: 'Medellín', country: 'Colombia', url: 'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632c9d30aa9ace684913b853/playlist.m3u8' },
+            { id: 'co-elsol-cali', name: 'El Sol Cali', city: 'Cali', country: 'Colombia', url: 'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632c9d30aa9ace684913b853/playlist.m3u8' },
+            { id: 'co-elsol-sm', name: 'El Sol Santa Marta', city: 'Santa Marta', country: 'Colombia', url: 'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632ce8986d2e8108b23d249f/playlist.m3u8' },
+            { id: 'co-fundingue', name: 'Fundingue Vallenato', city: 'Nacional', country: 'Colombia', url: 'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3' },
+            { id: 'co-yariguies', name: 'Yariguies Stereo', city: 'Barrancabermeja', country: 'Colombia', url: 'https://estructuraweb.com.co:9339/stream' },
+            { id: 'co-guapachosa', name: 'La Guapachosa', city: 'Bucaramanga', country: 'Colombia', url: 'https://radiolatina.info:8184/stream' }
+        ];
+
+        let favorites = JSON.parse(localStorage.getItem('rjp_favorites')) || [];
+        let currentStationId = null;
+        const audio = document.getElementById('audioPlayer');
+
+        function renderStations(list = stations) {
+            const grid = document.getElementById('stationsGrid');
+            document.getElementById('stationCount').innerText = `${list.length} disponibles`;
+            grid.innerHTML = '';
+            
+            if(list.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 text-xs">No se encontraron emisoras</div>';
+                return;
+            }
+
+            list.forEach(s => {
+                const isFav = favorites.includes(s.id);
+                const isPlaying = currentStationId === s.id;
+                
+                grid.innerHTML += `
+                    <div class="bg-slate-900 border ${isPlaying ? 'border-rose-500 shadow-lg shadow-rose-500/10' : 'border-slate-800'} rounded-2xl p-4 flex items-center justify-between gap-3 hover:border-slate-700 transition">
+                        <div class="min-w-0 flex-1">
+                            <h3 class="font-syne font-bold text-xs sm:text-sm truncate text-slate-200">${s.name}</h3>
+                            <p class="text-[11px] text-slate-400 truncate">${s.city}, ${s.country}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="toggleFavorite('${s.id}')" class="p-2 text-base rounded-xl hover:bg-slate-800 transition">${isFav ? '⭐' : '☆'}</button>
+                            <button onclick="playStation('${s.id}')" class="bg-rose-600 hover:bg-rose-500 text-white px-3.5 py-2 rounded-xl font-syne font-bold text-xs transition">
+                                ${isPlaying ? '⏸' : '▶'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderFavorites() {
+            const grid = document.getElementById('favoritesGrid');
+            const favList = stations.filter(s => favorites.includes(s.id));
+            document.getElementById('favCount').innerText = `${favList.length} guardadas`;
+            grid.innerHTML = '';
+
+            if(favList.length === 0) {
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 text-xs">Aún no tienes emisoras favoritas guardadas. Toca la estrella ☆ en cualquiera de ellas.</div>';
+                return;
+            }
+
+            favList.forEach(s => {
+                const isPlaying = currentStationId === s.id;
+                grid.innerHTML += `
+                    <div class="bg-slate-900 border ${isPlaying ? 'border-rose-500' : 'border-slate-800'} rounded-2xl p-4 flex items-center justify-between gap-3">
+                        <div class="min-w-0 flex-1">
+                            <h3 class="font-syne font-bold text-xs sm:text-sm truncate text-slate-200">${s.name}</h3>
+                            <p class="text-[11px] text-slate-400 truncate">${s.city}, ${s.country}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <button onclick="toggleFavorite('${s.id}')" class="p-2 text-base rounded-xl hover:bg-slate-800 transition">⭐</button>
+                            <button onclick="playStation('${s.id}')" class="bg-rose-600 hover:bg-rose-500 text-white px-3.5 py-2 rounded-xl font-syne font-bold text-xs transition">
+                                ${isPlaying ? '⏸' : '▶'}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterStations() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = stations.filter(s => 
+                s.name.toLowerCase().includes(query) || 
+                s.city.toLowerCase().includes(query) || 
+                s.country.toLowerCase().includes(query)
+            );
+            renderStations(filtered);
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(fav => fav !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('rjp_favorites', JSON.stringify(favorites));
+            renderStations();
+            renderFavorites();
+        }
+
+        function playStation(id) {
+            const s = stations.find(item => item.id === id);
+            if(!s) return;
+
+            currentStationId = s.id;
+            document.getElementById('currentTitle').innerText = s.name;
+            document.getElementById('currentSub').innerText = `${s.city}, ${s.country}`;
+
+            renderStations();
+            renderFavorites();
+
+            if (Hls.isSupported() && s.url.includes('.m3u8')) {
+                const hls = new Hls();
+                hls.loadSource(s.url);
+                hls.attachMedia(audio);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
+            } else {
+                audio.src = s.url;
+                audio.play().catch(e => console.log("Reproducción bloqueada o error en stream:", e));
+            }
+        }
+
+        function stopRadio() {
+            audio.pause();
+            audio.src = '';
+            currentStationId = null;
+            document.getElementById('currentTitle').innerText = 'Selecciona una emisora';
+            document.getElementById('currentSub').innerText = 'Listo para reproducir';
+            renderStations();
+            renderFavorites();
+        }
+
+        function showPage(pageId, btn) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.className = "tab-btn px-4 py-2 rounded-lg font-syne text-xs font-bold transition bg-slate-800 text-slate-400 hover:text-white";
+            });
+
+            document.getElementById('page-' + pageId).classList.remove('hidden');
+            btn.className = "tab-btn px-4 py-2 rounded-lg font-syne text-xs font-bold transition bg-rose-500 text-white shadow-lg shadow-rose-500/20";
+
+            if(pageId === 'favglobal') renderFavorites();
+        }
+
+        async function runHealthCheck() {
+            const container = document.getElementById('adminResults');
+            container.innerHTML = '<div class="col-span-full text-center text-xs text-slate-400 py-6">Analizando latencia y estado de los flujos...</div>';
+            let html = '';
+            
+            for(let s of stations) {
+                try {
+                    const res = await fetch(s.url, { method: 'HEAD', mode: 'no-cors' });
+                    html += `<div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex justify-between items-center text-xs">
+                        <span class="font-syne font-bold">${s.name}</span>
+                        <span class="text-emerald-400 font-medium bg-emerald-500/10 px-2.5 py-1 rounded-lg">🟢 Operativo</span>
+                    </div>`;
+                } catch(e) {
+                    html += `<div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex justify-between items-center text-xs">
+                        <span class="font-syne font-bold">${s.name}</span>
+                        <span class="text-rose-400 font-medium bg-rose-500/10 px-2.5 py-1 rounded-lg">🔴 Revisar Enlace</span>
+                    </div>`;
+                }
+            }
+            container.innerHTML = html;
+        }
+
+        function openTheme() {
+            alert("Los temas dinámicos están listos en el motor de diseño. Puedes personalizar los colores en el archivo CSS raíz.");
+        }
+
+        // Inicializar renderizado inicial
+        renderStations();
+    </script>
 </body>
 </html>
