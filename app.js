@@ -4,25 +4,9 @@ let currentStation = null, playing = false;
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
 
-// Enlaces nuevos y emisoras principales solicitadas
-const COLOMBIA_CURADA = [
-  {stationuuid:'el-sol-med', name:'El Sol 107.9 FM Medellín', url:'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632c9d30aa9ace684913b853/playlist.m3u8', country:'Colombia', state:'Medellín', tags:'salsa,tropical'},
-  {stationuuid:'el-sol-cali', name:'El Sol 106.5 FM Cali', url:'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632c9d30aa9ace684913b853/playlist.m3u8', country:'Colombia', state:'Cali', tags:'salsa,tropical'},
-  {stationuuid:'el-sol-sma', name:'El Sol Santa Marta', url:'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632ce8986d2e8108b23d249f/playlist.m3u8', country:'Colombia', state:'Santa Marta', tags:'salsa'},
-  {stationuuid:'el-sol-bga', name:'El Sol Bucaramanga 103.7 FM', url:'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632cc5d948f73909a614ab93/playlist.m3u8', country:'Colombia', state:'Bucaramanga', tags:'salsa'},
-  {stationuuid:'fundingue', name:'Fundingue Vallenato', url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3', country:'Colombia', state:'Nacional', tags:'vallenato'},
-  {stationuuid:'yariguies', name:'Yariguies Stereo 102.7 FM', url:'https://estructuraweb.com.co:9339/stream', country:'Colombia', state:'Barrancabermeja', tags:'noticias,pop'},
-  {stationuuid:'guapachosa', name:'La Guapachosa', url:'https://radiolatina.info:8184/stream', country:'Colombia', state:'Bucaramanga', tags:'tropical,popular'},
-  {stationuuid:'co-001', name:'Radioacktiva 97.9 FM', url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac', country:'Colombia', state:'Bogotá', tags:'rock'},
-  {stationuuid:'co-002', name:'Tropicana Bogotá 102.9 FM', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac', country:'Colombia', state:'Bogotá', tags:'tropical,salsa'},
-  {stationuuid:'co-003', name:'Caracol Radio Bogotá', url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac', country:'Colombia', state:'Bogotá', tags:'news'}
-];
-
-let globalStations = [...COLOMBIA_CURADA];
-
 const CONTINENTS = {
-  'América': ['Colombia','Mexico','Argentina','Brazil','United States'],
-  'Europa': ['Spain','France','Germany','Italy','United Kingdom'],
+  'América': ['Colombia','Mexico','Argentina','Brazil','United States','Chile','Peru'],
+  'Europa': ['Spain','France','Germany','Italy','United Kingdom','Portugal'],
   'Asia': ['Japan','South Korea','China','India']
 };
 
@@ -60,37 +44,8 @@ document.getElementById('pLogoImg').src = ICON;
 
 function initApp() {
   applyTheme(currentTheme);
-  renderDestacadas();
   renderContinents();
-  renderGlobalStations(COLOMBIA_CURADA);
-  fetchRadioBrowser();
-}
-
-// Carga masiva gratuita de miles de emisoras mundiales desde Radio Browser API
-async function fetchRadioBrowser() {
-  try {
-    const res = await fetch('https://de1.api.radio-browser.info/json/stations/topvote?limit=500');
-    const data = await res.json();
-    if(Array.isArray(data)) {
-      // Unificamos las curadas prioritarias con las globales de la API
-      globalStations = [...COLOMBIA_CURADA, ...data];
-      renderGlobalStations(globalStations);
-    }
-  } catch(e) {
-    console.log('Usando emisoras locales de respaldo');
-  }
-}
-
-function renderDestacadas() {
-  const el = document.getElementById('destacadasScroll');
-  if(!el) return;
-  el.innerHTML = COLOMBIA_CURADA.map(s => `
-    <div class="d-card" onclick="playStation('${s.stationuuid}')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px;width:130px;text-align:center;cursor:pointer;flex-shrink:0">
-      <div class="d-logo" style="width:45px;height:45px;border-radius:50%;background:var(--bg3);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'" style="width:100%;height:100%;object-fit:cover"></div>
-      <div class="d-name" style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
-      <div class="d-sub" style="font-size:9px;color:var(--text2)">${s.state}</div>
-    </div>
-  `).join('');
+  searchStationsApi('', 'Colombia'); // Carga inicial por defecto con Colombia
 }
 
 function renderContinents() {
@@ -111,61 +66,109 @@ function selectContinent(continent, btn) {
   grid.innerHTML = countries.map(c => `
     <div class="country-card" onclick="filterByCountry('${c}')">
       <div class="country-name">${c}</div>
-      <div class="country-count">Ver emisoras</div>
+      <div class="country-count">Explorar</div>
     </div>
   `).join('');
 }
 
-async function filterByCountry(countryName) {
+function filterByCountry(countryName) {
   const title = document.getElementById('stResultTitle');
   if(title) title.textContent = `Emisoras de ${countryName}`;
-  const filtered = globalStations.filter(s => s.country && s.country.toLowerCase() === countryName.toLowerCase());
-  renderGlobalStations(filtered.length ? filtered : globalStations);
+  searchStationsApi('', countryName);
 }
 
-function renderGlobalStations(stations) {
+// Barrido directo a la API gratuita de Radio Browser por nombre, país o género
+async function searchStationsApi(query = '', country = '') {
+  const el = document.getElementById('globalStationsList');
+  if(el) el.innerHTML = '<div class="loading-box"><div class="spinner"></div>Buscando emisoras...</div>';
+  
+  try {
+    let url = 'https://de1.api.radio-browser.info/json/stations/search?limit=100';
+    if(query) url += `&name=${encodeURIComponent(query)}`;
+    if(country) url += `&country=${encodeURIComponent(country)}`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if(Array.isArray(data)) {
+      renderStations(data);
+    } else {
+      if(el) el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No se encontraron emisoras.</div>';
+    }
+  } catch(e) {
+    if(el) el.innerHTML = '<div style="color:var(--accent);padding:20px;text-align:center">Error al conectar con la API gratuita.</div>';
+  }
+}
+
+// Búsqueda en tiempo real con retraso (debounce)
+let searchTimer;
+function filterGlobalStations() {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    const q = document.getElementById('searchInput').value.trim();
+    if(q.length > 0) {
+      document.getElementById('stResultTitle').textContent = `Resultados para: "${q}"`;
+      searchStationsApi(q, '');
+    } else {
+      searchStationsApi('', 'Colombia');
+    }
+  }, 400);
+}
+
+function renderStations(stations) {
   const el = document.getElementById('globalStationsList');
   if(!el) return;
-  el.innerHTML = stations.slice(0, 100).map(s => {
+  
+  if(!stations.length) {
+    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">Sin resultados.</div>';
+    return;
+  }
+
+  el.innerHTML = stations.map(s => {
     const isFav = favorites.includes(s.stationuuid);
     return `
       <div class="scard" id="card-${s.stationuuid}">
         <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
         <div class="scard-info" onclick="playStation('${s.stationuuid}')">
           <div class="scard-name">${s.name}</div>
-          <div class="scard-meta">${s.country || 'Global'} · ${s.state || ''}</div>
+          <div class="scard-meta">${s.country || ''} ${s.state ? '· '+s.state : ''} ${s.tags ? '· '+s.tags.split(',')[0] : ''}</div>
         </div>
         <div class="scard-actions">
           <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event)">${isFav?'★':'☆'}</button>
+          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event, ${JSON.stringify(s).replace(/"/g, '&quot;')})">${isFav?'★':'☆'}</button>
         </div>
       </div>
     `;
   }).join('');
 }
 
-function filterGlobalStations() {
-  const input = document.getElementById('searchInput');
-  if(!input) return;
-  const q = input.value.toLowerCase();
-  const filtered = globalStations.filter(s => 
-    s.name.toLowerCase().includes(q) || 
-    (s.tags && s.tags.toLowerCase().includes(q)) ||
-    (s.country && s.country.toLowerCase().includes(q)) ||
-    (s.state && s.state.toLowerCase().includes(q))
-  );
-  renderGlobalStations(filtered);
-}
+// Almacenamos temporalmente las emisoras cargadas para reproducción y favoritos
+let activeStationsMap = {};
 
 function playStation(uuid) {
-  let s = globalStations.find(x => x.stationuuid === uuid) || COLOMBIA_CURADA.find(x => x.stationuuid === uuid);
-  if(!s) return;
+  // Intentamos obtener la emisora del mapa actual o favoritos
+  let s = activeStationsMap[uuid] || favStore[uuid];
+  if(!s) {
+    // Si no está en memoria, la buscamos directamente haciendo una petición rápida a la API por UUID
+    fetch(`https://de1.api.radio-browser.info/json/stations/byuuid?uuids=${uuid}`)
+      .then(res => res.json())
+      .then(data => {
+        if(data && data[0]) {
+          playAudioData(data[0]);
+        }
+      });
+    return;
+  }
+  playAudioData(s);
+}
+
+function playAudioData(s) {
   currentStation = s;
   playing = true;
   
   audio.src = s.url_resolved || s.url;
   audio.load();
-  audio.play().catch(e => console.log('Autoplay bloqueado por navegador'));
+  audio.play().catch(e => console.log('Reproducción bloqueada'));
 
   document.getElementById('pName').textContent = s.name;
   document.getElementById('pStatus').textContent = `🔴 EN VIVO · ${s.state || s.country || 'Radio'}`;
@@ -180,27 +183,29 @@ function stopRadio() {
   document.getElementById('pStatus').textContent = 'Radio Jere Pro · En vivo';
 }
 
-function toggleFav(uuid, event) {
+function toggleFav(uuid, event, stationObj) {
   if(event) event.stopPropagation();
   const idx = favorites.indexOf(uuid);
-  
-  // Buscamos la emisora en la lista global o curada para asegurarnos de guardarla en el almacén
-  let s = globalStations.find(x => x.stationuuid === uuid) || COLOMBIA_CURADA.find(x => x.stationuuid === uuid);
   
   if(idx >= 0) {
     favorites.splice(idx, 1);
     delete favStore[uuid];
   } else {
-    if(s) {
+    if(stationObj) {
       favorites.push(uuid);
-      favStore[uuid] = s;
+      favStore[uuid] = stationObj;
+      activeStationsMap[uuid] = stationObj;
     }
   }
   localStorage.setItem('rjp_favs', JSON.stringify(favorites));
   localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
   
-  // Actualizamos vistas de listas actuales y favoritos
-  renderGlobalStations(globalStations);
+  // Refrescar vistas
+  if(document.getElementById('page-explorar').classList.contains('active')) {
+    // Re-renderizamos para actualizar estrellas
+    const q = document.getElementById('searchInput').value;
+    if(!q) searchStationsApi('', 'Colombia');
+  }
   if(document.getElementById('page-favglobal').classList.contains('active')) {
     renderFavGlobal();
   }
@@ -226,7 +231,7 @@ function renderFavGlobal() {
       </div>
       <div class="scard-actions">
         <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', event)">★</button>
+        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', event, ${JSON.stringify(s).replace(/"/g, '&quot;')})">★</button>
       </div>
     </div>
   `).join('');
