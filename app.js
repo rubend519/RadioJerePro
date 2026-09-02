@@ -5,8 +5,15 @@ let currentStation = null, playing = false;
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
 
-let pinnedStations = JSON.parse(localStorage.getItem('rjp_pinned')||'["yariguies"]');
-let pinnedStore = JSON.parse(localStorage.getItem('rjp_pinnedstore')||'{"yariguies":{"stationuuid":"yariguies", "name":"Yariguies Stereo 102.7 FM", "url":"https://estructuraweb.com.co:9339/stream", "country":"Colombia", "state":"Barrancabermeja", "tags":"noticias,pop"}}');
+// Emisoras fijas por defecto: Yariguies y Fundingue Vallenato
+const DEFAULT_PINS = ['yariguies', 'fundingue'];
+const DEFAULT_PIN_STORE = {
+  'yariguies': {stationuuid:'yariguies', name:'Yariguies Stereo 102.7 FM', url:'https://estructuraweb.com.co:9339/stream', country:'Colombia', state:'Barrancabermeja', tags:'noticias,pop'},
+  'fundingue': {stationuuid:'fundingue', name:'Fundingue Vallenato', url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3', country:'Colombia', state:'Nacional', tags:'vallenato'}
+};
+
+let pinnedStations = JSON.parse(localStorage.getItem('rjp_pinned')||JSON.stringify(DEFAULT_PINS));
+let pinnedStore = JSON.parse(localStorage.getItem('rjp_pinnedstore')||JSON.stringify(DEFAULT_PIN_STORE));
 
 let activeStationsMap = {};
 
@@ -119,7 +126,15 @@ async function searchStationsApi(query = '', country = '') {
       activeStationsMap = {};
       Object.values(pinnedStore).forEach(s => activeStationsMap[s.stationuuid] = s);
       data.forEach(s => activeStationsMap[s.stationuuid] = s);
-      renderStations(data);
+      
+      // Si estamos en Colombia sin buscar nada, aseguramos incluir a Fundingue y Yariguies al inicio
+      let combined = data;
+      if(country.toLowerCase() === 'colombia' && !query) {
+        const pinnedList = Object.values(pinnedStore);
+        const rest = data.filter(s => !pinnedList.some(p => p.stationuuid === s.stationuuid));
+        combined = [...pinnedList, ...rest];
+      }
+      renderStations(combined);
     } else {
       if(el) el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No se encontraron emisoras.</div>';
     }
