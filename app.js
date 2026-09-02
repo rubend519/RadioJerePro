@@ -1,8 +1,14 @@
 const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUKculusWKkeK6W597cY3Zmdu6evup67+WPquruofxJeDnTS9VdVe93f3/HE3sO3mWFEAhACImQ2f8Igdj1K5FSAAKEQAox+o6U2S8AY+eEGB5ntynyotwghsJbRy2Z/LDb/H6w12XesJXuzYA3W2vwzgzU2P7bZ9Sa7xhoDWIwdfZ5dn72b/PuSfNnkayseNiRkSES2SJvxJvsz/jt+k/zYFqfGX8IiGradOGOSKAYC1WK1zKeD5K8XiV0WpSKLThJj50mY+ZpTq6m8qWdK8iP43+s5eY9EwZp0AAAAAElFTkSuQmCC';
 const audio = document.getElementById('audioPlayer');
 let currentStation = null, playing = false;
+
+// Almacenamiento local para Favoritos y Top Anclado
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
+
+let pinnedStations = JSON.parse(localStorage.getItem('rjp_pinned')||'["yariguies"]');
+let pinnedStore = JSON.parse(localStorage.getItem('rjp_pinnedstore')||'{"yariguies":{"stationuuid":"yariguies", "name":"Yariguies Stereo 102.7 FM", "url":"https://estructuraweb.com.co:9339/stream", "country":"Colombia", "state":"Barrancabermeja", "tags":"noticias,pop"}}');
+
 let activeStationsMap = {};
 
 const CONTINENTS = {
@@ -12,7 +18,7 @@ const CONTINENTS = {
 };
 
 const THEMES = {
-  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:'#e94560',text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
+  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:#e94560,text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
   'Océano':    {emoji:'🌊',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
   'Bosque':    {emoji:'🌲',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
   'Carbón':    {emoji:'🔥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
@@ -45,8 +51,28 @@ document.getElementById('pLogoImg').src = ICON;
 
 function initApp() {
   applyTheme(currentTheme);
+  renderDestacadas();
   renderContinents();
   searchStationsApi('', 'Colombia');
+}
+
+function renderDestacadas() {
+  const el = document.getElementById('destacadasScroll');
+  if(!el) return;
+  const pins = pinnedStations.map(id => pinnedStore[id]).filter(Boolean);
+  
+  if(!pins.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--text3);padding:10px">No tienes emisoras ancladas. Añade desde Explorar con el botón 📌.</div>';
+    return;
+  }
+
+  el.innerHTML = pins.map(s => `
+    <div class="d-card" onclick="playStation('${s.stationuuid}')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;width:140px;text-align:center;cursor:pointer;flex-shrink:0">
+      <div class="d-logo" style="width:45px;height:45px;border-radius:50%;background:var(--bg3);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="d-name" style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
+      <div class="d-sub" style="font-size:9px;color:var(--text2)">${s.state || s.country || ''}</div>
+    </div>
+  `).join('');
 }
 
 function renderContinents() {
@@ -92,6 +118,7 @@ async function searchStationsApi(query = '', country = '') {
     
     if(Array.isArray(data)) {
       activeStationsMap = {};
+      Object.values(pinnedStore).forEach(s => activeStationsMap[s.stationuuid] = s);
       data.forEach(s => activeStationsMap[s.stationuuid] = s);
       renderStations(data);
     } else {
@@ -127,6 +154,7 @@ function renderStations(stations) {
 
   el.innerHTML = stations.map(s => {
     const isFav = favorites.includes(s.stationuuid);
+    const isPinned = pinnedStations.includes(s.stationuuid);
     return `
       <div class="scard" id="card-${s.stationuuid}">
         <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
@@ -136,6 +164,7 @@ function renderStations(stations) {
         </div>
         <div class="scard-actions">
           <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
+          <button class="btn-sm ${isPinned?'active':''}" onclick="togglePin('${s.stationuuid}', event)" title="Anclar al Top de inicio" style="font-size:12px;padding:4px 6px">${isPinned?'📌':'📍'}</button>
           <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event)">${isFav?'★':'☆'}</button>
         </div>
       </div>
@@ -144,7 +173,7 @@ function renderStations(stations) {
 }
 
 function playStation(uuid) {
-  let s = activeStationsMap[uuid] || favStore[uuid];
+  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
   if(!s) {
     fetch(`https://de1.api.radio-browser.info/json/stations/byuuid?uuids=${uuid}`)
       .then(res => res.json())
@@ -182,7 +211,7 @@ function stopRadio() {
 
 function toggleFav(uuid, event) {
   if(event) event.stopPropagation();
-  let s = activeStationsMap[uuid] || favStore[uuid];
+  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
   if(!s) return;
 
   const idx = favorites.indexOf(uuid);
@@ -197,24 +226,99 @@ function toggleFav(uuid, event) {
   localStorage.setItem('rjp_favs', JSON.stringify(favorites));
   localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
   
-  // Refrescar vistas activas
   if(document.getElementById('page-explorar').classList.contains('active')) {
-    const cards = document.querySelectorAll(`#card-${uuid} .btn-fav`);
-    cards.forEach(btn => {
+    const btn = document.querySelector(`#card-${uuid} .btn-fav`);
+    if(btn) {
       const isFav = favorites.includes(uuid);
       btn.textContent = isFav ? '★' : '☆';
       btn.classList.toggle('active', isFav);
-    });
+    }
   }
   if(document.getElementById('page-favglobal').classList.contains('active')) {
     renderFavGlobal();
   }
 }
 
-// Funciones para reordenar favoritos (Subir / Bajar)
+// Control para anclar/desanclar emisoras al Top principal
+function togglePin(uuid, event) {
+  if(event) event.stopPropagation();
+  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
+  if(!s) return;
+
+  const idx = pinnedStations.indexOf(uuid);
+  if(idx >= 0) {
+    pinnedStations.splice(idx, 1);
+    delete pinnedStore[uuid];
+  } else {
+    pinnedStations.push(uuid);
+    pinnedStore[uuid] = s;
+  }
+
+  localStorage.setItem('rjp_pinned', JSON.stringify(pinnedStations));
+  localStorage.setItem('rjp_pinnedstore', JSON.stringify(pinnedStore));
+
+  renderDestacadas();
+  if(document.getElementById('page-pinned').classList.contains('active')) {
+    renderPinnedList();
+  }
+  if(document.getElementById('page-explorar').classList.contains('active')) {
+    const btn = document.querySelector(`#card-${uuid} [title*="Anclar"]`);
+    if(btn) {
+      const isPinned = pinnedStations.includes(uuid);
+      btn.textContent = isPinned ? '📌' : '📍';
+      btn.classList.toggle('active', isPinned);
+    }
+  }
+}
+
+// Reordenar Top Anclado
+function movePinned(index, direction) {
+  const newIndex = index + direction;
+  if(newIndex < 0 || newIndex >= pinnedStations.length) return;
+
+  const temp = pinnedStations[index];
+  pinnedStations[index] = pinnedStations[newIndex];
+  pinnedStations[newIndex] = temp;
+
+  localStorage.setItem('rjp_pinned', JSON.stringify(pinnedStations));
+  renderDestacadas();
+  renderPinnedList();
+}
+
+function renderPinnedList() {
+  const el = document.getElementById('pinnedList');
+  if(!el) return;
+  const pins = pinnedStations.map(id => pinnedStore[id]).filter(Boolean);
+  const countEl = document.getElementById('pinnedCount');
+  if(countEl) countEl.textContent = pins.length + ' ancladas';
+
+  if(!pins.length) {
+    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No hay emisoras en tu Top. Usa el botón 📍 en Explorar.</div>';
+    return;
+  }
+
+  el.innerHTML = pins.map((s, idx) => `
+    <div class="scard">
+      <div style="display:flex;flex-direction:column;gap:2px;margin-right:4px">
+        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="movePinned(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}>▲</button>
+        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="movePinned(${idx}, 1)" ${idx === pins.length - 1 ? 'disabled style="opacity:0.3"' : ''}>▼</button>
+      </div>
+      <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
+      <div class="scard-info" onclick="playStation('${s.stationuuid}')">
+        <div class="scard-name">${s.name}</div>
+        <div class="scard-meta">${s.state || s.country || ''}</div>
+      </div>
+      <div class="scard-actions">
+        <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
+        <button class="btn-sm active" onclick="togglePin('${s.stationuuid}', event)" style="font-size:12px;padding:4px 6px">📌</button>
+      </div>
+    </div>
+  `).join('');
+}
+
 function moveFav(index, direction) {
   const newIndex = index + direction;
-  if (newIndex < 0 || newIndex >= favorites.length) return;
+  if(newIndex < 0 || newIndex >= favorites.length) return;
   
   const temp = favorites[index];
   favorites[index] = favorites[newIndex];
@@ -261,6 +365,7 @@ function showPage(pageId, btn) {
   document.getElementById('page-' + pageId).classList.add('active');
   if(btn) btn.classList.add('active');
   if(pageId === 'favglobal') renderFavGlobal();
+  if(pageId === 'pinned') renderPinnedList();
 }
 
 initApp();

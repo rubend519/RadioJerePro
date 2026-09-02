@@ -23,11 +23,11 @@
   <div class="tabs">
     <button class="tab active" onclick="showPage('inicio',this)">🏠 Inicio</button>
     <button class="tab" onclick="showPage('explorar',this)">🔍 Explorar</button>
+    <button class="tab" onclick="showPage('pinned',this)">📌 Mi Top</button>
     <button class="tab" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
   </div>
 </div>
 
-<!-- PANEL DE TEMAS -->
 <div class="theme-panel" id="themePanel" onclick="if(event.target===this)closeTheme()">
   <div class="panel-box">
     <div class="panel-title">🎨 Elige tu tema</div>
@@ -37,26 +37,26 @@
 </div>
 
 <div class="content">
-  <!-- INICIO (Sin eventos) -->
+  <!-- INICIO -->
   <div class="page active" id="page-inicio">
     <div class="hero-banner" style="background:linear-gradient(135deg,var(--bg3),var(--bg2));border:1px solid var(--border2);border-radius:var(--radius);padding:20px;margin-bottom:20px">
       <div class="hero-info">
         <span style="background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;font-family:'Syne',sans-serif">En Vivo 24/7</span>
-        <h1 class="hero-title" style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin:8px 0">La mejor música, en cualquier lugar.</h1>
-        <p class="hero-desc" style="font-size:12px;color:var(--text2);margin-bottom:14px">Disfruta de El Sol en todas sus ciudades, Fundingue Vallenato, Yariguies Stereo y La Guapachosa.</p>
-        <button class="btn-hero" onclick="playStation('el-sol-bga')" style="background:var(--accent);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer">▶ ESCUCHAR AHORA</button>
+        <h1 class="hero-title" style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin:8px 0">Tu música, tus emisoras ancladas.</h1>
+        <p class="hero-desc" style="font-size:12px;color:var(--text2);margin-bottom:14px">Explora miles de emisoras globales y personaliza tu propio Top de destacadas en la pantalla de inicio.</p>
+        <button class="btn-hero" onclick="showPage('explorar', document.querySelectorAll('.tab')[1])" style="background:var(--accent);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer">🔍 EXPLORAR EMISORAS</button>
       </div>
     </div>
 
-    <p class="sec-title">Emisoras Destacadas y Tus Enlaces</p>
-    <div class="destacadas-scroll" id="destacadasScroll" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px"></div>
+    <p class="sec-title">⭐ Tu Top de Emisoras Destacadas (Ancladas)</p>
+    <div class="destacadas-scroll" id="destacadasScroll" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;margin-bottom:20px"></div>
   </div>
 
-  <!-- EXPLORAR Y BUSCADOR GLOBAL LIBRE -->
+  <!-- EXPLORAR -->
   <div class="page" id="page-explorar">
     <div class="search-wrap">
       <span class="search-icon">🔎</span>
-      <input type="text" id="searchInput" placeholder="Buscar entre miles de emisoras del mundo o Colombia..." oninput="filterGlobalStations()">
+      <input type="text" id="searchInput" placeholder="Buscar emisora o país..." oninput="filterGlobalStations()">
     </div>
     
     <p class="sec-title">Filtrar por Continente</p>
@@ -65,6 +65,15 @@
 
     <p class="sec-title" id="stResultTitle">Emisoras Disponibles</p>
     <div class="stations-list" id="globalStationsList"></div>
+  </div>
+
+  <!-- GESTIONAR MI TOP ANCLADO -->
+  <div class="page" id="page-pinned">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <p class="sec-title" style="margin:0">📌 Gestionar y Reordenar Mi Top</p>
+      <span style="font-size:10px;color:var(--text3)" id="pinnedCount"></span>
+    </div>
+    <div class="stations-list" id="pinnedList"></div>
   </div>
 
   <!-- FAVORITOS -->
@@ -77,7 +86,6 @@
   </div>
 </div>
 
-<!-- REPRODUCTOR INFERIOR -->
 <div class="player" id="player">
   <div class="player-inner">
     <div class="p-logo"><img id="pLogoImg" alt=""></div>
