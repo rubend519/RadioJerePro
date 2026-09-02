@@ -5,198 +5,80 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Radio Jere Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--bg4:#1f1f35;--accent:#e94560;--blue:#448aff;--green:#00e676;--gold:#ffd740;--text:#f0f0f8;--text2:#8899bb;--text3:#4a5070;--card:#161625;--border:#ffffff10;--border2:#ffffff22;--radius:16px;--rsm:10px}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
-
-/* HEADER SUPERIOR EXPANDIDO */
-.hdr{background:var(--bg);padding:12px 20px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.logo{display:flex;align-items:center;gap:9px}
-.logo img{width:36px;height:36px;border-radius:9px;object-fit:cover;box-shadow:0 0 16px #e9456044}
-.logo-txt{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.5px}
-.logo-txt span{color:var(--accent)}
-
-.nav-links{display:flex;align-items:center;gap:15px;overflow-x:auto;scrollbar-width:none}
-.nav-links::-webkit-scrollbar{display:none}
-.nav-link{background:none;border:none;color:var(--text2);font-size:13px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;transition:.2s;padding:6px 10px;border-radius:8px;white-space:nowrap}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--bg3)}
-
-.hdr-right{display:flex;align-items:center;gap:10px}
-.live-badge{background:var(--bg3);border:1px solid var(--border2);border-radius:40px;padding:5px 12px;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* CONTENIDO PRINCIPAL */
-.content{padding:20px;max-width:1200px;margin:0 auto;padding-bottom:120px}
-.page{display:none}.page.active{display:block}
-
-/* HERO BANNER */
-.hero-banner{background:linear-gradient(135deg, var(--bg3), var(--bg2));border:1px solid var(--border2);border-radius:var(--radius);padding:30px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;position:relative;overflow:hidden}
-.hero-info{max-width:550px}
-.hero-tag{display:inline-block;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;margin-bottom:10px;font-family:'Syne',sans-serif}
-.hero-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px;letter-spacing:-.5px}
-.hero-desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.5}
-.btn-hero{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:.2s}
-.btn-hero:hover{opacity:.9}
-.hero-features{display:flex;gap:15px;margin-top:15px;font-size:11px;color:var(--text2);flex-wrap:wrap}
-
-/* CATEGORÍAS */
-.sec-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.sec-title span{color:var(--accent);cursor:pointer;font-size:11px}
-.cat-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px;scrollbar-width:none}
-.cat-scroll::-webkit-scrollbar{display:none}
-.cat-card{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:14px;min-width:110px;text-align:center;cursor:pointer;transition:.2s;flex-shrink:0}
-.cat-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.cat-icon{font-size:22px;margin-bottom:6px}
-.cat-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;margin-bottom:2px}
-.cat-sub{font-size:10px;color:var(--text3)}
-
-/* EMISORAS DESTACADAS HORIZONTALES */
-.destacadas-scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px;scrollbar-width:none}
-.destacadas-scroll::-webkit-scrollbar{display:none}
-.d-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;width:140px;text-align:center;cursor:pointer;transition:.2s;flex-shrink:0}
-.d-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.d-logo{width:50px;height:50px;border-radius:50%;background:var(--bg3);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid var(--border2)}
-.d-logo img{width:100%;height:100%;object-fit:cover}
-.d-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.d-sub{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* PRÓXIMOS EVENTOS */
-.eventos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-bottom:24px}
-.event-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;display:flex;align-items:center;gap:14px}
-.event-date{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;text-align:center;min-width:55px}
-.event-day{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent)}
-.event-mo{font-size:10px;text-transform:uppercase;color:var(--text3);font-weight:700}
-.event-info{flex:1;min-width:0}
-.event-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.event-desc{font-size:11px;color:var(--text2);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.event-time{font-size:10px;color:var(--text3)}
-
-/* LISTA DE ESTACIONES ESTÁNDAR */
-.stations-list{display:flex;flex-direction:column;gap:8px}
-.scard{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:.2s}
-.scard:hover{border-color:var(--border2)}
-.scard.playing{border-color:var(--accent);background:var(--bg3)}
-.scard-logo{width:42px;height:42px;border-radius:8px;background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.scard-logo img{width:100%;height:100%;object-fit:cover}
-.scard-info{flex:1;min-width:0}
-.scard-name{font-family:'Syne',sans-serif;font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.scard-meta{font-size:11px;color:var(--text2)}
-.scard-actions{display:flex;align-items:center;gap:8px}
-.btn-play{width:32px;height:32px;border-radius:50%;background:var(--accent);border:none;color:white;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.scard.playing .btn-play{background:var(--green);color:#000}
-.btn-fav{background:none;border:none;color:var(--text3);font-size:16px;cursor:pointer}
-.btn-fav.active{color:var(--gold)}
-
-/* REPRODUCTOR INFERIOR FIJO */
-.player{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border2);padding:10px 20px;z-index:200}
-.player-inner{display:flex;align-items:center;gap:15px;max-width:1200px;margin:0 auto}
-.p-logo{width:40px;height:40px;border-radius:8px;background:var(--bg3);overflow:hidden;flex-shrink:0}
-.p-logo img{width:100%;height:100%;object-fit:cover}
-.p-info{flex:1;min-width:0}
-.p-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-status{font-size:11px;color:var(--text2)}
-.p-controls{display:flex;align-items:center;gap:12px}
-.btn-ctrl{background:none;border:none;color:var(--text2);font-size:16px;cursor:pointer;transition:.2s}
-.btn-ctrl:hover{color:var(--text)}
-.btn-play-main{width:38px;height:38px;border-radius:50%;background:var(--accent);border:none;color:white;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.vol-wrap{display:flex;align-items:center;gap:6px}
-input[type=range]{-webkit-appearance:none;width:80px;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="hdr">
-  <div class="logo">
-    <img id="logoImg" alt="Radio Jere Pro">
-    <div class="logo-txt">Radio Jere <span>Pro</span></div>
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="logo">
+      <img id="logoImg" alt="Radio Jere Pro">
+      <div class="logo-txt">Radio Jere <span>Pro</span></div>
+    </div>
+    <div class="hdr-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="liveCount">1</span> en vivo</div>
+      <button class="btn-sm" onclick="openTheme()">🎨</button>
+    </div>
   </div>
-  <nav class="nav-links">
-    <button class="nav-link active" onclick="showPage('inicio',this)">🏠 Inicio</button>
-    <button class="nav-link" onclick="showPage('explorar',this)">🔍 Explorar</button>
-    <button class="nav-link" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
-    <button class="nav-link" onclick="showPage('eventos',this)">📅 Eventos</button>
-  </nav>
-  <div class="hdr-right">
-    <div class="live-badge"><div class="live-dot"></div><span id="liveCount">1</span> en vivo</div>
+  <div class="tabs">
+    <button class="tab active" onclick="showPage('inicio',this)">🏠 Inicio</button>
+    <button class="tab" onclick="showPage('explorar',this)">🔍 Explorar</button>
+    <button class="tab" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
   </div>
-</header>
+</div>
+
+<!-- PANEL DE TEMAS -->
+<div class="theme-panel" id="themePanel" onclick="if(event.target===this)closeTheme()">
+  <div class="panel-box">
+    <div class="panel-title">🎨 Elige tu tema</div>
+    <div class="theme-grid" id="themeGrid"></div>
+    <button class="btn-panel-close" onclick="closeTheme()">Listo</button>
+  </div>
+</div>
 
 <div class="content">
-
-  <!-- PÁGINA INICIO (ESTILO DASHBOARD DE LA FOTO) -->
+  <!-- INICIO (Sin eventos) -->
   <div class="page active" id="page-inicio">
-    <div class="hero-banner">
+    <div class="hero-banner" style="background:linear-gradient(135deg,var(--bg3),var(--bg2));border:1px solid var(--border2);border-radius:var(--radius);padding:20px;margin-bottom:20px">
       <div class="hero-info">
-        <span class="hero-tag">En Vivo 24/7</span>
-        <h1 class="hero-title">La mejor música, en cualquier lugar.</h1>
-        <p class="hero-desc">Conéctate con la mejor programación en directo donde estés, sin interrupciones y con la más alta calidad de audio optimizado.</p>
-        <button class="btn-hero" onclick="playFirstFeatured()">▶ ESCUCHAR AHORA</button>
-        <div class="hero-features">
-          <span>🎵 Alta calidad de streams</span>
-          <span>⚡ Conexión estable</span>
-          <span>🛡️ Totalmente gratis</span>
-        </div>
+        <span style="background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;font-family:'Syne',sans-serif">En Vivo 24/7</span>
+        <h1 class="hero-title" style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;margin:8px 0">La mejor música, en cualquier lugar.</h1>
+        <p class="hero-desc" style="font-size:12px;color:var(--text2);margin-bottom:14px">Disfruta de El Sol en todas sus ciudades, Fundingue Vallenato, Yariguies Stereo y La Guapachosa.</p>
+        <button class="btn-hero" onclick="playStation('el-sol-bga')" style="background:var(--accent);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer">▶ ESCUCHAR AHORA</button>
       </div>
     </div>
 
-    <p class="sec-title">Categorías</p>
-    <div class="cat-scroll">
-      <div class="cat-card" onclick="filterByCategory('varios')"><div class="cat-icon">🎧</div><div class="cat-name">Varios</div><div class="cat-sub">24/7</div></div>
-      <div class="cat-card" onclick="filterByCategory('reggaeton')"><div class="cat-icon">🔥</div><div class="cat-name">Reggaeton</div><div class="cat-sub">24/7</div></div>
-      <div class="cat-card" onclick="filterByCategory('salsa')"><div class="cat-icon">💃</div><div class="cat-name">Salsa</div><div class="cat-sub">24/7</div></div>
-      <div class="cat-card" onclick="filterByCategory('rock')"><div class="cat-icon">🎸</div><div class="cat-name">Rock</div><div class="cat-sub">24/7</div></div>
-      <div class="cat-card" onclick="filterByCategory('popular')"><div class="cat-icon">⭐</div><div class="cat-name">Popular</div><div class="cat-sub">24/7</div></div>
-      <div class="cat-card" onclick="filterByCategory('electronica')"><div class="cat-icon">⚡</div><div class="cat-name">Electrónica</div><div class="cat-sub">24/7</div></div>
-    </div>
-
-    <p class="sec-title">Emisoras Destacadas</p>
-    <div class="destacadas-scroll" id="destacadasScroll"></div>
-
-    <p class="sec-title">Próximos Eventos</p>
-    <div class="eventos-grid">
-      <div class="event-card">
-        <div class="event-date"><div class="event-day">31</div><div class="event-mo">May</div></div>
-        <div class="event-info"><div class="event-title">¡Tarde de Clásicos!</div><div class="event-desc">Los mejores clásicos de todos los tiempos.</div><div class="event-time">🕒 3:00 PM</div></div>
-      </div>
-      <div class="event-card">
-        <div class="event-date"><div class="event-day">02</div><div class="event-mo">Jun</div></div>
-        <div class="event-info"><div class="event-title">Noche de Reggaeton</div><div class="event-desc">Lo nuevo y lo mejor del género urbano.</div><div class="event-time">🕒 8:00 PM</div></div>
-      </div>
-      <div class="event-card">
-        <div class="event-date"><div class="event-day">05</div><div class="event-mo">Jun</div></div>
-        <div class="event-info"><div class="event-title">Especial Salsa</div><div class="event-desc">La mejor salsa para bailar sin parar.</div><div class="event-time">🕒 7:00 PM</div></div>
-      </div>
-    </div>
+    <p class="sec-title">Emisoras Destacadas y Tus Enlaces</p>
+    <div class="destacadas-scroll" id="destacadasScroll" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px"></div>
   </div>
 
-  <!-- PÁGINA EXPLORAR -->
+  <!-- EXPLORAR Y BUSCADOR GLOBAL LIBRE -->
   <div class="page" id="page-explorar">
-    <p class="sec-title">Directorio de Emisoras</p>
-    <div class="stations-list" id="stationsList"></div>
+    <div class="search-wrap">
+      <span class="search-icon">🔎</span>
+      <input type="text" id="searchInput" placeholder="Buscar entre miles de emisoras del mundo o Colombia..." oninput="filterGlobalStations()">
+    </div>
+    
+    <p class="sec-title">Filtrar por Continente</p>
+    <div class="cont-scroll" id="contScroll"></div>
+    <div class="country-grid" id="countryGrid"></div>
+
+    <p class="sec-title" id="stResultTitle">Emisoras Disponibles</p>
+    <div class="stations-list" id="globalStationsList"></div>
   </div>
 
-  <!-- PÁGINA FAVORITOS -->
+  <!-- FAVORITOS -->
   <div class="page" id="page-favglobal">
-    <p class="sec-title">Tus Emisoras Favoritas</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <p class="sec-title" style="margin:0">⭐ Tus Emisoras Favoritas</p>
+      <span style="font-size:10px;color:var(--text3)" id="favGlobalCount"></span>
+    </div>
     <div class="stations-list" id="favGlobalList"></div>
   </div>
-
-  <!-- PÁGINA EVENTOS -->
-  <div class="page" id="page-eventos">
-    <p class="sec-title">Calendario de Eventos</p>
-    <div class="eventos-grid">
-      <div class="event-card"><div class="event-date"><div class="event-day">31</div><div class="event-mo">May</div></div><div class="event-info"><div class="event-title">¡Tarde de Clásicos!</div><div class="event-desc">Clásicos de todos los tiempos.</div><div class="event-time">🕒 3:00 PM</div></div></div>
-      <div class="event-card"><div class="event-date"><div class="event-day">02</div><div class="event-mo">Jun</div></div><div class="event-info"><div class="event-title">Noche de Reggaeton</div><div class="event-desc">Lo nuevo y mejor.</div><div class="event-time">🕒 8:00 PM</div></div></div>
-    </div>
-  </div>
-
 </div>
 
 <!-- REPRODUCTOR INFERIOR -->
-<div class="player">
+<div class="player" id="player">
   <div class="player-inner">
     <div class="p-logo"><img id="pLogoImg" alt=""></div>
     <div class="p-info">
@@ -204,147 +86,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;heigh
       <div class="p-status" id="pStatus">Radio Jere Pro · En vivo</div>
     </div>
     <div class="p-controls">
-      <button class="btn-ctrl" onclick="stopRadio()">⏹</button>
-      <div class="vol-wrap"><span>🔉</span><input type="range" min="0" max="1" step="0.05" value="0.8" oninput="audio.volume=this.value"></div>
+      <div class="vol-wrap"><span>🔉</span><input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="audio.volume=this.value"></div>
+      <button class="btn-stop" onclick="stopRadio()">⏹</button>
     </div>
   </div>
 </div>
 
 <audio id="audioPlayer" preload="none"></audio>
-
-<script>
-const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUKculusWKkeK6W597cY3Zmdu6evup67+WPquruofxJeDnTS9VdVe93f3/HE3sO3mWFEAhACImQ2f8Igdj1K5FSAAKEQAox+o6U2S8AY+eEGB5ntynyotwghsJbRy2Z/LDb/H6w12XesJXuzYA3W2vwzgzU2P7bZ9Sa7xhoDWIwdfZ5dn72b/PuSfNnkayseNiRkSES2SJvxJvsz/jt+k/zYFqfGX8IiGradOGOSKAYC1WK1zKeD5K8XiV0WpSKLThJj50mY+ZpTq6m8qWdK8iP43+s5eY9EwZp0AAAAAElFTkSuQmCC';
-const audio = document.getElementById('audioPlayer');
-let currentStation = null, playing = false;
-let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
-let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
-
-const COLOMBIA_CURADA = [
-  {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'Bogotá',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
-  {stationuuid:'co-002',name:'Tropicana Bogotá 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'Bogotá',tags:'tropical,salsa'},
-  {stationuuid:'co-003',name:'Caracol Radio Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news'},
-  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://co-e7-p-e-cl2-audio.cdn.mdstrm.com/live-audio-aw/632cc5d948f73909a614ab93/playlist.m3u8',country:'Colombia',state:'Bucaramanga',tags:'salsa'},
-  {stationuuid:'co-fundingue',name:'Fundingue Vallenato',url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3',country:'Colombia',state:'Nacional',tags:'vallenato'}
-];
-
-document.getElementById('logoImg').src = ICON;
-document.getElementById('pLogoImg').src = ICON;
-
-function initApp() {
-  renderDestacadas();
-  renderStationsList();
-}
-
-function renderDestacadas() {
-  const el = document.getElementById('destacadasScroll');
-  el.innerHTML = COLOMBIA_CURADA.map(s => `
-    <div class="d-card" onclick="playStation('${s.stationuuid}')">
-      <div class="d-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-      <div class="d-name">${s.name}</div>
-      <div class="d-sub">${s.state}</div>
-    </div>
-  `).join('');
-}
-
-function renderStationsList() {
-  const el = document.getElementById('stationsList');
-  el.innerHTML = COLOMBIA_CURADA.map(s => {
-    const isFav = favorites.includes(s.stationuuid);
-    return `
-      <div class="scard" id="card-${s.stationuuid}">
-        <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-        <div class="scard-info" onclick="playStation('${s.stationuuid}')">
-          <div class="scard-name">${s.name}</div>
-          <div class="scard-meta">${s.state} · ${s.tags}</div>
-        </div>
-        <div class="scard-actions">
-          <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', this)">${isFav?'★':'☆'}</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function playFirstFeatured() {
-  playStation(COLOMBIA_CURADA[0].stationuuid);
-}
-
-function playStation(uuid) {
-  const s = COLOMBIA_CURADA.find(x => x.stationuuid === uuid);
-  if(!s) return;
-  currentStation = s;
-  playing = true;
-  
-  audio.src = s.url;
-  audio.load();
-  audio.play().catch(e => console.log('Autoplay bloqueado'));
-
-  document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = `🔴 EN VIVO · ${s.state}`;
-  const img = document.getElementById('pLogoImg');
-  img.src = s.favicon || ICON;
-}
-
-function stopRadio() {
-  audio.pause();
-  playing = false;
-  document.getElementById('pName').textContent = 'Selecciona una emisora';
-  document.getElementById('pStatus').textContent = 'Radio Jere Pro · En vivo';
-}
-
-function toggleFav(uuid, btn) {
-  const idx = favorites.indexOf(uuid);
-  if(idx >= 0) {
-    favorites.splice(idx, 1);
-    btn.textContent = '☆'; btn.classList.remove('active');
-    delete favStore[uuid];
-  } else {
-    favorites.push(uuid);
-    btn.textContent = '★'; btn.classList.add('active');
-    const s = COLOMBIA_CURADA.find(x => x.stationuuid === uuid);
-    if(s) favStore[uuid] = s;
-  }
-  localStorage.setItem('rjp_favs', JSON.stringify(favorites));
-  localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
-  if(document.getElementById('page-favglobal').classList.contains('active')) renderFavGlobal();
-}
-
-function renderFavGlobal() {
-  const el = document.getElementById('favGlobalList');
-  const favs = favorites.map(id => favStore[id]).filter(Boolean);
-  if(!favs.length) {
-    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No tienes favoritos guardados aún.</div>';
-    return;
-  }
-  el.innerHTML = favs.map(s => `
-    <div class="scard">
-      <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-      <div class="scard-info" onclick="playStation('${s.stationuuid}')">
-        <div class="scard-name">${s.name}</div>
-        <div class="scard-meta">${s.state}</div>
-      </div>
-      <div class="scard-actions">
-        <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', this)">★</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function filterByCategory(cat) {
-  showPage('explorar', document.querySelectorAll('.nav-link')[1]);
-}
-
-function showPage(pageId, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  document.getElementById('page-' + pageId).classList.add('active');
-  if(btn) btn.classList.add('active');
-  if(pageId === 'favglobal') renderFavGlobal();
-}
-
-initApp();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
