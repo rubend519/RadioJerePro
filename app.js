@@ -2,7 +2,6 @@ const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHe
 const audio = document.getElementById('audioPlayer');
 let currentStation = null, playing = false;
 
-// Almacenamiento local para Favoritos y Top Anclado
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
 
@@ -18,12 +17,12 @@ const CONTINENTS = {
 };
 
 const THEMES = {
-  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:#e94560,text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
-  'Océano':    {emoji:'🌊',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
-  'Bosque':    {emoji:'🌲',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
-  'Carbón':    {emoji:'🔥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
-  'Rosa':      {emoji:'🌸',bg:'#0e040e',bg2:'#180a18',bg3:'#220e22',bg4:'#2e142e',accent:'#e040fb',text:'#f8e8f8',text2:'#c080c0',text3:'#7a4a7a',card:'#140a14'},
-  'Día Claro': {emoji:'☀️',bg:'#f0f2f5',bg2:'#ffffff',bg3:'#e8eaf0',bg4:'#dde0ea',accent:'#1565c0',text:'#1a1a2e',text2:'#556080',text3:'#8896b0',card:'#ffffff'},
+  'Noche Azul': {emoji:'🌙', bg:'#0a0a12', bg2:'#12121e', bg3:'#1a1a2e', bg4:'#1f1f35', accent:'#e94560', text:'#f0f0f8', text2:'#8899bb', text3:'#4a5070', card:'#161625'},
+  'Océano':    {emoji:'🌊', bg:'#060d1a', bg2:'#0a1628', bg3:'#0f2040', bg4:'#142850', accent:'#00bcd4', text:'#e8f4f8', text2:'#7baabf', text3:'#3a607a', card:'#0c1830'},
+  'Bosque':    {emoji:'🌲', bg:'#060f06', bg2:'#0d180d', bg3:'#142414', bg4:'#1a2e1a', accent:'#4caf50', text:'#d4e8d4', text2:'#7aaa7a', text3:'#3a6a3a', card:'#0f1a0f'},
+  'Carbón':    {emoji:'🔥', bg:'#0e0e0e', bg2:'#1a1a1a', bg3:'#222', bg4:'#2a2a2a', accent:'#ff3d00', text:'#f0f0f0', text2:'#999', text3:'#555', card:'#161616'},
+  'Rosa':      {emoji:'🌸', bg:'#0e040e', bg2:'#180a18', bg3:'#220e22', bg4:'#2e142e', accent:'#e040fb', text:'#f8e8f8', text2:'#c080c0', text3:'#7a4a7a', card:'#140a14'},
+  'Día Claro': {emoji:'☀️', bg:'#f0f2f5', bg2:'#ffffff', bg3:'#e8eaf0', bg4:'#dde0ea', accent:'#1565c0', text:'#1a1a2e', text2:'#556080', text3:'#8896b0', card:'#ffffff'}
 };
 let currentTheme = localStorage.getItem('rjp_theme') || 'Noche Azul';
 
@@ -62,7 +61,7 @@ function renderDestacadas() {
   const pins = pinnedStations.map(id => pinnedStore[id]).filter(Boolean);
   
   if(!pins.length) {
-    el.innerHTML = '<div style="font-size:11px;color:var(--text3);padding:10px">No tienes emisoras ancladas. Añade desde Explorar con el botón 📌.</div>';
+    el.innerHTML = '<div style="font-size:11px;color:var(--text3);padding:10px">No tienes emisoras ancladas. Añade desde Explorar con el botón 📍.</div>';
     return;
   }
 
@@ -239,7 +238,6 @@ function toggleFav(uuid, event) {
   }
 }
 
-// Control para anclar/desanclar emisoras al Top principal
 function togglePin(uuid, event) {
   if(event) event.stopPropagation();
   let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
@@ -271,7 +269,6 @@ function togglePin(uuid, event) {
   }
 }
 
-// Reordenar Top Anclado
 function movePinned(index, direction) {
   const newIndex = index + direction;
   if(newIndex < 0 || newIndex >= pinnedStations.length) return;
