@@ -135,6 +135,7 @@ h1,h2,h3,h4,.font-syne{font-family:'Syne',sans-serif}
         let favorites = JSON.parse(localStorage.getItem('rjp_favorites')) || [];
         let currentStationId = null;
         let apiSearchResults = [];
+        let hlsInstance = null;
         const audio = document.getElementById('audioPlayer');
 
         function renderStations(list = stations) {
@@ -245,7 +246,6 @@ h1,h2,h3,h4,.font-syne{font-family:'Syne',sans-serif}
             }
             localStorage.setItem('rjp_favorites', JSON.stringify(favorites));
             
-            // Re-renderizar la vista activa
             const activePage = document.querySelector('.page:not(.hidden)').id;
             if(activePage === 'page-explorar') filterStations();
             if(activePage === 'page-favglobal') renderFavorites();
@@ -264,18 +264,38 @@ h1,h2,h3,h4,.font-syne{font-family:'Syne',sans-serif}
             if(activePage === 'page-explorar') filterStations();
             if(activePage === 'page-favglobal') renderFavorites();
 
-            if (Hls.isSupported() && s.url && s.url.includes('.m3u8')) {
-                const hls = new Hls();
-                hls.loadSource(s.url);
-                hls.attachMedia(audio);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
+            // Destruir instancia anterior de HLS si existe
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
+
+            audio.pause();
+            audio.src = '';
+
+            if (s.url && s.url.includes('.m3u8')) {
+                if (Hls.isSupported()) {
+                    hlsInstance = new Hls();
+                    hlsInstance.loadSource(s.url);
+                    hlsInstance.attachMedia(audio);
+                    hlsInstance.on(Hls.Events.MANIFEST_PARSED, () => {
+                        audio.play().catch(e => console.log("Error al reproducir HLS:", e));
+                    });
+                } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+                    audio.src = s.url;
+                    audio.play().catch(e => console.log("Error nativo HLS:", e));
+                }
             } else {
                 audio.src = s.url;
-                audio.play().catch(e => console.log("Reproducción bloqueada o error en stream:", e));
+                audio.play().catch(e => console.log("Error al reproducir audio directo:", e));
             }
         }
 
         function stopRadio() {
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
             audio.pause();
             audio.src = '';
             currentStationId = null;
