@@ -3,6 +3,7 @@ const audio = document.getElementById('audioPlayer');
 let currentStation = null, playing = false;
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
+let activeStationsMap = {};
 
 const CONTINENTS = {
   'América': ['Colombia','Mexico','Argentina','Brazil','United States','Chile','Peru'],
@@ -45,7 +46,7 @@ document.getElementById('pLogoImg').src = ICON;
 function initApp() {
   applyTheme(currentTheme);
   renderContinents();
-  searchStationsApi('', 'Colombia'); // Carga inicial por defecto con Colombia
+  searchStationsApi('', 'Colombia');
 }
 
 function renderContinents() {
@@ -77,7 +78,6 @@ function filterByCountry(countryName) {
   searchStationsApi('', countryName);
 }
 
-// Barrido directo a la API gratuita de Radio Browser por nombre, país o género
 async function searchStationsApi(query = '', country = '') {
   const el = document.getElementById('globalStationsList');
   if(el) el.innerHTML = '<div class="loading-box"><div class="spinner"></div>Buscando emisoras...</div>';
@@ -91,6 +91,8 @@ async function searchStationsApi(query = '', country = '') {
     const data = await res.json();
     
     if(Array.isArray(data)) {
+      activeStationsMap = {};
+      data.forEach(s => activeStationsMap[s.stationuuid] = s);
       renderStations(data);
     } else {
       if(el) el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No se encontraron emisoras.</div>';
@@ -100,7 +102,6 @@ async function searchStationsApi(query = '', country = '') {
   }
 }
 
-// Búsqueda en tiempo real con retraso (debounce)
 let searchTimer;
 function filterGlobalStations() {
   clearTimeout(searchTimer);
@@ -131,29 +132,25 @@ function renderStations(stations) {
         <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
         <div class="scard-info" onclick="playStation('${s.stationuuid}')">
           <div class="scard-name">${s.name}</div>
-          <div class="scard-meta">${s.country || ''} ${s.state ? '· '+s.state : ''} ${s.tags ? '· '+s.tags.split(',')[0] : ''}</div>
+          <div class="scard-meta">${s.country || ''} ${s.state ? '· '+s.state : ''}</div>
         </div>
         <div class="scard-actions">
           <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event, ${JSON.stringify(s).replace(/"/g, '&quot;')})">${isFav?'★':'☆'}</button>
+          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event)">${isFav?'★':'☆'}</button>
         </div>
       </div>
     `;
   }).join('');
 }
 
-// Almacenamos temporalmente las emisoras cargadas para reproducción y favoritos
-let activeStationsMap = {};
-
 function playStation(uuid) {
-  // Intentamos obtener la emisora del mapa actual o favoritos
   let s = activeStationsMap[uuid] || favStore[uuid];
   if(!s) {
-    // Si no está en memoria, la buscamos directamente haciendo una petición rápida a la API por UUID
     fetch(`https://de1.api.radio-browser.info/json/stations/byuuid?uuids=${uuid}`)
       .then(res => res.json())
       .then(data => {
         if(data && data[0]) {
+          activeStationsMap[uuid] = data[0];
           playAudioData(data[0]);
         }
       });
@@ -183,32 +180,48 @@ function stopRadio() {
   document.getElementById('pStatus').textContent = 'Radio Jere Pro · En vivo';
 }
 
-function toggleFav(uuid, event, stationObj) {
+function toggleFav(uuid, event) {
   if(event) event.stopPropagation();
+  let s = activeStationsMap[uuid] || favStore[uuid];
+  if(!s) return;
+
   const idx = favorites.indexOf(uuid);
-  
   if(idx >= 0) {
     favorites.splice(idx, 1);
     delete favStore[uuid];
   } else {
-    if(stationObj) {
-      favorites.push(uuid);
-      favStore[uuid] = stationObj;
-      activeStationsMap[uuid] = stationObj;
-    }
+    favorites.push(uuid);
+    favStore[uuid] = s;
   }
+  
   localStorage.setItem('rjp_favs', JSON.stringify(favorites));
   localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
   
-  // Refrescar vistas
+  // Refrescar vistas activas
   if(document.getElementById('page-explorar').classList.contains('active')) {
-    // Re-renderizamos para actualizar estrellas
-    const q = document.getElementById('searchInput').value;
-    if(!q) searchStationsApi('', 'Colombia');
+    const cards = document.querySelectorAll(`#card-${uuid} .btn-fav`);
+    cards.forEach(btn => {
+      const isFav = favorites.includes(uuid);
+      btn.textContent = isFav ? '★' : '☆';
+      btn.classList.toggle('active', isFav);
+    });
   }
   if(document.getElementById('page-favglobal').classList.contains('active')) {
     renderFavGlobal();
   }
+}
+
+// Funciones para reordenar favoritos (Subir / Bajar)
+function moveFav(index, direction) {
+  const newIndex = index + direction;
+  if (newIndex < 0 || newIndex >= favorites.length) return;
+  
+  const temp = favorites[index];
+  favorites[index] = favorites[newIndex];
+  favorites[newIndex] = temp;
+  
+  localStorage.setItem('rjp_favs', JSON.stringify(favorites));
+  renderFavGlobal();
 }
 
 function renderFavGlobal() {
@@ -222,8 +235,13 @@ function renderFavGlobal() {
     el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No tienes favoritos guardados aún. Toca ☆ en cualquier emisora.</div>';
     return;
   }
-  el.innerHTML = favs.map(s => `
+  
+  el.innerHTML = favs.map((s, idx) => `
     <div class="scard">
+      <div style="display:flex;flex-direction:column;gap:2px;margin-right:4px">
+        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="moveFav(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}>▲</button>
+        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="moveFav(${idx}, 1)" ${idx === favs.length - 1 ? 'disabled style="opacity:0.3"' : ''}>▼</button>
+      </div>
       <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
       <div class="scard-info" onclick="playStation('${s.stationuuid}')">
         <div class="scard-name">${s.name}</div>
@@ -231,7 +249,7 @@ function renderFavGlobal() {
       </div>
       <div class="scard-actions">
         <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', event, ${JSON.stringify(s).replace(/"/g, '&quot;')})">★</button>
+        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', event)">★</button>
       </div>
     </div>
   `).join('');
