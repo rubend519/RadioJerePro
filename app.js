@@ -5,7 +5,6 @@ let currentStation = null, playing = false;
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
 
-// Emisoras fijas por defecto: Yariguies y Fundingue Vallenato
 const DEFAULT_PINS = ['yariguies', 'fundingue'];
 const DEFAULT_PIN_STORE = {
   'yariguies': {stationuuid:'yariguies', name:'Yariguies Stereo 102.7 FM', url:'https://estructuraweb.com.co:9339/stream', country:'Colombia', state:'Barrancabermeja', tags:'noticias,pop'},
@@ -122,22 +121,33 @@ async function searchStationsApi(query = '', country = '') {
     const res = await fetch(url);
     const data = await res.json();
     
-    if(Array.isArray(data)) {
-      activeStationsMap = {};
-      Object.values(pinnedStore).forEach(s => activeStationsMap[s.stationuuid] = s);
-      data.forEach(s => activeStationsMap[s.stationuuid] = s);
-      
-      // Si estamos en Colombia sin buscar nada, aseguramos incluir a Fundingue y Yariguies al inicio
-      let combined = data;
-      if(country.toLowerCase() === 'colombia' && !query) {
-        const pinnedList = Object.values(pinnedStore);
-        const rest = data.filter(s => !pinnedList.some(p => p.stationuuid === s.stationuuid));
-        combined = [...pinnedList, ...rest];
-      }
-      renderStations(combined);
-    } else {
-      if(el) el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No se encontraron emisoras.</div>';
+    // Poblamos el mapa activo incluyendo siempre las emisoras personalizadas y las favoritas
+    activeStationsMap = {};
+    Object.values(pinnedStore).forEach(s => activeStationsMap[s.stationuuid] = s);
+    Object.values(favStore).forEach(s => activeStationsMap[s.stationuuid] = s);
+
+    let results = Array.isArray(data) ? data : [];
+    results.forEach(s => activeStationsMap[s.stationuuid] = s);
+
+    // Si hay texto en el buscador, filtramos también localmente entre las personalizadas para que coincida (ej: "fundingue")
+    let localMatches = [];
+    if(query) {
+      const qLower = query.toLowerCase();
+      localMatches = Object.values(pinnedStore).filter(s => 
+        s.name.toLowerCase().includes(qLower) || 
+        (s.tags && s.tags.toLowerCase().includes(qLower)) ||
+        (s.state && s.state.toLowerCase().includes(qLower))
+      );
+    } else if(country.toLowerCase() === 'colombia') {
+      localMatches = Object.values(pinnedStore);
     }
+
+    // Unimos resultados locales al principio sin duplicados
+    const combinedMap = new Map();
+    localMatches.forEach(s => combinedMap.set(s.stationuuid, s));
+    results.forEach(s => combinedMap.set(s.stationuuid, s));
+
+    renderStations(Array.from(combinedMap.values()));
   } catch(e) {
     if(el) el.innerHTML = '<div style="color:var(--accent);padding:20px;text-align:center">Error al conectar con la API gratuita.</div>';
   }
