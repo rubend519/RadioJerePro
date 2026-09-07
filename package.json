@@ -1,0 +1,10 @@
+{
+  "name": "radio-jere-pro",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/app.js --minify --target=es2015,chrome58,safari11 --outfile=js/app.min.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}

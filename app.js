@@ -1,393 +1,1728 @@
-const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUKculusWKkeK6W597cY3Zmdu6evup67+WPquruofxJeDnTS9VdVe93f3/HE3sO3mWFEAhACImQ2f8Igdj1K5FSAAKEQAox+o6U2S8AY+eEGB5ntynyotwghsJbRy2Z/LDb/H6w12XesJXuzYA3W2vwzgzU2P7bZ9Sa7xhoDWIwdfZ5dn72b/PuSfNnkayseNiRkSES2SJvxJvsz/jt+k/zYFqfGX8IiGradOGOSKAYC1WK1zKeD5K8XiV0WpSKLThJj50mY+ZpTq6m8qWdK8iP43+s5eY9EwZp0AAAAAElFTkSuQmCC';
+const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUJcukKIqkeK6W597cY3Zmdu6evup67+WPquruofxhexylnKEISgGEXK7D36mJjO0fS74s8kLff/I8+ZsfIu6XgI04A/e7E993P7z+c3P0q5q1tQ/28lIu1tI9r7n8c2/b/Peb+s/J4+n52jN0N3+l//Ww96U0jXqQAAAABJRU5ErkJggg==';
+const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
+// Compatible con TVs/navegadores viejos que no tienen AbortSignal.timeout() (API de 2022).
+// Usa AbortController + setTimeout, soportado desde hace mucho más tiempo.
+function timeoutSignal(ms) {
+  var controller = new AbortController();
+  setTimeout(function(){ controller.abort(); }, ms);
+  return controller.signal;
+}
 const audio = document.getElementById('audioPlayer');
-let currentStation = null, playing = false;
-
+let allStations=[], filteredStations=[], currentStation=null, playing=false;
+let allCountries=[], currentContinent='', currentCountry='';
 let favorites = JSON.parse(localStorage.getItem('rjp_favs')||'[]');
 let favStore = JSON.parse(localStorage.getItem('rjp_favstore')||'{}');
-
-const DEFAULT_PINS = ['yariguies', 'fundingue'];
-const DEFAULT_PIN_STORE = {
-  'yariguies': {stationuuid:'yariguies', name:'Yariguies Stereo 102.7 FM', url:'https://estructuraweb.com.co:9339/stream', country:'Colombia', state:'Barrancabermeja', tags:'noticias,pop'},
-  'fundingue': {stationuuid:'fundingue', name:'Fundingue Vallenato', url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3', country:'Colombia', state:'Nacional', tags:'vallenato'}
-};
-
-let pinnedStations = JSON.parse(localStorage.getItem('rjp_pinned')||JSON.stringify(DEFAULT_PINS));
-let pinnedStore = JSON.parse(localStorage.getItem('rjp_pinnedstore')||JSON.stringify(DEFAULT_PIN_STORE));
-
-let activeStationsMap = {};
-
-const CONTINENTS = {
-  'América': ['Colombia','Mexico','Argentina','Brazil','United States','Chile','Peru'],
-  'Europa': ['Spain','France','Germany','Italy','United Kingdom','Portugal'],
-  'Asia': ['Japan','South Korea','China','India']
-};
-
-const THEMES = {
-  'Noche Azul': {emoji:'🌙', bg:'#0a0a12', bg2:'#12121e', bg3:'#1a1a2e', bg4:'#1f1f35', accent:'#e94560', text:'#f0f0f8', text2:'#8899bb', text3:'#4a5070', card:'#161625'},
-  'Océano':    {emoji:'🌊', bg:'#060d1a', bg2:'#0a1628', bg3:'#0f2040', bg4:'#142850', accent:'#00bcd4', text:'#e8f4f8', text2:'#7baabf', text3:'#3a607a', card:'#0c1830'},
-  'Bosque':    {emoji:'🌲', bg:'#060f06', bg2:'#0d180d', bg3:'#142414', bg4:'#1a2e1a', accent:'#4caf50', text:'#d4e8d4', text2:'#7aaa7a', text3:'#3a6a3a', card:'#0f1a0f'},
-  'Carbón':    {emoji:'🔥', bg:'#0e0e0e', bg2:'#1a1a1a', bg3:'#222', bg4:'#2a2a2a', accent:'#ff3d00', text:'#f0f0f0', text2:'#999', text3:'#555', card:'#161616'},
-  'Rosa':      {emoji:'🌸', bg:'#0e040e', bg2:'#180a18', bg3:'#220e22', bg4:'#2e142e', accent:'#e040fb', text:'#f8e8f8', text2:'#c080c0', text3:'#7a4a7a', card:'#140a14'},
-  'Día Claro': {emoji:'☀️', bg:'#f0f2f5', bg2:'#ffffff', bg3:'#e8eaf0', bg4:'#dde0ea', accent:'#1565c0', text:'#1a1a2e', text2:'#556080', text3:'#8896b0', card:'#ffffff'}
-};
-let currentTheme = localStorage.getItem('rjp_theme') || 'Noche Azul';
-
-function applyTheme(n){
-  const t = THEMES[n]; if(!t) return;
-  currentTheme = n; localStorage.setItem('rjp_theme', n);
-  const r = document.documentElement.style;
-  ['bg','bg2','bg3','bg4','accent','text','text2','text3','card'].forEach(k => r.setProperty('--'+k, t[k]));
-  document.querySelectorAll('.theme-opt').forEach(o => o.classList.toggle('active', o.dataset.theme===n));
+let favPaises = JSON.parse(localStorage.getItem('rjp_favpaises')||'["Colombia","Mexico","Argentina","Spain","United States"]');
+let liveListeners = parseInt(localStorage.getItem('rjp_live')||'0');
+let playCounts = JSON.parse(localStorage.getItem('rjp_playcounts')||'{}');
+let favOrder = JSON.parse(localStorage.getItem('rjp_favorder')||'[]');
+let currentFavSort = 'manual';
+let urlOverrides = JSON.parse(localStorage.getItem('rjp_url_overrides')||'{}');
+function saveUrlOverride(uuid, url) {
+  urlOverrides[uuid] = url;
+  localStorage.setItem('rjp_url_overrides', JSON.stringify(urlOverrides));
 }
 
+let listenerChannel;
+try {
+  listenerChannel = new BroadcastChannel('rjp_listeners');
+  listenerChannel.postMessage('join');
+  listenerChannel.onmessage = ()=>{ liveListeners = Math.max(1, liveListeners); updateLiveCount(liveListeners); };
+} catch(e){}
+let liveCount = 1;
+function updateLiveCount(n){ document.getElementById('liveCount').textContent = n; }
+const FB_URL = 'https://radiojere-live-default-rtdb.firebaseio.com';
+const sessionId = 'sess_' + Math.random().toString(36).slice(2) + '_' + Date.now();
+
+async function pingLive() {
+  try {
+    await fetch(`${FB_URL}/listeners/${sessionId}.json`, {
+      method: 'PUT',
+      body: JSON.stringify({ ts: Date.now() })
+    });
+    const r = await fetch(`${FB_URL}/listeners.json`);
+    const data = await r.json();
+    if (data) {
+      const now = Date.now();
+      const activos = Object.values(data).filter(v => v && (now - v.ts) < 35000);
+      updateLiveCount(activos.length);
+    }
+  } catch(e) {
+    updateLiveCount(1);
+  }
+}
+
+window.addEventListener('beforeunload', () => {
+  navigator.sendBeacon(`${FB_URL}/listeners/${sessionId}.json?x-http-method-override=DELETE`, '');
+});
+
+pingLive();
+setInterval(pingLive, 15000);
+
+document.getElementById('logoImg').src=ICON;
+document.getElementById('pLogoImg').src=ICON;
+
+const COUNTRY_ALIASES = {
+  'South Korea': ['South Korea','Korea, Republic of','The Republic Of Korea','Korea','Republic of Korea','Korean'],
+  'North Korea': ['North Korea','Korea, Democratic','Democratic People'],
+  'United States': ['United States','United States of America','USA'],
+  'United Kingdom': ['United Kingdom','UK','Great Britain'],
+  'Czech Republic': ['Czech Republic','Czechia'],
+  'Dominican Republic': ['Dominican Republic','Republic Dominicana'],
+  'United Arab Emirates': ['United Arab Emirates','UAE'],
+  'Vietnam': ['Vietnam','Viet Nam'],
+  'Taiwan': ['Taiwan','Chinese Taipei'],
+  'Iran': ['Iran','Islamic Republic of Iran'],
+  'Russia': ['Russia','Russian Federation'],
+  'Bolivia': ['Bolivia','Bolivia, Plurinational'],
+  'Venezuela': ['Venezuela','Venezuela, Bolivarian'],
+  'Tanzania': ['Tanzania','United Republic of Tanzania'],
+};
+
+const CONTINENTS = {
+  'América': ['Colombia','Mexico','Argentina','Brazil','United States','Canada','Chile','Peru','Venezuela','Ecuador','Bolivia','Uruguay','Paraguay','Dominican Republic','Costa Rica','Panama','Cuba','Guatemala','Honduras','El Salvador','Nicaragua','Haiti','Puerto Rico','Jamaica','Trinidad and Tobago','Guyana','Suriname','Belize','Bahamas','Barbados','Antigua and Barbuda'],
+  'Europa': ['Spain','France','Germany','Italy','Portugal','United Kingdom','Netherlands','Sweden','Norway','Denmark','Finland','Poland','Russia','Ukraine','Switzerland','Austria','Belgium','Greece','Romania','Czech Republic','Hungary','Serbia','Croatia','Slovakia','Bulgaria','Ireland','Belarus','Lithuania','Latvia','Estonia','Slovenia','Bosnia and Herzegovina','North Macedonia','Albania','Kosovo','Moldova','Luxembourg','Iceland','Malta','Cyprus'],
+  'Asia': ['Japan','South Korea','India','China','Indonesia','Vietnam','Thailand','Malaysia','Philippines','Turkey','Saudi Arabia','United Arab Emirates','Iran','Iraq','Pakistan','Bangladesh','Singapore','Taiwan','Hong Kong','Myanmar','Cambodia','Laos','Sri Lanka','Nepal','Kazakhstan','Uzbekistan','Azerbaijan','Georgia','Armenia','Lebanon','Jordan','Israel','Kuwait','Qatar','Bahrain','Oman','Yemen','Syria','Afghanistan','Mongolia'],
+  'África': ['South Africa','Nigeria','Kenya','Egypt','Morocco','Ethiopia','Ghana','Tanzania','Algeria','Tunisia','Senegal','Cameroon','Uganda','Mozambique','Zimbabwe','Angola','Ivory Coast','Madagascar','Zambia','Rwanda','Libya','Sudan','Somalia'],
+  'Oceanía': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
+};
+
+let _stationsLoaded = false;
+async function loadStationsJSON() {
+  if (_stationsLoaded) return;
+  try {
+    const res = await fetch('/stations.json?_=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const arr = data.stations || data;
+    if (Array.isArray(arr) && arr.length > 0) {
+      COLOMBIA_CURADA.length = 0;
+      arr.forEach(s => COLOMBIA_CURADA.push(s));
+      _stationsLoaded = true;
+      console.log('[RJP] stations.json cargado:', arr.length, 'emisoras');
+    }
+  } catch(e) {
+    console.warn('[RJP] stations.json no disponible, usando fallback:', e.message);
+  }
+}
+
+const COLOMBIA_CURADA = [
+  {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'Bogotá',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
+  {stationuuid:'co-002',name:'Tropicana Bogotá 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'Bogotá',tags:'tropical,salsa',favicon:'https://www.tropicanafm.com/wp-content/uploads/2023/04/cropped-favicon-tropicana-32x32.png'},
+  {stationuuid:'co-003',name:'Caracol Radio Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.caracol.com.co/wp-content/uploads/2021/10/cropped-favicon-caracol-32x32.png'},
+  {stationuuid:'co-004',name:'W Radio Colombia',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/WRADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,talk',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/4/2021/09/cropped-favicon-wradio-32x32.png'},
+  {stationuuid:'co-005',name:'La Mega Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGAAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.lamega.com.co/wp-content/uploads/2021/10/cropped-favicon-lamega-32x32.png'},
+  {stationuuid:'co-006',name:'La Kalle 96.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLEAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,urbano',favicon:'https://www.lakalle.com.co/wp-content/uploads/2021/10/cropped-favicon-lakalle-32x32.png'},
+  {stationuuid:'co-007',name:'Bésame 97.4 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'romantica,baladas',favicon:'https://www.besame.fm/wp-content/uploads/2021/10/cropped-favicon-besame-32x32.png'},
+  {stationuuid:'co-008',name:'Olímpica Stereo Bogotá 105.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLIMPICA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'vallenato,popular',favicon:'https://www.olimpicastereo.com.co/wp-content/uploads/2021/09/cropped-favicon-olimpica-32x32.png'},
+  {stationuuid:'co-009',name:'Candela Stereo 101.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CANDELAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:'https://www.candelaestereo.com/wp-content/uploads/2021/09/cropped-favicon-candela-32x32.png'},
+  {stationuuid:'co-010',name:'Blu Radio 96.9 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BLU_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.bluradio.com/wp-content/uploads/2021/09/cropped-favicon-blu-32x32.png'},
+  {stationuuid:'co-011',name:'La FM Bogotá 94.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FMAAC.aac',country:'Colombia',state:'Bogotá',tags:'noticias,talk',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png'},
+  {stationuuid:'co-012',name:'El Sol Bogotá - La Salsa 105.4 FM',url:'/stream-proxy?id=co-012',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BOGOTAAAC_SC',country:'Colombia',state:'Bogotá',tags:'salsa',favicon:'https://www.elsolradio.com.co/wp-content/uploads/2021/09/cropped-favicon-elsol-32x32.png'},
+  {stationuuid:'co-013',name:'Radio Uno Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNOAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png'},
+  {stationuuid:'co-014',name:'Amor Stereo 97.7 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/AMOR_STEREOACC.aac',country:'Colombia',state:'Bogotá',tags:'romantica',favicon:''},
+  {stationuuid:'co-015',name:'Vibra Bogotá 104.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/VIBRAAAC.aac',country:'Colombia',state:'Bogotá',tags:'pop,hits',favicon:''},
+  {stationuuid:'co-016',name:'Señal Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÑAL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
+  {stationuuid:'co-017',name:'Oxígeno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'Bogotá',tags:'alternativa,pop',favicon:''},
+  {stationuuid:'co-018',name:'Rumba Estéreo Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:''},
+  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://stream.zeno.fm/f392822xevduv',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://stream.zeno.fm/yariguies',url_resolved:'https://19843.live.streamtheworld.com/YARIGUIES_SC',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://cdn.radoxo.com/images/colombia/yariguies-stereo.webp',geo_lat:7.0653,geo_long:-73.8547},
+  {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-026',name:'La FM Bucaramanga 99.7 FM',url:'/stream-proxy?id=co-026',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FM_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-027',name:'La Guapachosa 105.1 FM',url:'https://stream.zeno.fm/guapachosa-buca',url_resolved:'/stream-proxy?id=co-027',country:'Colombia',state:'Bucaramanga',tags:'popular,tropical',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-028',name:'W Radio Bucaramanga 98.1 FM',url:'/stream-proxy?id=co-028',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/W_RADIO_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias,opinion',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/5/2021/09/wradio-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-029',name:'Radio Uno Bucaramanga',url:'/stream-proxy?id=co-029',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNO_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-030',name:'La Kalle Bucaramanga 96.9 FM',url:'/stream-proxy?id=co-030',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLE_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'pop,urbano',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-031',name:'Florida Stereo 88.8 FM Floridablanca',url:'https://stream.zeno.fm/floridastereo',country:'Colombia',state:'Floridablanca',tags:'variada,pop',favicon:'',geo_lat:7.0647,geo_long:-73.0878},
+  {stationuuid:'co-032',name:'San Juan de Girón 88.2 FM',url:'https://stream.zeno.fm/sanjuangiron',country:'Colombia',state:'Girón',tags:'comunitaria,variada',favicon:'',geo_lat:7.0747,geo_long:-73.1678},
+  {stationuuid:'co-033',name:'Radio Nacional Colombia Bucaramanga 92.3 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIONACIONALCOL_SC',country:'Colombia',state:'Bucaramanga',tags:'cultura,noticias',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-034',name:'La Kontentosa 106.7 FM Bucaramanga',url:'https://stream.zeno.fm/q6fw8nu5y18uv',country:'Colombia',state:'Bucaramanga',tags:'popular,tropical',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-035',name:'Radio Policía Bucaramanga 91.7 FM',url:'https://stream.zeno.fm/radiopoliciabuca',country:'Colombia',state:'Bucaramanga',tags:'noticias,institucional',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+];
+
+const THEMES = {
+  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:'#e94560',text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
+  'Océano':    {emoji:'🌊',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
+  'Bosque':    {emoji:'🌲',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
+  'Carbón':    {emoji:'🔥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
+  'Rosa':      {emoji:'🌸',bg:'#0e040e',bg2:'#180a18',bg3:'#220e22',bg4:'#2e142e',accent:'#e040fb',text:'#f8e8f8',text2:'#c080c0',text3:'#7a4a7a',card:'#140a14'},
+  'Día Claro': {emoji:'☀️',bg:'#f0f2f5',bg2:'#ffffff',bg3:'#e8eaf0',bg4:'#dde0ea',accent:'#1565c0',text:'#1a1a2e',text2:'#556080',text3:'#8896b0',card:'#ffffff'},
+  'Atardecer': {emoji:'🌅',bg:'#12080a',bg2:'#1e0f0a',bg3:'#2d1710',bg4:'#3d2018',accent:'#ff6d00',text:'#ffeedd',text2:'#c0845a',text3:'#7a5040',card:'#1e1008'},
+  'Galaxia':   {emoji:'✨',bg:'#08060f',bg2:'#100e1e',bg3:'#19162e',bg4:'#231e3e',accent:'#7c4dff',text:'#ece8ff',text2:'#9080c0',text3:'#504870',card:'#130f20'},
+  'Caribe':    {emoji:'🏝️',bg:'#040e10',bg2:'#071820',bg3:'#0c2830',bg4:'#113540',accent:'#00e5a0',text:'#d8f5ee',text2:'#60a898',text3:'#306858',card:'#071518'},
+};
+let currentTheme=localStorage.getItem('rjp_theme')||'Noche Azul';
+
+function applyTheme(n){
+  const t=THEMES[n]; if(!t) return;
+  currentTheme=n; localStorage.setItem('rjp_theme',n);
+  const r=document.documentElement.style;
+  ['bg','bg2','bg3','bg4','accent','text','text2','text3','card'].forEach(k=>r.setProperty('--'+k,t[k]));
+  document.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===n));
+}
 function buildThemeGrid(){
-  const grid = document.getElementById('themeGrid');
-  if(!grid) return;
-  grid.innerHTML = Object.entries(THEMES).map(([n,t]) =>
+  document.getElementById('themeGrid').innerHTML=Object.entries(THEMES).map(([n,t])=>
     `<div class="theme-opt${n===currentTheme?' active':''}" data-theme="${n}" onclick="applyTheme('${n}')">
       <div class="theme-swatch" style="background:${t.bg};border:2px solid ${t.accent}">${t.emoji}</div>
       <div class="theme-label">${n}</div></div>`).join('');
 }
-function openTheme(){ buildThemeGrid(); document.getElementById('themePanel').classList.add('open'); }
-function closeTheme(){ document.getElementById('themePanel').classList.remove('open'); }
+function openTheme(){buildThemeGrid();document.getElementById('themePanel').classList.add('open')}
+function closeTheme(){document.getElementById('themePanel').classList.remove('open')}
 
-document.getElementById('logoImg').src = ICON;
-document.getElementById('pLogoImg').src = ICON;
-
-function initApp() {
-  applyTheme(currentTheme);
-  renderDestacadas();
-  renderContinents();
-  searchStationsApi('', 'Colombia');
+async function apiFetch(path,si=0){
+  if(si>=SERVERS.length) throw new Error('Sin servidores');
+  const c=new AbortController(); const to=setTimeout(()=>c.abort(),8000);
+  try{const r=await fetch(SERVERS[si]+path,{signal:c.signal}); clearTimeout(to); if(!r.ok) throw new Error(); return await r.json();}
+  catch(e){clearTimeout(to); return apiFetch(path,si+1);}
 }
 
-function renderDestacadas() {
-  const el = document.getElementById('destacadasScroll');
-  if(!el) return;
-  const pins = pinnedStations.map(id => pinnedStore[id]).filter(Boolean);
-  
-  if(!pins.length) {
-    el.innerHTML = '<div style="font-size:11px;color:var(--text3);padding:10px">No tienes emisoras ancladas. Añade desde Explorar con el botón 📍.</div>';
-    return;
-  }
-
-  el.innerHTML = pins.map(s => `
-    <div class="d-card" onclick="playStation('${s.stationuuid}')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;width:140px;text-align:center;cursor:pointer;flex-shrink:0">
-      <div class="d-logo" style="width:45px;height:45px;border-radius:50%;background:var(--bg3);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;overflow:hidden"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'" style="width:100%;height:100%;object-fit:cover"></div>
-      <div class="d-name" style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.name}</div>
-      <div class="d-sub" style="font-size:9px;color:var(--text2)">${s.state || s.country || ''}</div>
-    </div>
-  `).join('');
+// Función para filtrar emisoras repetidas por nombre/ciudad de forma limpia
+function filterUniqueStations(stations) {
+  const seenNames = new Set();
+  const seenUrls = new Set();
+  return stations.filter(s => {
+    const cleanName = (s.name || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 18);
+    const url = s.url_resolved || s.url || '';
+    if (!cleanName || (seenNames.has(cleanName) || (url && seenUrls.has(url)))) {
+      return false;
+    }
+    seenNames.add(cleanName);
+    if (url) seenUrls.add(url);
+    return true;
+  });
 }
 
-function renderContinents() {
-  const scroll = document.getElementById('contScroll');
-  if(!scroll) return;
-  scroll.innerHTML = Object.keys(CONTINENTS).map((c, idx) => `
-    <button class="cont-btn ${idx===0?'active':''}" onclick="selectContinent('${c}', this)">${c}</button>
-  `).join('');
-  selectContinent('América', scroll.querySelector('.cont-btn'));
+async function init(){
+  setStatus('Conectando...','loading');
+  await loadStationsJSON();
+  try{
+    allCountries=await apiFetch('/countries?hidebroken=true&order=name');
+    setStatus(`${allCountries.length} países disponibles`,'');
+    renderContinents();
+    renderFavPaises();
+  }catch(e){setStatus('Error de conexión','error');}
 }
 
-function selectContinent(continent, btn) {
-  document.querySelectorAll('.cont-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  const countries = CONTINENTS[continent] || [];
-  const grid = document.getElementById('countryGrid');
-  if(!grid) return;
-  grid.innerHTML = countries.map(c => `
-    <div class="country-card" onclick="filterByCountry('${c}')">
-      <div class="country-name">${c}</div>
-      <div class="country-count">Explorar</div>
-    </div>
-  `).join('');
+function renderContinents(){
+  const scroll=document.getElementById('contScroll');
+  scroll.innerHTML=Object.keys(CONTINENTS).map(c=>
+    `<button class="cont-btn${c===currentContinent?' active':''}" onclick="selectContinent('${c}')">${c}</button>`
+  ).join('');
+  if(currentContinent) showCountriesOf(currentContinent);
+  else document.getElementById('countryGrid').innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Selecciona un continente para ver sus países</div>';
 }
 
-function filterByCountry(countryName) {
-  const title = document.getElementById('stResultTitle');
-  if(title) title.textContent = `Emisoras de ${countryName}`;
-  searchStationsApi('', countryName);
+function selectContinent(c){
+  currentContinent=c;
+  document.querySelectorAll('.cont-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
+  showCountriesOf(c);
 }
 
-async function searchStationsApi(query = '', country = '') {
-  const el = document.getElementById('globalStationsList');
-  if(el) el.innerHTML = '<div class="loading-box"><div class="spinner"></div>Buscando emisoras...</div>';
-  
-  try {
-    let url = 'https://de1.api.radio-browser.info/json/stations/search?limit=100';
-    if(query) url += `&name=${encodeURIComponent(query)}`;
-    if(country) url += `&country=${encodeURIComponent(country)}`;
+function showCountriesOf(continent){
+  const names=CONTINENTS[continent]||[];
+  const countries=names.map(n=>{
+    const aliases=COUNTRY_ALIASES[n]||[n];
+    return allCountries.find(c=>aliases.some(a=>c.name.toLowerCase()===a.toLowerCase()));
+  }).filter(Boolean);
+  const grid=document.getElementById('countryGrid');
+  if(!countries.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">No hay países disponibles</div>';return;}
+  grid.innerHTML=countries.map(c=>`
+    <div class="country-card${favPaises.includes(c.name)?' fav':''}" onclick="selectCountry('${c.name}','${continent}')">
+      <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
+      <button class="country-fav-btn${favPaises.includes(c.name)?' active':''}" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)" title="País favorito">${favPaises.includes(c.name)?'★':'☆'}</button>
+    </div>`).join('');
+}
 
-    const res = await fetch(url);
-    const data = await res.json();
-    
-    // Poblamos el mapa activo incluyendo siempre las emisoras personalizadas y las favoritas
-    activeStationsMap = {};
-    Object.values(pinnedStore).forEach(s => activeStationsMap[s.stationuuid] = s);
-    Object.values(favStore).forEach(s => activeStationsMap[s.stationuuid] = s);
+function renderFavPaises(){
+  const grid=document.getElementById('favPaisGrid');
+  if(!favPaises.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Agrega países favoritos con "+ Editar"</div>';return;}
+  const countries=favPaises.map(n=>allCountries.find(c=>c.name===n)).filter(Boolean);
+  grid.innerHTML=countries.map(c=>`
+    <div class="country-card fav" onclick="selectCountry('${c.name}','Favoritos')">
+      <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
+      <button class="country-fav-btn active" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)">★</button>
+    </div>`).join('');
+}
 
-    let results = Array.isArray(data) ? data : [];
-    results.forEach(s => activeStationsMap[s.stationuuid] = s);
+function toggleFavPais(name,btn){
+  const idx=favPaises.indexOf(name);
+  if(idx>=0){favPaises.splice(idx,1);if(btn){btn.textContent='☆';btn.classList.remove('active');}}
+  else{favPaises.push(name);if(btn){btn.textContent='★';btn.classList.add('active');}}
+  localStorage.setItem('rjp_favpaises',JSON.stringify(favPaises));
+  renderFavPaises();
+  if(currentContinent) showCountriesOf(currentContinent);
+  renderFavPaisPanel();
+}
 
-    // Si hay texto en el buscador, filtramos también localmente entre las personalizadas para que coincida (ej: "fundingue")
-    let localMatches = [];
-    if(query) {
-      const qLower = query.toLowerCase();
-      localMatches = Object.values(pinnedStore).filter(s => 
-        s.name.toLowerCase().includes(qLower) || 
-        (s.tags && s.tags.toLowerCase().includes(qLower)) ||
-        (s.state && s.state.toLowerCase().includes(qLower))
+let allCountriesForPanel=[];
+function openFavPais(){
+  allCountriesForPanel=[...allCountries];
+  renderFavPaisPanel();
+  document.getElementById('fpSearch').value='';
+  document.getElementById('favpaisPanel').classList.add('open');
+}
+function closeFavPais(){document.getElementById('favpaisPanel').classList.remove('open')}
+function renderFavPaisPanel(list){
+  const data=list||allCountriesForPanel;
+  document.getElementById('fpList').innerHTML=data.map(c=>`
+    <div class="fp-item${favPaises.includes(c.name)?' favved':''}" onclick="toggleFavPais('${c.name}',null);this.classList.toggle('favved');this.querySelector('.fp-item-star').textContent=favPaises.includes('${c.name}')?'★':'☆'">
+      <div><div class="fp-item-name">${c.name}</div><div class="fp-item-count">${c.stationcount} emisoras</div></div>
+      <span class="fp-item-star">${favPaises.includes(c.name)?'★':'☆'}</span>
+    </div>`).join('');
+}
+function filterFavPaisPanel(q){
+  const filtered=allCountriesForPanel.filter(c=>c.name.toLowerCase().includes(q.toLowerCase()));
+  renderFavPaisPanel(filtered);
+}
+
+async function selectCountry(name, continent, pushNav=true){
+  if(pushNav) navPush({ type:'country', data:{ name, continent } });
+  currentCountry=name;
+  document.getElementById('view-continents').style.display='none';
+  document.getElementById('view-stations').style.display='block';
+  const bc=document.getElementById('breadcrumb');
+  bc.style.display='flex';
+  bc.innerHTML=`<span onclick="backToMap()">${continent}</span><span class="sep"> › </span><span onclick="backToMap()">${name}</span>`;
+  document.getElementById('stTitle').textContent=`Emisoras de ${name}`;
+  setStStatus(`Cargando ${name}...`,'loading');
+  document.getElementById('stationsList').innerHTML='<div class="loading-box"><div class="spinner"></div>Buscando...</div>';
+  try{
+    if(name === 'Colombia') {
+      await loadStationsJSON();
+      allStations = filterUniqueStations([...COLOMBIA_CURADA]);
+      filteredStations = [...allStations];
+      renderStations(filteredStations, 'stationsList');
+      setStStatus(`Cargando más emisoras de Colombia...`, 'loading');
+    }
+
+    const aliases = COUNTRY_ALIASES[name] || [name];
+    let allFound = [];
+    for(const alias of aliases) {
+      try {
+        const r = await apiFetch(`/stations/search?limit=500&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(alias)}`);
+        if(Array.isArray(r)) allFound.push(...r);
+      } catch(e) {}
+    }
+
+    const seen = new Set();
+    const apiStations = allFound.filter(s => {
+      if(seen.has(s.stationuuid)) return false;
+      seen.add(s.stationuuid); return true;
+    });
+
+    if(name === 'Colombia') {
+      const curadaIds = new Set(COLOMBIA_CURADA.map(s => s.stationuuid));
+      const curadaNames = new Set(COLOMBIA_CURADA.map(s => s.name.toLowerCase().slice(0,15)));
+      const apiFiltered = apiStations.filter(s =>
+        !curadaIds.has(s.stationuuid) &&
+        !curadaNames.has(s.name.toLowerCase().slice(0,15))
       );
-    } else if(country.toLowerCase() === 'colombia') {
-      localMatches = Object.values(pinnedStore);
-    }
-
-    // Unimos resultados locales al principio sin duplicados
-    const combinedMap = new Map();
-    localMatches.forEach(s => combinedMap.set(s.stationuuid, s));
-    results.forEach(s => combinedMap.set(s.stationuuid, s));
-
-    renderStations(Array.from(combinedMap.values()));
-  } catch(e) {
-    if(el) el.innerHTML = '<div style="color:var(--accent);padding:20px;text-align:center">Error al conectar con la API gratuita.</div>';
-  }
-}
-
-let searchTimer;
-function filterGlobalStations() {
-  clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    const q = document.getElementById('searchInput').value.trim();
-    if(q.length > 0) {
-      document.getElementById('stResultTitle').textContent = `Resultados para: "${q}"`;
-      searchStationsApi(q, '');
+      allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiFiltered]);
     } else {
-      searchStationsApi('', 'Colombia');
+      allStations = filterUniqueStations(apiStations);
     }
-  }, 400);
+
+    filteredStations = [...allStations];
+    setStStatus(`${allStations.length} emisoras de ${name}`, '');
+    sortStations(currentSort, document.querySelector('.sort-btn.active'));
+  }catch(e){
+    setStStatus('Error al cargar emisoras','error');
+    document.getElementById('stationsList').innerHTML=`<div class="loading-box">Error.<br><button class="btn-retry" onclick="selectCountry('${name}','${continent}')">🔄 Reintentar</button></div>`;
+  }
 }
 
-function renderStations(stations) {
-  const el = document.getElementById('globalStationsList');
+const navHistory = [];
+let navIdx = -1;
+
+function navPush(view) {
+  navHistory.splice(navIdx + 1);
+  navHistory.push(view);
+  navIdx = navHistory.length - 1;
+  navUpdateButtons();
+  navUpdateCrumb();
+}
+
+function navBack() {
+  if(navIdx <= 0) return;
+  navIdx--;
+  navGoto(navHistory[navIdx], false);
+  navUpdateButtons();
+  navUpdateCrumb();
+}
+
+function navForward() {
+  if(navIdx >= navHistory.length - 1) return;
+  navIdx++;
+  navGoto(navHistory[navIdx], false);
+  navUpdateButtons();
+  navUpdateCrumb();
+}
+
+function navHome() {
+  navPush({ type: 'home' });
+  _showHome();
+}
+
+function navGoto(view, push = true) {
+  if(!view) return;
+  if(push) navPush(view);
+  if(view.type === 'home')    _showHome();
+  if(view.type === 'country') selectCountry(view.data.name, view.data.continent, false);
+  if(view.type === 'search')  { document.getElementById('searchInput').value = view.data.q; filterStations(); }
+  if(view.type === 'favs')    showPage('favglobal', null);
+}
+
+function navUpdateButtons() {
+  const btnB = document.getElementById('btnBack');
+  const btnF = document.getElementById('btnForward');
+  const btnH = document.getElementById('btnHome');
+  if(btnB) btnB.disabled = navIdx <= 0;
+  if(btnF) btnF.disabled = navIdx >= navHistory.length - 1;
+  if(btnH) btnH.disabled = !!(navHistory[navIdx] && navHistory[navIdx].type === 'home');
+}
+
+function navUpdateCrumb() {
+  const el = document.getElementById('navCrumb');
   if(!el) return;
-  
-  if(!stations.length) {
-    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">Sin resultados.</div>';
+  const view = navHistory[navIdx];
+  if(!view || view.type === 'home') {
+    el.innerHTML = '<span class="nc-item active">🌍 Inicio</span>';
     return;
   }
-
-  el.innerHTML = stations.map(s => {
-    const isFav = favorites.includes(s.stationuuid);
-    const isPinned = pinnedStations.includes(s.stationuuid);
-    return `
-      <div class="scard" id="card-${s.stationuuid}">
-        <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-        <div class="scard-info" onclick="playStation('${s.stationuuid}')">
-          <div class="scard-name">${s.name}</div>
-          <div class="scard-meta">${s.country || ''} ${s.state ? '· '+s.state : ''}</div>
-        </div>
-        <div class="scard-actions">
-          <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-          <button class="btn-sm ${isPinned?'active':''}" onclick="togglePin('${s.stationuuid}', event)" title="Anclar al Top de inicio" style="font-size:12px;padding:4px 6px">${isPinned?'📌':'📍'}</button>
-          <button class="btn-fav ${isFav?'active':''}" onclick="toggleFav('${s.stationuuid}', event)">${isFav?'★':'☆'}</button>
-        </div>
-      </div>
-    `;
-  }).join('');
+  if(view.type === 'country') {
+    const cont = view.data.continent || '';
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span>${cont ? `<span class="nc-item" onclick="navHome()">${cont}</span><span class="nc-sep">›</span>` : ''}<span class="nc-item active">${view.data.name}</span>`;
+  }
+  if(view.type === 'search') {
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span><span class="nc-item active">🔎 "${view.data.q}"</span>`;
+  }
+  if(view.type === 'favs') {
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span><span class="nc-item active">⭐ Favoritos</span>`;
+  }
 }
 
-function playStation(uuid) {
-  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
-  if(!s) {
-    fetch(`https://de1.api.radio-browser.info/json/stations/byuuid?uuids=${uuid}`)
-      .then(res => res.json())
-      .then(data => {
-        if(data && data[0]) {
-          activeStationsMap[uuid] = data[0];
-          playAudioData(data[0]);
+function _showHome() {
+  document.getElementById('view-continents').style.display = 'block';
+  document.getElementById('view-stations').style.display = 'none';
+  document.getElementById('breadcrumb').style.display = 'none';
+  currentCountry = '';
+  navUpdateButtons();
+  navUpdateCrumb();
+}
+
+function backToMap(){
+  _showHome();
+  if(navIdx > 0) { navIdx--; navUpdateButtons(); navUpdateCrumb(); }
+}
+
+let _searchDebounce;
+function filterStations(){
+  const q=document.getElementById('searchInput').value.trim();
+  clearTimeout(_searchDebounce);
+  _searchDebounce = setTimeout(async () => {
+    const ql = q.toLowerCase();
+    if(!q) {
+      filteredStations = [...allStations];
+      sortStations(currentSort, null);
+      return;
+    }
+    const localResults = allStations.filter(s=>
+      s.name.toLowerCase().includes(ql)||
+      (s.tags||'').toLowerCase().includes(ql)||
+      (s.state||'').toLowerCase().includes(ql)
+    );
+    if(localResults.length > 0) {
+      filteredStations = filterUniqueStations(localResults);
+      sortStations(currentSort, null);
+    }
+    try {
+      setStStatus('🔎 Buscando en Radio Browser...', 'loading');
+      const rbResults = await apiFetch(`/stations/search?name=${encodeURIComponent(q)}&hidebroken=true&order=votes&reverse=true&limit=40`);
+      if(Array.isArray(rbResults) && rbResults.length) {
+        document.getElementById('view-continents').style.display='none';
+        document.getElementById('view-stations').style.display='block';
+        document.getElementById('breadcrumb').style.display='none';
+        navPush({ type:'search', data:{ q } });
+        const uuids = new Set(localResults.map(s=>s.stationuuid));
+        const fresh = rbResults.filter(s=>!uuids.has(s.stationuuid));
+        filteredStations = filterUniqueStations([...localResults, ...fresh]);
+        allStations = filteredStations;
+        sortStations(currentSort, null);
+        setStStatus(`${filteredStations.length} resultados para "${q}"`, 'ok');
+      } else if(!localResults.length) {
+        document.getElementById('stationsList').innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No se encontraron resultados</div></div>';
+        setStStatus('Sin resultados', 'error');
+      }
+    } catch(e) {
+      if(localResults.length) setStStatus(`${localResults.length} resultados locales`, 'ok');
+    }
+  }, 350);
+}
+
+const _stationRegistry = {};
+function _registerStation(s){ _stationRegistry[s.stationuuid]=s; return s.stationuuid; }
+function _playById(uuid){ const s=_stationRegistry[uuid]; if(s) playStation(s); }
+function _toggleFavById(uuid, btn){ const s=_stationRegistry[uuid]; if(s) toggleFav(uuid,btn,s); }
+function _shareById(uuid){ const s=_stationRegistry[uuid]; if(s) openShare(s); }
+
+function stationCard(s){
+  _registerStation(s);
+  const isFav=favorites.includes(s.stationuuid);
+  const isPlaying=currentStation&&currentStation.stationuuid===s.stationuuid&&playing;
+  const id=s.stationuuid;
+  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'📻';
+  const tags=(s.tags||'').split(',').slice(0,1).filter(Boolean).map(t=>`<span class="tag">${t.trim()}</span>`).join('');
+  return `<div class="scard${isPlaying?' playing':''}" id="card-${id}">
+    <div class="scard-logo">${logo}</div>
+    <div class="scard-info" onclick="_playById('${id}')">
+      <div class="scard-name">${s.name}</div>
+      <div class="scard-meta">${id.startsWith('co-')?'<span style="color:var(--green);font-size:9px">✓ verificada</span> · ':''}${[s.state,tags].filter(Boolean).join(' · ')}</div>
+    </div>
+    <div class="scard-actions">
+      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
+      <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'★':'☆'}</button>
+      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
+    </div>
+  </div>`;
+}
+
+function renderStations(stations,containerId){
+  const el=document.getElementById(containerId);
+  if(!stations.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">No se encontraron emisoras</div></div>';return;}
+  sortedStations = stations;
+  const batch = stations.slice(0, 120);
+  el.innerHTML = batch.map(stationCard).join('');
+  if(stations.length > 120) {
+    el.innerHTML += `<div style="text-align:center;padding:16px">
+      <button class="btn-retry" onclick="loadMore('${containerId}')">
+        ▼ Ver más (${stations.length - 120} restantes)
+      </button></div>`;
+  }
+}
+
+const DYNAMIC_RESOLVE_MAP = {
+  'co-019': { query: 'El Sol Bucaramanga', country: 'Colombia' },
+  'co-012': { query: 'El Sol Bogota salsa', country: 'Colombia' },
+};
+
+const resolvedUrlCache = {};
+
+async function resolveStreamUrl(station) {
+  if(resolvedUrlCache[station.stationuuid]) {
+    return resolvedUrlCache[station.stationuuid];
+  }
+  const map = DYNAMIC_RESOLVE_MAP[station.stationuuid];
+  if(!map) return station.url_resolved || station.url;
+
+  try {
+    const results = await apiFetch(
+      `/stations/search?name=${encodeURIComponent(map.query)}&country=${encodeURIComponent(map.country)}&hidebroken=true&limit=10&order=votes&reverse=true`
+    );
+    if(Array.isArray(results) && results.length > 0) {
+      const best = results.find(r =>
+        r.name.toLowerCase().includes('bucaramanga') ||
+        r.name.toLowerCase().includes('103.7')
+      ) || results[0];
+      const url = best.url_resolved || best.url;
+      resolvedUrlCache[station.stationuuid] = url;
+      return url;
+    }
+  } catch(e) {}
+  return station.url_resolved || station.url;
+}
+
+const PROXY_STATION_IDS = new Set([
+  'co-019','co-020','co-021','co-023','co-024',
+  'co-025','co-026','co-027','co-028','co-029','co-030','co-012'
+]);
+
+function getProxyUrl(stationId) {
+  return `/stream-proxy?id=${stationId}`;
+}
+
+async function resolveProxyUrl(station) {
+  try {
+    const res = await fetch(`/stream-proxy?id=${station.stationuuid}&info=1`, {
+      signal: timeoutSignal(8000)
+    });
+    if(res.ok) {
+      const data = await res.json();
+      if(data.url) {
+        resolvedUrlCache[station.stationuuid] = data.url;
+        return data.url;
+      }
+    }
+  } catch(e) {}
+  return station.url_resolved || station.url;
+}
+
+function getEffectiveUrl(station) {
+  if(urlOverrides[station.stationuuid]) return urlOverrides[station.stationuuid];
+  if(resolvedUrlCache[station.stationuuid]) return resolvedUrlCache[station.stationuuid];
+  return station.url || station.url_resolved;
+}
+let retryAttempts = {};
+const MAX_RETRIES = 3;
+
+async function getAlternativeUrl(station) {
+  const urls = [station.url_resolved, station.url].filter(Boolean);
+  try {
+    const results = await apiFetch(`/stations/search?name=${encodeURIComponent(station.name)}&limit=5&hidebroken=true`);
+    if(Array.isArray(results)) {
+      for(const r of results) {
+        if(r.stationuuid !== station.stationuuid && r.url_resolved) {
+          urls.push(r.url_resolved);
         }
-      });
-    return;
-  }
-  playAudioData(s);
+        if(r.stationuuid === station.stationuuid && r.url_resolved && !urls.includes(r.url_resolved)) {
+          urls.unshift(r.url_resolved);
+        }
+      }
+    }
+  } catch(e) {}
+  return urls;
 }
 
-function playAudioData(s) {
-  currentStation = s;
-  playing = true;
-  
-  audio.src = s.url_resolved || s.url;
-  audio.load();
-  audio.play().catch(e => console.log('Reproducción bloqueada'));
+function updateStreamBadge(uuid, state) {
+  document.querySelectorAll(`[id^="card-${uuid}"], [id^="favcard-${uuid}"]`).forEach(card => {
+    let badge = card.querySelector('.stream-badge');
+    if(!badge) {
+      const metaEl = card.querySelector('.scard-meta');
+      if(metaEl) { badge = document.createElement('span'); badge.className='stream-badge'; metaEl.appendChild(badge); }
+    }
+    if(!badge) return;
+    if(state === 'error') {
+      badge.className='stream-badge error'; badge.textContent='✗ sin señal';
+      card.classList.add('stream-error'); card.classList.remove('stream-retrying');
+    } else if(state === 'retrying') {
+      badge.className='stream-badge retrying'; badge.textContent='⟳ reintentando...';
+      card.classList.add('stream-retrying'); card.classList.remove('stream-error');
+    } else if(state === 'ok') {
+      badge.className='stream-badge ok'; badge.textContent='✓ en vivo';
+      card.classList.remove('stream-error','stream-retrying');
+      setTimeout(() => { badge.textContent=''; badge.className='stream-badge'; }, 4000);
+    } else {
+      badge.textContent=''; badge.className='stream-badge';
+      card.classList.remove('stream-error','stream-retrying');
+    }
+  });
+}
+
+async function playStation(s){
+  if(typeof s==='string') s=JSON.parse(s);
+  _registerStation(s);
+  currentStation=s; playing=true;
+  retryAttempts[s.stationuuid] = 0;
 
   document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = `🔴 EN VIVO · ${s.state || s.country || 'Radio'}`;
-  const img = document.getElementById('pLogoImg');
-  img.src = s.favicon || ICON;
+  document.getElementById('pStatus').textContent = '⟳ Resolviendo stream...';
+
+  let url = getEffectiveUrl(s);
+
+  if(url && url.startsWith('/stream-proxy')) {
+    document.getElementById('pStatus').textContent = '⟳ Buscando señal...';
+    try {
+      const proxyRes = await fetch(url + '&info=1');
+      const proxyData = await proxyRes.json();
+      if(proxyData && proxyData.url) {
+        url = proxyData.url;
+      } else {
+        url = await resolveProxyUrl(s);
+      }
+    } catch(e) {
+      url = await resolveProxyUrl(s);
+    }
+  }
+
+  if(!url) {
+    document.getElementById('pStatus').textContent = '✗ Sin URL de stream';
+    playing = false;
+    return;
+  }
+  _loadStream(s, url);
 }
 
-function stopRadio() {
+async function _loadStream(s, url) {
+  if(!url || typeof url !== 'string' || url.trim() === '') {
+    _handleStreamError(s);
+    return;
+  }
+  
+  let finalUrl = url.trim();
+  if (finalUrl.includes('streamtheworld.com') || finalUrl.includes('rcnradio.com') || finalUrl.includes('caracol.com.co')) {
+    if (urlOverrides[s.stationuuid]) {
+      finalUrl = urlOverrides[s.stationuuid];
+    }
+  }
+
   audio.pause();
-  playing = false;
-  document.getElementById('pName').textContent = 'Selecciona una emisora';
-  document.getElementById('pStatus').textContent = 'Radio Jere Pro · En vivo';
+  audio.src = finalUrl;
+  audio.volume = document.getElementById('volSlider').value;
+  document.getElementById('pName').textContent = s.name;
+  document.getElementById('pStatus').textContent = '⟳ Conectando...';
+  document.getElementById('nowName').textContent = s.name;
+  document.getElementById('headerWave').classList.remove('idle');
+  
+  const img = document.getElementById('pLogoImg');
+  img.onerror = function() {
+    this.onerror = null;
+    this.src = ICON;
+  };
+  img.src = s.favicon || ICON;
+  updateStreamBadge(s.stationuuid, null);
+  
+  try {
+    await audio.play();
+    document.getElementById('pStatus').textContent = '▶ Reproduciendo';
+    updateStreamBadge(s.stationuuid, 'ok');
+    playCounts[s.stationuuid] = (playCounts[s.stationuuid]||0) + 1;
+    localStorage.setItem('rjp_playcounts', JSON.stringify(playCounts));
+  } catch(e) {
+    _handleStreamError(s);
+  }
+  refreshCards();
 }
 
-function toggleFav(uuid, event) {
-  if(event) event.stopPropagation();
-  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
-  if(!s) return;
+audio.addEventListener('error', () => {
+  if(currentStation && playing) _handleStreamError(currentStation);
+});
 
+audio.addEventListener('stalled', () => {
+  if(currentStation && playing) {
+    setTimeout(() => {
+      if(currentStation && playing && (audio.readyState < 3)) _handleStreamError(currentStation);
+    }, 8000);
+  }
+});
+
+async function _handleStreamError(s) {
+  const attempt = (retryAttempts[s.stationuuid]||0) + 1;
+  retryAttempts[s.stationuuid] = attempt;
+
+  if(attempt > MAX_RETRIES) {
+    playing = false;
+    document.getElementById('pStatus').textContent = '✗ Sin señal — intenta otra';
+    updateStreamBadge(s.stationuuid, 'error');
+    _showManualUrlBtn(s);
+    refreshCards();
+    return;
+  }
+
+  document.getElementById('pStatus').textContent = `⟳ Buscando enlace nuevo (${attempt}/${MAX_RETRIES})...`;
+  updateStreamBadge(s.stationuuid, 'retrying');
+
+  let nextUrl = null;
+
+  if(attempt <= 2) {
+    try {
+      const results = await apiFetch(`/stations/search?name=${encodeURIComponent(s.name)}&limit=8&hidebroken=true`);
+      if(Array.isArray(results) && results.length > 0) {
+        const fresh = results.find(r => (r.url_resolved || r.url) && (r.url_resolved || r.url) !== audio.src);
+        if(fresh) {
+          nextUrl = fresh.url_resolved || fresh.url;
+          saveUrlOverride(s.stationuuid, nextUrl);
+        }
+      }
+    } catch(e) {}
+  }
+
+  if(!nextUrl) {
+    if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
+      nextUrl = await resolveProxyUrl(s);
+    } else {
+      const urls = await getAlternativeUrl(s);
+      nextUrl = urls[attempt - 1];
+    }
+  }
+
+  if(!nextUrl) {
+    playing = false;
+    document.getElementById('pStatus').textContent = '✗ Sin señal disponible';
+    updateStreamBadge(s.stationuuid, 'error');
+    _showManualUrlBtn(s);
+    refreshCards();
+    return;
+  }
+
+  await _loadStream(s, nextUrl);
+}
+
+function _showManualUrlBtn(s) {
+  let bar = document.getElementById('manualUrlBar');
+  if(!bar) {
+    bar = document.createElement('div');
+    bar.id = 'manualUrlBar';
+    bar.style.cssText = 'padding:8px 14px;background:var(--bg3);border-top:1px solid var(--border2);display:flex;gap:8px;align-items:center;font-size:11px;color:var(--text2)';
+    document.getElementById('player').appendChild(bar);
+  }
+  const existing = urlOverrides[s.stationuuid];
+  bar.innerHTML = `<span style="flex:1">⚠️ <b>${s.name}</b> sin señal. ¿Tienes la URL del stream?</span>
+    <input id="manualUrlInput" placeholder="Pega la URL del stream aquí..." 
+      style="flex:2;padding:4px 8px;border-radius:5px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:11px"
+      value="${existing||''}" />
+    <button onclick="_applyManualUrl('${s.stationuuid}')" 
+      style="background:var(--accent);color:white;border:none;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;white-space:nowrap">Guardar y reproducir</button>
+    <button onclick="document.getElementById('manualUrlBar').remove()" 
+      style="background:var(--bg4);color:var(--text2);border:none;border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer">✕</button>`;
+}
+
+function _applyManualUrl(uuid) {
+  const manualEl = document.getElementById('manualUrlInput');
+  const url = manualEl && manualEl.value ? manualEl.value.trim() : undefined;
+  if(!url) return;
+  saveUrlOverride(uuid, url);
+  var manualBarEl = document.getElementById('manualUrlBar');
+  if(manualBarEl) manualBarEl.remove();
+  const s = favStore[uuid] || [...COLOMBIA_CURADA, ...allStations].find(x => x.stationuuid === uuid);
+  if(s) {
+    retryAttempts[uuid] = 0;
+    _loadStream(s, url);
+  }
+}
+
+function stopRadio(){
+  audio.pause(); audio.src=''; playing=false;
+  document.getElementById('pName').textContent='Selecciona una emisora';
+  document.getElementById('pStatus').textContent='Radio Jere Pro';
+  document.getElementById('nowName').textContent='Sin reproducir';
+  document.getElementById('headerWave').classList.add('idle');
+  document.getElementById('pLogoImg').src=ICON;
+  refreshCards();
+}
+
+function toggleFav(uuid, btn, stationObj) {
   const idx = favorites.indexOf(uuid);
   if(idx >= 0) {
     favorites.splice(idx, 1);
+    favOrder = favOrder.filter(id => id !== uuid);
+    if(btn){ btn.textContent='☆'; btn.classList.remove('active'); }
     delete favStore[uuid];
   } else {
     favorites.push(uuid);
-    favStore[uuid] = s;
+    if(!favOrder.includes(uuid)) favOrder.push(uuid);
+    if(btn){ btn.textContent='★'; btn.classList.add('active'); }
+    if(stationObj) favStore[uuid] = stationObj;
+    else {
+      const allSrc = [...COLOMBIA_CURADA, ...allStations];
+      const found = allSrc.find(s => s.stationuuid === uuid);
+      if(found) favStore[uuid] = found;
+    }
   }
-  
   localStorage.setItem('rjp_favs', JSON.stringify(favorites));
   localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
-  
-  if(document.getElementById('page-explorar').classList.contains('active')) {
-    const btn = document.querySelector(`#card-${uuid} .btn-fav`);
-    if(btn) {
-      const isFav = favorites.includes(uuid);
-      btn.textContent = isFav ? '★' : '☆';
-      btn.classList.toggle('active', isFav);
-    }
-  }
-  if(document.getElementById('page-favglobal').classList.contains('active')) {
-    renderFavGlobal();
-  }
+  localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
+  if(document.getElementById('page-favglobal').classList.contains('active')) renderFavGlobal();
+  if(document.getElementById('page-favlocal') && document.getElementById('page-favlocal').classList.contains('active')) renderFavLocal();
 }
 
-function togglePin(uuid, event) {
-  if(event) event.stopPropagation();
-  let s = activeStationsMap[uuid] || favStore[uuid] || pinnedStore[uuid];
-  if(!s) return;
-
-  const idx = pinnedStations.indexOf(uuid);
-  if(idx >= 0) {
-    pinnedStations.splice(idx, 1);
-    delete pinnedStore[uuid];
-  } else {
-    pinnedStations.push(uuid);
-    pinnedStore[uuid] = s;
-  }
-
-  localStorage.setItem('rjp_pinned', JSON.stringify(pinnedStations));
-  localStorage.setItem('rjp_pinnedstore', JSON.stringify(pinnedStore));
-
-  renderDestacadas();
-  if(document.getElementById('page-pinned').classList.contains('active')) {
-    renderPinnedList();
-  }
-  if(document.getElementById('page-explorar').classList.contains('active')) {
-    const btn = document.querySelector(`#card-${uuid} [title*="Anclar"]`);
-    if(btn) {
-      const isPinned = pinnedStations.includes(uuid);
-      btn.textContent = isPinned ? '📌' : '📍';
-      btn.classList.toggle('active', isPinned);
-    }
-  }
+function refreshCards(){
+  document.querySelectorAll('.scard').forEach(card=>{
+    const uuid=card.id.replace('card-','');
+    const isP=currentStation&&currentStation.stationuuid===uuid&&playing;
+    card.classList.toggle('playing',isP);
+    const btn=card.querySelector('.btn-play'); if(btn) btn.textContent=isP?'⏸':'▶';
+  });
 }
 
-function movePinned(index, direction) {
-  const newIndex = index + direction;
-  if(newIndex < 0 || newIndex >= pinnedStations.length) return;
-
-  const temp = pinnedStations[index];
-  pinnedStations[index] = pinnedStations[newIndex];
-  pinnedStations[newIndex] = temp;
-
-  localStorage.setItem('rjp_pinned', JSON.stringify(pinnedStations));
-  renderDestacadas();
-  renderPinnedList();
+function showPage(p,btn){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(p==='favglobal') renderFavGlobal();
+  if(p==='favlocal') renderFavLocal();
 }
 
-function renderPinnedList() {
-  const el = document.getElementById('pinnedList');
-  if(!el) return;
-  const pins = pinnedStations.map(id => pinnedStore[id]).filter(Boolean);
-  const countEl = document.getElementById('pinnedCount');
-  if(countEl) countEl.textContent = pins.length + ' ancladas';
-
-  if(!pins.length) {
-    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No hay emisoras en tu Top. Usa el botón 📍 en Explorar.</div>';
-    return;
-  }
-
-  el.innerHTML = pins.map((s, idx) => `
-    <div class="scard">
-      <div style="display:flex;flex-direction:column;gap:2px;margin-right:4px">
-        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="movePinned(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}>▲</button>
-        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="movePinned(${idx}, 1)" ${idx === pins.length - 1 ? 'disabled style="opacity:0.3"' : ''}>▼</button>
-      </div>
-      <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-      <div class="scard-info" onclick="playStation('${s.stationuuid}')">
-        <div class="scard-name">${s.name}</div>
-        <div class="scard-meta">${s.state || s.country || ''}</div>
-      </div>
-      <div class="scard-actions">
-        <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-        <button class="btn-sm active" onclick="togglePin('${s.stationuuid}', event)" style="font-size:12px;padding:4px 6px">📌</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function moveFav(index, direction) {
-  const newIndex = index + direction;
-  if(newIndex < 0 || newIndex >= favorites.length) return;
-  
-  const temp = favorites[index];
-  favorites[index] = favorites[newIndex];
-  favorites[newIndex] = temp;
-  
-  localStorage.setItem('rjp_favs', JSON.stringify(favorites));
+function setFavSort(mode, btn) {
+  currentFavSort = mode;
+  document.querySelectorAll('.fav-sort-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
   renderFavGlobal();
 }
 
-function renderFavGlobal() {
+function moveFav(uuid, dir) {
+  favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
+  favOrder = favOrder.filter(id => favorites.includes(id));
+  const idx = favOrder.indexOf(uuid);
+  if(idx < 0) return;
+  const newIdx = idx + dir;
+  if(newIdx < 0 || newIdx >= favOrder.length) return;
+  [favOrder[idx], favOrder[newIdx]] = [favOrder[newIdx], favOrder[idx]];
+  localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
+  renderFavGlobal();
+}
+
+function getSortedFavs() {
+  favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
+  favOrder = favOrder.filter(id => favorites.includes(id));
+
+  let favS = favOrder.map(uuid => favStore[uuid]).filter(Boolean);
+
+  if(currentFavSort === 'az') {
+    favS = [...favS].sort((a,b) => a.name.localeCompare(b.name, 'es', {sensitivity:'base'}));
+  } else if(currentFavSort === 'za') {
+    favS = [...favS].sort((a,b) => b.name.localeCompare(a.name, 'es', {sensitivity:'base'}));
+  } else if(currentFavSort === 'mostused') {
+    favS = [...favS].sort((a,b) => (playCounts[b.stationuuid]||0) - (playCounts[a.stationuuid]||0));
+  }
+  return favS;
+}
+
+function favCard(s, idx, total) {
+  _registerStation(s);
+  const id = s.stationuuid;
+  const isPlaying = currentStation && currentStation.stationuuid === id && playing;
+  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : '📻';
+  const playCount = playCounts[id] || 0;
+  const playLabel = playCount > 0 ? `<span style="font-size:9px;color:var(--accent)">▶ ${playCount}×</span>` : '';
+  const showReorder = currentFavSort === 'manual';
+  return `<div class="scard${isPlaying?' playing':''}" id="favcard-${id}">
+    ${showReorder ? `<div class="scard-reorder">
+      <button class="btn-reorder" onclick="moveFav('${id}',-1)" ${idx===0?'disabled':''}>▲</button>
+      <button class="btn-reorder" onclick="moveFav('${id}',1)" ${idx===total-1?'disabled':''}>▼</button>
+    </div>` : ''}
+    <div class="scard-logo">${logo}</div>
+    <div class="scard-info" onclick="_playById('${id}')">
+      <div class="scard-name">${s.name}</div>
+      <div class="scard-meta">${[s.country, s.state].filter(Boolean).join(' · ')} ${playLabel}</div>
+    </div>
+    <div class="scard-actions">
+      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
+      <button class="btn-fav active" onclick="_toggleFavById('${id}',this)">★</button>
+      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
+    </div>
+  </div>`;
+}
+
+function renderFavGlobal(){
   const el = document.getElementById('favGlobalList');
-  if(!el) return;
-  const favs = favorites.map(id => favStore[id]).filter(Boolean);
-  const countEl = document.getElementById('favGlobalCount');
-  if(countEl) countEl.textContent = favs.length + ' emisoras';
-  
-  if(!favs.length) {
-    el.innerHTML = '<div style="color:var(--text3);padding:20px;text-align:center">No tienes favoritos guardados aún. Toca ☆ en cualquier emisora.</div>';
+  const favS = getSortedFavs();
+  document.getElementById('favGlobalCount').textContent = favS.length + ' emisoras';
+  if(!favS.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">Toca ☆ en cualquier emisora para guardarla aquí.<br><br>Tus favoritos se guardan aunque cambies de país o continente.</div></div>';
     return;
   }
-  
-  el.innerHTML = favs.map((s, idx) => `
-    <div class="scard">
-      <div style="display:flex;flex-direction:column;gap:2px;margin-right:4px">
-        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="moveFav(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3"' : ''}>▲</button>
-        <button class="btn-sm" style="padding:2px 6px;font-size:10px" onclick="moveFav(${idx}, 1)" ${idx === favs.length - 1 ? 'disabled style="opacity:0.3"' : ''}>▼</button>
-      </div>
-      <div class="scard-logo"><img src="${s.favicon||ICON}" onerror="this.src='${ICON}'"></div>
-      <div class="scard-info" onclick="playStation('${s.stationuuid}')">
-        <div class="scard-name">${s.name}</div>
-        <div class="scard-meta">${s.state || s.country || ''}</div>
-      </div>
-      <div class="scard-actions">
-        <button class="btn-play" onclick="playStation('${s.stationuuid}')">▶</button>
-        <button class="btn-fav active" onclick="toggleFav('${s.stationuuid}', event)">★</button>
-      </div>
-    </div>
-  `).join('');
+  el.innerHTML = favS.map((s,i) => favCard(s, i, favS.length)).join('');
 }
 
-function showPage(pageId, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(l => l.classList.remove('active'));
-  document.getElementById('page-' + pageId).classList.add('active');
+let nearbyExploreData = [];
+let currentNearbySort = 'popular';
+let nearbyUserLat = null, nearbyUserLng = null;
+
+async function findNearbyExplore() {
+  const btn = document.getElementById('btnNearbyExplore');
+  const sub = document.getElementById('nearbyExploreSub');
+  btn.disabled = true; btn.textContent = '📍 Buscando...';
+  sub.textContent = 'Obteniendo tu ubicación GPS...';
+
+  if(!navigator.geolocation) {
+    sub.textContent = '❌ Geolocalización no disponible';
+    btn.disabled = false; btn.textContent = 'Buscar'; return;
+  }
+
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    nearbyUserLat = pos.coords.latitude;
+    nearbyUserLng = pos.coords.longitude;
+    sub.textContent = 'Buscando emisoras más cercanas...';
+    try {
+      let locationLabel = '';
+      try {
+        const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${nearbyUserLat}&lon=${nearbyUserLng}&format=json&accept-language=es`);
+        const geo = await geoRes.json();
+        const gAddr1 = geo.address || {};
+        const city = gAddr1.city || gAddr1.town || gAddr1.municipality || gAddr1.village || '';
+        const dept = gAddr1.state || '';
+        locationLabel = [city, dept].filter(Boolean).join(', ');
+      } catch(e) {}
+
+      let found = [];
+      const radii = [100, 250, 500];
+      for(const radius of radii) {
+        try {
+          const r = await apiFetch(
+            `/stations/bygeodistance?lat=${nearbyUserLat}&long=${nearbyUserLng}&radius=${radius}&hidebroken=true&limit=200&order=distance`
+          );
+          if(Array.isArray(r) && r.length > 0) {
+            found = r;
+            if(found.length >= 10) break;
+          }
+        } catch(e) {}
+      }
+
+      const seen = new Set();
+      nearbyExploreData = filterUniqueStations(found.filter(s => {
+        if(seen.has(s.stationuuid)) return false;
+        seen.add(s.stationuuid); return true;
+      }));
+
+      const santanderCuradas = COLOMBIA_CURADA.filter(s =>
+        s.state && (
+          s.state.toLowerCase().includes('bucaramanga') ||
+          s.state.toLowerCase().includes('santander') ||
+          s.state.toLowerCase().includes('barrancabermeja')
+        )
+      );
+      const curadaIds = new Set(nearbyExploreData.map(s => s.stationuuid));
+      const toAdd = santanderCuradas.filter(s => !curadaIds.has(s.stationuuid));
+      nearbyExploreData = filterUniqueStations([...toAdd, ...nearbyExploreData]);
+
+      const label = locationLabel ? `📍 ${locationLabel}` : '📍 Tu ubicación';
+      sub.textContent = `${label} · ${nearbyExploreData.length} emisoras cercanas`;
+      btn.textContent = '↺ Actualizar'; btn.disabled = false;
+
+      document.getElementById('nearbyExploreList').style.display = 'block';
+      sortNearby('distance', document.querySelector('#nearbyExploreList .sort-btn[data-mode="distance"]'));
+    } catch(e) {
+      sub.textContent = '❌ Error al buscar emisoras cercanas';
+      btn.textContent = 'Reintentar'; btn.disabled = false;
+    }
+  }, (err) => {
+    sub.textContent = err.code === 1
+      ? '❌ Permiso denegado — habilita ubicación en tu navegador'
+      : '❌ No se pudo obtener la ubicación';
+    btn.textContent = 'Reintentar'; btn.disabled = false;
+  }, { timeout: 12000, enableHighAccuracy: false });
+}
+
+function sortNearby(mode, btn) {
+  currentNearbySort = mode;
+  document.querySelectorAll('#nearbyExploreList .sort-btn').forEach(b => b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  if(pageId === 'favglobal') renderFavGlobal();
-  if(pageId === 'pinned') renderPinnedList();
+  let sorted = [...nearbyExploreData];
+  if(mode === 'az') {
+    sorted.sort((a,b) => a.name.localeCompare(b.name,'es',{sensitivity:'base'}));
+  } else if(mode === 'verified') {
+    sorted.sort((a,b) => {
+      const aV = (a.stationuuid && a.stationuuid.indexOf('co-') === 0) ? 1 : 0;
+      const bV = (b.stationuuid && b.stationuuid.indexOf('co-') === 0) ? 1 : 0;
+      if(aV !== bV) return bV - aV;
+      return (b.votes||0) - (a.votes||0);
+    });
+  } else if(mode === 'popular') {
+    sorted.sort((a,b) => (b.votes||0) - (a.votes||0));
+  }
+  renderStations(sorted.slice(0, 100), 'nearbyStationsList');
 }
 
-initApp();
+let nearbyStations = [];
+
+async function findNearbyStations() {
+  const btn = document.getElementById('btnNearby');
+  const bar = document.getElementById('nearbyBar');
+  btn.disabled = true;
+  btn.textContent = '📍 Buscando...';
+  bar.querySelector('span').textContent = '📍 Obteniendo tu ubicación...';
+
+  if(!navigator.geolocation) {
+    bar.querySelector('span').textContent = '❌ Geolocalización no disponible en tu navegador';
+    btn.disabled = false; btn.textContent = 'Buscar';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const { latitude: lat, longitude: lng } = pos.coords;
+    bar.querySelector('span').textContent = '🌐 Buscando emisoras cercanas...';
+    try {
+      const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+      const geo = await geoRes.json();
+      const gAddr2 = geo.address || {};
+      const countryName = gAddr2.country || '';
+      const city = gAddr2.city || gAddr2.town || gAddr2.municipality || '';
+
+      if(!countryName) throw new Error('No country');
+
+      bar.querySelector('span').textContent = `📍 ${city ? city + ', ' : ''}${countryName}`;
+      btn.textContent = '✓ Actualizar';
+      btn.disabled = false;
+
+      const serverRes = await apiFetch(`/stations/search?limit=300&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(countryName)}`);
+      nearbyStations = filterUniqueStations(Array.isArray(serverRes) ? serverRes : []);
+
+      let nearbyEl = document.getElementById('nearbyResults');
+      if(!nearbyEl) {
+        nearbyEl = document.createElement('div');
+        nearbyEl.id = 'nearbyResults';
+        document.getElementById('favGlobalList').parentElement.appendChild(nearbyEl);
+      }
+      nearbyEl.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin:12px 0 8px">
+          <p class="sec-title" style="margin:0">📍 Emisoras de ${countryName}${city?' ('+city+')':''}</p>
+          <span style="font-size:10px;color:var(--text3)">${nearbyStations.length} encontradas</span>
+        </div>
+        <div class="stations-list" id="nearbyList"></div>`;
+      renderStations(nearbyStations.slice(0, 60), 'nearbyList');
+    } catch(e) {
+      bar.querySelector('span').textContent = '❌ No se pudo detectar la ubicación';
+      btn.textContent = 'Reintentar';
+      btn.disabled = false;
+    }
+  }, (err) => {
+    bar.querySelector('span').textContent = err.code === 1
+      ? '❌ Permiso denegado. Habilita la ubicación en tu navegador.'
+      : '❌ No se pudo obtener la ubicación';
+    btn.textContent = 'Reintentar';
+    btn.disabled = false;
+  }, { timeout: 10000 });
+}
+
+function renderFavLocal(){
+  const el = document.getElementById('favLocalList');
+  const regionLabel = currentCountry || currentContinent || 'esta región';
+  document.getElementById('favLocalRegion').textContent = regionLabel;
+  if(!currentCountry && !currentContinent){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">Primero selecciona un continente y país para ver sus favoritos locales.</div></div>';
+    return;
+  }
+  const localSrc = currentCountry === 'Colombia'
+    ? [...COLOMBIA_CURADA, ...allStations]
+    : [...allStations];
+  const seen = new Set();
+  const unique = filterUniqueStations(localSrc.filter(s=>{ if(seen.has(s.stationuuid)) return false; seen.add(s.stationuuid); return true; }));
+  const favS = unique.filter(s => favorites.includes(s.stationuuid));
+  document.getElementById('favLocalCount').textContent = favS.length + ' emisoras';
+  if(!favS.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No tienes favoritos de ' + regionLabel + ' aún.<br>Explora y toca ☆ para guardar.</div></div>';
+    return;
+  }
+  el.innerHTML = favS.map(stationCard).join('');
+}
+
+function loadMore(containerId) {
+  const el = document.getElementById(containerId);
+  const btn = el.querySelector('.btn-retry');
+  if(btn) btn.parentElement.remove();
+  const source = sortedStations.length > 0 ? sortedStations : filteredStations;
+  const already = el.querySelectorAll('.scard').length;
+  const nextBatch = source.slice(already, already + 120);
+  el.innerHTML += nextBatch.map(stationCard).join('');
+  if(source.length > already + 120) {
+    el.innerHTML += `<div style="text-align:center;padding:16px">
+      <button class="btn-retry" onclick="loadMore('${containerId}')">
+        ▼ Ver más (${source.length - already - 120} restantes)
+      </button></div>`;
+  }
+}
+
+let currentSort = 'popular';
+let sortedStations = [];
+
+function sortStations(mode, btn) {
+  currentSort = mode;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  sortedStations = [...filteredStations];
+
+  if(mode === 'az') {
+    sortedStations.sort((a,b) => a.name.localeCompare(b.name, 'es', {sensitivity:'base'}));
+  } else if(mode === 'za') {
+    sortedStations.sort((a,b) => b.name.localeCompare(a.name, 'es', {sensitivity:'base'}));
+  } else if(mode === 'popular') {
+    sortedStations.sort((a,b) => {
+      const aV = a.stationuuid && a.stationuuid.startsWith('co-') ? 1 : 0;
+      const bV = b.stationuuid && b.stationuuid.startsWith('co-') ? 1 : 0;
+      if(aV !== bV) return bV - aV;
+      return (b.votes||0) - (a.votes||0);
+    });
+  } else if(mode === 'verified') {
+    sortedStations.sort((a,b) => {
+      const aV = a.stationuuid && a.stationuuid.startsWith('co-') ? 1 : 0;
+      const bV = b.stationuuid && b.stationuuid.startsWith('co-') ? 1 : 0;
+      if(aV !== bV) return bV - aV;
+      return a.name.localeCompare(b.name, 'es');
+    });
+  }
+
+  renderStations(sortedStations, 'stationsList');
+}
+
+let shareStation = null;
+
+function openShare(s) {
+  if(typeof s === 'string') s = JSON.parse(s);
+  shareStation = s;
+  document.getElementById('shareStationName').textContent = s.name;
+  document.getElementById('shareStationSub').textContent = 
+    [s.country, s.state].filter(Boolean).join(' · ') || 'Radio Jere Pro';
+  const appUrl = `https://radiojerepro.netlify.app?station=${encodeURIComponent(s.name)}`;
+  document.getElementById('shareLinkInput').value = appUrl;
+  document.getElementById('sharePanel').classList.add('open');
+  document.getElementById('btnCopyLink').textContent = 'Copiar';
+  document.getElementById('btnCopyLink').classList.remove('copied');
+}
+
+function closeShare() {
+  document.getElementById('sharePanel').classList.remove('open');
+}
+
+function getShareText() {
+  return `🎶 Estoy escuchando "${shareStation && shareStation.name}" en Radio Jere Pro\n🔗 https://radiojerepro.netlify.app`;
+}
+
+function shareWhatsApp() {
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+function shareTelegram() {
+  const text = encodeURIComponent(getShareText());
+  const url = encodeURIComponent('https://radiojerepro.netlify.app');
+  window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+}
+
+function shareTwitter() {
+  const text = encodeURIComponent(getShareText());
+  window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+}
+
+function shareFacebook() {
+  const url = encodeURIComponent('https://radiojerepro.netlify.app');
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+}
+
+function shareEmail() {
+  const subject = encodeURIComponent(`Escucha ${shareStation && shareStation.name} en Radio Jere Pro`);
+  const body = encodeURIComponent(getShareText());
+  window.open(`mailto:?subject=${subject}&body=${body}`);
+}
+
+function shareNative() {
+  if(navigator.share) {
+    navigator.share({
+      title: (shareStation && shareStation.name) || 'Radio Jere Pro',
+      text: getShareText(),
+      url: 'https://radiojerepro.netlify.app'
+    }).catch(()=>{});
+  } else {
+    copyShareLink();
+  }
+}
+
+function copyStreamUrl() {
+  const url = (shareStation && (shareStation.url_resolved || shareStation.url)) || '';
+  navigator.clipboard.writeText(url).then(()=>{
+    document.getElementById('shareLinkInput').value = url;
+    showCopied();
+  }).catch(()=>{
+    document.getElementById('shareLinkInput').value = url;
+  });
+}
+
+function copyAppLink() {
+  const url = `https://radiojerepro.netlify.app?station=${encodeURIComponent((shareStation && shareStation.name)||'')}`;
+  document.getElementById('shareLinkInput').value = url;
+  navigator.clipboard.writeText(url).catch(()=>{});
+  showCopied();
+}
+
+function copyShareLink() {
+  const val = document.getElementById('shareLinkInput').value;
+  navigator.clipboard.writeText(val).then(showCopied).catch(()=>{
+    const inp = document.getElementById('shareLinkInput');
+    inp.select(); document.execCommand('copy'); showCopied();
+  });
+}
+
+function showCopied() {
+  const btn = document.getElementById('btnCopyLink');
+  btn.textContent = '✓ Copiado';
+  btn.classList.add('copied');
+  setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2000);
+}
+
+let currentLang = 'all';
+
+const LANGS = {
+  all: {
+    explore: '🔍 Explorar', favs: '⭐ Favoritos',
+    search: 'Buscar emisora...', orderLabel: 'Ordenar:',
+    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
+    selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
+    loading: 'Cargando...', noResults: 'No se encontraron emisoras',
+    addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
+    continentLabel: 'Por continente', myCountries: '⭐ Mis países',
+    editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
+    continents: {América:'América',Europa:'Europa',Asia:'Asia',África:'África',Oceanía:'Oceanía'}
+  },
+  es: {
+    explore: '🔍 Explorar', favs: '⭐ Favoritos',
+    search: 'Buscar emisora...', orderLabel: 'Ordenar:',
+    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
+    selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
+    loading: 'Cargando...', noResults: 'No se encontraron emisoras',
+    addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
+    continentLabel: 'Por continente', myCountries: '⭐ Mis países',
+    editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
+    continents: {América:'América',Europa:'Europa',Asia:'Asia',África:'África',Oceanía:'Oceanía'}
+  },
+  en: {
+    explore: '🔍 Explore', favs: '⭐ Favorites',
+    search: 'Search station...', orderLabel: 'Sort:',
+    popular: '🔥 Popular', az: 'A → Z', za: 'Z → A', verified: '✓ Verified',
+    selectStation: 'Select a station', appName: 'Radio Jere Pro',
+    loading: 'Loading...', noResults: 'No stations found',
+    addFavs: 'Tap ☆ on any station to save it here.',
+    continentLabel: 'By continent', myCountries: '⭐ My countries',
+    editBtn: '+ Edit', stations: 'stations', live: 'live',
+    continents: {América:'Americas',Europa:'Europe',Asia:'Asia',África:'Africa',Oceanía:'Oceania'}
+  },
+  fr: {
+    explore: '🔍 Explorer', favs: '⭐ Favoris',
+    search: 'Chercher une station...', orderLabel: 'Trier:',
+    popular: '🔥 Populaires', az: 'A → Z', za: 'Z → A', verified: '✓ Vérifiées',
+    selectStation: 'Sélectionner une station', appName: 'Radio Jere Pro',
+    loading: 'Chargement...', noResults: 'Aucune station trouvée',
+    addFavs: 'Appuyez sur ☆ pour sauvegarder une station.',
+    continentLabel: 'Par continent', myCountries: '⭐ Mes pays',
+    editBtn: '+ Modifier', stations: 'stations', live: 'en direct',
+    continents: {América:'Amériques',Europa:'Europe',Asia:'Asie',África:'Afrique',Oceanía:'Océanie'}
+  },
+  pt: {
+    explore: '🔍 Explorar', favs: '⭐ Favoritos',
+    search: 'Buscar estação...', orderLabel: 'Ordenar:',
+    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
+    selectStation: 'Selecione uma estação', appName: 'Radio Jere Pro',
+    loading: 'Carregando...', noResults: 'Nenhuma estação encontrada',
+    addFavs: 'Toque em ☆ para salvar uma estação aqui.',
+    continentLabel: 'Por continente', myCountries: '⭐ Meus países',
+    editBtn: '+ Editar', stations: 'estações', live: 'ao vivo',
+    continents: {América:'Américas',Europa:'Europa',Asia:'Ásia',África:'África',Oceanía:'Oceania'}
+  }
+};
+
+function setLang(lang, btn) {
+  currentLang = lang;
+  localStorage.setItem('rjp_lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  applyLang();
+}
+
+function applyLang() {
+  const t = LANGS[currentLang] || LANGS.all;
+
+  const tabs = document.querySelectorAll('.tab');
+  if(tabs[0]) tabs[0].textContent = t.explore;
+  if(tabs[1]) tabs[1].textContent = t.favs;
+
+  const si = document.getElementById('searchInput');
+  if(si) si.placeholder = t.search;
+
+  const sortLabel = document.querySelector('.sort-label');
+  if(sortLabel) sortLabel.textContent = t.orderLabel;
+  const sortBtns = document.querySelectorAll('.sort-btn');
+  if(sortBtns[0]) sortBtns[0].textContent = t.popular;
+  if(sortBtns[1]) sortBtns[1].textContent = t.az;
+  if(sortBtns[2]) sortBtns[2].textContent = t.za;
+  if(sortBtns[3]) sortBtns[3].textContent = t.verified;
+
+  const pName = document.getElementById('pName');
+  if(pName && pName.textContent === LANGS[currentLang === 'all' ? 'es' : 'es'].selectStation
+     || (pName && !currentStation)) {
+    pName.textContent = t.selectStation;
+  }
+
+  const nowName = document.getElementById('nowName');
+  if(nowName && !playing) nowName.textContent = t.appName;
+
+  document.querySelectorAll('.cont-btn').forEach(b => {
+    const orig = Object.keys(t.continents).find(k => 
+      Object.values(LANGS).some(l => l.continents[k] === b.textContent)
+    ) || b.dataset.orig;
+    if(orig) {
+      b.dataset.orig = orig;
+      b.textContent = t.continents[orig] || orig;
+    }
+  });
+
+  const myC = document.querySelector('#favpais-section .sec-title');
+  if(myC) myC.textContent = t.myCountries;
+  const editB = document.querySelector('#favpais-section .btn-sm');
+  if(editB) editB.textContent = t.editBtn;
+  const contL = document.querySelector('#view-continents .sec-title:last-of-type');
+  if(contL) contL.textContent = t.continentLabel;
+}
+
+function getLang() { return LANGS[currentLang] || LANGS.all; }
+
+function setStatus(msg,type){
+  document.getElementById('statusText').textContent=msg;
+  document.getElementById('statusDot').className='sdot'+(type==='loading'?' loading':type==='error'?' error':'');
+}
+function setStStatus(msg,type){
+  document.getElementById('stStatusText').textContent=msg;
+  document.getElementById('stStatusDot').className='sdot'+(type==='loading'?' loading':type==='error'?' error':'');
+}
+
+applyTheme(currentTheme);
+const savedLang = localStorage.getItem('rjp_lang') || 'all';
+currentLang = savedLang;
+const langBtns = document.querySelectorAll('.lang-btn');
+langBtns.forEach(b => {
+  b.classList.remove('active');
+  if(b.onclick && b.onclick.toString().includes("'"+savedLang+"'")) b.classList.add('active');
+});
+
+if(favorites.length > 0 && Object.keys(favStore).length === 0) {
+  favorites.forEach(uuid => {
+    const found = COLOMBIA_CURADA.find(s => s.stationuuid === uuid);
+    if(found) favStore[uuid] = found;
+  });
+  localStorage.setItem('rjp_favstore', JSON.stringify(favStore));
+}
+favorites.forEach(id => { if(!favOrder.includes(id)) favOrder.push(id); });
+favOrder = favOrder.filter(id => favorites.includes(id));
+localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
+
+init();
+
+const shazamState = {
+  mediaRecorder: null,
+  audioChunks: [],
+  timerInterval: null,
+  stream: null,
+  history: JSON.parse(localStorage.getItem('rjp_shazam_history') || '[]'),
+  lastResult: null,
+};
+
+function shazamOpen() {
+  document.getElementById('shazamPanel').classList.add('open');
+  shazamShowHistory();
+  shazamSetState('idle');
+}
+
+function shazamClose() {
+  shazamStop();
+  document.getElementById('shazamPanel').classList.remove('open');
+}
+
+async function shazamStart() {
+  shazamOpen();
+  shazamSetState('listening');
+  const btn = document.getElementById('btnShazam');
+  btn.classList.add('listening');
+
+  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    shazamSetState('error', '🌐',
+      'Tu navegador no soporta grabación de audio.<br>' +
+      '<small>Usa Chrome, Edge o Firefox actualizado.</small>');
+    btn.classList.remove('listening');
+    return;
+  }
+
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: true,
+        noiseSuppression: true,
+        sampleRate: 44100,
+      },
+      video: false
+    });
+  } catch(e) {
+    btn.classList.remove('listening');
+    const name = e.name || '';
+    const msg = e.message || '';
+
+    if(name === 'NotAllowedError' || name === 'PermissionDeniedError') {
+      shazamSetState('error', '🔒',
+        'Permiso denegado por el sistema.<br><br>' +
+        '<b>Paso 1 — Windows:</b> Inicio → Configuración → Privacidad → Micrófono → activa <b>"Permitir que las apps accedan al micrófono"</b> y activa <b>Microsoft Edge</b>.<br><br>' +
+        '<b>Paso 2 — Navegador:</b> Haz clic en el 🔒 junto a la URL → Micrófono → <b>Permitir</b> → recarga.<br><br>' +
+        'También puedes <b>buscar la canción por nombre</b> aquí abajo ↓',
+        true);
+    } else if(name === 'NotFoundError' || name === 'DevicesNotFoundError') {
+      shazamSetState('error', '🎤',
+        'No se detectó micrófono en tu dispositivo.<br>' +
+        '<small>Conecta un micrófono e intenta de nuevo.</small>');
+    } else if(name === 'NotReadableError' || name === 'TrackStartError') {
+      shazamSetState('error', '⚠️',
+        'El micrófono está siendo usado por otra aplicación.<br>' +
+        '<small>Cierra otras apps que usen el micrófono (Teams, Zoom, etc.) y recarga.</small>');
+    } else if(name === 'OverconstrainedError') {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      } catch(e2) {
+        shazamSetState('error', '🎤', 'No se pudo acceder al micrófono: ' + (e2.message || e2.name));
+        return;
+      }
+    } else if(name === 'AbortError') {
+      shazamSetState('error', '⏱',
+        'La solicitud fue cancelada.<br>Intenta de nuevo.');
+    } else {
+      shazamSetState('error', '🎤',
+        'Error al acceder al micrófono.<br>' +
+        '<small style="color:var(--text3)">' + (name || 'Error') + ': ' + (msg || 'desconocido') + '</small><br><br>' +
+        'Recarga la página y verifica los permisos del sitio.');
+    }
+
+    if(!stream) return;
+  }
+
+  shazamState.stream = stream;
+  shazamState.audioChunks = [];
+
+  let mimeType = '';
+  const formats = ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4'];
+  for(const f of formats) {
+    if(MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
+  }
+  const options = mimeType ? { mimeType } : {};
+
+  try {
+    shazamState.mediaRecorder = new MediaRecorder(stream, options);
+  } catch(e) {
+    shazamState.mediaRecorder = new MediaRecorder(stream);
+  }
+
+  shazamState.mediaRecorder.ondataavailable = e => {
+    if(e.data && e.data.size > 0) shazamState.audioChunks.push(e.data);
+  };
+  shazamState.mediaRecorder.onerror = e => {
+    shazamSetState('error', '⚠️', 'Error durante la grabación. Intenta de nuevo.');
+    shazamStop();
+  };
+  shazamState.mediaRecorder.start(200);
+
+  let secs = 8;
+  const timerEl = document.getElementById('shazamTimer');
+  if(timerEl) { timerEl.textContent = secs; timerEl.style.fontSize = ''; }
+  shazamState.timerInterval = setInterval(() => {
+    secs--;
+    const el = document.getElementById('shazamTimer');
+    if(el) el.textContent = secs > 0 ? secs : '⟳';
+    if(secs <= 0) {
+      clearInterval(shazamState.timerInterval);
+      shazamIdentify();
+    }
+  }, 1000);
+}
+
+function shazamStop() {
+  clearInterval(shazamState.timerInterval);
+  if(shazamState.mediaRecorder && shazamState.mediaRecorder.state !== 'inactive') {
+    shazamState.mediaRecorder.stop();
+  }
+  if(shazamState.stream) {
+    shazamState.stream.getTracks().forEach(t => t.stop());
+    shazamState.stream = null;
+  }
+  document.getElementById('btnShazam').classList.remove('listening');
+}
+
+async function shazamIdentify() {
+  shazamStop();
+  shazamSetState('loading');
+
+  if(!shazamState.audioChunks.length) {
+    shazamSetState('error', '😕', 'No se capturó audio. Verifica que el micrófono funcione.');
+    return;
+  }
+
+  const audioBlob = new Blob(shazamState.audioChunks, { type: 'audio/webm' });
+
+  try {
+    const formData = new FormData();
+    formData.append('file', audioBlob, 'audio.webm');
+    formData.append('return', 'apple_music,spotify');
+    formData.append('api_token', 'test');
+
+    const res = await fetch('https://api.audd.io/', {
+      method: 'POST',
+      body: formData,
+      signal: timeoutSignal(15000),
+    });
+
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    if(data.status === 'success' && data.result) {
+      const r = data.result;
+      shazamState.lastResult = r;
+      shazamShowResult(r);
+      const entry = {
+        title:    r.title,
+        artist:   r.artist,
+        album:    r.album || '',
+        artwork:  (r.apple_music && r.apple_music.artwork && r.apple_music.artwork.url ? r.apple_music.artwork.url.replace('{w}x{h}', '80x80') : '') || '',
+        spotify:  (r.spotify && r.spotify.external_urls && r.spotify.external_urls.spotify) || '',
+        youtube:  encodeURIComponent(r.title + ' ' + r.artist),
+        ts:       Date.now(),
+      };
+      shazamState.history.unshift(entry);
+      if(shazamState.history.length > 10) shazamState.history.pop();
+      localStorage.setItem('rjp_shazam_history', JSON.stringify(shazamState.history));
+      shazamShowHistory();
+    } else {
+      shazamSetState('error', '🎵', 'No se reconoció la canción.<br>Asegúrate de que haya música sonando claramente.');
+    }
+  } catch(e) {
+    if(e.name === 'AbortError' || e.name === 'TimeoutError') {
+      shazamSetState('error', '⏱', 'El servidor tardó demasiado. Intenta de nuevo.');
+    } else {
+      shazamSetState('error', '📡', 'Sin conexión con el servidor de identificación.<br>Verifica tu internet.');
+    }
+  }
+}
+
+function shazamShowResult(r) {
+  document.getElementById('shazamListening').style.display = 'none';
+  document.getElementById('shazamError').style.display    = 'none';
+  const res = document.getElementById('shazamResult');
+  res.classList.add('show');
+
+  const artwork = (r.apple_music && r.apple_music.artwork && r.apple_music.artwork.url ? r.apple_music.artwork.url.replace('{w}x{h}', '300x300') : '') || '';
+  document.getElementById('shazamArt').src    = artwork || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"%3E%3Crect width="80" height="80" rx="12" fill="%231a1a2e"/%3E%3Ctext x="50%25" y="55%25" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="%23e94560"%3E🎵%3C/text%3E%3C/svg%3E';
+  document.getElementById('shazamArt').onerror = function(){ this.src=''; };
+  document.getElementById('shazamSong').textContent   = r.title  || 'Desconocido';
+  document.getElementById('shazamArtist').textContent = r.artist || 'Artista desconocido';
+  document.getElementById('shazamAlbum').textContent  = r.album  ? '💿 ' + r.album : '';
+
+  const spotify = r.spotify && r.spotify.external_urls ? r.spotify.external_urls.spotify : undefined;
+  document.getElementById('btnShazamSpotify').style.display = spotify ? 'inline-block' : 'none';
+  document.getElementById('btnShazamSpotify').dataset.url = spotify || '';
+}
+
+function shazamSetState(state, icon, msg) {
+  document.getElementById('shazamListening').style.display = 'none';
+  document.getElementById('shazamResult').classList.remove('show');
+  document.getElementById('shazamError').style.display    = 'none';
+
+  if(state === 'listening') {
+    const el = document.getElementById('shazamListening');
+    el.style.display = 'flex';
+    const t = document.getElementById('shazamTimer');
+    if(t) { t.style.fontSize = ''; }
+  } else if(state === 'loading') {
+    document.getElementById('shazamListening').style.display = 'flex';
+    const t = document.getElementById('shazamTimer');
+    if(t) { t.textContent = '⟳'; t.style.fontSize = '28px'; }
+  } else if(state === 'error') {
+    const el = document.getElementById('shazamError');
+    el.style.display = 'block';
+    document.getElementById('shazamErrIcon').textContent = icon || '😕';
+    document.getElementById('shazamErrMsg').innerHTML = msg || 'No se pudo identificar la canción';
+    const showManual = (arguments[3] === true) || icon === '🔒' || icon === '🎤' || icon === '⚠️';
+    const manualEl = document.getElementById('shazamManual');
+    if(manualEl) manualEl.style.display = showManual ? 'block' : 'none';
+  } else if(state === 'idle') {
+    document.getElementById('shazamListening').style.display = 'flex';
+    const t = document.getElementById('shazamTimer');
+    if(t) { t.textContent = '🎵'; t.style.fontSize = '32px'; }
+  }
+}
+
+function shazamOpenYT() {
+  const r = shazamState.lastResult;
+  if(!r) return;
+  window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(r.title + ' ' + r.artist), '_blank');
+}
+
+function shazamOpenSpotify() {
+  const url = document.getElementById('btnShazamSpotify').dataset.url;
+  if(url) window.open(url, '_blank');
+}
+
+function shazamShowHistory() {
+  const el = document.getElementById('shazamHistory');
+  if(!el || !shazamState.history.length) { if(el) el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="shazam-history-title">🕐 Identificadas recientemente</div>' +
+    shazamState.history.slice(0, 5).map(h => {
+      const ago = _timeAgo(h.ts);
+      return `<div class="shazam-hist-item" onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(h.title+' '+h.artist)}','_blank')">
+        <img class="shazam-hist-img" src="${h.artwork||''}" onerror="this.style.display='none'" alt="">
+        <div class="shazam-hist-info">
+          <div class="shazam-hist-name">${h.title}</div>
+          <div class="shazam-hist-artist">${h.artist}</div>
+        </div>
+        <div class="shazam-hist-time">${ago}</div>
+      </div>`;
+    }).join('');
+}
+
+function _timeAgo(ts) {
+  const diff = Math.floor((Date.now() - ts) / 1000);
+  if(diff < 60)   return 'ahora';
+  if(diff < 3600) return Math.floor(diff/60) + ' min';
+  if(diff < 86400) return Math.floor(diff/3600) + 'h';
+  return Math.floor(diff/86400) + 'd';
+}
+
+document.addEventListener('keydown', function(e) {
+  if(e.altKey && e.key === 'ArrowLeft')  { e.preventDefault(); if(typeof navBack    === 'function') navBack(); }
+  if(e.altKey && e.key === 'ArrowRight') { e.preventDefault(); if(typeof navForward === 'function') navForward(); }
+  if(e.key === 'Escape') {
+    ['shazamPanel','themePanel','favpaisPanel','sharePanel'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if(el) { el.classList.remove('open'); if(el.style.display==='flex') el.style.display='none'; }
+    });
+    if(typeof shazamStop === 'function') shazamStop();
+  }
+});
+
+async function shazamManualSearch() {
+  const input = document.getElementById('shazamManualInput');
+  const q = ((input && input.value) || '').trim();
+  if(!q) return;
+
+  const resultsEl = document.getElementById('shazamManualResults');
+  if(!resultsEl) return;
+  resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text2);padding:8px 0">⟳ Buscando...</div>';
+
+  try {
+    const res = await fetch(
+      'https://itunes.apple.com/search?term=' + encodeURIComponent(q) +
+      '&media=music&limit=6&entity=song',
+      { signal: timeoutSignal(8000) }
+    );
+    const data = await res.json();
+    const results = data.results || [];
+
+    if(!results.length) {
+      resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">Sin resultados. Prueba con otro nombre.</div>';
+      return;
+    }
+
+    resultsEl.innerHTML = results.map(r => {
+      const art = (r.artworkUrl100 || '').replace('100x100', '60x60');
+      const ytQ = encodeURIComponent(r.trackName + ' ' + r.artistName);
+      const spotifyQ = encodeURIComponent(r.trackName + ' ' + r.artistName);
+      return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer"
+        onclick="shazamManualPick('${r.trackName.replace(/'/g,"\'")}','${r.artistName.replace(/'/g,"\'")}','${art}','${(r.collectionName ? r.collectionName.replace(/'/g,"\'") : '')||''}')">
+        <img src="${art}" width="44" height="44" style="border-radius:8px;flex-shrink:0;background:var(--bg3)" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.trackName}</div>
+          <div style="font-size:11px;color:var(--text2)">${r.artistName}</div>
+          <div style="font-size:10px;color:var(--text3)">${r.collectionName||''}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
+          <a href="https://www.youtube.com/results?search_query=${ytQ}" target="_blank"
+            onclick="event.stopPropagation()"
+            style="font-size:10px;padding:3px 8px;background:var(--accent);color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">▶ YT</a>
+          <a href="https://open.spotify.com/search/${spotifyQ}" target="_blank"
+            onclick="event.stopPropagation()"
+            style="font-size:10px;padding:3px 8px;background:#1DB954;color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">🎧 SP</a>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text3)">Error de conexión.</div>';
+  }
+}
+
+function shazamManualPick(title, artist, art, album) {
+  shazamState.lastResult = { title, artist, album, apple_music: { artwork: { url: art.replace('60x60','300x300') } } };
+  document.getElementById('shazamManualResults').innerHTML = '';
+  document.getElementById('shazamManualInput').value = '';
+  document.getElementById('shazamManual').style.display = 'none';
+  shazamShowResult(shazamState.lastResult);
+  const entry = { title, artist, album, artwork: art, youtube: encodeURIComponent(title+' '+artist), ts: Date.now() };
+  shazamState.history.unshift(entry);
+  if(shazamState.history.length > 10) shazamState.history.pop();
+  localStorage.setItem('rjp_shazam_history', JSON.stringify(shazamState.history));
+  shazamShowHistory();
+}

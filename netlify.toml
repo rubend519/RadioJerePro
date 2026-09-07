@@ -1,6 +1,7 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  command = "npm install && npm run build"
 
 [functions]
   node_bundler = "esbuild"
@@ -25,11 +26,12 @@
     Referrer-Policy         = "strict-origin-when-cross-origin"
     Permissions-Policy      = "geolocation=(self), microphone=()"
 
-# JS modules — cache agresivo con content hash
+# app.min.js se regenera en cada deploy — nunca cachear agresivo,
+# para que los TVs (que cachean fuerte) siempre tomen la versión nueva.
 [[headers]]
-  for = "/js/*.js"
+  for = "/js/app.min.js"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
     Content-Type  = "application/javascript; charset=utf-8"
 
 # CSS
