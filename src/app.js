@@ -165,10 +165,12 @@ function applyTheme(n){
   document.querySelectorAll('.theme-opt').forEach(o=>o.classList.toggle('active',o.dataset.theme===n));
 }
 function buildThemeGrid(){
-  document.getElementById('themeGrid').innerHTML=Object.entries(THEMES).map(([n,t])=>
-    `<div class="theme-opt${n===currentTheme?' active':''}" data-theme="${n}" onclick="applyTheme('${n}')">
+  document.getElementById('themeGrid').innerHTML=Object.entries(THEMES).map(function(pair){
+    var n=pair[0], t=pair[1];
+    return `<div class="theme-opt${n===currentTheme?' active':''}" data-theme="${n}" onclick="applyTheme('${n}')">
       <div class="theme-swatch" style="background:${t.bg};border:2px solid ${t.accent}">${t.emoji}</div>
-      <div class="theme-label">${n}</div></div>`).join('');
+      <div class="theme-label">${n}</div></div>`;
+  }).join('');
 }
 function openTheme(){buildThemeGrid();document.getElementById('themePanel').classList.add('open')}
 function closeTheme(){document.getElementById('themePanel').classList.remove('open')}
@@ -850,7 +852,9 @@ function moveFav(uuid, dir) {
   if(idx < 0) return;
   const newIdx = idx + dir;
   if(newIdx < 0 || newIdx >= favOrder.length) return;
-  [favOrder[idx], favOrder[newIdx]] = [favOrder[newIdx], favOrder[idx]];
+  var tmpFav = favOrder[idx];
+  favOrder[idx] = favOrder[newIdx];
+  favOrder[newIdx] = tmpFav;
   localStorage.setItem('rjp_favorder', JSON.stringify(favOrder));
   renderFavGlobal();
 }
@@ -1023,7 +1027,8 @@ async function findNearbyStations() {
   }
 
   navigator.geolocation.getCurrentPosition(async (pos) => {
-    const { latitude: lat, longitude: lng } = pos.coords;
+    const lat = pos.coords.latitude;
+    const lng = pos.coords.longitude;
     bar.querySelector('span').textContent = '🌐 Buscando emisoras cercanas...';
     try {
       const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
