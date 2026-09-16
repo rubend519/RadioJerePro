@@ -261,7 +261,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
     </div>
   </div>
   <div class="tabs">
-    <button class="tab active" onclick="showPage('explorar',this)">🔍 Explorar</button>
+    <button class="tab active" onclick="showPage('inicio',this)">🏠 Inicio</button>
+    <button class="tab" onclick="showPage('explorar',this)">🔍 Explorar</button>
     <button class="tab" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
   </div>
   <div class="lang-bar">
@@ -361,8 +362,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 </div>
 
 <div class="content">
+  <!-- INICIO -->
+  <div class="page active" id="page-inicio">
+    <div style="padding:20px 16px">
+      <h1 style="font-size:22px;margin:0 0 6px">Tu música, tus emisoras ancladas.</h1>
+      <p style="color:var(--text2);font-size:13px;margin:0 0 16px">Explora miles de emisoras globales y personaliza tu propio Top de destacadas en la pantalla de inicio.</p>
+      <div style="font-size:11px;letter-spacing:.05em;color:var(--gold, #ffd740);margin-bottom:8px">⭐ TU TOP DE EMISORAS DESTACADAS (ANCLADAS)</div>
+      <div id="homeAnchoredGrid"></div>
+    </div>
+  </div>
   <!-- EXPLORAR -->
-  <div class="page active" id="page-explorar">
+  <div class="page" id="page-explorar">
     <!-- Breadcrumb -->
     <div class="breadcrumb" id="breadcrumb" style="display:none"></div>
     <!-- Vista continentes -->
