@@ -128,7 +128,8 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://stream.zeno.fm/f392822xevduv',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://stream.zeno.fm/yariguies',url_resolved:'https://19843.live.streamtheworld.com/YARIGUIES_SC',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://cdn.radoxo.com/images/colombia/yariguies-stereo.webp',geo_lat:7.0653,geo_long:-73.8547},
+  {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://stream.zeno.fm/yariguies',url_resolved:'https://19843.live.streamtheworld.com/YARIGUIES_SC',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://images.zeno.fm/iqpxWu2NPq98GNfDgwP05w9QvePKl8AzyO0PoY5PFqY/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYjM0NjJmZTYtM2YxZC00Nzc2LThkMDAtOTZjZDZmMTE1MzVmL2ltYWdlLz91PTE3MTM5MDUzNjMwMDA',geo_lat:7.0653,geo_long:-73.8547},
+  {stationuuid:'co-036',name:'Radio Fundingue.com',url:'https://stream.zeno.fm/radio-fundingue-com',country:'Colombia',state:'Barranquilla',tags:'vallenato',favicon:'https://images.zeno.fm/znlO1U-iRK909IIaN127niR1oqoN-bKbdXYm_icQYzs/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMjlhM2IwZTEtMmEwNC00MjVmLTk2MTYtMmUxZDg1OWQyZDgyL2ltYWdlLz91PTE3MzYzNDYxMTgwMDA',verified:false},
   {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
@@ -432,7 +433,8 @@ function filterStations(){
       sortStations(currentSort, null);
       return;
     }
-    const localResults = allStations.filter(s=>
+    const pool = allStations.length ? allStations : COLOMBIA_CURADA;
+    const localResults = pool.filter(s=>
       s.name.toLowerCase().includes(ql)||
       (s.tags||'').toLowerCase().includes(ql)||
       (s.state||'').toLowerCase().includes(ql)
@@ -487,6 +489,7 @@ function stationCard(s){
     <div class="scard-actions">
       <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
       <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'★':'☆'}</button>
+      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="toggleAnchor('${id}');this.classList.toggle('active')" title="Anclar en Inicio">📌</button>
       <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
     </div>
   </div>`;
@@ -836,6 +839,7 @@ function showPage(p,btn){
   if(btn) btn.classList.add('active');
   if(p==='favglobal') renderFavGlobal();
   if(p==='favlocal') renderFavLocal();
+  if(p==='inicio') renderHomeAnchored();
 }
 
 function setFavSort(mode, btn) {
@@ -1731,3 +1735,55 @@ function shazamManualPick(title, artist, art, album) {
   localStorage.setItem('rjp_shazam_history', JSON.stringify(shazamState.history));
   shazamShowHistory();
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   EMISORAS ANCLADAS (pantalla de Inicio)
+   Por defecto: Yariguíes Stereo y Radio Fundingue.com.
+   El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
+   ══════════════════════════════════════════════════════════════════ */
+
+const DEFAULT_ANCHORED = ['co-022', 'co-036'];
+
+function getAnchored() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('rjp_anchored'));
+    return Array.isArray(saved) ? saved : DEFAULT_ANCHORED.slice();
+  } catch (e) {
+    return DEFAULT_ANCHORED.slice();
+  }
+}
+
+function isAnchored(uuid) {
+  return getAnchored().indexOf(uuid) !== -1;
+}
+
+function toggleAnchor(uuid) {
+  var list = getAnchored();
+  var idx = list.indexOf(uuid);
+  if (idx === -1) list.push(uuid); else list.splice(idx, 1);
+  localStorage.setItem('rjp_anchored', JSON.stringify(list));
+  renderHomeAnchored();
+}
+
+function findStationByUuid(uuid) {
+  var found = COLOMBIA_CURADA.filter(function (s) { return s.stationuuid === uuid; })[0];
+  if (found) return found;
+  return allStations.filter(function (s) { return s.stationuuid === uuid; })[0];
+}
+
+function renderHomeAnchored() {
+  var container = document.getElementById('homeAnchoredGrid');
+  if (!container) return;
+  var uuids = getAnchored();
+  var stations = uuids.map(findStationByUuid).filter(Boolean);
+
+  if (!stations.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">⭐</div>' +
+      '<div class="empty-text">Aún no tienes emisoras ancladas. Ve a Explorar y ancla tus favoritas.</div></div>';
+    return;
+  }
+  container.innerHTML = stations.map(stationCard).join('');
+}
+
+// Vuelve a pintar el inicio cuando la página carga (si el contenedor ya existe en el HTML).
+document.addEventListener('DOMContentLoaded', renderHomeAnchored);
