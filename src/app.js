@@ -1744,7 +1744,7 @@ function shazamManualPick(title, artist, art, album) {
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
    ══════════════════════════════════════════════════════════════════ */
 
-const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-020', 'co-037', 'co-038'];
+const DEFAULT_ANCHORED = ['co-022', 'co-036'];
 
 function getAnchored() {
   try {
@@ -1789,3 +1789,104 @@ function renderHomeAnchored() {
 
 // Vuelve a pintar el inicio cuando la página carga (si el contenedor ya existe en el HTML).
 document.addEventListener('DOMContentLoaded', renderHomeAnchored);
+
+/* ══════════════════════════════════════════════════════════════════
+   CHEQUEO AUTOMÁTICO DE SALUD (cada 24 horas)
+   Prueba cada emisora curada en segundo plano y marca las que estén
+   caídas, sin que el usuario tenga que darles play primero.
+   Yariguíes (co-022) y Fundingue (co-036) quedan EXCLUIDAS para
+   siempre: sus URLs se consiguieron a mano y verificaron por oído,
+   nunca deben sobreescribirse ni re-chequearse automáticamente.
+   ══════════════════════════════════════════════════════════════════ */
+
+const HEALTH_CHECK_EXCLUDE = ['co-022', 'co-036'];
+const HEALTH_CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 horas
+const HEALTH_CHECK_TIMEOUT_MS = 8000;
+const HEALTH_CHECK_BATCH_SIZE = 3; // no probar todas a la vez (cuida TVs viejos)
+
+function getHealthCache() {
+  try {
+    return JSON.parse(localStorage.getItem('rjp_health_cache')) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveHealthCache(cache) {
+  try { localStorage.setItem('rjp_health_cache', JSON.stringify(cache)); } catch (e) {}
+}
+
+function isHealthCheckDue() {
+  var last = parseInt(localStorage.getItem('rjp_last_health_check') || '0', 10);
+  return (Date.now() - last) > HEALTH_CHECK_INTERVAL_MS;
+}
+
+// Prueba una URL de audio sin reproducir sonido de verdad: solo confirma
+// que el navegador logra empezar a cargar el stream (evento 'canplay') o
+// que falla (evento 'error'), con un límite de tiempo por si se cuelga.
+function probeStreamUrl(url) {
+  return new Promise(function (resolve) {
+    var probe = new Audio();
+    var done = false;
+    var finish = function (ok) {
+      if (done) return;
+      done = true;
+      probe.src = '';
+      resolve(ok);
+    };
+    probe.addEventListener('canplay', function () { finish(true); });
+    probe.addEventListener('loadedmetadata', function () { finish(true); });
+    probe.addEventListener('error', function () { finish(false); });
+    setTimeout(function () { finish(false); }, HEALTH_CHECK_TIMEOUT_MS);
+    probe.preload = 'metadata';
+    try { probe.src = url; probe.load(); } catch (e) { finish(false); }
+  });
+}
+
+function runHealthCheckBatch(stations, index, cache) {
+  if (index >= stations.length) {
+    saveHealthCache(cache);
+    localStorage.setItem('rjp_last_health_check', String(Date.now()));
+    return;
+  }
+  var batch = stations.slice(index, index + HEALTH_CHECK_BATCH_SIZE);
+  var proms = batch.map(function (s) {
+    var url = s.url_resolved || s.url;
+    return probeStreamUrl(url).then(function (ok) {
+      cache[s.stationuuid] = { ok: ok, ts: Date.now() };
+      updateStreamBadge(s.stationuuid, ok ? 'ok' : 'error');
+    });
+  });
+  Promise.all(proms).then(function () {
+    setTimeout(function () {
+      runHealthCheckBatch(stations, index + HEALTH_CHECK_BATCH_SIZE, cache);
+    }, 400); // pequeña pausa entre tandas
+  });
+}
+
+function runHealthCheckIfDue() {
+  if (!isHealthCheckDue()) return;
+  var targets = COLOMBIA_CURADA.filter(function (s) {
+    return HEALTH_CHECK_EXCLUDE.indexOf(s.stationuuid) === -1;
+  });
+  var cache = getHealthCache();
+  runHealthCheckBatch(targets, 0, cache);
+}
+
+// Al abrir tarjetas, si ya tenemos un resultado guardado del último
+// chequeo, lo mostramos de inmediato (sin esperar a que el usuario
+// le dé play) — excepto en las 2 protegidas, que siempre se muestran
+// como confiables.
+function applyCachedHealthBadges() {
+  var cache = getHealthCache();
+  Object.keys(cache).forEach(function (uuid) {
+    if (HEALTH_CHECK_EXCLUDE.indexOf(uuid) !== -1) return;
+    updateStreamBadge(uuid, cache[uuid].ok ? 'ok' : 'error');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  applyCachedHealthBadges();
+  // Se retrasa un poco para no competir con la carga inicial de la página.
+  setTimeout(runHealthCheckIfDue, 5000);
+});
