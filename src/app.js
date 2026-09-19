@@ -1,4 +1,4 @@
-const ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAitElEQVR4nI2beYwk133fP++9uvrunmPn2J29l0sud0VSXK5IUbREHZasw7KU2JFtGImdwHBg/+HAjuM/EgQ5EOREDiAGDEOxFVimLUsgTMuUJcukKIqkeK6W597cY3Zmdu6evup67+WPquruofxhexylnKEISgGEXK7D36mJjO0fS74s8kLff/I8+ZsfIu6XgI04A/e7E993P7z+c3P0q5q1tQ/28lIu1tI9r7n8c2/b/Peb+s/J4+n52jN0N3+l//Ww96U0jXqQAAAABJRU5ErkJggg==';
+const ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMWExYTJlIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjQiIGZpbGw9IiNlOTQ1NjAiLz4KPHBhdGggZD0iTTMyIDIwYTEyIDEyIDAgMCAxIDEyIDEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTMyIDEyYTIwIDIwIDAgMCAxIDIwIDIwIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNTUiLz4KPHBhdGggZD0iTTMyIDQ0YTEyIDEyIDAgMCAxLTEyLTEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuODUiLz4KPC9zdmc+Cg==';
 const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
 // Compatible con TVs/navegadores viejos que no tienen AbortSignal.timeout() (API de 2022).
 // Usa AbortController + setTimeout, soportado desde hace mucho más tiempo.
@@ -125,11 +125,13 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-016',name:'Señal Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÑAL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
   {stationuuid:'co-017',name:'Oxígeno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'Bogotá',tags:'alternativa,pop',favicon:''},
   {stationuuid:'co-018',name:'Rumba Estéreo Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:''},
-  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://stream.zeno.fm/f392822xevduv',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://mdstrm.com/audio/632cc5d948f73909a614ab93/icecast.audio',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227,verified:true},
   {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://stream.zeno.fm/yariguies',url_resolved:'https://19843.live.streamtheworld.com/YARIGUIES_SC',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://images.zeno.fm/iqpxWu2NPq98GNfDgwP05w9QvePKl8AzyO0PoY5PFqY/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYjM0NjJmZTYtM2YxZC00Nzc2LThkMDAtOTZjZDZmMTE1MzVmL2ltYWdlLz91PTE3MTM5MDUzNjMwMDA',geo_lat:7.0653,geo_long:-73.8547},
-  {stationuuid:'co-036',name:'Radio Fundingue.com',url:'https://stream.zeno.fm/radio-fundingue-com',country:'Colombia',state:'Barranquilla',tags:'vallenato',favicon:'https://images.zeno.fm/znlO1U-iRK909IIaN127niR1oqoN-bKbdXYm_icQYzs/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMjlhM2IwZTEtMmEwNC00MjVmLTk2MTYtMmUxZDg1OWQyZDgyL2ltYWdlLz91PTE3MzYzNDYxMTgwMDA',verified:false},
+  {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://estructuraweb.com.co:9339/stream',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://images.zeno.fm/iqpxWu2NPq98GNfDgwP05w9QvePKl8AzyO0PoY5PFqY/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYjM0NjJmZTYtM2YxZC00Nzc2LThkMDAtOTZjZDZmMTE1MzVmL2ltYWdlLz91PTE3MTM5MDUzNjMwMDA',geo_lat:7.0653,geo_long:-73.8547,verified:true},
+  {stationuuid:'co-036',name:'Radio Fundingue.com',url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3',country:'Colombia',state:'Barranquilla',tags:'vallenato',favicon:'https://images.zeno.fm/znlO1U-iRK909IIaN127niR1oqoN-bKbdXYm_icQYzs/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMjlhM2IwZTEtMmEwNC00MjVmLTk2MTYtMmUxZDg1OWQyZDgyL2ltYWdlLz91PTE3MzYzNDYxMTgwMDA',verified:true},
+  {stationuuid:'co-037',name:'El Sol Medellín 107.9 FM',url:'https://mdstrm.com/audio/632c9d30aa9ace684913b853/icecast.audio',country:'Colombia',state:'Medellín',tags:'salsa',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',verified:true},
+  {stationuuid:'co-038',name:'Radio Power Colombia',url:'https://stream.zeno.fm/radio-power',country:'Colombia',state:'Fusagasugá',tags:'80s,90s,dance',favicon:ICON,verified:false},
   {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
@@ -541,7 +543,7 @@ async function resolveStreamUrl(station) {
 }
 
 const PROXY_STATION_IDS = new Set([
-  'co-019','co-020','co-021','co-023','co-024',
+  'co-020','co-021','co-023','co-024',
   'co-025','co-026','co-027','co-028','co-029','co-030','co-012'
 ]);
 
@@ -1742,7 +1744,7 @@ function shazamManualPick(title, artist, art, album) {
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
    ══════════════════════════════════════════════════════════════════ */
 
-const DEFAULT_ANCHORED = ['co-022', 'co-036'];
+const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-020', 'co-037', 'co-038'];
 
 function getAnchored() {
   try {
