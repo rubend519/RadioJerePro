@@ -1,0 +1,63 @@
+name: Descubrir emisoras nuevas
+
+on:
+  schedule:
+    # Todos los días a las 8:00 UTC (3:00 am hora Colombia). Para cada 48h,
+    # comenta esta línea y descomenta la de abajo.
+    - cron: '0 8 * * *'
+    # - cron: '0 8 */2 * *'
+  workflow_dispatch: {}   # permite lanzarlo a mano con el botón "Run workflow"
+
+permissions:
+  contents: write   # necesario para que el Action pueda hacer commit y push
+
+jobs:
+  descubrir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repo
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Descubrir emisoras de cadenas (TuneIn)
+        working-directory: scripts
+        run: python descubrir_cadenas_tunein.py
+
+      - name: Fusionar con stations.json
+        id: merge
+        working-directory: scripts
+        run: |
+          python merge_emisoras.py \
+            --master ../stations.json \
+            --candidatos cadenas_tunein.csv \
+            --salida ../stations.json \
+            --reporte reporte_merge.csv
+        continue-on-error: true   # código 78 = "sin cambios", no es un error real
+
+      - name: Subir el reporte como artefacto descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-merge
+          path: |
+            scripts/reporte_merge.csv
+            scripts/cadenas_tunein.csv
+          retention-days: 14
+
+      - name: Commit y push (solo si stations.json cambió)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- stations.json; then
+            echo "Sin cambios en stations.json, no se hace commit."
+          else
+            git add stations.json
+            git commit -m "Auto: nuevas emisoras descubiertas ($(date -u +%Y-%m-%d))"
+            git push
+          fi
