@@ -491,7 +491,7 @@ function stationCard(s){
     <div class="scard-actions">
       <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
       <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'★':'☆'}</button>
-      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="toggleAnchor('${id}');this.classList.toggle('active')" title="Anclar en Inicio">📌</button>
+      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'📌':'📍'}</button>
       <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
     </div>
   </div>`;
@@ -902,6 +902,7 @@ function favCard(s, idx, total) {
     <div class="scard-actions">
       <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
       <button class="btn-fav active" onclick="_toggleFavById('${id}',this)">★</button>
+      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'📌':'📍'}</button>
       <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
     </div>
   </div>`;
@@ -975,9 +976,14 @@ async function findNearbyExplore() {
           s.state.toLowerCase().includes('barrancabermeja')
         )
       );
-      const curadaIds = new Set(nearbyExploreData.map(s => s.stationuuid));
-      const toAdd = santanderCuradas.filter(s => !curadaIds.has(s.stationuuid));
-      nearbyExploreData = filterUniqueStations([...toAdd, ...nearbyExploreData]);
+      // Los IDs de Radio Browser nunca coinciden con nuestros "co-0XX", así que
+      // comparamos por nombre normalizado para detectar la misma emisora y
+      // preferir SIEMPRE nuestra versión curada (con URL verificada) sobre la
+      // de Radio Browser (que puede estar rota).
+      const normName = s => (s.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+      const curadaNameSet = new Set(santanderCuradas.map(normName));
+      nearbyExploreData = nearbyExploreData.filter(s => !curadaNameSet.has(normName(s)));
+      nearbyExploreData = filterUniqueStations([...santanderCuradas, ...nearbyExploreData]);
 
       const label = locationLabel ? `📍 ${locationLabel}` : '📍 Tu ubicación';
       sub.textContent = `${label} · ${nearbyExploreData.length} emisoras cercanas`;
@@ -1746,6 +1752,18 @@ function shazamManualPick(title, artist, art, album) {
 
 const DEFAULT_ANCHORED = ['co-022', 'co-036'];
 
+function getAnchorStore() {
+  try {
+    return JSON.parse(localStorage.getItem('rjp_anchor_store')) || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveAnchorStore(store) {
+  try { localStorage.setItem('rjp_anchor_store', JSON.stringify(store)); } catch (e) {}
+}
+
 function getAnchored() {
   try {
     const saved = JSON.parse(localStorage.getItem('rjp_anchored'));
@@ -1759,15 +1777,38 @@ function isAnchored(uuid) {
   return getAnchored().indexOf(uuid) !== -1;
 }
 
-function toggleAnchor(uuid) {
+function toggleAnchor(uuid, stationObj) {
   var list = getAnchored();
   var idx = list.indexOf(uuid);
-  if (idx === -1) list.push(uuid); else list.splice(idx, 1);
+  var store = getAnchorStore();
+  if (idx === -1) {
+    list.push(uuid);
+    if (stationObj) store[uuid] = stationObj;
+  } else {
+    list.splice(idx, 1);
+    delete store[uuid];
+  }
   localStorage.setItem('rjp_anchored', JSON.stringify(list));
+  saveAnchorStore(store);
   renderHomeAnchored();
 }
 
+// Helper para usar desde onclick="" en las tarjetas: toma la estación ya
+// registrada en memoria y actualiza el ícono del botón según el estado real
+// (nunca a ciegas), porque el emoji del pin no cambia de color con CSS.
+function _toggleAnchorById(uuid, btn) {
+  var s = _stationRegistry[uuid];
+  toggleAnchor(uuid, s);
+  if (btn) {
+    var nowAnchored = isAnchored(uuid);
+    btn.classList.toggle('active', nowAnchored);
+    btn.textContent = nowAnchored ? '📌' : '📍';
+  }
+}
+
 function findStationByUuid(uuid) {
+  var store = getAnchorStore();
+  if (store[uuid]) return store[uuid];
   var found = COLOMBIA_CURADA.filter(function (s) { return s.stationuuid === uuid; })[0];
   if (found) return found;
   return allStations.filter(function (s) { return s.stationuuid === uuid; })[0];
@@ -1893,27 +1934,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* ══════════════════════════════════════════════════════════════════
    SINCRONIZAR CONFIGURACIÓN ENTRE DISPOSITIVOS (código de 9 dígitos)
-   MEJORA PARA COMPATIBILIDAD CON SMART TV SAMSUNG Y TIZEN
+   Exporta: favoritos, orden de favoritos, países favoritos, emisoras
+   ancladas, tema, y las URLs que el usuario corrigió a mano.
    ══════════════════════════════════════════════════════════════════ */
 
-const SYNC_KEYS = ['rjp_favs', 'rjp_favstore', 'rjp_favorder', 'rjp_favpaises', 'rjp_anchored', 'rjp_theme', 'rjp_url_overrides'];
+const SYNC_KEYS = ['rjp_favs', 'rjp_favstore', 'rjp_favorder', 'rjp_favpaises', 'rjp_anchored', 'rjp_anchor_store', 'rjp_theme', 'rjp_url_overrides'];
 
 function collectSyncData() {
   var out = {};
-  for(var i=0; i<SYNC_KEYS.length; i++) {
-    var v = localStorage.getItem(SYNC_KEYS[i]);
-    if (v !== null) out[SYNC_KEYS[i]] = v;
-  }
+  SYNC_KEYS.forEach(function (key) {
+    var v = localStorage.getItem(key);
+    if (v !== null) out[key] = v;
+  });
   return out;
 }
 
 function applySyncData(data) {
-  for(var i=0; i<SYNC_KEYS.length; i++) {
-    var key = SYNC_KEYS[i];
-    if (data.hasOwnProperty(key)) {
+  SYNC_KEYS.forEach(function (key) {
+    if (Object.prototype.hasOwnProperty.call(data, key)) {
       localStorage.setItem(key, data[key]);
     }
-  }
+  });
 }
 
 function openSyncPanel() {
@@ -1930,63 +1971,46 @@ function closeSyncPanel() {
   if (panel) panel.classList.remove('open');
 }
 
-// Mejora: Uso de Promesas estándar sin Async/Await puro para TVs viejos
-function generateSyncCode() {
+async function generateSyncCode() {
   var out = document.getElementById('syncCodeOut');
   var msg = document.getElementById('syncMsg');
   if (msg) msg.textContent = 'Generando código...';
-  
-  var payload = JSON.stringify(collectSyncData());
-  
-  fetch('/sync', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: payload,
-    signal: timeoutSignal(10000)
-  })
-  .then(function(res) {
+  try {
+    var res = await fetch('/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(collectSyncData()),
+      signal: timeoutSignal(10000),
+    });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    return res.json();
-  })
-  .then(function(data) {
+    var data = await res.json();
     if (out) out.textContent = data.code;
     if (msg) msg.textContent = 'Escribe este código en el otro dispositivo. Válido por 15 minutos.';
-  })
-  .catch(function(e) {
-    if (msg) msg.textContent = '❌ No se pudo generar el código. Revisa tu conexión.';
-  });
+  } catch (e) {
+    if (msg) msg.textContent = '❌ No se pudo generar el código. Intenta de nuevo.';
+  }
 }
 
-function applySyncCode() {
+async function applySyncCode() {
   var input = document.getElementById('syncCodeIn');
   var msg = document.getElementById('syncMsg');
   var code = (input && input.value || '').trim();
-  
   if (!/^\d{9}$/.test(code)) {
     if (msg) msg.textContent = '❌ El código debe tener exactamente 9 números.';
     return;
   }
   if (msg) msg.textContent = 'Importando...';
-  
-  fetch('/sync?code=' + code, { signal: timeoutSignal(10000) })
-  .then(function(res) {
+  try {
+    var res = await fetch('/sync?code=' + code, { signal: timeoutSignal(10000) });
     if (!res.ok) {
-      return res.text().then(function(txt) {
-         try { var err = JSON.parse(txt); throw new Error(err.error); }
-         catch(e) { throw new Error('HTTP ' + res.status); }
-      });
+      var err = await res.json().catch(function () { return {}; });
+      throw new Error(err.error || ('HTTP ' + res.status));
     }
-    return res.json();
-  })
-  .then(function(body) {
+    var body = await res.json();
     applySyncData(body.data || {});
     if (msg) msg.textContent = '✔ Configuración importada. Recargando...';
-    // Mejora: Timeout escalonado para asegurar escritura en disco de la TV
-    setTimeout(function () { 
-        window.location.reload(true); 
-    }, 1500);
-  })
-  .catch(function(e) {
+    setTimeout(function () { location.reload(); }, 1200);
+  } catch (e) {
     if (msg) msg.textContent = '❌ ' + (e.message || 'Código inválido o expirado.');
-  });
+  }
 }
