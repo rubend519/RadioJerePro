@@ -1890,3 +1890,103 @@ document.addEventListener('DOMContentLoaded', function () {
   // Se retrasa un poco para no competir con la carga inicial de la página.
   setTimeout(runHealthCheckIfDue, 5000);
 });
+
+/* ══════════════════════════════════════════════════════════════════
+   SINCRONIZAR CONFIGURACIÓN ENTRE DISPOSITIVOS (código de 9 dígitos)
+   MEJORA PARA COMPATIBILIDAD CON SMART TV SAMSUNG Y TIZEN
+   ══════════════════════════════════════════════════════════════════ */
+
+const SYNC_KEYS = ['rjp_favs', 'rjp_favstore', 'rjp_favorder', 'rjp_favpaises', 'rjp_anchored', 'rjp_theme', 'rjp_url_overrides'];
+
+function collectSyncData() {
+  var out = {};
+  for(var i=0; i<SYNC_KEYS.length; i++) {
+    var v = localStorage.getItem(SYNC_KEYS[i]);
+    if (v !== null) out[SYNC_KEYS[i]] = v;
+  }
+  return out;
+}
+
+function applySyncData(data) {
+  for(var i=0; i<SYNC_KEYS.length; i++) {
+    var key = SYNC_KEYS[i];
+    if (data.hasOwnProperty(key)) {
+      localStorage.setItem(key, data[key]);
+    }
+  }
+}
+
+function openSyncPanel() {
+  var panel = document.getElementById('syncPanel');
+  if (panel) panel.classList.add('open');
+  var out = document.getElementById('syncCodeOut');
+  var msg = document.getElementById('syncMsg');
+  if (out) out.textContent = '— — — — — — — — —';
+  if (msg) msg.textContent = '';
+}
+
+function closeSyncPanel() {
+  var panel = document.getElementById('syncPanel');
+  if (panel) panel.classList.remove('open');
+}
+
+// Mejora: Uso de Promesas estándar sin Async/Await puro para TVs viejos
+function generateSyncCode() {
+  var out = document.getElementById('syncCodeOut');
+  var msg = document.getElementById('syncMsg');
+  if (msg) msg.textContent = 'Generando código...';
+  
+  var payload = JSON.stringify(collectSyncData());
+  
+  fetch('/sync', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: payload,
+    signal: timeoutSignal(10000)
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(function(data) {
+    if (out) out.textContent = data.code;
+    if (msg) msg.textContent = 'Escribe este código en el otro dispositivo. Válido por 15 minutos.';
+  })
+  .catch(function(e) {
+    if (msg) msg.textContent = '❌ No se pudo generar el código. Revisa tu conexión.';
+  });
+}
+
+function applySyncCode() {
+  var input = document.getElementById('syncCodeIn');
+  var msg = document.getElementById('syncMsg');
+  var code = (input && input.value || '').trim();
+  
+  if (!/^\d{9}$/.test(code)) {
+    if (msg) msg.textContent = '❌ El código debe tener exactamente 9 números.';
+    return;
+  }
+  if (msg) msg.textContent = 'Importando...';
+  
+  fetch('/sync?code=' + code, { signal: timeoutSignal(10000) })
+  .then(function(res) {
+    if (!res.ok) {
+      return res.text().then(function(txt) {
+         try { var err = JSON.parse(txt); throw new Error(err.error); }
+         catch(e) { throw new Error('HTTP ' + res.status); }
+      });
+    }
+    return res.json();
+  })
+  .then(function(body) {
+    applySyncData(body.data || {});
+    if (msg) msg.textContent = '✔ Configuración importada. Recargando...';
+    // Mejora: Timeout escalonado para asegurar escritura en disco de la TV
+    setTimeout(function () { 
+        window.location.reload(true); 
+    }, 1500);
+  })
+  .catch(function(e) {
+    if (msg) msg.textContent = '❌ ' + (e.message || 'Código inválido o expirado.');
+  });
+}

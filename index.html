@@ -3,530 +3,377 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Radio Jere Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Radio Jere</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--bg4:#1f1f35;--accent:#e94560;--blue:#448aff;--green:#00e676;--gold:#ffd740;--text:#f0f0f8;--text2:#8899bb;--text3:#4a5070;--card:#161625;--border:#ffffff10;--border2:#ffffff22;--radius:16px;--rsm:10px}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
-/* HEADER */
-.hdr{background:var(--bg);padding:0;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border2)}
-.nav-bar{display:flex;align-items:center;gap:7px;padding:9px 14px 0}
-.btn-nav{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;flex-shrink:0;-webkit-tap-highlight-color:transparent;user-select:none}
-.btn-nav:hover:not(:disabled){background:var(--bg4);border-color:var(--accent);color:var(--text)}
-.btn-nav:active:not(:disabled){transform:scale(.92)}
-.btn-nav:disabled{opacity:.28;cursor:default}
-.nav-crumb{flex:1;min-width:0;display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text3);overflow:hidden}
-.nc-item{cursor:pointer;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;transition:.15s}
-.nc-item:hover{opacity:.75}
-.nc-item.active{color:var(--text2);cursor:default;pointer-events:none}
-.nc-sep{color:var(--text3);flex-shrink:0;font-size:10px}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 0;margin-bottom:11px;gap:8px}
-.logo{display:flex;align-items:center;gap:9px}
-.logo img{width:36px;height:36px;border-radius:9px;object-fit:cover;box-shadow:0 0 16px #e9456044}
-.logo-txt{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.5px}
-.logo-txt span{color:var(--accent)}
-.hdr-right{display:flex;align-items:center;gap:7px}
-.btn-sm{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;color:var(--text2);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:.2s;white-space:nowrap}
-.btn-sm:hover{border-color:var(--accent);color:var(--text)}
-.live-badge{background:var(--bg3);border:1px solid var(--border2);border-radius:40px;padding:5px 10px;display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite}
-.now-pill{background:var(--bg3);border:1px solid var(--border2);border-radius:40px;padding:5px 10px;display:flex;align-items:center;gap:6px;max-width:130px;overflow:hidden}
-.wave{display:flex;gap:2px;align-items:center;height:11px;flex-shrink:0}
-.wave span{display:block;width:2px;background:var(--accent);border-radius:2px;animation:wave 1s ease-in-out infinite}
-.wave span:nth-child(2){animation-delay:.15s}.wave span:nth-child(3){animation-delay:.3s}.wave span:nth-child(4){animation-delay:.15s}
-.wave.idle span{animation:none;height:3px}
-@keyframes wave{0%,100%{height:3px}50%{height:11px}}
-.now-name{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{display:flex;gap:3px}
-.tab{padding:9px 15px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;border-radius:8px 8px 0 0;transition:.2s;border:none;background:none}
-.tab.active{color:var(--text);background:var(--bg2);border-bottom:2px solid var(--accent)}
-/* PANELS */
-.theme-panel,.favpais-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;background:#00000099;align-items:flex-end;justify-content:center}
-.theme-panel.open,.favpais-panel.open{display:flex}
-.panel-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:18px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
-.panel-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:14px;text-align:center}
-.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px;max-height:60vh;overflow-y:auto}
-.theme-opt{border:2px solid var(--border2);border-radius:11px;padding:11px 7px;cursor:pointer;text-align:center;transition:.2s;background:var(--bg3)}
-.theme-opt:hover{border-color:var(--accent)}.theme-opt.active{border-color:var(--accent);background:var(--bg4)}
-.theme-swatch{width:30px;height:30px;border-radius:50%;margin:0 auto 5px;font-size:15px;display:flex;align-items:center;justify-content:center}
-.theme-label{font-size:10px;color:var(--text2)}
-.btn-panel-close{width:100%;background:var(--accent);border:none;color:white;border-radius:9px;padding:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;margin-top:4px}
-/* CONTENT */
-.content{padding:14px 14px 108px}
-.page{display:none}.page.active{display:block}
-/* CONTINENT NAV */
-.cont-scroll{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;margin-bottom:12px;scrollbar-width:none}
-.cont-scroll::-webkit-scrollbar{display:none}
-.cont-btn{flex-shrink:0;background:var(--card);border:1px solid var(--border2);border-radius:9px;padding:8px 13px;font-size:12px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;color:var(--text2);transition:.2s;white-space:nowrap}
-.cont-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-/* BREADCRUMB */
-.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:12px;font-size:12px;color:var(--text3);flex-wrap:wrap}
-.breadcrumb span{cursor:pointer;color:var(--accent);text-decoration:underline}
-.breadcrumb .sep{color:var(--text3);cursor:default;text-decoration:none}
-/* COUNTRY GRID */
-.country-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.country-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px 12px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:space-between}
-.country-card:hover{border-color:var(--border2);background:var(--bg3)}
-.country-card.fav{border-color:var(--gold)44}
-.country-name{font-family:'Syne',sans-serif;font-size:12px;font-weight:600}
-.country-count{font-size:10px;color:var(--text3)}
-.country-fav-btn{background:none;border:none;font-size:14px;cursor:pointer;color:var(--text3);padding:2px}
-.country-fav-btn.active{color:var(--gold)}
-/* SEARCH */
-.search-wrap{position:relative;margin-bottom:10px}
-.search-wrap input{width:100%;background:var(--card);border:1px solid var(--border2);border-radius:var(--rsm);padding:11px 14px 11px 38px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:.2s}
-.search-wrap input:focus{border-color:var(--accent)}
-.search-wrap input::placeholder{color:var(--text3)}
-.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;pointer-events:none}
-/* STATION LIST */
-.stations-list{display:flex;flex-direction:column;gap:7px}
-.scard{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.2s}
-.scard:hover{border-color:var(--border2);transform:translateY(-1px)}
-.scard.playing{border-color:var(--accent);background:var(--bg3)}
-.scard-logo{width:42px;height:42px;border-radius:8px;background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;overflow:hidden}
-.scard-logo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
-.scard-info{flex:1;min-width:0}
-.scard-name{font-family:'Syne',sans-serif;font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
-.scard-meta{font-size:10px;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tag{background:var(--bg4);border:1px solid var(--border);border-radius:4px;padding:1px 4px;font-size:9px;color:var(--text3)}
-.scard-actions{display:flex;flex-direction:column;gap:4px;align-items:center;flex-shrink:0}
-.btn-play{width:30px;height:30px;border-radius:50%;background:var(--accent);border:none;color:white;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
-.scard.playing .btn-play{background:var(--green);color:#000}
-.btn-fav{width:24px;height:24px;border:none;background:none;color:var(--text3);font-size:14px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
-.btn-fav.active,.btn-fav:hover{color:var(--gold)}
-/* PLAYER */
-.player{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border2);padding:9px 13px;z-index:200}
-.player-inner{display:flex;align-items:center;gap:9px;max-width:600px;margin:0 auto}
-.p-logo{width:36px;height:36px;border-radius:7px;background:var(--bg3);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.p-logo img{width:100%;height:100%;object-fit:cover;border-radius:7px}
-.p-info{flex:1;min-width:0}
-.p-name{font-family:'Syne',sans-serif;font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-status{font-size:10px;color:var(--text2)}
-.p-controls{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.vol-wrap{display:flex;align-items:center;gap:4px}
-.vol-wrap span{font-size:12px;color:var(--text2)}
-input[type=range]{-webkit-appearance:none;appearance:none;width:60px;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer}
-.btn-stop{background:var(--accent);border:none;color:white;width:34px;height:34px;border-radius:50%;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-/* STATUS */
-.status-bar{background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:8px 11px;font-size:11px;color:var(--text2);margin-bottom:11px;display:flex;align-items:center;gap:6px}
-.sdot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
-.sdot.loading{background:var(--gold);animation:pulse 1s infinite}
-.sdot.error{background:var(--accent)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.sec-title{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty-icon{font-size:40px;margin-bottom:9px}.empty-text{font-size:12px}
-.loading-box{text-align:center;padding:24px;color:var(--text2);font-size:12px}
-.spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 9px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.btn-retry{background:var(--accent);color:white;border:none;border-radius:7px;padding:9px 18px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;margin-top:10px}
-.sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.sort-btn{background:var(--card);border:1px solid var(--border2);border-radius:7px;padding:5px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text2);cursor:pointer;transition:.2s;white-space:nowrap}
-.sort-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.sort-btn:hover:not(.active){border-color:var(--accent);color:var(--text)}
-.sort-label{font-size:10px;color:var(--text3);font-family:'Syne',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase}
-.lang-bar{display:flex;align-items:center;gap:5px;padding:0 14px 10px}
-.lang-btn{background:var(--card);border:1px solid var(--border2);border-radius:6px;padding:4px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:700;color:var(--text2);cursor:pointer;transition:.2s}
-.lang-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.lang-btn:hover:not(.active){color:var(--text);border-color:var(--border2)}
-.share-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;background:#00000099;align-items:flex-end;justify-content:center}
-.share-panel.open{display:flex}
-.share-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:500px}
-.share-station-name{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.share-station-sub{font-size:11px;color:var(--text2);margin-bottom:18px}
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.share-opt{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;padding:10px 6px;border-radius:12px;background:var(--bg3);border:1px solid var(--border);transition:.2s}
-.share-opt:hover{border-color:var(--accent)}
-.share-opt-icon{font-size:24px}
-.share-opt-label{font-size:10px;color:var(--text2);font-family:'Syne',sans-serif;font-weight:600;text-align:center}
-.share-link-box{display:flex;gap:8px;margin-bottom:14px}
-.share-link-input{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:11px;font-family:'DM Sans',sans-serif;outline:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.btn-copy-link{background:var(--accent);color:white;border:none;border-radius:8px;padding:9px 14px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;transition:.2s}
-.btn-copy-link.copied{background:var(--green);color:#000}
-.btn-close-share{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);border-radius:10px;padding:11px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
-/* FAVPAIS PANEL */
-.fp-search{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:12px}
-.fp-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto}
-.fp-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 12px;cursor:pointer;transition:.2s}
-.fp-item:hover{border-color:var(--border2)}
-.fp-item-name{font-size:13px}
-.fp-item-count{font-size:10px;color:var(--text3)}
-.fp-item-star{font-size:16px;color:var(--text3)}
-.fp-item.favved .fp-item-star{color:var(--gold)}
-/* FAVORITOS SORT BAR */
-.fav-sort-bar{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.fav-sort-btn{background:var(--card);border:1px solid var(--border2);border-radius:7px;padding:5px 10px;font-size:11px;font-family:'Syne',sans-serif;font-weight:600;color:var(--text2);cursor:pointer;transition:.2s;white-space:nowrap}
-.fav-sort-btn.active{background:var(--accent);border-color:var(--accent);color:white}
-.fav-sort-btn:hover:not(.active){border-color:var(--accent);color:var(--text)}
-/* REORDER BUTTONS */
-.btn-reorder{width:22px;height:22px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);border-radius:5px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
-.btn-reorder:hover{border-color:var(--accent);color:var(--text)}
-.btn-reorder:disabled{opacity:.25;cursor:default}
-.scard-reorder{display:flex;flex-direction:column;gap:3px;align-items:center;flex-shrink:0;margin-right:2px}
-/* NEARBY BUTTON */
-.nearby-bar{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:9px 12px;margin-bottom:11px;font-size:12px;color:var(--text2)}
-.btn-nearby{background:var(--accent);color:white;border:none;border-radius:7px;padding:6px 13px;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap;transition:.2s}
-.btn-nearby:hover{opacity:.85}
-.btn-nearby:disabled{background:var(--bg4);color:var(--text3);cursor:default}
-/* STREAM RETRY */
-.scard.stream-error{border-color:#ff3d0044}
-.scard.stream-retrying{border-color:var(--gold)44}
-.stream-badge{font-size:9px;padding:1px 5px;border-radius:4px;margin-left:4px}
-.stream-badge.error{background:#ff3d0022;color:#ff3d00;border:1px solid #ff3d0044}
-.stream-badge.retrying{background:#ffd74022;color:var(--gold);border:1px solid #ffd74044}
-.stream-badge.ok{background:#00e67622;color:var(--green);border:1px solid #00e67644}
-/* NEARBY EXPLORE SECTION */
-.nearby-explore{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:12px;margin-bottom:14px}
-.nearby-explore-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.nearby-explore-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--text)}
-.nearby-explore-sub{font-size:10px;color:var(--text3);margin-top:2px}
+/* ==========================================================================
+   FASE 2: SISTEMA DE DISEÑO BASE (COLORES, TIPOGRAFÍA Y RESET)
+   Optimizado para TV (sin sombras excesivas ni filtros pesados)
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'DM Sans', sans-serif; }
+:root {
+  --bg-app: #0B0E14;        /* Fondo oscuro azul marino principal */
+  --bg-sidebar: #05070A;    /* Fondo menú lateral y reproductor */
+  --bg-card: #151A22;       /* Fondo de tarjetas */
+  --bg-hover: #1E2532;
+  --accent: #FF5722;        /* Naranja principal */
+  --accent-grad: linear-gradient(90deg, #FF5722, #FF2A5F);
+  --text-main: #FFFFFF;
+  --text-muted: #8B95A5;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+body { background: var(--bg-app); color: var(--text-main); overflow: hidden; }
 
-/* ── IDENTIFICADOR DE CANCIONES ─────────────────────────── */
-.btn-shazam{background:linear-gradient(135deg,#1a1a2e,#0f3460);border:2px solid var(--accent);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s;position:relative;flex-shrink:0;-webkit-tap-highlight-color:transparent}
-.btn-shazam:hover{transform:scale(1.08);box-shadow:0 0 18px var(--accent)66}
-.btn-shazam.listening{border-color:var(--green);animation:shazam-pulse 1.2s ease-in-out infinite}
-.btn-shazam.listening .shazam-icon{animation:shazam-spin 2s linear infinite}
-@keyframes shazam-pulse{0%,100%{box-shadow:0 0 8px var(--green)44}50%{box-shadow:0 0 24px var(--green)88}}
-@keyframes shazam-spin{to{transform:rotate(360deg)}}
-.shazam-icon{font-size:20px;line-height:1}
+/* ==========================================================================
+   LAYOUT PRINCIPAL (FLEXBOX COMPATIBLE TIZEN 2016 / WEBOS)
+   ========================================================================== */
+.app-layout { display: flex; flex-direction: column; height: 100vh; }
+.main-area { display: flex; flex: 1; min-height: 0; overflow: hidden; }
 
-/* Panel resultado */
-.shazam-panel{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:500;background:#00000099;align-items:flex-end;justify-content:center}
-.shazam-panel.open{display:flex}
-.shazam-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px;width:100%;max-width:480px;min-height:260px}
-.shazam-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.shazam-listening{display:flex;flex-direction:column;align-items:center;gap:14px;padding:20px 0}
-.shazam-wave-big{display:flex;gap:4px;align-items:center;height:48px}
-.shazam-wave-big span{display:block;width:5px;background:var(--accent);border-radius:3px;animation:swb 0.9s ease-in-out infinite}
-.shazam-wave-big span:nth-child(2){animation-delay:.1s}.shazam-wave-big span:nth-child(3){animation-delay:.2s}
-.shazam-wave-big span:nth-child(4){animation-delay:.3s}.shazam-wave-big span:nth-child(5){animation-delay:.2s}
-.shazam-wave-big span:nth-child(6){animation-delay:.1s}
-@keyframes swb{0%,100%{height:6px}50%{height:44px}}
-.shazam-hint{font-size:12px;color:var(--text2);text-align:center;line-height:1.5}
-.shazam-timer{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;color:var(--accent)}
+/* --- SIDEBAR (MENÚ LATERAL) --- */
+.sidebar { width: 260px; background: var(--bg-sidebar); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; overflow-y: auto; flex-shrink: 0; }
+.sidebar-logo { padding: 24px 20px; display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; color: var(--text-main); }
+.logo-icon { width: 32px; height: 32px; background: var(--accent-grad); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 18px; height: 18px; fill: white; }
 
-/* Resultado */
-.shazam-result{display:none;flex-direction:column;gap:12px}
-.shazam-result.show{display:flex}
-.shazam-art{width:80px;height:80px;border-radius:12px;object-fit:cover;flex-shrink:0}
-.shazam-song{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text)}
-.shazam-artist{font-size:13px;color:var(--text2);margin-top:2px}
-.shazam-album{font-size:11px;color:var(--text3);margin-top:2px}
-.shazam-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
-.shazam-btn{padding:8px 16px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:12px;cursor:pointer;border:none;transition:.2s}
-.shazam-btn.primary{background:var(--accent);color:white}
-.shazam-btn.secondary{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
-.shazam-btn:hover{opacity:.85}
-.shazam-error{text-align:center;padding:20px;color:var(--text2);font-size:13px;line-height:1.6}
-.shazam-error .err-icon{font-size:32px;margin-bottom:8px}
-.shazam-history{margin-top:12px}
-.shazam-history-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;font-family:'Syne',sans-serif;margin-bottom:8px}
-.shazam-hist-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.shazam-hist-item:last-child{border:none}
-.shazam-hist-item:hover .shazam-hist-name{color:var(--accent)}
-.shazam-hist-img{width:36px;height:36px;border-radius:6px;object-fit:cover;background:var(--bg3);flex-shrink:0}
-.shazam-hist-info{flex:1;min-width:0}
-.shazam-hist-name{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.shazam-hist-artist{font-size:10px;color:var(--text3)}
-.shazam-hist-time{font-size:10px;color:var(--text3);flex-shrink:0}
+.nav-section { padding: 10px 16px; }
+.nav-title { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin: 15px 0 10px 12px; font-weight: 700; }
+.nav-btn { display: flex; align-items: center; gap: 12px; padding: 12px 16px; width: 100%; background: none; border: none; border-radius: 12px; color: var(--text-muted); font-size: 14px; font-weight: 500; cursor: pointer; text-align: left; transition: all 0.2s; }
+.nav-btn:hover { background: var(--bg-hover); color: var(--text-main); }
+.nav-btn.active { background: var(--accent-grad); color: white; }
+.nav-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* Anuncio inferior menú */
+.sidebar-ad { margin: auto 16px 20px; padding: 16px; background: var(--bg-card); border-radius: var(--radius-md); text-align: center; border: 1px solid var(--border-color); }
+.sidebar-ad p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+
+/* --- CONTENIDO CENTRAL --- */
+.content-area { flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative; }
+
+/* --- CABECERA TOP --- */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 30px; background: var(--bg-app); border-bottom: 1px solid transparent; flex-shrink: 0; gap: 20px; }
+.search-container { flex: 1; max-width: 500px; position: relative; }
+.search-container input { width: 100%; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 30px; padding: 10px 15px 10px 40px; color: var(--text-main); font-size: 14px; outline: none; transition: 0.2s; }
+.search-container input:focus { border-color: var(--accent); background: var(--bg-hover); }
+.search-container svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; fill: var(--text-muted); pointer-events: none; }
+.topbar-actions { display: flex; align-items: center; gap: 12px; }
+.live-btn { display: flex; align-items: center; gap: 8px; background: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.3); color: #00e676; padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 700; cursor: pointer; }
+.live-dot { width: 8px; height: 8px; background: #00e676; border-radius: 50%; animation: pulse 1.5s infinite; }
+.icon-btn { width: 40px; height: 40px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); transition: 0.2s; }
+.icon-btn:hover { color: var(--text-main); border-color: var(--text-muted); }
+.icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* --- ÁREA DE DESPLAZAMIENTO (PÁGINAS) --- */
+.scroll-view { flex: 1; overflow-y: auto; padding: 0 30px 40px; }
+.page { display: none; }
+.page.active { display: block; }
+.section-title { font-size: 18px; font-weight: 700; margin: 30px 0 16px; color: var(--text-main); display: flex; justify-content: space-between; align-items: center; }
+
+/* BANNER HERO (Solo css, sin imagenes pesadas para cuidar la RAM de la TV) */
+.hero-banner { margin-top: 20px; background: linear-gradient(120deg, #1A1235 0%, #0B0E14 100%); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 30px; display: flex; align-items: center; gap: 30px; position: relative; overflow: hidden; }
+.hero-banner::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 50%; background: radial-gradient(circle at right, rgba(255,87,34,0.15) 0%, transparent 70%); pointer-events: none; }
+.hero-img { width: 120px; height: 120px; border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover; background: var(--bg-card); z-index: 1; }
+.hero-info { flex: 1; z-index: 1; }
+.hero-title { font-size: 28px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+.hero-tags { font-size: 14px; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
+.hero-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; max-width: 80%; }
+.hero-actions { display: flex; gap: 12px; }
+.btn-primary { background: var(--accent-grad); border: none; color: white; padding: 10px 24px; border-radius: 30px; font-weight: 700; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform 0.2s; }
+.btn-primary:active { transform: scale(0.95); }
+.btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 20px; border-radius: 30px; font-weight: 500; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+/* GRID DE PAÍSES Y CONTINENTES */
+.grid-2col { display: flex; gap: 24px; flex-wrap: wrap; }
+.grid-col { flex: 1; min-width: 300px; }
+.pill-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.country-pill { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; flex: 1 1 calc(33.333% - 10px); min-width: 140px; }
+.country-pill:hover { border-color: var(--text-muted); background: var(--bg-hover); }
+.country-pill .flag { font-size: 20px; }
+.country-pill .info { display: flex; flex-direction: column; }
+.country-pill .name { font-size: 13px; font-weight: 700; }
+.country-pill .count { font-size: 10px; color: var(--text-muted); }
+.country-pill.active { border-color: var(--accent); background: rgba(255,87,34,0.05); }
+
+/* LISTA DE EMISORAS (El JS inyectará aquí) */
+.stations-list { display: flex; flex-direction: column; gap: 12px; }
+
+/* ==========================================================================
+   REPRODUCTOR INFERIOR PERSISTENTE (BOTTOM PLAYER)
+   ========================================================================== */
+.bottom-player { height: 90px; background: var(--bg-sidebar); border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0; z-index: 100; }
+.player-left { display: flex; align-items: center; gap: 16px; width: 30%; min-width: 200px; }
+.player-logo { width: 56px; height: 56px; border-radius: 10px; background: var(--bg-card); object-fit: cover; }
+.player-info { display: flex; flex-direction: column; overflow: hidden; }
+.player-name { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main); margin-bottom: 4px; }
+.player-status { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.player-center { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 40%; }
+.wave-anim { display: flex; gap: 3px; align-items: center; height: 24px; }
+.wave-anim span { display: block; width: 3px; background: var(--accent); border-radius: 3px; animation: wave 1s ease-in-out infinite; }
+.wave-anim span:nth-child(2) { animation-delay: 0.15s; } .wave-anim span:nth-child(3) { animation-delay: 0.3s; }
+.wave-anim span:nth-child(4) { animation-delay: 0.15s; } .wave-anim span:nth-child(5) { animation-delay: 0.05s; }
+.wave-anim.idle span { animation: none; height: 4px; background: var(--text-muted); }
+@keyframes wave { 0%, 100% { height: 4px; } 50% { height: 24px; } }
+.player-center span { font-size: 11px; color: var(--accent); margin-top: 6px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+.player-right { display: flex; align-items: center; justify-content: flex-end; gap: 16px; width: 30%; min-width: 200px; }
+.vol-container { display: flex; align-items: center; gap: 8px; }
+.vol-container svg { width: 20px; height: 20px; fill: var(--text-muted); }
+input[type=range] { -webkit-appearance: none; width: 80px; background: transparent; }
+input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: var(--text-muted); border-radius: 2px; }
+input[type=range]::-webkit-slider-thumb { border: none; height: 12px; width: 12px; border-radius: 50%; background: var(--text-main); cursor: pointer; -webkit-appearance: none; margin-top: -4px; transition: 0.2s; }
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); background: var(--accent); }
+.btn-play-big { width: 50px; height: 50px; border-radius: 50%; background: var(--accent-grad); border: none; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 15px rgba(255,87,34,0.3); }
+.btn-play-big:active { transform: scale(0.9); }
+.btn-play-big svg { width: 20px; height: 20px; fill: white; margin-left: 3px; }
+
+/* ANIMACIÓN PULSO LIVE */
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,230,118,0.4); } 70% { box-shadow: 0 0 0 6px rgba(0,230,118,0); } 100% { box-shadow: 0 0 0 0 rgba(0,230,118,0); } }
+
+/* ==========================================================================
+   DISEÑO RESPONSIVO (MÓVIL Y TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .sidebar { position: absolute; transform: translateX(-100%); z-index: 200; height: 100%; transition: transform 0.3s; }
+  .sidebar.open { transform: translateX(0); }
+  .grid-2col { flex-direction: column; }
+  .hero-banner { flex-direction: column; text-align: center; padding: 20px; }
+  .hero-actions { justify-content: center; }
+  .player-center { display: none; } /* Ocultar onda en móvil para dar espacio */
+  .player-left { width: auto; flex: 1; }
+  .player-right { width: auto; }
+  input[type=range] { display: none; } /* Ocultar barra volumen en móvil (usan botones físicos) */
+  .topbar { padding: 12px 15px; }
+  .scroll-view { padding: 0 15px 20px; }
+}
+
+/* Modales Ocultos Temporalmente para mantener los IDs funcionales del JS actual */
+.hidden-layer { display: none; }
 </style>
 </head>
 <body>
-<div class="hdr">
-  <!-- Barra navegación: atrás / home / adelante / breadcrumb -->
-  <div class="nav-bar">
-    <button class="btn-nav" id="btnBack"    onclick="navBack()"    title="Atrás"   disabled>&#8592;</button>
-    <button class="btn-nav" id="btnHome"    onclick="navHome()"    title="Inicio"  disabled>⌂</button>
-    <button class="btn-nav" id="btnForward" onclick="navForward()" title="Adelante" disabled>&#8594;</button>
-    <div class="nav-crumb" id="navCrumb"></div>
-  </div>
-  <div class="hdr-top">
-    <div class="logo">
-      <img id="logoImg" alt="Radio Jere Pro">
-      <div class="logo-txt">Radio Jere <span>Pro</span></div>
+
+<div class="app-layout">
+  
+  <div class="main-area">
+    <!-- SIDEBAR -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <!-- Icono de antena RSS simplificado -->
+          <svg viewBox="0 0 24 24"><path d="M4 11a9 9 0 0 1 9 9h-2a7 7 0 0 0-7-7v-2zm0 4a5 5 0 0 1 5 5h-2a3 3 0 0 0-3-3v-2zm0-8a13 13 0 0 1 13 13h-2a11 11 0 0 0-11-11v-2zm2 13a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
+        </div>
+        Radio Jere
+      </div>
+      
+      <div class="nav-section">
+        <button class="nav-btn active" onclick="showPage('inicio', this)">
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Inicio
+        </button>
+        <button class="nav-btn" onclick="showPage('explorar', this)">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg> Explorar
+        </button>
+        <button class="nav-btn" onclick="showPage('favglobal', this)">
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> Favoritos
+        </button>
+        <!-- FASE 4 usará esta página -->
+        <button class="nav-btn" onclick="showPage('anclados', this)">
+          <svg viewBox="0 0 24 24"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg> Anclar
+        </button>
+      </div>
+
+      <div class="nav-title">Categorías</div>
+      <div class="nav-section">
+        <button class="nav-btn"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.91-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.34.16-2h4.68c.09.66.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg> Todas</button>
+      </div>
+
+      <div class="nav-title">Opciones</div>
+      <div class="nav-section" style="flex:1">
+        <button class="nav-btn" onclick="openTheme()"><svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.06-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.06.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .43-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.49-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg> Configuración</button>
+      </div>
+
+      <div class="sidebar-ad">
+        <svg style="width:24px;height:24px;fill:var(--accent);margin-bottom:8px;" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <p>Tu música,<br>tus emisoras ancladas.</p>
+      </div>
+    </nav>
+
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <!-- Botón para mostrar menú en móviles -->
+        <button class="icon-btn" style="display:none;" id="btnMenuToggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+
+        <div class="search-container">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar emisoras, países o géneros..." oninput="filterStations()">
+        </div>
+
+        <div class="topbar-actions">
+          <!-- Botón Shazam conservado funcionalmente, adaptado visualmente a topbar -->
+          <button class="icon-btn" id="btnShazam" onclick="shazamStart()" title="Identificar canción">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </button>
+          
+          <button class="live-btn">
+            <div class="live-dot"></div> <span id="liveCount">0</span> En vivo
+          </button>
+          
+          <button class="icon-btn" title="Idioma"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.91-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8z"/></svg></button>
+          <button class="icon-btn" onclick="openSyncPanel()" title="Sincronizar TV"><svg viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg></button>
+        </div>
+      </header>
+
+      <!-- SCROLL AREA PÁGINAS -->
+      <div class="scroll-view">
+        
+        <!-- PÁGINA: INICIO -->
+        <div class="page active" id="page-inicio">
+          <!-- HERO BANNER -->
+          <div class="hero-banner">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a2e'/%3E%3C/svg%3E" class="hero-img" id="heroImg" alt="Radio">
+            <div class="hero-info">
+              <div class="hero-title">Yariguíes Stereo 102.7 FM <span class="live-btn" style="padding:4px 8px; font-size:11px;"><div class="live-dot"></div>En vivo</span></div>
+              <div class="hero-tags">Salsa · Merengue · Tropical</div>
+              <div class="hero-desc">La mejor música tropical y los éxitos de siempre, ¡en tu radio de confianza!</div>
+              <div class="hero-actions">
+                <button class="btn-primary" onclick="_playById('co-022')"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Reproducir</button>
+                <button class="btn-secondary"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> Favoritos</button>
+                <button class="btn-secondary"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M16 12V4h1V2H7v2h1v8l-2 2v2h5.2v6h1.6v-6H18v-2l-2-2z"/></svg> Anclar</button>
+              </div>
+            </div>
+            <!-- Elemento decorativo del banner derecho -->
+            <div style="z-index:1; font-family:'Syne',sans-serif; font-size:24px; font-weight:800; line-height:1.1; text-align:right; transform: rotate(-5deg); color:#fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+              La emisora<br>que te acompaña<br><span style="color:var(--accent);">siempre</span>
+            </div>
+          </div>
+
+          <div class="grid-2col">
+            <!-- PAÍSES -->
+            <div class="grid-col">
+              <div class="section-title">
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:-3px;margin-right:6px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Explorar por países</span>
+              </div>
+              <div class="pill-grid" id="countryGrid">
+                <!-- Se inyectará desde JS. Estructura placeholder para diseño: -->
+                <div class="country-pill">
+                  <div class="flag">🇨🇴</div>
+                  <div class="info"><span class="name">Colombia</span><span class="count">672 emisoras</span></div>
+                </div>
+                <div class="country-pill">
+                  <div class="flag">🇲🇽</div>
+                  <div class="info"><span class="name">México</span><span class="count">2.177 emisoras</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CONTINENTES -->
+            <div class="grid-col">
+              <div class="section-title">
+                <span><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:-3px;margin-right:6px"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg> Por continente</span>
+              </div>
+              <div class="pill-grid" id="contScroll">
+                <!-- JS inyectará aquí -->
+                <div class="country-pill active"><div class="flag">🌎</div><div class="info"><span class="name">América</span></div></div>
+                <div class="country-pill"><div class="flag">🌍</div><div class="info"><span class="name">Europa</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EMISORAS DESTACADAS (FASE 3 rediseñará las tarjetas internamente, aquí está el contenedor) -->
+          <div class="section-title">
+            <span>⭐ Emisoras destacadas</span>
+            <span style="font-size:12px; font-weight:500; color:var(--text-muted); cursor:pointer;">Ver todas ></span>
+          </div>
+          <div class="stations-list" id="homeAnchoredGrid"></div>
+        </div>
+
+        <!-- PÁGINA: EXPLORAR -->
+        <div class="page" id="page-explorar">
+          <div class="section-title">Resultados de búsqueda</div>
+          <div class="stations-list" id="stationsList"></div>
+        </div>
+
+        <!-- PÁGINA: FAVORITOS -->
+        <div class="page" id="page-favglobal">
+          <div class="section-title">⭐ Mis emisoras favoritas</div>
+          <div class="stations-list" id="favGlobalList"></div>
+        </div>
+
+      </div>
     </div>
-    <div class="hdr-right">
-      <div class="live-badge"><div class="live-dot"></div><span id="liveCount">0</span> en vivo</div>
-      <!-- Identificar canción -->
-      <button class="btn-shazam" id="btnShazam" onclick="shazamStart()" title="Identificar canción">
-        <span class="shazam-icon">🎵</span>
+  </div>
+
+  <!-- PLAYER INFERIOR PERSISTENTE -->
+  <div class="bottom-player" id="player">
+    <div class="player-left">
+      <img id="pLogoImg" class="player-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a2e'/%3E%3C/svg%3E" alt="Logo">
+      <div class="player-info">
+        <div class="player-name" id="pName">Selecciona una emisora</div>
+        <div class="player-status" id="pStatus">Radio Jere</div>
+      </div>
+    </div>
+
+    <div class="player-center">
+      <div class="wave-anim idle" id="headerWave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <span id="nowName">Sin reproducir</span>
+    </div>
+
+    <div class="player-right">
+      <div class="vol-container">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="document.getElementById('audioPlayer').volume=this.value">
+      </div>
+      
+      <button class="btn-play-big" onclick="if(typeof stopRadio==='function')stopRadio()">
+        <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
-      <button class="btn-sm" onclick="openTheme()">🎨</button>
-      <div class="now-pill">
-        <div class="wave idle" id="headerWave"><span></span><span></span><span></span><span></span></div>
-        <span class="now-name" id="nowName">Sin reproducir</span>
-      </div>
-    </div>
-  </div>
-  <div class="tabs">
-    <button class="tab active" onclick="showPage('inicio',this)">🏠 Inicio</button>
-    <button class="tab" onclick="showPage('explorar',this)">🔍 Explorar</button>
-    <button class="tab" onclick="showPage('favglobal',this)">⭐ Favoritos</button>
-  </div>
-  <div class="lang-bar">
-    <span style="font-size:10px;color:var(--text3);font-family:'Syne',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-right:2px">🌐</span>
-    <button class="lang-btn active" onclick="setLang('all',this)">Todos</button>
-    <button class="lang-btn" onclick="setLang('es',this)">🇪🇸 Español</button>
-    <button class="lang-btn" onclick="setLang('en',this)">🇬🇧 English</button>
-    <button class="lang-btn" onclick="setLang('fr',this)">🇫🇷 Français</button>
-    <button class="lang-btn" onclick="setLang('pt',this)">🇧🇷 Português</button>
-  </div>
-</div>
-
-<!-- THEME PANEL -->
-<div class="theme-panel" id="themePanel" onclick="if(event.target===this)closeTheme()">
-  <div class="panel-box">
-    <div class="panel-title">🎨 Elige tu tema</div>
-    <div class="theme-grid" id="themeGrid"></div>
-    <button class="btn-panel-close" onclick="closeTheme()">Listo</button>
-  </div>
-</div>
-
-<!-- IDENTIFICADOR DE CANCIONES -->
-<div class="shazam-panel" id="shazamPanel" onclick="if(event.target===this)shazamClose()">
-  <div class="shazam-box">
-    <div class="shazam-title">
-      <span>🎵</span>
-      <span>Identificar canción</span>
-      <button onclick="shazamClose()" style="margin-left:auto;background:none;border:none;color:var(--text2);font-size:18px;cursor:pointer">✕</button>
-    </div>
-
-    <!-- Estado: escuchando -->
-    <div id="shazamListening" class="shazam-listening" style="display:none">
-      <div class="shazam-wave-big">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <div class="shazam-timer" id="shazamTimer">5</div>
-      <div class="shazam-hint">Acerca el teléfono a la música<br>o reproduce audio cerca del micrófono</div>
-    </div>
-
-    <!-- Estado: resultado -->
-    <div id="shazamResult" class="shazam-result">
-      <div style="display:flex;gap:14px;align-items:center">
-        <img id="shazamArt" class="shazam-art" src="" alt="">
-        <div>
-          <div class="shazam-song"  id="shazamSong">—</div>
-          <div class="shazam-artist" id="shazamArtist">—</div>
-          <div class="shazam-album"  id="shazamAlbum"></div>
-        </div>
-      </div>
-      <div class="shazam-actions">
-        <button class="shazam-btn primary"    id="btnShazamYT"     onclick="shazamOpenYT()">▶ YouTube</button>
-        <button class="shazam-btn primary"    id="btnShazamSpotify" onclick="shazamOpenSpotify()">🎧 Spotify</button>
-        <button class="shazam-btn secondary"  onclick="shazamStart()">🔄 Identificar otra</button>
-        <button class="shazam-btn secondary"  onclick="shazamClose()">Cerrar</button>
-      </div>
-    </div>
-
-    <!-- Estado: error -->
-    <div id="shazamError" class="shazam-error" style="display:none">
-      <div class="err-icon" id="shazamErrIcon">🎤</div>
-      <div id="shazamErrMsg">No se pudo identificar la canción</div>
-      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap">
-        <button class="shazam-btn primary"   onclick="shazamStart()">🔄 Intentar de nuevo</button>
-        <button class="shazam-btn secondary" onclick="shazamClose()">Cerrar</button>
-      </div>
-    </div>
-
-    <!-- Buscador manual por nombre — alternativa sin micrófono -->
-    <div id="shazamManual" style="display:none;margin-top:14px">
-      <div style="font-size:11px;color:var(--text2);margin-bottom:8px;font-family:'Syne',sans-serif;font-weight:700">
-        🔎 O busca la canción por nombre:
-      </div>
-      <div style="display:flex;gap:6px">
-        <input id="shazamManualInput" type="text"
-          placeholder="Nombre de la canción o artista..."
-          style="flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none"
-          onkeydown="if(event.key==='Enter')shazamManualSearch()"
-        >
-        <button class="shazam-btn primary" onclick="shazamManualSearch()" style="white-space:nowrap">Buscar</button>
-      </div>
-      <div id="shazamManualResults" style="margin-top:10px"></div>
-    </div>
-
-    <!-- Historial de identificaciones -->
-    <div class="shazam-history" id="shazamHistory"></div>
-  </div>
-</div>
-
-<!-- PAÍSES FAVORITOS PANEL -->
-<div class="favpais-panel" id="favpaisPanel" onclick="if(event.target===this)closeFavPais()">
-  <div class="panel-box">
-    <div class="panel-title">⭐ Mis países favoritos</div>
-    <input class="fp-search" type="text" placeholder="Buscar país..." oninput="filterFavPaisPanel(this.value)" id="fpSearch">
-    <div class="fp-list" id="fpList"></div>
-    <button class="btn-panel-close" onclick="closeFavPais()">Listo</button>
-  </div>
-</div>
-
-<div class="content">
-  <!-- INICIO -->
-  <div class="page active" id="page-inicio">
-    <div style="padding:20px 16px">
-      <h1 style="font-size:22px;margin:0 0 6px">Tu música, tus emisoras ancladas.</h1>
-      <p style="color:var(--text2);font-size:13px;margin:0 0 16px">Explora miles de emisoras globales y personaliza tu propio Top de destacadas en la pantalla de inicio.</p>
-      <div style="font-size:11px;letter-spacing:.05em;color:var(--gold, #ffd740);margin-bottom:8px">⭐ TU TOP DE EMISORAS DESTACADAS (ANCLADAS)</div>
-      <div id="homeAnchoredGrid"></div>
-    </div>
-  </div>
-  <!-- EXPLORAR -->
-  <div class="page" id="page-explorar">
-    <!-- Breadcrumb -->
-    <div class="breadcrumb" id="breadcrumb" style="display:none"></div>
-    <!-- Vista continentes -->
-    <div id="view-continents">
-      <div class="status-bar"><div class="sdot loading" id="statusDot"></div><span id="statusText">Conectando...</span></div>
-      <!-- Cerca de mí -->
-      <div class="nearby-explore" id="nearbyExplore">
-        <div class="nearby-explore-header">
-          <div>
-            <div class="nearby-explore-title">📍 Emisoras cerca de mí</div>
-            <div class="nearby-explore-sub" id="nearbyExploreSub">Detecta tu ubicación para ver emisoras locales</div>
-          </div>
-          <button class="btn-nearby" id="btnNearbyExplore" onclick="findNearbyExplore()">Buscar</button>
-        </div>
-        <div id="nearbyExploreList" style="display:none">
-          <div class="sort-bar" style="margin-bottom:8px">
-            <button class="sort-btn active" data-mode="distance" onclick="sortNearby('distance',this)">📍 Más cercanas</button>
-            <button class="sort-btn" data-mode="popular" onclick="sortNearby('popular',this)">🔥 Populares</button>
-            <button class="sort-btn" data-mode="az" onclick="sortNearby('az',this)">A → Z</button>
-            <button class="sort-btn" data-mode="verified" onclick="sortNearby('verified',this)">✓ Verificadas</button>
-          </div>
-          <div class="stations-list" id="nearbyStationsList"></div>
-        </div>
-      </div>
-      <!-- Países favoritos -->
-      <div id="favpais-section" style="margin-bottom:16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <p class="sec-title" style="margin:0">⭐ Mis países</p>
-          <button class="btn-sm" onclick="openFavPais()">+ Editar</button>
-        </div>
-        <div class="country-grid" id="favPaisGrid"><div style="font-size:11px;color:var(--text3);padding:8px">Agrega países favoritos con "+ Editar"</div></div>
-      </div>
-      <!-- Continentes -->
-      <p class="sec-title">Por continente</p>
-      <div class="cont-scroll" id="contScroll"></div>
-      <div class="country-grid" id="countryGrid"><div class="loading-box"><div class="spinner"></div>Cargando...</div></div>
-    </div>
-    <!-- Vista emisoras -->
-    <div id="view-stations" style="display:none">
-      <div class="search-wrap">
-        <span class="search-icon">🔎</span>
-        <input type="text" id="searchInput" placeholder="Buscar emisora..." oninput="filterStations()">
-      </div>
-      <div class="status-bar"><div class="sdot loading" id="stStatusDot"></div><span id="stStatusText">Cargando...</span></div>
-      <div class="sort-bar">
-        <span class="sort-label">Ordenar:</span>
-        <button class="sort-btn active" onclick="sortStations('popular',this)">🔥 Populares</button>
-        <button class="sort-btn" onclick="sortStations('az',this)">A → Z</button>
-        <button class="sort-btn" onclick="sortStations('za',this)">Z → A</button>
-        <button class="sort-btn" onclick="sortStations('verified',this)">✓ Verificadas</button>
-      </div>
-      <p class="sec-title" id="stTitle">Emisoras</p>
-      <div class="stations-list" id="stationsList"><div class="loading-box"><div class="spinner"></div>Cargando...</div></div>
+      
+      <!-- Botón menú lista -->
+      <button class="icon-btn" style="border:none; background:none;"><svg viewBox="0 0 24 24"><path d="M4 18h16v-2H4v2zM4 13h16v-2H4v2zM4 6v2h16V6H4z"/></svg></button>
     </div>
   </div>
 
-  <!-- FAVORITOS GLOBAL -->
-  <div class="page" id="page-favglobal">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-      <p class="sec-title" style="margin:0">⭐ Todos mis favoritos</p>
-      <span style="font-size:10px;color:var(--text3)" id="favGlobalCount"></span>
-    </div>
-    <!-- Nearby bar -->
-    <div class="nearby-bar" id="nearbyBar">
-      <span style="flex:1">📍 Buscar emisoras cerca de ti</span>
-      <button class="btn-nearby" id="btnNearby" onclick="findNearbyStations()">Buscar</button>
-    </div>
-    <!-- Fav sort bar -->
-    <div class="fav-sort-bar">
-      <span class="sort-label">Ordenar:</span>
-      <button class="fav-sort-btn active" onclick="setFavSort('manual',this)">↕ Manual</button>
-      <button class="fav-sort-btn" onclick="setFavSort('az',this)">A → Z</button>
-      <button class="fav-sort-btn" onclick="setFavSort('za',this)">Z → A</button>
-      <button class="fav-sort-btn" onclick="setFavSort('mostused',this)">🔥 Más usadas</button>
-    </div>
-    <div class="stations-list" id="favGlobalList"></div>
-  </div>
+  <audio id="audioPlayer" preload="none"></audio>
 
+  <!-- MANTENEMOS TUS CONTENEDORES OCULTOS PARA QUE EL JS NO FALLE EN ESTA FASE -->
+  <div class="hidden-layer">
+    <div id="breadcrumb"></div>
+    <div id="view-continents"></div>
+    <div id="view-stations"></div>
+    <div id="favPaisGrid"></div>
+    <div id="statusDot"></div>
+    <div id="statusText"></div>
+    <div id="stStatusDot"></div>
+    <div id="stStatusText"></div>
+    <div id="stTitle"></div>
+    <div id="themePanel"></div>
+    <div id="syncPanel">
+      <div id="syncCodeOut"></div>
+      <div id="syncCodeIn"></div>
+      <div id="syncMsg"></div>
+    </div>
+    <div id="shazamPanel"></div>
+    <div id="favpaisPanel"></div>
+    <div id="sharePanel"></div>
+    <button id="btnBack"></button>
+    <button id="btnHome"></button>
+    <button id="btnForward"></button>
+    <div id="navCrumb"></div>
+  </div>
 
 </div>
 
-<!-- SHARE PANEL -->
-<div class="share-panel" id="sharePanel" onclick="if(event.target===this)closeShare()">
-  <div class="share-box">
-    <div class="share-station-name" id="shareStationName">Emisora</div>
-    <div class="share-station-sub" id="shareStationSub">Radio Jere Pro</div>
-    <div class="share-grid">
-      <div class="share-opt" onclick="shareWhatsApp()">
-        <span class="share-opt-icon">💬</span>
-        <span class="share-opt-label">WhatsApp</span>
-      </div>
-      <div class="share-opt" onclick="shareTelegram()">
-        <span class="share-opt-icon">✈️</span>
-        <span class="share-opt-label">Telegram</span>
-      </div>
-      <div class="share-opt" onclick="shareTwitter()">
-        <span class="share-opt-icon">𝕏</span>
-        <span class="share-opt-label">Twitter/X</span>
-      </div>
-      <div class="share-opt" onclick="shareFacebook()">
-        <span class="share-opt-icon">📘</span>
-        <span class="share-opt-label">Facebook</span>
-      </div>
-      <div class="share-opt" onclick="shareEmail()">
-        <span class="share-opt-icon">📧</span>
-        <span class="share-opt-label">Email</span>
-      </div>
-      <div class="share-opt" onclick="shareNative()">
-        <span class="share-opt-icon">📤</span>
-        <span class="share-opt-label">Más opciones</span>
-      </div>
-      <div class="share-opt" onclick="copyStreamUrl()">
-        <span class="share-opt-icon">🔗</span>
-        <span class="share-opt-label">Copiar stream</span>
-      </div>
-      <div class="share-opt" onclick="copyAppLink()">
-        <span class="share-opt-icon">📻</span>
-        <span class="share-opt-label">Link app</span>
-      </div>
-    </div>
-    <div class="share-link-box">
-      <input class="share-link-input" id="shareLinkInput" readonly>
-      <button class="btn-copy-link" id="btnCopyLink" onclick="copyShareLink()">Copiar</button>
-    </div>
-    <button class="btn-close-share" onclick="closeShare()">Cerrar</button>
-  </div>
-</div>
-
-<div class="player" id="player">
-  <div class="player-inner">
-    <div class="p-logo"><img id="pLogoImg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:7px"></div>
-    <div class="p-info">
-      <div class="p-name" id="pName">Selecciona una emisora</div>
-      <div class="p-status" id="pStatus">Radio Jere Pro</div>
-    </div>
-    <div class="p-controls">
-      <div class="vol-wrap"><span>🔉</span><input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="audio.volume=this.value"></div>
-      <button class="btn-stop" onclick="stopRadio()">⏹</button>
-    </div>
-  </div>
-</div>
-
-<audio id="audioPlayer" preload="none"></audio>
-
-<!--
-  Compatibilidad con Smart TVs (Samsung Tizen, LG webOS, Sony/TCL Android TV):
-  1. Polyfills: rellenan funciones que algunos TVs no traen incorporadas
-     (fetch, AbortController). Cada uno se auto-desactiva si el navegador
-     ya la soporta, así que no afecta a navegadores modernos.
-  2. app.min.js: es tu código de src/app.js ya traducido (transpilado) a
-     una versión de JavaScript compatible con TVs desde ~2016 en adelante.
-     Se genera automáticamente en cada despliegue — nunca lo edites a mano,
-     edita src/app.js y Netlify lo vuelve a traducir solo.
--->
+<!-- Scripts transpilados actuales (No cambiar) -->
 <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.20/dist/fetch.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/abortcontroller-polyfill@1.7.5/dist/umd-polyfill.min.js"></script>
 <script src="/js/app.min.js"></script>

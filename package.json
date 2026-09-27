@@ -4,6 +4,9 @@
   "scripts": {
     "build": "esbuild src/app.js --minify --target=es2015,chrome58,safari11 --outfile=js/app.min.js"
   },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  },
   "devDependencies": {
     "esbuild": "^0.24.0"
   }
