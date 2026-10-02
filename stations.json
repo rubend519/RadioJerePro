@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro — emisoras curadas Colombia",
-    "last_updated": "2026-10-01",
-    "total": 167,
+    "last_updated": "2026-10-02",
+    "total": 169,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -1587,6 +1587,24 @@
       "stationuuid": "co-167",
       "name": "Tu 95.5 FM﻿Grupo Niche - Un alto en el camino - ﻿Grupo Niche - Un alto en el camino",
       "url": "https://stream20.usastreams.com:7094/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-168",
+      "name": "ENC Radio (Nuevo Continente)Oración",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-169",
+      "name": "Emisora MarianaHOTELEROS",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
