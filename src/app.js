@@ -1,7 +1,7 @@
-const ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMWExYTJlIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjQiIGZpbGw9IiNlOTQ1NjAiLz4KPHBhdGggZD0iTTMyIDIwYTEyIDEyIDAgMCAxIDEyIDEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTMyIDEyYTIwIDIwIDAgMCAxIDIwIDIwIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNTUiLz4KPHBhdGggZD0iTTMyIDQ0YTEyIDEyIDAgMCAxLTEyLTEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuODUiLz4KPC9zdmc+Cg==';
+﻿const ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMWExYTJlIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjQiIGZpbGw9IiNlOTQ1NjAiLz4KPHBhdGggZD0iTTMyIDIwYTEyIDEyIDAgMCAxIDEyIDEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTMyIDEyYTIwIDIwIDAgMCAxIDIwIDIwIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNTUiLz4KPHBhdGggZD0iTTMyIDQ0YTEyIDEyIDAgMCAxLTEyLTEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuODUiLz4KPC9zdmc+Cg==';
 const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
 // Compatible con TVs/navegadores viejos que no tienen AbortSignal.timeout() (API de 2022).
-// Usa AbortController + setTimeout, soportado desde hace mucho más tiempo.
+// Usa AbortController + setTimeout, soportado desde hace mucho mÃ¡s tiempo.
 function timeoutSignal(ms) {
   var controller = new AbortController();
   setTimeout(function(){ controller.abort(); }, ms);
@@ -80,11 +80,11 @@ const COUNTRY_ALIASES = {
 };
 
 const CONTINENTS = {
-  'América': ['Colombia','Mexico','Argentina','Brazil','United States','Canada','Chile','Peru','Venezuela','Ecuador','Bolivia','Uruguay','Paraguay','Dominican Republic','Costa Rica','Panama','Cuba','Guatemala','Honduras','El Salvador','Nicaragua','Haiti','Puerto Rico','Jamaica','Trinidad and Tobago','Guyana','Suriname','Belize','Bahamas','Barbados','Antigua and Barbuda'],
+  'AmÃ©rica': ['Colombia','Mexico','Argentina','Brazil','United States','Canada','Chile','Peru','Venezuela','Ecuador','Bolivia','Uruguay','Paraguay','Dominican Republic','Costa Rica','Panama','Cuba','Guatemala','Honduras','El Salvador','Nicaragua','Haiti','Puerto Rico','Jamaica','Trinidad and Tobago','Guyana','Suriname','Belize','Bahamas','Barbados','Antigua and Barbuda'],
   'Europa': ['Spain','France','Germany','Italy','Portugal','United Kingdom','Netherlands','Sweden','Norway','Denmark','Finland','Poland','Russia','Ukraine','Switzerland','Austria','Belgium','Greece','Romania','Czech Republic','Hungary','Serbia','Croatia','Slovakia','Bulgaria','Ireland','Belarus','Lithuania','Latvia','Estonia','Slovenia','Bosnia and Herzegovina','North Macedonia','Albania','Kosovo','Moldova','Luxembourg','Iceland','Malta','Cyprus'],
   'Asia': ['Japan','South Korea','India','China','Indonesia','Vietnam','Thailand','Malaysia','Philippines','Turkey','Saudi Arabia','United Arab Emirates','Iran','Iraq','Pakistan','Bangladesh','Singapore','Taiwan','Hong Kong','Myanmar','Cambodia','Laos','Sri Lanka','Nepal','Kazakhstan','Uzbekistan','Azerbaijan','Georgia','Armenia','Lebanon','Jordan','Israel','Kuwait','Qatar','Bahrain','Oman','Yemen','Syria','Afghanistan','Mongolia'],
-  'África': ['South Africa','Nigeria','Kenya','Egypt','Morocco','Ethiopia','Ghana','Tanzania','Algeria','Tunisia','Senegal','Cameroon','Uganda','Mozambique','Zimbabwe','Angola','Ivory Coast','Madagascar','Zambia','Rwanda','Libya','Sudan','Somalia'],
-  'Oceanía': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
+  'Ãfrica': ['South Africa','Nigeria','Kenya','Egypt','Morocco','Ethiopia','Ghana','Tanzania','Algeria','Tunisia','Senegal','Cameroon','Uganda','Mozambique','Zimbabwe','Angola','Ivory Coast','Madagascar','Zambia','Rwanda','Libya','Sudan','Somalia'],
+  'OceanÃ­a': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
 };
 
 let _stationsLoaded = false;
@@ -107,32 +107,32 @@ async function loadStationsJSON() {
 }
 
 const COLOMBIA_CURADA = [
-  {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'Bogotá',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
-  {stationuuid:'co-002',name:'Tropicana Bogotá 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'Bogotá',tags:'tropical,salsa',favicon:'https://www.tropicanafm.com/wp-content/uploads/2023/04/cropped-favicon-tropicana-32x32.png'},
-  {stationuuid:'co-003',name:'Caracol Radio Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.caracol.com.co/wp-content/uploads/2021/10/cropped-favicon-caracol-32x32.png'},
-  {stationuuid:'co-004',name:'W Radio Colombia',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/WRADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,talk',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/4/2021/09/cropped-favicon-wradio-32x32.png'},
-  {stationuuid:'co-005',name:'La Mega Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGAAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.lamega.com.co/wp-content/uploads/2021/10/cropped-favicon-lamega-32x32.png'},
-  {stationuuid:'co-006',name:'La Kalle 96.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLEAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,urbano',favicon:'https://www.lakalle.com.co/wp-content/uploads/2021/10/cropped-favicon-lakalle-32x32.png'},
-  {stationuuid:'co-007',name:'Bésame 97.4 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'romantica,baladas',favicon:'https://www.besame.fm/wp-content/uploads/2021/10/cropped-favicon-besame-32x32.png'},
-  {stationuuid:'co-008',name:'Olímpica Stereo Bogotá 105.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLIMPICA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'vallenato,popular',favicon:'https://www.olimpicastereo.com.co/wp-content/uploads/2021/09/cropped-favicon-olimpica-32x32.png'},
-  {stationuuid:'co-009',name:'Candela Stereo 101.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CANDELAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:'https://www.candelaestereo.com/wp-content/uploads/2021/09/cropped-favicon-candela-32x32.png'},
-  {stationuuid:'co-010',name:'Blu Radio 96.9 FM Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BLU_RADIOAAC.aac',country:'Colombia',state:'Bogotá',tags:'news,noticias',favicon:'https://www.bluradio.com/wp-content/uploads/2021/09/cropped-favicon-blu-32x32.png'},
-  {stationuuid:'co-011',name:'La FM Bogotá 94.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FMAAC.aac',country:'Colombia',state:'Bogotá',tags:'noticias,talk',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png'},
-  {stationuuid:'co-012',name:'El Sol Bogotá - La Salsa 105.4 FM',url:'/stream-proxy?id=co-012',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BOGOTAAAC_SC',country:'Colombia',state:'Bogotá',tags:'salsa',favicon:'https://www.elsolradio.com.co/wp-content/uploads/2021/09/cropped-favicon-elsol-32x32.png'},
-  {stationuuid:'co-013',name:'Radio Uno Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNOAAC.aac',country:'Colombia',state:'Bogotá',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png'},
-  {stationuuid:'co-014',name:'Amor Stereo 97.7 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/AMOR_STEREOACC.aac',country:'Colombia',state:'Bogotá',tags:'romantica',favicon:''},
-  {stationuuid:'co-015',name:'Vibra Bogotá 104.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/VIBRAAAC.aac',country:'Colombia',state:'Bogotá',tags:'pop,hits',favicon:''},
-  {stationuuid:'co-016',name:'Señal Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÑAL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
-  {stationuuid:'co-017',name:'Oxígeno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'Bogotá',tags:'alternativa,pop',favicon:''},
-  {stationuuid:'co-018',name:'Rumba Estéreo Bogotá',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'Bogotá',tags:'salsa,tropical',favicon:''},
+  {stationuuid:'co-001',name:'Radioacktiva 97.9 FM',url:'https://16613.live.streamtheworld.com/RADIO_ACTIVAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'rock',favicon:'https://www.radioacktiva.com/wp-content/uploads/2020/07/favicon-32x32.png'},
+  {stationuuid:'co-002',name:'Tropicana BogotÃ¡ 102.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/TROPICANAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'tropical,salsa',favicon:'https://www.tropicanafm.com/wp-content/uploads/2023/04/cropped-favicon-tropicana-32x32.png'},
+  {stationuuid:'co-003',name:'Caracol Radio BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_RADIOAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'news,noticias',favicon:'https://www.caracol.com.co/wp-content/uploads/2021/10/cropped-favicon-caracol-32x32.png'},
+  {stationuuid:'co-004',name:'W Radio Colombia',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/WRADIOAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'news,talk',favicon:'https://www.wradio.com.co/wp-content/uploads/sites/4/2021/09/cropped-favicon-wradio-32x32.png'},
+  {stationuuid:'co-005',name:'La Mega BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'popular,vallenato',favicon:'https://www.lamega.com.co/wp-content/uploads/2021/10/cropped-favicon-lamega-32x32.png'},
+  {stationuuid:'co-006',name:'La Kalle 96.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLEAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'popular,urbano',favicon:'https://www.lakalle.com.co/wp-content/uploads/2021/10/cropped-favicon-lakalle-32x32.png'},
+  {stationuuid:'co-007',name:'BÃ©same 97.4 FM BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BOGOTAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'romantica,baladas',favicon:'https://www.besame.fm/wp-content/uploads/2021/10/cropped-favicon-besame-32x32.png'},
+  {stationuuid:'co-008',name:'OlÃ­mpica Stereo BogotÃ¡ 105.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLIMPICA_BOGOTAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'vallenato,popular',favicon:'https://www.olimpicastereo.com.co/wp-content/uploads/2021/09/cropped-favicon-olimpica-32x32.png'},
+  {stationuuid:'co-009',name:'Candela Stereo 101.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/CANDELAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'salsa,tropical',favicon:'https://www.candelaestereo.com/wp-content/uploads/2021/09/cropped-favicon-candela-32x32.png'},
+  {stationuuid:'co-010',name:'Blu Radio 96.9 FM BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/BLU_RADIOAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'news,noticias',favicon:'https://www.bluradio.com/wp-content/uploads/2021/09/cropped-favicon-blu-32x32.png'},
+  {stationuuid:'co-011',name:'La FM BogotÃ¡ 94.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FMAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'noticias,talk',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png'},
+  {stationuuid:'co-012',name:'El Sol BogotÃ¡ - La Salsa 105.4 FM',url:'/stream-proxy?id=co-012',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/EL_SOL_BOGOTAAAC_SC',country:'Colombia',state:'BogotÃ¡',tags:'salsa',favicon:'https://www.elsolradio.com.co/wp-content/uploads/2021/09/cropped-favicon-elsol-32x32.png'},
+  {stationuuid:'co-013',name:'Radio Uno BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNOAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png'},
+  {stationuuid:'co-014',name:'Amor Stereo 97.7 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/AMOR_STEREOACC.aac',country:'Colombia',state:'BogotÃ¡',tags:'romantica',favicon:''},
+  {stationuuid:'co-015',name:'Vibra BogotÃ¡ 104.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/VIBRAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'pop,hits',favicon:''},
+  {stationuuid:'co-016',name:'SeÃ±al Colombia Radio',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/SEÃ‘AL_COLOMBIAAAC.aac',country:'Colombia',state:'Nacional',tags:'cultura,clasica',favicon:''},
+  {stationuuid:'co-017',name:'OxÃ­geno 103.9 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/OXIGENOACC.aac',country:'Colombia',state:'BogotÃ¡',tags:'alternativa,pop',favicon:''},
+  {stationuuid:'co-018',name:'Rumba EstÃ©reo BogotÃ¡',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RUMBA_BOGOTAAAC.aac',country:'Colombia',state:'BogotÃ¡',tags:'salsa,tropical',favicon:''},
   {stationuuid:'co-019',name:'El Sol Bucaramanga 103.7 FM',url:'https://mdstrm.com/audio/632cc5d948f73909a614ab93/icecast.audio',country:'Colombia',state:'Bucaramanga',tags:'salsa,tropical',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227,verified:true},
-  {stationuuid:'co-020',name:'Bésame FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-020',name:'BÃ©same FM Bucaramanga 104.7 FM',url:'https://stream.zeno.fm/g57d822xevduv',country:'Colombia',state:'Bucaramanga',tags:'romantica,baladas',favicon:'https://besame.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-besame-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-021',name:'Tropicana Bucaramanga 95.7 FM',url:'/stream-proxy?id=co-021',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/TR_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'tropical,salsa',favicon:'https://tropicana.caracol.com.co/wp-content/uploads/sites/2/2021/09/tropicana-favicon.ico',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://estructuraweb.com.co:9339/stream',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://images.zeno.fm/iqpxWu2NPq98GNfDgwP05w9QvePKl8AzyO0PoY5PFqY/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYjM0NjJmZTYtM2YxZC00Nzc2LThkMDAtOTZjZDZmMTE1MzVmL2ltYWdlLz91PTE3MTM5MDUzNjMwMDA',geo_lat:7.0653,geo_long:-73.8547,verified:true},
   {stationuuid:'co-036',name:'Radio Fundingue.com',url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3',country:'Colombia',state:'Barranquilla',tags:'vallenato',favicon:'https://images.zeno.fm/znlO1U-iRK909IIaN127niR1oqoN-bKbdXYm_icQYzs/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMjlhM2IwZTEtMmEwNC00MjVmLTk2MTYtMmUxZDg1OWQyZDgyL2ltYWdlLz91PTE3MzYzNDYxMTgwMDA',verified:true},
-  {stationuuid:'co-037',name:'El Sol Medellín 107.9 FM',url:'https://mdstrm.com/audio/632c9d30aa9ace684913b853/icecast.audio',country:'Colombia',state:'Medellín',tags:'salsa',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',verified:true},
-  {stationuuid:'co-038',name:'Radio Power Colombia',url:'https://stream.zeno.fm/radio-power',country:'Colombia',state:'Fusagasugá',tags:'80s,90s,dance',favicon:ICON,verified:false},
-  {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-037',name:'El Sol MedellÃ­n 107.9 FM',url:'https://mdstrm.com/audio/632c9d30aa9ace684913b853/icecast.audio',country:'Colombia',state:'MedellÃ­n',tags:'salsa',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',verified:true},
+  {stationuuid:'co-038',name:'Radio Power Colombia',url:'https://stream.zeno.fm/radio-power',country:'Colombia',state:'FusagasugÃ¡',tags:'80s,90s,dance',favicon:ICON,verified:false},
+  {stationuuid:'co-023',name:'OlÃ­mpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-026',name:'La FM Bucaramanga 99.7 FM',url:'/stream-proxy?id=co-026',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_FM_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://www.lafm.com.co/wp-content/uploads/2021/09/cropped-favicon-lafm-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
@@ -141,22 +141,22 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-029',name:'Radio Uno Bucaramanga',url:'/stream-proxy?id=co-029',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_UNO_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://www.radiouno.com.co/wp-content/uploads/2021/09/cropped-favicon-radiouno-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-030',name:'La Kalle Bucaramanga 96.9 FM',url:'/stream-proxy?id=co-030',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_KALLE_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'pop,urbano',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-031',name:'Florida Stereo 88.8 FM Floridablanca',url:'https://stream.zeno.fm/floridastereo',country:'Colombia',state:'Floridablanca',tags:'variada,pop',favicon:'',geo_lat:7.0647,geo_long:-73.0878},
-  {stationuuid:'co-032',name:'San Juan de Girón 88.2 FM',url:'https://stream.zeno.fm/sanjuangiron',country:'Colombia',state:'Girón',tags:'comunitaria,variada',favicon:'',geo_lat:7.0747,geo_long:-73.1678},
+  {stationuuid:'co-032',name:'San Juan de GirÃ³n 88.2 FM',url:'https://stream.zeno.fm/sanjuangiron',country:'Colombia',state:'GirÃ³n',tags:'comunitaria,variada',favicon:'',geo_lat:7.0747,geo_long:-73.1678},
   {stationuuid:'co-033',name:'Radio Nacional Colombia Bucaramanga 92.3 FM',url:'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIONACIONALCOL_SC',country:'Colombia',state:'Bucaramanga',tags:'cultura,noticias',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-034',name:'La Kontentosa 106.7 FM Bucaramanga',url:'https://stream.zeno.fm/q6fw8nu5y18uv',country:'Colombia',state:'Bucaramanga',tags:'popular,tropical',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
-  {stationuuid:'co-035',name:'Radio Policía Bucaramanga 91.7 FM',url:'https://stream.zeno.fm/radiopoliciabuca',country:'Colombia',state:'Bucaramanga',tags:'noticias,institucional',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
+  {stationuuid:'co-035',name:'Radio PolicÃ­a Bucaramanga 91.7 FM',url:'https://stream.zeno.fm/radiopoliciabuca',country:'Colombia',state:'Bucaramanga',tags:'noticias,institucional',favicon:'',geo_lat:7.1198,geo_long:-73.1227},
 ];
 
 const THEMES = {
-  'Noche Azul':{emoji:'🌙',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:'#e94560',text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
-  'Océano':    {emoji:'🌊',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
-  'Bosque':    {emoji:'🌲',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
-  'Carbón':    {emoji:'🔥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
-  'Rosa':      {emoji:'🌸',bg:'#0e040e',bg2:'#180a18',bg3:'#220e22',bg4:'#2e142e',accent:'#e040fb',text:'#f8e8f8',text2:'#c080c0',text3:'#7a4a7a',card:'#140a14'},
-  'Día Claro': {emoji:'☀️',bg:'#f0f2f5',bg2:'#ffffff',bg3:'#e8eaf0',bg4:'#dde0ea',accent:'#1565c0',text:'#1a1a2e',text2:'#556080',text3:'#8896b0',card:'#ffffff'},
-  'Atardecer': {emoji:'🌅',bg:'#12080a',bg2:'#1e0f0a',bg3:'#2d1710',bg4:'#3d2018',accent:'#ff6d00',text:'#ffeedd',text2:'#c0845a',text3:'#7a5040',card:'#1e1008'},
-  'Galaxia':   {emoji:'✨',bg:'#08060f',bg2:'#100e1e',bg3:'#19162e',bg4:'#231e3e',accent:'#7c4dff',text:'#ece8ff',text2:'#9080c0',text3:'#504870',card:'#130f20'},
-  'Caribe':    {emoji:'🏝️',bg:'#040e10',bg2:'#071820',bg3:'#0c2830',bg4:'#113540',accent:'#00e5a0',text:'#d8f5ee',text2:'#60a898',text3:'#306858',card:'#071518'},
+  'Noche Azul':{emoji:'ðŸŒ™',bg:'#0a0a12',bg2:'#12121e',bg3:'#1a1a2e',bg4:'#1f1f35',accent:'#e94560',text:'#f0f0f8',text2:'#8899bb',text3:'#4a5070',card:'#161625'},
+  'OcÃ©ano':    {emoji:'ðŸŒŠ',bg:'#060d1a',bg2:'#0a1628',bg3:'#0f2040',bg4:'#142850',accent:'#00bcd4',text:'#e8f4f8',text2:'#7baabf',text3:'#3a607a',card:'#0c1830'},
+  'Bosque':    {emoji:'ðŸŒ²',bg:'#060f06',bg2:'#0d180d',bg3:'#142414',bg4:'#1a2e1a',accent:'#4caf50',text:'#d4e8d4',text2:'#7aaa7a',text3:'#3a6a3a',card:'#0f1a0f'},
+  'CarbÃ³n':    {emoji:'ðŸ”¥',bg:'#0e0e0e',bg2:'#1a1a1a',bg3:'#222',bg4:'#2a2a2a',accent:'#ff3d00',text:'#f0f0f0',text2:'#999',text3:'#555',card:'#161616'},
+  'Rosa':      {emoji:'ðŸŒ¸',bg:'#0e040e',bg2:'#180a18',bg3:'#220e22',bg4:'#2e142e',accent:'#e040fb',text:'#f8e8f8',text2:'#c080c0',text3:'#7a4a7a',card:'#140a14'},
+  'DÃ­a Claro': {emoji:'â˜€ï¸',bg:'#f0f2f5',bg2:'#ffffff',bg3:'#e8eaf0',bg4:'#dde0ea',accent:'#1565c0',text:'#1a1a2e',text2:'#556080',text3:'#8896b0',card:'#ffffff'},
+  'Atardecer': {emoji:'ðŸŒ…',bg:'#12080a',bg2:'#1e0f0a',bg3:'#2d1710',bg4:'#3d2018',accent:'#ff6d00',text:'#ffeedd',text2:'#c0845a',text3:'#7a5040',card:'#1e1008'},
+  'Galaxia':   {emoji:'âœ¨',bg:'#08060f',bg2:'#100e1e',bg3:'#19162e',bg4:'#231e3e',accent:'#7c4dff',text:'#ece8ff',text2:'#9080c0',text3:'#504870',card:'#130f20'},
+  'Caribe':    {emoji:'ðŸï¸',bg:'#040e10',bg2:'#071820',bg3:'#0c2830',bg4:'#113540',accent:'#00e5a0',text:'#d8f5ee',text2:'#60a898',text3:'#306858',card:'#071518'},
 };
 let currentTheme=localStorage.getItem('rjp_theme')||'Noche Azul';
 
@@ -185,7 +185,7 @@ async function apiFetch(path,si=0){
   catch(e){clearTimeout(to); return apiFetch(path,si+1);}
 }
 
-// Función para filtrar emisoras repetidas por nombre/ciudad de forma limpia
+// FunciÃ³n para filtrar emisoras repetidas por nombre/ciudad de forma limpia
 function filterUniqueStations(stations) {
   const seenNames = new Set();
   const seenUrls = new Set();
@@ -206,10 +206,10 @@ async function init(){
   await loadStationsJSON();
   try{
     allCountries=await apiFetch('/countries?hidebroken=true&order=name');
-    setStatus(`${allCountries.length} países disponibles`,'');
+    setStatus(`${allCountries.length} paÃ­ses disponibles`,'');
     renderContinents();
     renderFavPaises();
-  }catch(e){setStatus('Error de conexión','error');}
+  }catch(e){setStatus('Error de conexiÃ³n','error');}
 }
 
 function renderContinents(){
@@ -218,7 +218,7 @@ function renderContinents(){
     `<button class="cont-btn${c===currentContinent?' active':''}" onclick="selectContinent('${c}')">${c}</button>`
   ).join('');
   if(currentContinent) showCountriesOf(currentContinent);
-  else document.getElementById('countryGrid').innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Selecciona un continente para ver sus países</div>';
+  else document.getElementById('countryGrid').innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Selecciona un continente para ver sus paÃ­ses</div>';
 }
 
 function selectContinent(c){
@@ -234,29 +234,29 @@ function showCountriesOf(continent){
     return allCountries.find(c=>aliases.some(a=>c.name.toLowerCase()===a.toLowerCase()));
   }).filter(Boolean);
   const grid=document.getElementById('countryGrid');
-  if(!countries.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">No hay países disponibles</div>';return;}
+  if(!countries.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">No hay paÃ­ses disponibles</div>';return;}
   grid.innerHTML=countries.map(c=>`
     <div class="country-card${favPaises.includes(c.name)?' fav':''}" onclick="selectCountry('${c.name}','${continent}')">
       <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
-      <button class="country-fav-btn${favPaises.includes(c.name)?' active':''}" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)" title="País favorito">${favPaises.includes(c.name)?'★':'☆'}</button>
+      <button class="country-fav-btn${favPaises.includes(c.name)?' active':''}" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)" title="PaÃ­s favorito">${favPaises.includes(c.name)?'â˜…':'â˜†'}</button>
     </div>`).join('');
 }
 
 function renderFavPaises(){
   const grid=document.getElementById('favPaisGrid');
-  if(!favPaises.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Agrega países favoritos con "+ Editar"</div>';return;}
+  if(!favPaises.length){grid.innerHTML='<div style="font-size:11px;color:var(--text3);padding:8px">Agrega paÃ­ses favoritos con "+ Editar"</div>';return;}
   const countries=favPaises.map(n=>allCountries.find(c=>c.name===n)).filter(Boolean);
   grid.innerHTML=countries.map(c=>`
     <div class="country-card fav" onclick="selectCountry('${c.name}','Favoritos')">
       <div><div class="country-name">${c.name}</div><div class="country-count">${c.stationcount} emisoras</div></div>
-      <button class="country-fav-btn active" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)">★</button>
+      <button class="country-fav-btn active" onclick="event.stopPropagation();toggleFavPais('${c.name}',this)">â˜…</button>
     </div>`).join('');
 }
 
 function toggleFavPais(name,btn){
   const idx=favPaises.indexOf(name);
-  if(idx>=0){favPaises.splice(idx,1);if(btn){btn.textContent='☆';btn.classList.remove('active');}}
-  else{favPaises.push(name);if(btn){btn.textContent='★';btn.classList.add('active');}}
+  if(idx>=0){favPaises.splice(idx,1);if(btn){btn.textContent='â˜†';btn.classList.remove('active');}}
+  else{favPaises.push(name);if(btn){btn.textContent='â˜…';btn.classList.add('active');}}
   localStorage.setItem('rjp_favpaises',JSON.stringify(favPaises));
   renderFavPaises();
   if(currentContinent) showCountriesOf(currentContinent);
@@ -274,9 +274,9 @@ function closeFavPais(){document.getElementById('favpaisPanel').classList.remove
 function renderFavPaisPanel(list){
   const data=list||allCountriesForPanel;
   document.getElementById('fpList').innerHTML=data.map(c=>`
-    <div class="fp-item${favPaises.includes(c.name)?' favved':''}" onclick="toggleFavPais('${c.name}',null);this.classList.toggle('favved');this.querySelector('.fp-item-star').textContent=favPaises.includes('${c.name}')?'★':'☆'">
+    <div class="fp-item${favPaises.includes(c.name)?' favved':''}" onclick="toggleFavPais('${c.name}',null);this.classList.toggle('favved');this.querySelector('.fp-item-star').textContent=favPaises.includes('${c.name}')?'â˜…':'â˜†'">
       <div><div class="fp-item-name">${c.name}</div><div class="fp-item-count">${c.stationcount} emisoras</div></div>
-      <span class="fp-item-star">${favPaises.includes(c.name)?'★':'☆'}</span>
+      <span class="fp-item-star">${favPaises.includes(c.name)?'â˜…':'â˜†'}</span>
     </div>`).join('');
 }
 function filterFavPaisPanel(q){
@@ -291,7 +291,7 @@ async function selectCountry(name, continent, pushNav=true){
   document.getElementById('view-stations').style.display='block';
   const bc=document.getElementById('breadcrumb');
   bc.style.display='flex';
-  bc.innerHTML=`<span onclick="backToMap()">${continent}</span><span class="sep"> › </span><span onclick="backToMap()">${name}</span>`;
+  bc.innerHTML=`<span onclick="backToMap()">${continent}</span><span class="sep"> â€º </span><span onclick="backToMap()">${name}</span>`;
   document.getElementById('stTitle').textContent=`Emisoras de ${name}`;
   setStStatus(`Cargando ${name}...`,'loading');
   document.getElementById('stationsList').innerHTML='<div class="loading-box"><div class="spinner"></div>Buscando...</div>';
@@ -301,12 +301,12 @@ async function selectCountry(name, continent, pushNav=true){
       allStations = filterUniqueStations([...COLOMBIA_CURADA]);
       filteredStations = [...allStations];
       renderStations(filteredStations, 'stationsList');
-      setStStatus(`Cargando más emisoras de Colombia...`, 'loading');
+      setStStatus(`Cargando mÃ¡s emisoras de Colombia...`, 'loading');
     }
 
     const aliases = COUNTRY_ALIASES[name] || [name];
     let allFound = [];
-    for(const alias of aliases) {
+    for(let _i=0; _i<aliases.length; _i++) { const alias = aliases[_i];
       try {
         const r = await apiFetch(`/stations/search?limit=500&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(alias)}`);
         if(Array.isArray(r)) allFound.push(...r);
@@ -336,7 +336,7 @@ async function selectCountry(name, continent, pushNav=true){
     sortStations(currentSort, document.querySelector('.sort-btn.active'));
   }catch(e){
     setStStatus('Error al cargar emisoras','error');
-    document.getElementById('stationsList').innerHTML=`<div class="loading-box">Error.<br><button class="btn-retry" onclick="selectCountry('${name}','${continent}')">🔄 Reintentar</button></div>`;
+    document.getElementById('stationsList').innerHTML=`<div class="loading-box">Error.<br><button class="btn-retry" onclick="selectCountry('${name}','${continent}')">ðŸ”„ Reintentar</button></div>`;
   }
 }
 
@@ -395,18 +395,18 @@ function navUpdateCrumb() {
   if(!el) return;
   const view = navHistory[navIdx];
   if(!view || view.type === 'home') {
-    el.innerHTML = '<span class="nc-item active">🌍 Inicio</span>';
+    el.innerHTML = '<span class="nc-item active">ðŸŒ Inicio</span>';
     return;
   }
   if(view.type === 'country') {
     const cont = view.data.continent || '';
-    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span>${cont ? `<span class="nc-item" onclick="navHome()">${cont}</span><span class="nc-sep">›</span>` : ''}<span class="nc-item active">${view.data.name}</span>`;
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">ðŸŒ Inicio</span><span class="nc-sep">â€º</span>${cont ? `<span class="nc-item" onclick="navHome()">${cont}</span><span class="nc-sep">â€º</span>` : ''}<span class="nc-item active">${view.data.name}</span>`;
   }
   if(view.type === 'search') {
-    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span><span class="nc-item active">🔎 "${view.data.q}"</span>`;
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">ðŸŒ Inicio</span><span class="nc-sep">â€º</span><span class="nc-item active">ðŸ”Ž "${view.data.q}"</span>`;
   }
   if(view.type === 'favs') {
-    el.innerHTML = `<span class="nc-item" onclick="navHome()">🌍 Inicio</span><span class="nc-sep">›</span><span class="nc-item active">⭐ Favoritos</span>`;
+    el.innerHTML = `<span class="nc-item" onclick="navHome()">ðŸŒ Inicio</span><span class="nc-sep">â€º</span><span class="nc-item active">â­ Favoritos</span>`;
   }
 }
 
@@ -446,7 +446,7 @@ function filterStations(){
       sortStations(currentSort, null);
     }
     try {
-      setStStatus('🔎 Buscando en Radio Browser...', 'loading');
+      setStStatus('ðŸ”Ž Buscando en Radio Browser...', 'loading');
       const rbResults = await apiFetch(`/stations/search?name=${encodeURIComponent(q)}&hidebroken=true&order=votes&reverse=true&limit=40`);
       if(Array.isArray(rbResults) && rbResults.length) {
         document.getElementById('view-continents').style.display='none';
@@ -460,7 +460,7 @@ function filterStations(){
         sortStations(currentSort, null);
         setStStatus(`${filteredStations.length} resultados para "${q}"`, 'ok');
       } else if(!localResults.length) {
-        document.getElementById('stationsList').innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-text">No se encontraron resultados</div></div>';
+        document.getElementById('stationsList').innerHTML='<div class="empty-state"><div class="empty-icon">ðŸ”</div><div class="empty-text">No se encontraron resultados</div></div>';
         setStStatus('Sin resultados', 'error');
       }
     } catch(e) {
@@ -480,33 +480,33 @@ function stationCard(s){
   const isFav=favorites.includes(s.stationuuid);
   const isPlaying=currentStation&&currentStation.stationuuid===s.stationuuid&&playing;
   const id=s.stationuuid;
-  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'📻';
+  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'ðŸ“»';
   const tags=(s.tags||'').split(',').slice(0,1).filter(Boolean).map(t=>`<span class="tag">${t.trim()}</span>`).join('');
   return `<div class="scard${isPlaying?' playing':''}" id="card-${id}">
     <div class="scard-logo">${logo}</div>
     <div class="scard-info" onclick="_playById('${id}')">
       <div class="scard-name">${s.name}</div>
-      <div class="scard-meta">${id.startsWith('co-')?'<span style="color:var(--green);font-size:9px">✓ verificada</span> · ':''}${[s.state,tags].filter(Boolean).join(' · ')}</div>
+      <div class="scard-meta">${s.verified === true?'<span style="color:var(--green);font-size:9px">âœ“ verificada</span> Â· ':''}${[s.state,tags].filter(Boolean).join(' Â· ')}</div>
     </div>
     <div class="scard-actions">
-      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
-      <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'★':'☆'}</button>
-      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'📌':'📍'}</button>
-      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
+      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'â¸':'â–¶'}</button>
+      <button class="btn-fav${isFav?' active':''}" onclick="_toggleFavById('${id}',this)">${isFav?'â˜…':'â˜†'}</button>
+      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'ðŸ“Œ':'ðŸ“'}</button>
+      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">â†—</button>
     </div>
   </div>`;
 }
 
 function renderStations(stations,containerId){
   const el=document.getElementById(containerId);
-  if(!stations.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">No se encontraron emisoras</div></div>';return;}
+  if(!stations.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">ðŸ“­</div><div class="empty-text">No se encontraron emisoras</div></div>';return;}
   sortedStations = stations;
   const batch = stations.slice(0, 120);
   el.innerHTML = batch.map(stationCard).join('');
   if(stations.length > 120) {
     el.innerHTML += `<div style="text-align:center;padding:16px">
       <button class="btn-retry" onclick="loadMore('${containerId}')">
-        ▼ Ver más (${stations.length - 120} restantes)
+        â–¼ Ver mÃ¡s (${stations.length - 120} restantes)
       </button></div>`;
   }
 }
@@ -543,8 +543,8 @@ async function resolveStreamUrl(station) {
 }
 
 const PROXY_STATION_IDS = new Set([
-  'co-020','co-021','co-023','co-024',
-  'co-025','co-026','co-027','co-028','co-029','co-030','co-012'
+  'co-012','co-019','co-020','co-021','co-023','co-024',
+  'co-025','co-026','co-028','co-029','co-030'
 ]);
 
 function getProxyUrl(stationId) {
@@ -554,7 +554,8 @@ function getProxyUrl(stationId) {
 async function resolveProxyUrl(station) {
   try {
     const res = await fetch(`/stream-proxy?id=${station.stationuuid}&info=1`, {
-      signal: timeoutSignal(8000)
+      signal: timeoutSignal(8000),
+      cache: 'no-store'
     });
     if(res.ok) {
       const data = await res.json();
@@ -564,33 +565,104 @@ async function resolveProxyUrl(station) {
       }
     }
   } catch(e) {}
-  return station.url_resolved || station.url;
+
+  // Si el proxy no logra resolver, usamos primero una URL real del catÃ¡logo.
+  // Nunca devolvemos /stream-proxy como si fuera un stream de audio.
+  if(station.url_resolved && !station.url_resolved.startsWith('/stream-proxy')) {
+    return station.url_resolved;
+  }
+  return station.url || null;
 }
 
 function getEffectiveUrl(station) {
+  // 1) CorrecciÃ³n manual del usuario: siempre mÃ¡xima prioridad.
   if(urlOverrides[station.stationuuid]) return urlOverrides[station.stationuuid];
+
+  // 2) URL ya resuelta durante esta sesiÃ³n.
   if(resolvedUrlCache[station.stationuuid]) return resolvedUrlCache[station.stationuuid];
-  return station.url || station.url_resolved;
+
+  // 3) Emisoras protegidas por el proxy de Radio Jere.
+  if(PROXY_STATION_IDS.has(station.stationuuid)) return getProxyUrl(station.stationuuid);
+
+  // 4) URL resuelta/curada antes que la URL de origen.
+  return station.url_resolved || station.url || null;
 }
+
 let retryAttempts = {};
 const MAX_RETRIES = 3;
 
+function _pushUniqueUrl(list, url) {
+  if(!url || typeof url !== 'string') return;
+  const clean = url.trim();
+  if(!clean || clean.startsWith('/stream-proxy')) return;
+  if(!list.includes(clean)) list.push(clean);
+}
+
 async function getAlternativeUrl(station) {
-  const urls = [station.url_resolved, station.url].filter(Boolean);
-  try {
-    const results = await apiFetch(`/stations/search?name=${encodeURIComponent(station.name)}&limit=5&hidebroken=true`);
-    if(Array.isArray(results)) {
-      for(const r of results) {
-        if(r.stationuuid !== station.stationuuid && r.url_resolved) {
-          urls.push(r.url_resolved);
-        }
-        if(r.stationuuid === station.stationuuid && r.url_resolved && !urls.includes(r.url_resolved)) {
-          urls.unshift(r.url_resolved);
-        }
-      }
-    }
-  } catch(e) {}
+  // Solo devuelve alternativas conocidas del catÃ¡logo/servidor propio.
+  // Radio Browser se consulta aparte y Ãºnicamente como Ãºltimo recurso.
+  const urls = [];
+
+  if(PROXY_STATION_IDS.has(station.stationuuid)) {
+    const proxyUrl = await resolveProxyUrl(station);
+    _pushUniqueUrl(urls, proxyUrl);
+  }
+
+  _pushUniqueUrl(urls, station.url_resolved);
+  _pushUniqueUrl(urls, station.url);
+
   return urls;
+}
+
+function normalizeStationText(value) {
+  return (value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function radioBrowserScore(source, candidate) {
+  const srcName = normalizeStationText(source.name);
+  const canName = normalizeStationText(candidate.name);
+  const srcState = normalizeStationText(source.state);
+  const canState = normalizeStationText(candidate.state);
+  const srcCountry = normalizeStationText(source.country || 'Colombia');
+  const canCountry = normalizeStationText(candidate.country);
+
+  let score = 0;
+  if(srcName && canName === srcName) score += 100;
+  else {
+    const words = srcName.split(' ').filter(w => w.length >= 3);
+    score += words.filter(w => canName.includes(w)).length * 10;
+  }
+
+  if(srcState && canState && (canState.includes(srcState) || srcState.includes(canState))) score += 35;
+  if(srcCountry && canCountry === srcCountry) score += 20;
+  if(candidate.lastcheckok === 1 || candidate.lastcheckok === true) score += 10;
+  if(candidate.url_resolved) score += 5;
+  score += Math.min(Number(candidate.votes || 0), 100) / 20;
+  return score;
+}
+
+async function findRadioBrowserFallback(station) {
+  try {
+    const results = await apiFetch(
+      `/stations/search?name=${encodeURIComponent(station.name)}&country=${encodeURIComponent(station.country || 'Colombia')}&limit=12&hidebroken=true&order=votes&reverse=true`
+    );
+    if(!Array.isArray(results) || !results.length) return null;
+
+    const candidates = results
+      .map(r => ({ station: r, score: radioBrowserScore(station, r) }))
+      .filter(x => (x.station.url_resolved || x.station.url) && x.score >= 20)
+      .sort((a,b) => b.score - a.score);
+
+    if(!candidates.length) return null;
+    return candidates[0].station.url_resolved || candidates[0].station.url || null;
+  } catch(e) {
+    return null;
+  }
 }
 
 function updateStreamBadge(uuid, state) {
@@ -602,13 +674,13 @@ function updateStreamBadge(uuid, state) {
     }
     if(!badge) return;
     if(state === 'error') {
-      badge.className='stream-badge error'; badge.textContent='✗ sin señal';
+      badge.className='stream-badge error'; badge.textContent='âœ— sin seÃ±al';
       card.classList.add('stream-error'); card.classList.remove('stream-retrying');
     } else if(state === 'retrying') {
-      badge.className='stream-badge retrying'; badge.textContent='⟳ reintentando...';
+      badge.className='stream-badge retrying'; badge.textContent='âŸ³ reintentando...';
       card.classList.add('stream-retrying'); card.classList.remove('stream-error');
     } else if(state === 'ok') {
-      badge.className='stream-badge ok'; badge.textContent='✓ en vivo';
+      badge.className='stream-badge ok'; badge.textContent='âœ“ en vivo';
       card.classList.remove('stream-error','stream-retrying');
       setTimeout(() => { badge.textContent=''; badge.className='stream-badge'; }, 4000);
     } else {
@@ -625,31 +697,23 @@ async function playStation(s){
   retryAttempts[s.stationuuid] = 0;
 
   document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = '⟳ Resolviendo stream...';
+  document.getElementById('pStatus').textContent = 'âŸ³ Resolviendo stream...';
 
   let url = getEffectiveUrl(s);
 
   if(url && url.startsWith('/stream-proxy')) {
-    document.getElementById('pStatus').textContent = '⟳ Buscando señal...';
-    try {
-      const proxyRes = await fetch(url + '&info=1');
-      const proxyData = await proxyRes.json();
-      if(proxyData && proxyData.url) {
-        url = proxyData.url;
-      } else {
-        url = await resolveProxyUrl(s);
-      }
-    } catch(e) {
-      url = await resolveProxyUrl(s);
-    }
+    document.getElementById('pStatus').textContent = 'âŸ³ Buscando seÃ±al...';
+    url = await resolveProxyUrl(s);
   }
 
   if(!url) {
-    document.getElementById('pStatus').textContent = '✗ Sin URL de stream';
+    document.getElementById('pStatus').textContent = 'âœ— Sin URL de stream';
     playing = false;
+    updateStreamBadge(s.stationuuid, 'error');
     return;
   }
-  _loadStream(s, url);
+
+  await _loadStream(s, url);
 }
 
 async function _loadStream(s, url) {
@@ -657,22 +721,17 @@ async function _loadStream(s, url) {
     _handleStreamError(s);
     return;
   }
-  
-  let finalUrl = url.trim();
-  if (finalUrl.includes('streamtheworld.com') || finalUrl.includes('rcnradio.com') || finalUrl.includes('caracol.com.co')) {
-    if (urlOverrides[s.stationuuid]) {
-      finalUrl = urlOverrides[s.stationuuid];
-    }
-  }
+
+  const finalUrl = url.trim();
 
   audio.pause();
   audio.src = finalUrl;
   audio.volume = document.getElementById('volSlider').value;
   document.getElementById('pName').textContent = s.name;
-  document.getElementById('pStatus').textContent = '⟳ Conectando...';
+  document.getElementById('pStatus').textContent = 'âŸ³ Conectando...';
   document.getElementById('nowName').textContent = s.name;
   document.getElementById('headerWave').classList.remove('idle');
-  
+
   const img = document.getElementById('pLogoImg');
   img.onerror = function() {
     this.onerror = null;
@@ -680,10 +739,10 @@ async function _loadStream(s, url) {
   };
   img.src = s.favicon || ICON;
   updateStreamBadge(s.stationuuid, null);
-  
+
   try {
     await audio.play();
-    document.getElementById('pStatus').textContent = '▶ Reproduciendo';
+    document.getElementById('pStatus').textContent = 'â–¶ Reproduciendo';
     updateStreamBadge(s.stationuuid, 'ok');
     playCounts[s.stationuuid] = (playCounts[s.stationuuid]||0) + 1;
     localStorage.setItem('rjp_playcounts', JSON.stringify(playCounts));
@@ -711,43 +770,45 @@ async function _handleStreamError(s) {
 
   if(attempt > MAX_RETRIES) {
     playing = false;
-    document.getElementById('pStatus').textContent = '✗ Sin señal — intenta otra';
+    document.getElementById('pStatus').textContent = 'âœ— Sin seÃ±al â€” intenta otra';
     updateStreamBadge(s.stationuuid, 'error');
     _showManualUrlBtn(s);
     refreshCards();
     return;
   }
 
-  document.getElementById('pStatus').textContent = `⟳ Buscando enlace nuevo (${attempt}/${MAX_RETRIES})...`;
+  document.getElementById('pStatus').textContent = `âŸ³ Buscando enlace nuevo (${attempt}/${MAX_RETRIES})...`;
   updateStreamBadge(s.stationuuid, 'retrying');
 
   let nextUrl = null;
+  const currentUrl = (audio.currentSrc || audio.src || '').trim();
 
-  if(attempt <= 2) {
-    try {
-      const results = await apiFetch(`/stations/search?name=${encodeURIComponent(s.name)}&limit=8&hidebroken=true`);
-      if(Array.isArray(results) && results.length > 0) {
-        const fresh = results.find(r => (r.url_resolved || r.url) && (r.url_resolved || r.url) !== audio.src);
-        if(fresh) {
-          nextUrl = fresh.url_resolved || fresh.url;
-          saveUrlOverride(s.stationuuid, nextUrl);
-        }
-      }
-    } catch(e) {}
+  // Intento 1: resolver mediante nuestro proxy para las emisoras soportadas.
+  if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
+    const proxyCandidate = await resolveProxyUrl(s);
+    if(proxyCandidate && proxyCandidate !== currentUrl) nextUrl = proxyCandidate;
+  }
+
+  // Intentos 1 y 2: probar URLs conocidas del catÃ¡logo, sin salir a terceros.
+  if(!nextUrl && attempt <= 2) {
+    const urls = await getAlternativeUrl(s);
+    nextUrl = urls.find(u => u && u !== currentUrl) || null;
+  }
+
+  // Intento 3: Radio Browser es el ÃšLTIMO recurso.
+  // El resultado es temporal: NO se guarda en rjp_url_overrides.
+  if(!nextUrl && attempt === 3) {
+    const rbUrl = await findRadioBrowserFallback(s);
+    if(rbUrl && rbUrl !== currentUrl) nextUrl = rbUrl;
   }
 
   if(!nextUrl) {
-    if(attempt === 1 && PROXY_STATION_IDS.has(s.stationuuid)) {
-      nextUrl = await resolveProxyUrl(s);
-    } else {
-      const urls = await getAlternativeUrl(s);
-      nextUrl = urls[attempt - 1];
+    // Avanza al siguiente nivel de recuperaciÃ³n sin marcar todavÃ­a como caÃ­da.
+    if(attempt < MAX_RETRIES) {
+      return _handleStreamError(s);
     }
-  }
-
-  if(!nextUrl) {
     playing = false;
-    document.getElementById('pStatus').textContent = '✗ Sin señal disponible';
+    document.getElementById('pStatus').textContent = 'âœ— Sin seÃ±al disponible';
     updateStreamBadge(s.stationuuid, 'error');
     _showManualUrlBtn(s);
     refreshCards();
@@ -766,14 +827,14 @@ function _showManualUrlBtn(s) {
     document.getElementById('player').appendChild(bar);
   }
   const existing = urlOverrides[s.stationuuid];
-  bar.innerHTML = `<span style="flex:1">⚠️ <b>${s.name}</b> sin señal. ¿Tienes la URL del stream?</span>
-    <input id="manualUrlInput" placeholder="Pega la URL del stream aquí..." 
+  bar.innerHTML = `<span style="flex:1">âš ï¸ <b>${s.name}</b> sin seÃ±al. Â¿Tienes la URL del stream?</span>
+    <input id="manualUrlInput" placeholder="Pega la URL del stream aquÃ­..." 
       style="flex:2;padding:4px 8px;border-radius:5px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);font-size:11px"
       value="${existing||''}" />
     <button onclick="_applyManualUrl('${s.stationuuid}')" 
       style="background:var(--accent);color:white;border:none;border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;white-space:nowrap">Guardar y reproducir</button>
     <button onclick="document.getElementById('manualUrlBar').remove()" 
-      style="background:var(--bg4);color:var(--text2);border:none;border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer">✕</button>`;
+      style="background:var(--bg4);color:var(--text2);border:none;border-radius:5px;padding:4px 8px;font-size:11px;cursor:pointer">âœ•</button>`;
 }
 
 function _applyManualUrl(uuid) {
@@ -805,12 +866,12 @@ function toggleFav(uuid, btn, stationObj) {
   if(idx >= 0) {
     favorites.splice(idx, 1);
     favOrder = favOrder.filter(id => id !== uuid);
-    if(btn){ btn.textContent='☆'; btn.classList.remove('active'); }
+    if(btn){ btn.textContent='â˜†'; btn.classList.remove('active'); }
     delete favStore[uuid];
   } else {
     favorites.push(uuid);
     if(!favOrder.includes(uuid)) favOrder.push(uuid);
-    if(btn){ btn.textContent='★'; btn.classList.add('active'); }
+    if(btn){ btn.textContent='â˜…'; btn.classList.add('active'); }
     if(stationObj) favStore[uuid] = stationObj;
     else {
       const allSrc = [...COLOMBIA_CURADA, ...allStations];
@@ -830,7 +891,7 @@ function refreshCards(){
     const uuid=card.id.replace('card-','');
     const isP=currentStation&&currentStation.stationuuid===uuid&&playing;
     card.classList.toggle('playing',isP);
-    const btn=card.querySelector('.btn-play'); if(btn) btn.textContent=isP?'⏸':'▶';
+    const btn=card.querySelector('.btn-play'); if(btn) btn.textContent=isP?'â¸':'â–¶';
   });
 }
 
@@ -885,25 +946,25 @@ function favCard(s, idx, total) {
   _registerStation(s);
   const id = s.stationuuid;
   const isPlaying = currentStation && currentStation.stationuuid === id && playing;
-  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : '📻';
+  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : 'ðŸ“»';
   const playCount = playCounts[id] || 0;
-  const playLabel = playCount > 0 ? `<span style="font-size:9px;color:var(--accent)">▶ ${playCount}×</span>` : '';
+  const playLabel = playCount > 0 ? `<span style="font-size:9px;color:var(--accent)">â–¶ ${playCount}Ã—</span>` : '';
   const showReorder = currentFavSort === 'manual';
   return `<div class="scard${isPlaying?' playing':''}" id="favcard-${id}">
     ${showReorder ? `<div class="scard-reorder">
-      <button class="btn-reorder" onclick="moveFav('${id}',-1)" ${idx===0?'disabled':''}>▲</button>
-      <button class="btn-reorder" onclick="moveFav('${id}',1)" ${idx===total-1?'disabled':''}>▼</button>
+      <button class="btn-reorder" onclick="moveFav('${id}',-1)" ${idx===0?'disabled':''}>â–²</button>
+      <button class="btn-reorder" onclick="moveFav('${id}',1)" ${idx===total-1?'disabled':''}>â–¼</button>
     </div>` : ''}
     <div class="scard-logo">${logo}</div>
     <div class="scard-info" onclick="_playById('${id}')">
       <div class="scard-name">${s.name}</div>
-      <div class="scard-meta">${[s.country, s.state].filter(Boolean).join(' · ')} ${playLabel}</div>
+      <div class="scard-meta">${[s.country, s.state].filter(Boolean).join(' Â· ')} ${playLabel}</div>
     </div>
     <div class="scard-actions">
-      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
-      <button class="btn-fav active" onclick="_toggleFavById('${id}',this)">★</button>
-      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'📌':'📍'}</button>
-      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">↗</button>
+      <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'â¸':'â–¶'}</button>
+      <button class="btn-fav active" onclick="_toggleFavById('${id}',this)">â˜…</button>
+      <button class="btn-fav${isAnchored(id)?' active':''}" onclick="_toggleAnchorById('${id}',this)" title="Anclar en Inicio">${isAnchored(id)?'ðŸ“Œ':'ðŸ“'}</button>
+      <button class="btn-fav" onclick="_shareById('${id}')" title="Compartir" style="font-size:13px">â†—</button>
     </div>
   </div>`;
 }
@@ -913,7 +974,7 @@ function renderFavGlobal(){
   const favS = getSortedFavs();
   document.getElementById('favGlobalCount').textContent = favS.length + ' emisoras';
   if(!favS.length){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><div class="empty-text">Toca ☆ en cualquier emisora para guardarla aquí.<br><br>Tus favoritos se guardan aunque cambies de país o continente.</div></div>';
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">â­</div><div class="empty-text">Toca â˜† en cualquier emisora para guardarla aquÃ­.<br><br>Tus favoritos se guardan aunque cambies de paÃ­s o continente.</div></div>';
     return;
   }
   el.innerHTML = favS.map((s,i) => favCard(s, i, favS.length)).join('');
@@ -926,18 +987,18 @@ let nearbyUserLat = null, nearbyUserLng = null;
 async function findNearbyExplore() {
   const btn = document.getElementById('btnNearbyExplore');
   const sub = document.getElementById('nearbyExploreSub');
-  btn.disabled = true; btn.textContent = '📍 Buscando...';
-  sub.textContent = 'Obteniendo tu ubicación GPS...';
+  btn.disabled = true; btn.textContent = 'ðŸ“ Buscando...';
+  sub.textContent = 'Obteniendo tu ubicaciÃ³n GPS...';
 
   if(!navigator.geolocation) {
-    sub.textContent = '❌ Geolocalización no disponible';
+    sub.textContent = 'âŒ GeolocalizaciÃ³n no disponible';
     btn.disabled = false; btn.textContent = 'Buscar'; return;
   }
 
   navigator.geolocation.getCurrentPosition(async (pos) => {
     nearbyUserLat = pos.coords.latitude;
     nearbyUserLng = pos.coords.longitude;
-    sub.textContent = 'Buscando emisoras más cercanas...';
+    sub.textContent = 'Buscando emisoras mÃ¡s cercanas...';
     try {
       let locationLabel = '';
       try {
@@ -951,7 +1012,7 @@ async function findNearbyExplore() {
 
       let found = [];
       const radii = [100, 250, 500];
-      for(const radius of radii) {
+      for(let _i=0; _i<radii.length; _i++) { const radius = radii[_i];
         try {
           const r = await apiFetch(
             `/stations/bygeodistance?lat=${nearbyUserLat}&long=${nearbyUserLng}&radius=${radius}&hidebroken=true&limit=200&order=distance`
@@ -976,29 +1037,29 @@ async function findNearbyExplore() {
           s.state.toLowerCase().includes('barrancabermeja')
         )
       );
-      // Los IDs de Radio Browser nunca coinciden con nuestros "co-0XX", así que
+      // Los IDs de Radio Browser nunca coinciden con nuestros "co-0XX", asÃ­ que
       // comparamos por nombre normalizado para detectar la misma emisora y
-      // preferir SIEMPRE nuestra versión curada (con URL verificada) sobre la
+      // preferir SIEMPRE nuestra versiÃ³n curada (con URL verificada) sobre la
       // de Radio Browser (que puede estar rota).
       const normName = s => (s.name||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
       const curadaNameSet = new Set(santanderCuradas.map(normName));
       nearbyExploreData = nearbyExploreData.filter(s => !curadaNameSet.has(normName(s)));
       nearbyExploreData = filterUniqueStations([...santanderCuradas, ...nearbyExploreData]);
 
-      const label = locationLabel ? `📍 ${locationLabel}` : '📍 Tu ubicación';
-      sub.textContent = `${label} · ${nearbyExploreData.length} emisoras cercanas`;
-      btn.textContent = '↺ Actualizar'; btn.disabled = false;
+      const label = locationLabel ? `ðŸ“ ${locationLabel}` : 'ðŸ“ Tu ubicaciÃ³n';
+      sub.textContent = `${label} Â· ${nearbyExploreData.length} emisoras cercanas`;
+      btn.textContent = 'â†º Actualizar'; btn.disabled = false;
 
       document.getElementById('nearbyExploreList').style.display = 'block';
       sortNearby('distance', document.querySelector('#nearbyExploreList .sort-btn[data-mode="distance"]'));
     } catch(e) {
-      sub.textContent = '❌ Error al buscar emisoras cercanas';
+      sub.textContent = 'âŒ Error al buscar emisoras cercanas';
       btn.textContent = 'Reintentar'; btn.disabled = false;
     }
   }, (err) => {
     sub.textContent = err.code === 1
-      ? '❌ Permiso denegado — habilita ubicación en tu navegador'
-      : '❌ No se pudo obtener la ubicación';
+      ? 'âŒ Permiso denegado â€” habilita ubicaciÃ³n en tu navegador'
+      : 'âŒ No se pudo obtener la ubicaciÃ³n';
     btn.textContent = 'Reintentar'; btn.disabled = false;
   }, { timeout: 12000, enableHighAccuracy: false });
 }
@@ -1029,11 +1090,11 @@ async function findNearbyStations() {
   const btn = document.getElementById('btnNearby');
   const bar = document.getElementById('nearbyBar');
   btn.disabled = true;
-  btn.textContent = '📍 Buscando...';
-  bar.querySelector('span').textContent = '📍 Obteniendo tu ubicación...';
+  btn.textContent = 'ðŸ“ Buscando...';
+  bar.querySelector('span').textContent = 'ðŸ“ Obteniendo tu ubicaciÃ³n...';
 
   if(!navigator.geolocation) {
-    bar.querySelector('span').textContent = '❌ Geolocalización no disponible en tu navegador';
+    bar.querySelector('span').textContent = 'âŒ GeolocalizaciÃ³n no disponible en tu navegador';
     btn.disabled = false; btn.textContent = 'Buscar';
     return;
   }
@@ -1041,7 +1102,7 @@ async function findNearbyStations() {
   navigator.geolocation.getCurrentPosition(async (pos) => {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
-    bar.querySelector('span').textContent = '🌐 Buscando emisoras cercanas...';
+    bar.querySelector('span').textContent = 'ðŸŒ Buscando emisoras cercanas...';
     try {
       const geoRes = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
       const geo = await geoRes.json();
@@ -1051,8 +1112,8 @@ async function findNearbyStations() {
 
       if(!countryName) throw new Error('No country');
 
-      bar.querySelector('span').textContent = `📍 ${city ? city + ', ' : ''}${countryName}`;
-      btn.textContent = '✓ Actualizar';
+      bar.querySelector('span').textContent = `ðŸ“ ${city ? city + ', ' : ''}${countryName}`;
+      btn.textContent = 'âœ“ Actualizar';
       btn.disabled = false;
 
       const serverRes = await apiFetch(`/stations/search?limit=300&hidebroken=true&order=votes&reverse=true&country=${encodeURIComponent(countryName)}`);
@@ -1066,20 +1127,20 @@ async function findNearbyStations() {
       }
       nearbyEl.innerHTML = `
         <div style="display:flex;align-items:center;justify-content:space-between;margin:12px 0 8px">
-          <p class="sec-title" style="margin:0">📍 Emisoras de ${countryName}${city?' ('+city+')':''}</p>
+          <p class="sec-title" style="margin:0">ðŸ“ Emisoras de ${countryName}${city?' ('+city+')':''}</p>
           <span style="font-size:10px;color:var(--text3)">${nearbyStations.length} encontradas</span>
         </div>
         <div class="stations-list" id="nearbyList"></div>`;
       renderStations(nearbyStations.slice(0, 60), 'nearbyList');
     } catch(e) {
-      bar.querySelector('span').textContent = '❌ No se pudo detectar la ubicación';
+      bar.querySelector('span').textContent = 'âŒ No se pudo detectar la ubicaciÃ³n';
       btn.textContent = 'Reintentar';
       btn.disabled = false;
     }
   }, (err) => {
     bar.querySelector('span').textContent = err.code === 1
-      ? '❌ Permiso denegado. Habilita la ubicación en tu navegador.'
-      : '❌ No se pudo obtener la ubicación';
+      ? 'âŒ Permiso denegado. Habilita la ubicaciÃ³n en tu navegador.'
+      : 'âŒ No se pudo obtener la ubicaciÃ³n';
     btn.textContent = 'Reintentar';
     btn.disabled = false;
   }, { timeout: 10000 });
@@ -1087,10 +1148,10 @@ async function findNearbyStations() {
 
 function renderFavLocal(){
   const el = document.getElementById('favLocalList');
-  const regionLabel = currentCountry || currentContinent || 'esta región';
+  const regionLabel = currentCountry || currentContinent || 'esta regiÃ³n';
   document.getElementById('favLocalRegion').textContent = regionLabel;
   if(!currentCountry && !currentContinent){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">Primero selecciona un continente y país para ver sus favoritos locales.</div></div>';
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">ðŸ“</div><div class="empty-text">Primero selecciona un continente y paÃ­s para ver sus favoritos locales.</div></div>';
     return;
   }
   const localSrc = currentCountry === 'Colombia'
@@ -1101,7 +1162,7 @@ function renderFavLocal(){
   const favS = unique.filter(s => favorites.includes(s.stationuuid));
   document.getElementById('favLocalCount').textContent = favS.length + ' emisoras';
   if(!favS.length){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No tienes favoritos de ' + regionLabel + ' aún.<br>Explora y toca ☆ para guardar.</div></div>';
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">ðŸ“</div><div class="empty-text">No tienes favoritos de ' + regionLabel + ' aÃºn.<br>Explora y toca â˜† para guardar.</div></div>';
     return;
   }
   el.innerHTML = favS.map(stationCard).join('');
@@ -1118,7 +1179,7 @@ function loadMore(containerId) {
   if(source.length > already + 120) {
     el.innerHTML += `<div style="text-align:center;padding:16px">
       <button class="btn-retry" onclick="loadMore('${containerId}')">
-        ▼ Ver más (${source.length - already - 120} restantes)
+        â–¼ Ver mÃ¡s (${source.length - already - 120} restantes)
       </button></div>`;
   }
 }
@@ -1163,7 +1224,7 @@ function openShare(s) {
   shareStation = s;
   document.getElementById('shareStationName').textContent = s.name;
   document.getElementById('shareStationSub').textContent = 
-    [s.country, s.state].filter(Boolean).join(' · ') || 'Radio Jere Pro';
+    [s.country, s.state].filter(Boolean).join(' Â· ') || 'Radio Jere Pro';
   const appUrl = `https://radiojerepro.netlify.app?station=${encodeURIComponent(s.name)}`;
   document.getElementById('shareLinkInput').value = appUrl;
   document.getElementById('sharePanel').classList.add('open');
@@ -1176,7 +1237,7 @@ function closeShare() {
 }
 
 function getShareText() {
-  return `🎶 Estoy escuchando "${shareStation && shareStation.name}" en Radio Jere Pro\n🔗 https://radiojerepro.netlify.app`;
+  return `ðŸŽ¶ Estoy escuchando "${shareStation && shareStation.name}" en Radio Jere Pro\nðŸ”— https://radiojerepro.netlify.app`;
 }
 
 function shareWhatsApp() {
@@ -1245,7 +1306,7 @@ function copyShareLink() {
 
 function showCopied() {
   const btn = document.getElementById('btnCopyLink');
-  btn.textContent = '✓ Copiado';
+  btn.textContent = 'âœ“ Copiado';
   btn.classList.add('copied');
   setTimeout(()=>{ btn.textContent='Copiar'; btn.classList.remove('copied'); }, 2000);
 }
@@ -1254,59 +1315,59 @@ let currentLang = 'all';
 
 const LANGS = {
   all: {
-    explore: '🔍 Explorar', favs: '⭐ Favoritos',
+    explore: 'ðŸ” Explorar', favs: 'â­ Favoritos',
     search: 'Buscar emisora...', orderLabel: 'Ordenar:',
-    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
+    popular: 'ðŸ”¥ Populares', az: 'A â†’ Z', za: 'Z â†’ A', verified: 'âœ“ Verificadas',
     selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
     loading: 'Cargando...', noResults: 'No se encontraron emisoras',
-    addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
-    continentLabel: 'Por continente', myCountries: '⭐ Mis países',
+    addFavs: 'Toca â˜† en cualquier emisora para guardarla aquÃ­.',
+    continentLabel: 'Por continente', myCountries: 'â­ Mis paÃ­ses',
     editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
-    continents: {América:'América',Europa:'Europa',Asia:'Asia',África:'África',Oceanía:'Oceanía'}
+    continents: {AmÃ©rica:'AmÃ©rica',Europa:'Europa',Asia:'Asia',Ãfrica:'Ãfrica',OceanÃ­a:'OceanÃ­a'}
   },
   es: {
-    explore: '🔍 Explorar', favs: '⭐ Favoritos',
+    explore: 'ðŸ” Explorar', favs: 'â­ Favoritos',
     search: 'Buscar emisora...', orderLabel: 'Ordenar:',
-    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
+    popular: 'ðŸ”¥ Populares', az: 'A â†’ Z', za: 'Z â†’ A', verified: 'âœ“ Verificadas',
     selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
     loading: 'Cargando...', noResults: 'No se encontraron emisoras',
-    addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
-    continentLabel: 'Por continente', myCountries: '⭐ Mis países',
+    addFavs: 'Toca â˜† en cualquier emisora para guardarla aquÃ­.',
+    continentLabel: 'Por continente', myCountries: 'â­ Mis paÃ­ses',
     editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
-    continents: {América:'América',Europa:'Europa',Asia:'Asia',África:'África',Oceanía:'Oceanía'}
+    continents: {AmÃ©rica:'AmÃ©rica',Europa:'Europa',Asia:'Asia',Ãfrica:'Ãfrica',OceanÃ­a:'OceanÃ­a'}
   },
   en: {
-    explore: '🔍 Explore', favs: '⭐ Favorites',
+    explore: 'ðŸ” Explore', favs: 'â­ Favorites',
     search: 'Search station...', orderLabel: 'Sort:',
-    popular: '🔥 Popular', az: 'A → Z', za: 'Z → A', verified: '✓ Verified',
+    popular: 'ðŸ”¥ Popular', az: 'A â†’ Z', za: 'Z â†’ A', verified: 'âœ“ Verified',
     selectStation: 'Select a station', appName: 'Radio Jere Pro',
     loading: 'Loading...', noResults: 'No stations found',
-    addFavs: 'Tap ☆ on any station to save it here.',
-    continentLabel: 'By continent', myCountries: '⭐ My countries',
+    addFavs: 'Tap â˜† on any station to save it here.',
+    continentLabel: 'By continent', myCountries: 'â­ My countries',
     editBtn: '+ Edit', stations: 'stations', live: 'live',
-    continents: {América:'Americas',Europa:'Europe',Asia:'Asia',África:'Africa',Oceanía:'Oceania'}
+    continents: {AmÃ©rica:'Americas',Europa:'Europe',Asia:'Asia',Ãfrica:'Africa',OceanÃ­a:'Oceania'}
   },
   fr: {
-    explore: '🔍 Explorer', favs: '⭐ Favoris',
+    explore: 'ðŸ” Explorer', favs: 'â­ Favoris',
     search: 'Chercher une station...', orderLabel: 'Trier:',
-    popular: '🔥 Populaires', az: 'A → Z', za: 'Z → A', verified: '✓ Vérifiées',
-    selectStation: 'Sélectionner une station', appName: 'Radio Jere Pro',
-    loading: 'Chargement...', noResults: 'Aucune station trouvée',
-    addFavs: 'Appuyez sur ☆ pour sauvegarder une station.',
-    continentLabel: 'Par continent', myCountries: '⭐ Mes pays',
+    popular: 'ðŸ”¥ Populaires', az: 'A â†’ Z', za: 'Z â†’ A', verified: 'âœ“ VÃ©rifiÃ©es',
+    selectStation: 'SÃ©lectionner une station', appName: 'Radio Jere Pro',
+    loading: 'Chargement...', noResults: 'Aucune station trouvÃ©e',
+    addFavs: 'Appuyez sur â˜† pour sauvegarder une station.',
+    continentLabel: 'Par continent', myCountries: 'â­ Mes pays',
     editBtn: '+ Modifier', stations: 'stations', live: 'en direct',
-    continents: {América:'Amériques',Europa:'Europe',Asia:'Asie',África:'Afrique',Oceanía:'Océanie'}
+    continents: {AmÃ©rica:'AmÃ©riques',Europa:'Europe',Asia:'Asie',Ãfrica:'Afrique',OceanÃ­a:'OcÃ©anie'}
   },
   pt: {
-    explore: '🔍 Explorar', favs: '⭐ Favoritos',
-    search: 'Buscar estação...', orderLabel: 'Ordenar:',
-    popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
-    selectStation: 'Selecione uma estação', appName: 'Radio Jere Pro',
-    loading: 'Carregando...', noResults: 'Nenhuma estação encontrada',
-    addFavs: 'Toque em ☆ para salvar uma estação aqui.',
-    continentLabel: 'Por continente', myCountries: '⭐ Meus países',
-    editBtn: '+ Editar', stations: 'estações', live: 'ao vivo',
-    continents: {América:'Américas',Europa:'Europa',Asia:'Ásia',África:'África',Oceanía:'Oceania'}
+    explore: 'ðŸ” Explorar', favs: 'â­ Favoritos',
+    search: 'Buscar estaÃ§Ã£o...', orderLabel: 'Ordenar:',
+    popular: 'ðŸ”¥ Populares', az: 'A â†’ Z', za: 'Z â†’ A', verified: 'âœ“ Verificadas',
+    selectStation: 'Selecione uma estaÃ§Ã£o', appName: 'Radio Jere Pro',
+    loading: 'Carregando...', noResults: 'Nenhuma estaÃ§Ã£o encontrada',
+    addFavs: 'Toque em â˜† para salvar uma estaÃ§Ã£o aqui.',
+    continentLabel: 'Por continente', myCountries: 'â­ Meus paÃ­ses',
+    editBtn: '+ Editar', stations: 'estaÃ§Ãµes', live: 'ao vivo',
+    continents: {AmÃ©rica:'AmÃ©ricas',Europa:'Europa',Asia:'Ãsia',Ãfrica:'Ãfrica',OceanÃ­a:'Oceania'}
   }
 };
 
@@ -1423,8 +1484,8 @@ async function shazamStart() {
   btn.classList.add('listening');
 
   if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    shazamSetState('error', '🌐',
-      'Tu navegador no soporta grabación de audio.<br>' +
+    shazamSetState('error', 'ðŸŒ',
+      'Tu navegador no soporta grabaciÃ³n de audio.<br>' +
       '<small>Usa Chrome, Edge o Firefox actualizado.</small>');
     btn.classList.remove('listening');
     return;
@@ -1446,35 +1507,35 @@ async function shazamStart() {
     const msg = e.message || '';
 
     if(name === 'NotAllowedError' || name === 'PermissionDeniedError') {
-      shazamSetState('error', '🔒',
+      shazamSetState('error', 'ðŸ”’',
         'Permiso denegado por el sistema.<br><br>' +
-        '<b>Paso 1 — Windows:</b> Inicio → Configuración → Privacidad → Micrófono → activa <b>"Permitir que las apps accedan al micrófono"</b> y activa <b>Microsoft Edge</b>.<br><br>' +
-        '<b>Paso 2 — Navegador:</b> Haz clic en el 🔒 junto a la URL → Micrófono → <b>Permitir</b> → recarga.<br><br>' +
-        'También puedes <b>buscar la canción por nombre</b> aquí abajo ↓',
+        '<b>Paso 1 â€” Windows:</b> Inicio â†’ ConfiguraciÃ³n â†’ Privacidad â†’ MicrÃ³fono â†’ activa <b>"Permitir que las apps accedan al micrÃ³fono"</b> y activa <b>Microsoft Edge</b>.<br><br>' +
+        '<b>Paso 2 â€” Navegador:</b> Haz clic en el ðŸ”’ junto a la URL â†’ MicrÃ³fono â†’ <b>Permitir</b> â†’ recarga.<br><br>' +
+        'TambiÃ©n puedes <b>buscar la canciÃ³n por nombre</b> aquÃ­ abajo â†“',
         true);
     } else if(name === 'NotFoundError' || name === 'DevicesNotFoundError') {
-      shazamSetState('error', '🎤',
-        'No se detectó micrófono en tu dispositivo.<br>' +
-        '<small>Conecta un micrófono e intenta de nuevo.</small>');
+      shazamSetState('error', 'ðŸŽ¤',
+        'No se detectÃ³ micrÃ³fono en tu dispositivo.<br>' +
+        '<small>Conecta un micrÃ³fono e intenta de nuevo.</small>');
     } else if(name === 'NotReadableError' || name === 'TrackStartError') {
-      shazamSetState('error', '⚠️',
-        'El micrófono está siendo usado por otra aplicación.<br>' +
-        '<small>Cierra otras apps que usen el micrófono (Teams, Zoom, etc.) y recarga.</small>');
+      shazamSetState('error', 'âš ï¸',
+        'El micrÃ³fono estÃ¡ siendo usado por otra aplicaciÃ³n.<br>' +
+        '<small>Cierra otras apps que usen el micrÃ³fono (Teams, Zoom, etc.) y recarga.</small>');
     } else if(name === 'OverconstrainedError') {
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
       } catch(e2) {
-        shazamSetState('error', '🎤', 'No se pudo acceder al micrófono: ' + (e2.message || e2.name));
+        shazamSetState('error', 'ðŸŽ¤', 'No se pudo acceder al micrÃ³fono: ' + (e2.message || e2.name));
         return;
       }
     } else if(name === 'AbortError') {
-      shazamSetState('error', '⏱',
+      shazamSetState('error', 'â±',
         'La solicitud fue cancelada.<br>Intenta de nuevo.');
     } else {
-      shazamSetState('error', '🎤',
-        'Error al acceder al micrófono.<br>' +
+      shazamSetState('error', 'ðŸŽ¤',
+        'Error al acceder al micrÃ³fono.<br>' +
         '<small style="color:var(--text3)">' + (name || 'Error') + ': ' + (msg || 'desconocido') + '</small><br><br>' +
-        'Recarga la página y verifica los permisos del sitio.');
+        'Recarga la pÃ¡gina y verifica los permisos del sitio.');
     }
 
     if(!stream) return;
@@ -1485,7 +1546,7 @@ async function shazamStart() {
 
   let mimeType = '';
   const formats = ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4'];
-  for(const f of formats) {
+  for(let _i=0; _i<formats.length; _i++) { const f = formats[_i];
     if(MediaRecorder.isTypeSupported(f)) { mimeType = f; break; }
   }
   const options = mimeType ? { mimeType } : {};
@@ -1500,7 +1561,7 @@ async function shazamStart() {
     if(e.data && e.data.size > 0) shazamState.audioChunks.push(e.data);
   };
   shazamState.mediaRecorder.onerror = e => {
-    shazamSetState('error', '⚠️', 'Error durante la grabación. Intenta de nuevo.');
+    shazamSetState('error', 'âš ï¸', 'Error durante la grabaciÃ³n. Intenta de nuevo.');
     shazamStop();
   };
   shazamState.mediaRecorder.start(200);
@@ -1511,7 +1572,7 @@ async function shazamStart() {
   shazamState.timerInterval = setInterval(() => {
     secs--;
     const el = document.getElementById('shazamTimer');
-    if(el) el.textContent = secs > 0 ? secs : '⟳';
+    if(el) el.textContent = secs > 0 ? secs : 'âŸ³';
     if(secs <= 0) {
       clearInterval(shazamState.timerInterval);
       shazamIdentify();
@@ -1536,7 +1597,7 @@ async function shazamIdentify() {
   shazamSetState('loading');
 
   if(!shazamState.audioChunks.length) {
-    shazamSetState('error', '😕', 'No se capturó audio. Verifica que el micrófono funcione.');
+    shazamSetState('error', 'ðŸ˜•', 'No se capturÃ³ audio. Verifica que el micrÃ³fono funcione.');
     return;
   }
 
@@ -1575,13 +1636,13 @@ async function shazamIdentify() {
       localStorage.setItem('rjp_shazam_history', JSON.stringify(shazamState.history));
       shazamShowHistory();
     } else {
-      shazamSetState('error', '🎵', 'No se reconoció la canción.<br>Asegúrate de que haya música sonando claramente.');
+      shazamSetState('error', 'ðŸŽµ', 'No se reconociÃ³ la canciÃ³n.<br>AsegÃºrate de que haya mÃºsica sonando claramente.');
     }
   } catch(e) {
     if(e.name === 'AbortError' || e.name === 'TimeoutError') {
-      shazamSetState('error', '⏱', 'El servidor tardó demasiado. Intenta de nuevo.');
+      shazamSetState('error', 'â±', 'El servidor tardÃ³ demasiado. Intenta de nuevo.');
     } else {
-      shazamSetState('error', '📡', 'Sin conexión con el servidor de identificación.<br>Verifica tu internet.');
+      shazamSetState('error', 'ðŸ“¡', 'Sin conexiÃ³n con el servidor de identificaciÃ³n.<br>Verifica tu internet.');
     }
   }
 }
@@ -1593,11 +1654,11 @@ function shazamShowResult(r) {
   res.classList.add('show');
 
   const artwork = (r.apple_music && r.apple_music.artwork && r.apple_music.artwork.url ? r.apple_music.artwork.url.replace('{w}x{h}', '300x300') : '') || '';
-  document.getElementById('shazamArt').src    = artwork || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"%3E%3Crect width="80" height="80" rx="12" fill="%231a1a2e"/%3E%3Ctext x="50%25" y="55%25" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="%23e94560"%3E🎵%3C/text%3E%3C/svg%3E';
+  document.getElementById('shazamArt').src    = artwork || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"%3E%3Crect width="80" height="80" rx="12" fill="%231a1a2e"/%3E%3Ctext x="50%25" y="55%25" dominant-baseline="middle" text-anchor="middle" font-size="36" fill="%23e94560"%3EðŸŽµ%3C/text%3E%3C/svg%3E';
   document.getElementById('shazamArt').onerror = function(){ this.src=''; };
   document.getElementById('shazamSong').textContent   = r.title  || 'Desconocido';
   document.getElementById('shazamArtist').textContent = r.artist || 'Artista desconocido';
-  document.getElementById('shazamAlbum').textContent  = r.album  ? '💿 ' + r.album : '';
+  document.getElementById('shazamAlbum').textContent  = r.album  ? 'ðŸ’¿ ' + r.album : '';
 
   const spotify = r.spotify && r.spotify.external_urls ? r.spotify.external_urls.spotify : undefined;
   document.getElementById('btnShazamSpotify').style.display = spotify ? 'inline-block' : 'none';
@@ -1617,19 +1678,19 @@ function shazamSetState(state, icon, msg) {
   } else if(state === 'loading') {
     document.getElementById('shazamListening').style.display = 'flex';
     const t = document.getElementById('shazamTimer');
-    if(t) { t.textContent = '⟳'; t.style.fontSize = '28px'; }
+    if(t) { t.textContent = 'âŸ³'; t.style.fontSize = '28px'; }
   } else if(state === 'error') {
     const el = document.getElementById('shazamError');
     el.style.display = 'block';
-    document.getElementById('shazamErrIcon').textContent = icon || '😕';
-    document.getElementById('shazamErrMsg').innerHTML = msg || 'No se pudo identificar la canción';
-    const showManual = (arguments[3] === true) || icon === '🔒' || icon === '🎤' || icon === '⚠️';
+    document.getElementById('shazamErrIcon').textContent = icon || 'ðŸ˜•';
+    document.getElementById('shazamErrMsg').innerHTML = msg || 'No se pudo identificar la canciÃ³n';
+    const showManual = (arguments[3] === true) || icon === 'ðŸ”’' || icon === 'ðŸŽ¤' || icon === 'âš ï¸';
     const manualEl = document.getElementById('shazamManual');
     if(manualEl) manualEl.style.display = showManual ? 'block' : 'none';
   } else if(state === 'idle') {
     document.getElementById('shazamListening').style.display = 'flex';
     const t = document.getElementById('shazamTimer');
-    if(t) { t.textContent = '🎵'; t.style.fontSize = '32px'; }
+    if(t) { t.textContent = 'ðŸŽµ'; t.style.fontSize = '32px'; }
   }
 }
 
@@ -1647,7 +1708,7 @@ function shazamOpenSpotify() {
 function shazamShowHistory() {
   const el = document.getElementById('shazamHistory');
   if(!el || !shazamState.history.length) { if(el) el.innerHTML = ''; return; }
-  el.innerHTML = '<div class="shazam-history-title">🕐 Identificadas recientemente</div>' +
+  el.innerHTML = '<div class="shazam-history-title">ðŸ• Identificadas recientemente</div>' +
     shazamState.history.slice(0, 5).map(h => {
       const ago = _timeAgo(h.ts);
       return `<div class="shazam-hist-item" onclick="window.open('https://www.youtube.com/results?search_query=${encodeURIComponent(h.title+' '+h.artist)}','_blank')">
@@ -1688,7 +1749,7 @@ async function shazamManualSearch() {
 
   const resultsEl = document.getElementById('shazamManualResults');
   if(!resultsEl) return;
-  resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text2);padding:8px 0">⟳ Buscando...</div>';
+  resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text2);padding:8px 0">âŸ³ Buscando...</div>';
 
   try {
     const res = await fetch(
@@ -1719,15 +1780,15 @@ async function shazamManualSearch() {
         <div style="display:flex;flex-direction:column;gap:4px;flex-shrink:0">
           <a href="https://www.youtube.com/results?search_query=${ytQ}" target="_blank"
             onclick="event.stopPropagation()"
-            style="font-size:10px;padding:3px 8px;background:var(--accent);color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">▶ YT</a>
+            style="font-size:10px;padding:3px 8px;background:var(--accent);color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">â–¶ YT</a>
           <a href="https://open.spotify.com/search/${spotifyQ}" target="_blank"
             onclick="event.stopPropagation()"
-            style="font-size:10px;padding:3px 8px;background:#1DB954;color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">🎧 SP</a>
+            style="font-size:10px;padding:3px 8px;background:#1DB954;color:white;border-radius:4px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700">ðŸŽ§ SP</a>
         </div>
       </div>`;
     }).join('');
   } catch(e) {
-    resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text3)">Error de conexión.</div>';
+    resultsEl.innerHTML = '<div style="font-size:12px;color:var(--text3)">Error de conexiÃ³n.</div>';
   }
 }
 
@@ -1744,11 +1805,11 @@ function shazamManualPick(title, artist, art, album) {
   shazamShowHistory();
 }
 
-/* ══════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    EMISORAS ANCLADAS (pantalla de Inicio)
-   Por defecto: Yariguíes Stereo y Radio Fundingue.com.
+   Por defecto: YariguÃ­es Stereo y Radio Fundingue.com.
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
-   ══════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 const DEFAULT_ANCHORED = ['co-022', 'co-036'];
 
@@ -1793,8 +1854,8 @@ function toggleAnchor(uuid, stationObj) {
   renderHomeAnchored();
 }
 
-// Helper para usar desde onclick="" en las tarjetas: toma la estación ya
-// registrada en memoria y actualiza el ícono del botón según el estado real
+// Helper para usar desde onclick="" en las tarjetas: toma la estaciÃ³n ya
+// registrada en memoria y actualiza el Ã­cono del botÃ³n segÃºn el estado real
 // (nunca a ciegas), porque el emoji del pin no cambia de color con CSS.
 function _toggleAnchorById(uuid, btn) {
   var s = _stationRegistry[uuid];
@@ -1802,7 +1863,7 @@ function _toggleAnchorById(uuid, btn) {
   if (btn) {
     var nowAnchored = isAnchored(uuid);
     btn.classList.toggle('active', nowAnchored);
-    btn.textContent = nowAnchored ? '📌' : '📍';
+    btn.textContent = nowAnchored ? 'ðŸ“Œ' : 'ðŸ“';
   }
 }
 
@@ -1821,24 +1882,24 @@ function renderHomeAnchored() {
   var stations = uuids.map(findStationByUuid).filter(Boolean);
 
   if (!stations.length) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">⭐</div>' +
-      '<div class="empty-text">Aún no tienes emisoras ancladas. Ve a Explorar y ancla tus favoritas.</div></div>';
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">â­</div>' +
+      '<div class="empty-text">AÃºn no tienes emisoras ancladas. Ve a Explorar y ancla tus favoritas.</div></div>';
     return;
   }
   container.innerHTML = stations.map(stationCard).join('');
 }
 
-// Vuelve a pintar el inicio cuando la página carga (si el contenedor ya existe en el HTML).
+// Vuelve a pintar el inicio cuando la pÃ¡gina carga (si el contenedor ya existe en el HTML).
 document.addEventListener('DOMContentLoaded', renderHomeAnchored);
 
-/* ══════════════════════════════════════════════════════════════════
-   CHEQUEO AUTOMÁTICO DE SALUD (cada 24 horas)
-   Prueba cada emisora curada en segundo plano y marca las que estén
-   caídas, sin que el usuario tenga que darles play primero.
-   Yariguíes (co-022) y Fundingue (co-036) quedan EXCLUIDAS para
-   siempre: sus URLs se consiguieron a mano y verificaron por oído,
-   nunca deben sobreescribirse ni re-chequearse automáticamente.
-   ══════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CHEQUEO AUTOMÃTICO DE SALUD (cada 24 horas)
+   Prueba cada emisora curada en segundo plano y marca las que estÃ©n
+   caÃ­das, sin que el usuario tenga que darles play primero.
+   YariguÃ­es (co-022) y Fundingue (co-036) quedan EXCLUIDAS para
+   siempre: sus URLs se consiguieron a mano y verificaron por oÃ­do,
+   nunca deben sobreescribirse ni re-chequearse automÃ¡ticamente.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 const HEALTH_CHECK_EXCLUDE = ['co-022', 'co-036'];
 const HEALTH_CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 horas
@@ -1864,7 +1925,7 @@ function isHealthCheckDue() {
 
 // Prueba una URL de audio sin reproducir sonido de verdad: solo confirma
 // que el navegador logra empezar a cargar el stream (evento 'canplay') o
-// que falla (evento 'error'), con un límite de tiempo por si se cuelga.
+// que falla (evento 'error'), con un lÃ­mite de tiempo por si se cuelga.
 function probeStreamUrl(url) {
   return new Promise(function (resolve) {
     var probe = new Audio();
@@ -1884,6 +1945,15 @@ function probeStreamUrl(url) {
   });
 }
 
+async function getHealthCheckUrl(station) {
+  // Mismo orden base del reproductor, excepto que no inicia audio audible.
+  let url = getEffectiveUrl(station);
+  if(url && url.startsWith('/stream-proxy')) {
+    url = await resolveProxyUrl(station);
+  }
+  return url;
+}
+
 function runHealthCheckBatch(stations, index, cache) {
   if (index >= stations.length) {
     saveHealthCache(cache);
@@ -1891,17 +1961,16 @@ function runHealthCheckBatch(stations, index, cache) {
     return;
   }
   var batch = stations.slice(index, index + HEALTH_CHECK_BATCH_SIZE);
-  var proms = batch.map(function (s) {
-    var url = s.url_resolved || s.url;
-    return probeStreamUrl(url).then(function (ok) {
-      cache[s.stationuuid] = { ok: ok, ts: Date.now() };
-      updateStreamBadge(s.stationuuid, ok ? 'ok' : 'error');
-    });
+  var proms = batch.map(async function (s) {
+    var url = await getHealthCheckUrl(s);
+    var ok = url ? await probeStreamUrl(url) : false;
+    cache[s.stationuuid] = { ok: ok, ts: Date.now() };
+    updateStreamBadge(s.stationuuid, ok ? 'ok' : 'error');
   });
   Promise.all(proms).then(function () {
     setTimeout(function () {
       runHealthCheckBatch(stations, index + HEALTH_CHECK_BATCH_SIZE, cache);
-    }, 400); // pequeña pausa entre tandas
+    }, 400); // pequeÃ±a pausa entre tandas
   });
 }
 
@@ -1914,9 +1983,9 @@ function runHealthCheckIfDue() {
   runHealthCheckBatch(targets, 0, cache);
 }
 
-// Al abrir tarjetas, si ya tenemos un resultado guardado del último
+// Al abrir tarjetas, si ya tenemos un resultado guardado del Ãºltimo
 // chequeo, lo mostramos de inmediato (sin esperar a que el usuario
-// le dé play) — excepto en las 2 protegidas, que siempre se muestran
+// le dÃ© play) â€” excepto en las 2 protegidas, que siempre se muestran
 // como confiables.
 function applyCachedHealthBadges() {
   var cache = getHealthCache();
@@ -1928,15 +1997,15 @@ function applyCachedHealthBadges() {
 
 document.addEventListener('DOMContentLoaded', function () {
   applyCachedHealthBadges();
-  // Se retrasa un poco para no competir con la carga inicial de la página.
+  // Se retrasa un poco para no competir con la carga inicial de la pÃ¡gina.
   setTimeout(runHealthCheckIfDue, 5000);
 });
 
-/* ══════════════════════════════════════════════════════════════════
-   SINCRONIZAR CONFIGURACIÓN ENTRE DISPOSITIVOS (código de 9 dígitos)
-   Exporta: favoritos, orden de favoritos, países favoritos, emisoras
-   ancladas, tema, y las URLs que el usuario corrigió a mano.
-   ══════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SINCRONIZAR CONFIGURACIÃ“N ENTRE DISPOSITIVOS (cÃ³digo de 9 dÃ­gitos)
+   Exporta: favoritos, orden de favoritos, paÃ­ses favoritos, emisoras
+   ancladas, tema, y las URLs que el usuario corrigiÃ³ a mano.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 const SYNC_KEYS = ['rjp_favs', 'rjp_favstore', 'rjp_favorder', 'rjp_favpaises', 'rjp_anchored', 'rjp_anchor_store', 'rjp_theme', 'rjp_url_overrides'];
 
@@ -1962,7 +2031,7 @@ function openSyncPanel() {
   if (panel) panel.classList.add('open');
   var out = document.getElementById('syncCodeOut');
   var msg = document.getElementById('syncMsg');
-  if (out) out.textContent = '— — — — — — — — —';
+  if (out) out.textContent = 'â€” â€” â€” â€” â€” â€” â€” â€” â€”';
   if (msg) msg.textContent = '';
 }
 
@@ -1974,7 +2043,7 @@ function closeSyncPanel() {
 async function generateSyncCode() {
   var out = document.getElementById('syncCodeOut');
   var msg = document.getElementById('syncMsg');
-  if (msg) msg.textContent = 'Generando código...';
+  if (msg) msg.textContent = 'Generando cÃ³digo...';
   try {
     var res = await fetch('/sync', {
       method: 'POST',
@@ -1985,9 +2054,9 @@ async function generateSyncCode() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
     if (out) out.textContent = data.code;
-    if (msg) msg.textContent = 'Escribe este código en el otro dispositivo. Válido por 15 minutos.';
+    if (msg) msg.textContent = 'Escribe este cÃ³digo en el otro dispositivo. VÃ¡lido por 15 minutos.';
   } catch (e) {
-    if (msg) msg.textContent = '❌ No se pudo generar el código. Intenta de nuevo.';
+    if (msg) msg.textContent = 'âŒ No se pudo generar el cÃ³digo. Intenta de nuevo.';
   }
 }
 
@@ -1996,7 +2065,7 @@ async function applySyncCode() {
   var msg = document.getElementById('syncMsg');
   var code = (input && input.value || '').trim();
   if (!/^\d{9}$/.test(code)) {
-    if (msg) msg.textContent = '❌ El código debe tener exactamente 9 números.';
+    if (msg) msg.textContent = 'âŒ El cÃ³digo debe tener exactamente 9 nÃºmeros.';
     return;
   }
   if (msg) msg.textContent = 'Importando...';
@@ -2008,9 +2077,10 @@ async function applySyncCode() {
     }
     var body = await res.json();
     applySyncData(body.data || {});
-    if (msg) msg.textContent = '✔ Configuración importada. Recargando...';
+    if (msg) msg.textContent = 'âœ” ConfiguraciÃ³n importada. Recargando...';
     setTimeout(function () { location.reload(); }, 1200);
   } catch (e) {
-    if (msg) msg.textContent = '❌ ' + (e.message || 'Código inválido o expirado.');
+    if (msg) msg.textContent = 'âŒ ' + (e.message || 'CÃ³digo invÃ¡lido o expirado.');
   }
 }
+
