@@ -1,4 +1,4 @@
-﻿const ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMWExYTJlIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjQiIGZpbGw9IiNlOTQ1NjAiLz4KPHBhdGggZD0iTTMyIDIwYTEyIDEyIDAgMCAxIDEyIDEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTMyIDEyYTIwIDIwIDAgMCAxIDIwIDIwIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNTUiLz4KPHBhdGggZD0iTTMyIDQ0YTEyIDEyIDAgMCAxLTEyLTEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuODUiLz4KPC9zdmc+Cg==';
+const ICON = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMWExYTJlIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjQiIGZpbGw9IiNlOTQ1NjAiLz4KPHBhdGggZD0iTTMyIDIwYTEyIDEyIDAgMCAxIDEyIDEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTMyIDEyYTIwIDIwIDAgMCAxIDIwIDIwIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNTUiLz4KPHBhdGggZD0iTTMyIDQ0YTEyIDEyIDAgMCAxLTEyLTEyIiBzdHJva2U9IiNlOTQ1NjAiIHN0cm9rZS13aWR0aD0iMy41IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuODUiLz4KPC9zdmc+Cg==';
 const SERVERS = ['https://de1.api.radio-browser.info/json','https://nl1.api.radio-browser.info/json','https://at1.api.radio-browser.info/json','https://fi1.api.radio-browser.info/json'];
 // Compatible con TVs/navegadores viejos que no tienen AbortSignal.timeout() (API de 2022).
 // Usa AbortController + setTimeout, soportado desde hace mucho mÃ¡s tiempo.
@@ -1323,7 +1323,7 @@ const LANGS = {
     addFavs: 'Toca â˜† en cualquier emisora para guardarla aquÃ­.',
     continentLabel: 'Por continente', myCountries: 'â­ Mis paÃ­ses',
     editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
-    continents: {AmÃ©rica:'AmÃ©rica',Europa:'Europa',Asia:'Asia',Ãfrica:'Ãfrica',OceanÃ­a:'OceanÃ­a'}
+    continents: {'América':'América','Europa':'Europa','Asia':'Asia','África':'África','Oceanía':'Oceanía'}
   },
   es: {
     explore: 'ðŸ” Explorar', favs: 'â­ Favoritos',
@@ -1334,7 +1334,7 @@ const LANGS = {
     addFavs: 'Toca â˜† en cualquier emisora para guardarla aquÃ­.',
     continentLabel: 'Por continente', myCountries: 'â­ Mis paÃ­ses',
     editBtn: '+ Editar', stations: 'emisoras', live: 'en vivo',
-    continents: {AmÃ©rica:'AmÃ©rica',Europa:'Europa',Asia:'Asia',Ãfrica:'Ãfrica',OceanÃ­a:'OceanÃ­a'}
+    continents: {'América':'América','Europa':'Europa','Asia':'Asia','África':'África','Oceanía':'Oceanía'}
   },
   en: {
     explore: 'ðŸ” Explore', favs: 'â­ Favorites',
@@ -1345,7 +1345,7 @@ const LANGS = {
     addFavs: 'Tap â˜† on any station to save it here.',
     continentLabel: 'By continent', myCountries: 'â­ My countries',
     editBtn: '+ Edit', stations: 'stations', live: 'live',
-    continents: {AmÃ©rica:'Americas',Europa:'Europe',Asia:'Asia',Ãfrica:'Africa',OceanÃ­a:'Oceania'}
+    continents: {'América':'Americas','Europa':'Europe','Asia':'Asia','África':'Africa','Oceanía':'Oceania'}
   },
   fr: {
     explore: 'ðŸ” Explorer', favs: 'â­ Favoris',
@@ -1356,7 +1356,7 @@ const LANGS = {
     addFavs: 'Appuyez sur â˜† pour sauvegarder une station.',
     continentLabel: 'Par continent', myCountries: 'â­ Mes pays',
     editBtn: '+ Modifier', stations: 'stations', live: 'en direct',
-    continents: {AmÃ©rica:'AmÃ©riques',Europa:'Europe',Asia:'Asie',Ãfrica:'Afrique',OceanÃ­a:'OcÃ©anie'}
+    continents: {'América':'Amériques','Europa':'Europe','Asia':'Asie','África':'Afrique','Oceanía':'Océanie'}
   },
   pt: {
     explore: 'ðŸ” Explorar', favs: 'â­ Favoritos',
@@ -1367,7 +1367,7 @@ const LANGS = {
     addFavs: 'Toque em â˜† para salvar uma estaÃ§Ã£o aqui.',
     continentLabel: 'Por continente', myCountries: 'â­ Meus paÃ­ses',
     editBtn: '+ Editar', stations: 'estaÃ§Ãµes', live: 'ao vivo',
-    continents: {AmÃ©rica:'AmÃ©ricas',Europa:'Europa',Asia:'Ãsia',Ãfrica:'Ãfrica',OceanÃ­a:'Oceania'}
+    continents: {'América':'Américas','Europa':'Europa','Asia':'Ásia','África':'África','Oceanía':'Oceania'}
   }
 };
 
