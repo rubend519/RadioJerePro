@@ -2,12 +2,20 @@
   "name": "radio-jere-pro",
   "private": true,
   "scripts": {
-    "build": "esbuild src/app.js --minify --target=es2015,chrome58,safari11 --outfile=js/app.min.js"
+    "build:modern": "esbuild src/app.js --minify --target=es2015,chrome58,safari11 --outfile=js/app.min.js",
+    "build:samsung:transpile": "babel src/app.js --config-file ./babel.samsung.json --out-file js/app.samsung.js",
+    "build:samsung": "npm run build:samsung:transpile && esbuild js/app.samsung.js --bundle --minify --target=chrome47 --outfile=js/app.samsung.min.js",
+    "build": "npm run build:modern && npm run build:samsung"
   },
   "dependencies": {
-    "@netlify/blobs": "^8.1.0"
+    "@netlify/blobs": "^8.1.0",
+    "core-js": "^3.50.0"
   },
   "devDependencies": {
+    "@babel/cli": "^8.0.6",
+    "@babel/core": "^8.0.6",
+    "@babel/preset-env": "^8.0.6",
+    "babel-plugin-polyfill-corejs3": "^1.0.0",
     "esbuild": "^0.24.0"
   }
 }

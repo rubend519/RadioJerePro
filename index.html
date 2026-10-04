@@ -554,6 +554,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 -->
 <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.20/dist/fetch.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/abortcontroller-polyfill@1.7.5/dist/umd-polyfill.min.js"></script>
-<script src="/js/app.min.js"></script>
+<script>
+(function () {
+  var ua = navigator.userAgent || '';
+  var isSamsungTV = /Tizen|SMART-TV/i.test(ua);
+
+  var script = document.createElement('script');
+
+  if (isSamsungTV) {
+    script.src = '/js/app.samsung.min.js';
+  } else {
+    script.src = '/js/app.min.js';
+  }
+
+  script.async = false;
+  document.body.appendChild(script);
+})();
+</script>
 </body>
 </html>

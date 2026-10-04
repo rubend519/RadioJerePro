@@ -1,0 +1,21 @@
+﻿{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "47"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "polyfill-corejs3",
+      {
+        "method": "usage-global",
+        "version": "3.50"
+      }
+    ]
+  ]
+}
