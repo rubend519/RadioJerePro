@@ -793,7 +793,7 @@ function _applyManualUrl(uuid) {
 function stopRadio(){
   audio.pause(); audio.src=''; playing=false;
   document.getElementById('pName').textContent='Selecciona una emisora';
-  document.getElementById('pStatus').textContent='Radio Jere Pro';
+  document.getElementById('pStatus').textContent='Radio Jere';
   document.getElementById('nowName').textContent='Sin reproducir';
   document.getElementById('headerWave').classList.add('idle');
   document.getElementById('pLogoImg').src=ICON;
@@ -1163,8 +1163,8 @@ function openShare(s) {
   shareStation = s;
   document.getElementById('shareStationName').textContent = s.name;
   document.getElementById('shareStationSub').textContent = 
-    [s.country, s.state].filter(Boolean).join(' · ') || 'Radio Jere Pro';
-  const appUrl = `https://radiojerepro.netlify.app?station=${encodeURIComponent(s.name)}`;
+    [s.country, s.state].filter(Boolean).join(' · ') || 'Radio Jere';
+  const appUrl = `https://radiojere.netlify.app?station=${encodeURIComponent(s.name)}`;
   document.getElementById('shareLinkInput').value = appUrl;
   document.getElementById('sharePanel').classList.add('open');
   document.getElementById('btnCopyLink').textContent = 'Copiar';
@@ -1176,7 +1176,7 @@ function closeShare() {
 }
 
 function getShareText() {
-  return `🎶 Estoy escuchando "${shareStation && shareStation.name}" en Radio Jere Pro\n🔗 https://radiojerepro.netlify.app`;
+  return `🎶 Estoy escuchando "${shareStation && shareStation.name}" en Radio Jere\n🔗 https://radiojere.netlify.app`;
 }
 
 function shareWhatsApp() {
@@ -1186,7 +1186,7 @@ function shareWhatsApp() {
 
 function shareTelegram() {
   const text = encodeURIComponent(getShareText());
-  const url = encodeURIComponent('https://radiojerepro.netlify.app');
+  const url = encodeURIComponent('https://radiojere.netlify.app');
   window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
 }
 
@@ -1196,12 +1196,12 @@ function shareTwitter() {
 }
 
 function shareFacebook() {
-  const url = encodeURIComponent('https://radiojerepro.netlify.app');
+  const url = encodeURIComponent('https://radiojere.netlify.app');
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
 }
 
 function shareEmail() {
-  const subject = encodeURIComponent(`Escucha ${shareStation && shareStation.name} en Radio Jere Pro`);
+  const subject = encodeURIComponent(`Escucha ${shareStation && shareStation.name} en Radio Jere`);
   const body = encodeURIComponent(getShareText());
   window.open(`mailto:?subject=${subject}&body=${body}`);
 }
@@ -1209,9 +1209,9 @@ function shareEmail() {
 function shareNative() {
   if(navigator.share) {
     navigator.share({
-      title: (shareStation && shareStation.name) || 'Radio Jere Pro',
+      title: (shareStation && shareStation.name) || 'Radio Jere',
       text: getShareText(),
-      url: 'https://radiojerepro.netlify.app'
+      url: 'https://radiojere.netlify.app'
     }).catch(()=>{});
   } else {
     copyShareLink();
@@ -1229,7 +1229,7 @@ function copyStreamUrl() {
 }
 
 function copyAppLink() {
-  const url = `https://radiojerepro.netlify.app?station=${encodeURIComponent((shareStation && shareStation.name)||'')}`;
+  const url = `https://radiojere.netlify.app?station=${encodeURIComponent((shareStation && shareStation.name)||'')}`;
   document.getElementById('shareLinkInput').value = url;
   navigator.clipboard.writeText(url).catch(()=>{});
   showCopied();
@@ -1257,7 +1257,7 @@ const LANGS = {
     explore: '🔍 Explorar', favs: '⭐ Favoritos',
     search: 'Buscar emisora...', orderLabel: 'Ordenar:',
     popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
-    selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
+    selectStation: 'Selecciona una emisora', appName: 'Radio Jere',
     loading: 'Cargando...', noResults: 'No se encontraron emisoras',
     addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
     continentLabel: 'Por continente', myCountries: '⭐ Mis países',
@@ -1268,7 +1268,7 @@ const LANGS = {
     explore: '🔍 Explorar', favs: '⭐ Favoritos',
     search: 'Buscar emisora...', orderLabel: 'Ordenar:',
     popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
-    selectStation: 'Selecciona una emisora', appName: 'Radio Jere Pro',
+    selectStation: 'Selecciona una emisora', appName: 'Radio Jere',
     loading: 'Cargando...', noResults: 'No se encontraron emisoras',
     addFavs: 'Toca ☆ en cualquier emisora para guardarla aquí.',
     continentLabel: 'Por continente', myCountries: '⭐ Mis países',
@@ -1279,7 +1279,7 @@ const LANGS = {
     explore: '🔍 Explore', favs: '⭐ Favorites',
     search: 'Search station...', orderLabel: 'Sort:',
     popular: '🔥 Popular', az: 'A → Z', za: 'Z → A', verified: '✓ Verified',
-    selectStation: 'Select a station', appName: 'Radio Jere Pro',
+    selectStation: 'Select a station', appName: 'Radio Jere',
     loading: 'Loading...', noResults: 'No stations found',
     addFavs: 'Tap ☆ on any station to save it here.',
     continentLabel: 'By continent', myCountries: '⭐ My countries',
@@ -1290,7 +1290,7 @@ const LANGS = {
     explore: '🔍 Explorer', favs: '⭐ Favoris',
     search: 'Chercher une station...', orderLabel: 'Trier:',
     popular: '🔥 Populaires', az: 'A → Z', za: 'Z → A', verified: '✓ Vérifiées',
-    selectStation: 'Sélectionner une station', appName: 'Radio Jere Pro',
+    selectStation: 'Sélectionner une station', appName: 'Radio Jere',
     loading: 'Chargement...', noResults: 'Aucune station trouvée',
     addFavs: 'Appuyez sur ☆ pour sauvegarder une station.',
     continentLabel: 'Par continent', myCountries: '⭐ Mes pays',
@@ -1301,7 +1301,7 @@ const LANGS = {
     explore: '🔍 Explorar', favs: '⭐ Favoritos',
     search: 'Buscar estação...', orderLabel: 'Ordenar:',
     popular: '🔥 Populares', az: 'A → Z', za: 'Z → A', verified: '✓ Verificadas',
-    selectStation: 'Selecione uma estação', appName: 'Radio Jere Pro',
+    selectStation: 'Selecione uma estação', appName: 'Radio Jere',
     loading: 'Carregando...', noResults: 'Nenhuma estação encontrada',
     addFavs: 'Toque em ☆ para salvar uma estação aqui.',
     continentLabel: 'Por continente', myCountries: '⭐ Meus países',
@@ -1320,10 +1320,19 @@ function setLang(lang, btn) {
 
 function applyLang() {
   const t = LANGS[currentLang] || LANGS.all;
-
   const tabs = document.querySelectorAll('.tab');
-  if(tabs[0]) tabs[0].textContent = t.explore;
-  if(tabs[1]) tabs[1].textContent = t.favs;
+
+  const homeLabels = {
+    all: '🏠 Inicio',
+    es:  '🏠 Inicio',
+    en:  '🏠 Home',
+    fr:  '🏠 Accueil',
+    pt:  '🏠 Início'
+  };
+
+  if(tabs[0]) tabs[0].textContent = homeLabels[currentLang] || '🏠 Inicio';
+  if(tabs[1]) tabs[1].textContent = t.explore;
+  if(tabs[2]) tabs[2].textContent = t.favs;
 
   const si = document.getElementById('searchInput');
   if(si) si.placeholder = t.search;
@@ -1750,7 +1759,7 @@ function shazamManualPick(title, artist, art, album) {
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
    ══════════════════════════════════════════════════════════════════ */
 
-const DEFAULT_ANCHORED = ['co-022', 'co-036'];
+const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-027'];
 
 function getAnchorStore() {
   try {

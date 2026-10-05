@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Radio Jere Pro</title>
+<title>Radio Jere</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -232,6 +232,434 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 .shazam-hist-artist{font-size:10px;color:var(--text3)}
 .shazam-hist-time{font-size:10px;color:var(--text3);flex-shrink:0}
 </style>
+
+<style id="radio-jere-ui-2026">
+
+/* ============================================================
+   RADIO JERE - NUEVA INTERFAZ
+   ============================================================ */
+
+.content{
+    max-width:1500px;
+    margin:0 auto;
+    padding:22px 28px 110px;
+}
+
+
+/* ---------- INICIO ---------- */
+
+.rj-home{
+    width:100%;
+}
+
+.rj-hero{
+    position:relative;
+    overflow:hidden;
+    min-height:245px;
+    border:1px solid var(--border2);
+    border-radius:22px;
+    padding:32px 36px;
+    margin-bottom:28px;
+
+    background:
+      radial-gradient(circle at 80% 25%, rgba(233,69,96,.30), transparent 28%),
+      radial-gradient(circle at 55% 120%, rgba(68,138,255,.23), transparent 40%),
+      linear-gradient(120deg,#121526,#19182b 55%,#11111b);
+
+    box-shadow:
+      0 20px 60px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.rj-hero:before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(10,10,18,.15),
+        rgba(10,10,18,0)
+      );
+
+    pointer-events:none;
+}
+
+.rj-hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.rj-kicker{
+    color:var(--accent);
+    font-family:'Syne',sans-serif;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.rj-hero h1{
+    font-family:'Syne',sans-serif;
+    font-size:34px;
+    letter-spacing:-1.2px;
+    margin:0 0 8px;
+}
+
+.rj-hero p{
+    max-width:620px;
+    color:var(--text2);
+    font-size:14px;
+    line-height:1.65;
+}
+
+
+/* ---------- CARACTERÍSTICAS ---------- */
+
+.rj-hero-features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:25px;
+    max-width:850px;
+}
+
+.rj-feature{
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    min-height:70px;
+
+    padding:12px 14px;
+
+    border:1px solid var(--border2);
+    border-radius:13px;
+
+    background:rgba(20,20,35,.72);
+    backdrop-filter:blur(8px);
+}
+
+.rj-feature-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:var(--bg4);
+
+    font-size:20px;
+
+    flex-shrink:0;
+}
+
+.rj-feature strong{
+    display:block;
+
+    font-family:'Syne',sans-serif;
+
+    font-size:12px;
+}
+
+.rj-feature small{
+    display:block;
+
+    margin-top:3px;
+
+    color:var(--text3);
+
+    font-size:10px;
+}
+
+
+/* ---------- MICRÓFONO DECORATIVO ---------- */
+
+.rj-hero-mic{
+    position:absolute;
+
+    right:65px;
+    top:35px;
+
+    font-size:135px;
+
+    opacity:.15;
+
+    transform:rotate(-8deg);
+
+    filter:
+      drop-shadow(0 0 30px rgba(233,69,96,.35));
+
+    pointer-events:none;
+}
+
+
+/* ---------- SECCIÓN ANCLADAS ---------- */
+
+.rj-anchored-section{
+    margin-top:4px;
+}
+
+.rj-section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+
+    margin-bottom:14px;
+}
+
+.rj-section-kicker{
+    font-family:'Syne',sans-serif;
+
+    color:var(--gold);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:5px;
+}
+
+.rj-section-head h2{
+    font-family:'Syne',sans-serif;
+
+    font-size:20px;
+
+    margin:0 0 3px;
+}
+
+.rj-section-head p{
+    color:var(--text3);
+
+    font-size:11px;
+}
+
+
+/* ---------- GRID DE EMISORAS ANCLADAS ---------- */
+
+#homeAnchoredGrid{
+    display:grid;
+
+    grid-template-columns:
+      repeat(auto-fit,minmax(330px,1fr));
+
+    gap:12px;
+}
+
+
+/* ---------- TARJETAS DE INICIO ---------- */
+
+#homeAnchoredGrid .scard{
+    position:relative;
+
+    min-height:105px;
+
+    padding:15px;
+
+    gap:12px;
+
+    border-radius:15px;
+
+    background:
+      linear-gradient(
+        145deg,
+        var(--card),
+        var(--bg2)
+      );
+
+    transition:
+      transform .2s,
+      border-color .2s,
+      box-shadow .2s;
+}
+
+#homeAnchoredGrid .scard:hover{
+    transform:translateY(-3px);
+
+    border-color:var(--border2);
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.22);
+}
+
+#homeAnchoredGrid .scard.playing{
+    border-color:var(--accent);
+
+    box-shadow:
+      0 0 0 1px var(--accent),
+      0 0 25px rgba(233,69,96,.13);
+}
+
+#homeAnchoredGrid .scard-logo{
+    width:62px;
+    height:62px;
+
+    border-radius:13px;
+
+    background:var(--bg3);
+}
+
+#homeAnchoredGrid .scard-logo img{
+    border-radius:13px;
+}
+
+#homeAnchoredGrid .scard-name{
+    font-size:13px;
+
+    margin-bottom:5px;
+}
+
+#homeAnchoredGrid .scard-meta{
+    font-size:10px;
+}
+
+
+/* ---------- ACCIONES HORIZONTALES ---------- */
+
+#homeAnchoredGrid .scard-actions{
+    flex-direction:row;
+
+    align-self:flex-end;
+
+    gap:4px;
+}
+
+#homeAnchoredGrid .btn-play{
+    width:38px;
+    height:38px;
+
+    font-size:14px;
+
+    box-shadow:
+      0 5px 15px rgba(233,69,96,.25);
+}
+
+#homeAnchoredGrid .btn-fav{
+    width:29px;
+    height:29px;
+
+    border-radius:8px;
+
+    background:var(--bg3);
+
+    border:1px solid var(--border);
+}
+
+#homeAnchoredGrid .btn-fav:hover{
+    border-color:var(--border2);
+
+    background:var(--bg4);
+}
+
+
+/* ---------- HEADER UN POCO MÁS AMPLIO ---------- */
+
+.hdr-top,
+.tabs,
+.lang-bar{
+    max-width:1500px;
+
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.hdr-top{
+    padding-left:28px;
+    padding-right:28px;
+}
+
+.tabs{
+    padding-left:20px;
+}
+
+.lang-bar{
+    padding-left:28px;
+}
+
+.logo-txt{
+    font-size:18px;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+    .content{
+        padding:
+          16px
+          14px
+          100px;
+    }
+
+    .rj-hero{
+        padding:25px 22px;
+    }
+
+    .rj-hero h1{
+        font-size:27px;
+    }
+
+    .rj-hero-features{
+        grid-template-columns:1fr;
+    }
+
+    .rj-hero-mic{
+        right:10px;
+        top:45px;
+        font-size:100px;
+    }
+
+    #homeAnchoredGrid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .rj-hero{
+        padding:22px 17px;
+    }
+
+    .rj-hero h1{
+        font-size:23px;
+    }
+
+    .rj-hero-mic{
+        display:none;
+    }
+
+    .rj-section-head h2{
+        font-size:17px;
+    }
+
+    #homeAnchoredGrid .scard{
+        min-height:90px;
+        padding:11px;
+    }
+
+    #homeAnchoredGrid .scard-logo{
+        width:50px;
+        height:50px;
+    }
+
+    #homeAnchoredGrid .scard-actions{
+        gap:2px;
+    }
+
+}
+
+</style>
+
 </head>
 <body>
 <div class="hdr">
@@ -244,8 +672,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
   </div>
   <div class="hdr-top">
     <div class="logo">
-      <img id="logoImg" alt="Radio Jere Pro">
-      <div class="logo-txt">Radio Jere <span>Pro</span></div>
+      <img id="logoImg" alt="Radio Jere">
+      <div class="logo-txt">Radio Jere</div>
     </div>
     <div class="hdr-right">
       <div class="live-badge"><div class="live-dot"></div><span id="liveCount">0</span> en vivo</div>
@@ -389,12 +817,76 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 <div class="content">
   <!-- INICIO -->
   <div class="page active" id="page-inicio">
-    <div style="padding:20px 16px">
-      <h1 style="font-size:22px;margin:0 0 6px">Tu música, tus emisoras ancladas.</h1>
-      <p style="color:var(--text2);font-size:13px;margin:0 0 16px">Explora miles de emisoras globales y personaliza tu propio Top de destacadas en la pantalla de inicio.</p>
-      <div style="font-size:11px;letter-spacing:.05em;color:var(--gold, #ffd740);margin-bottom:8px">⭐ TU TOP DE EMISORAS DESTACADAS (ANCLADAS)</div>
-      <div id="homeAnchoredGrid"></div>
+    <div class="rj-home">
+
+  <section class="rj-hero">
+
+    <div class="rj-hero-content">
+
+      <div class="rj-kicker">RADIO JERE</div>
+
+      <h1>Tu música, tus emisoras.</h1>
+
+      <p>
+        Escucha tus emisoras favoritas, descubre nuevas señales
+        y mantén siempre a mano las que más te gustan.
+      </p>
+
+      <div class="rj-hero-features">
+
+        <div class="rj-feature">
+          <span class="rj-feature-icon">🌎</span>
+          <div>
+            <strong>Explora</strong>
+            <small>Emisoras de todo el mundo</small>
+          </div>
+        </div>
+
+        <div class="rj-feature">
+          <span class="rj-feature-icon">⭐</span>
+          <div>
+            <strong>Favoritos</strong>
+            <small>Guarda tus preferidas</small>
+          </div>
+        </div>
+
+        <div class="rj-feature">
+          <span class="rj-feature-icon">📌</span>
+          <div>
+            <strong>Ancladas</strong>
+            <small>Acceso rápido desde Inicio</small>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
+    <div class="rj-hero-mic">🎙️</div>
+
+  </section>
+
+
+  <section class="rj-anchored-section">
+
+    <div class="rj-section-head">
+
+      <div>
+        <div class="rj-section-kicker">⭐ TU SELECCIÓN</div>
+        <h2>Tus emisoras ancladas</h2>
+        <p>
+          Yarigüies, Fundingue y La Guapachosa vienen ancladas inicialmente.
+          Puedes agregar o quitar cualquier emisora.
+        </p>
+      </div>
+
+    </div>
+
+    <div id="homeAnchoredGrid"></div>
+
+  </section>
+
+</div>
   </div>
   <!-- EXPLORAR -->
   <div class="page" id="page-explorar">
@@ -483,7 +975,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 <div class="share-panel" id="sharePanel" onclick="if(event.target===this)closeShare()">
   <div class="share-box">
     <div class="share-station-name" id="shareStationName">Emisora</div>
-    <div class="share-station-sub" id="shareStationSub">Radio Jere Pro</div>
+    <div class="share-station-sub" id="shareStationSub">Radio Jere</div>
     <div class="share-grid">
       <div class="share-opt" onclick="shareWhatsApp()">
         <span class="share-opt-icon">💬</span>
@@ -531,7 +1023,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
     <div class="p-logo"><img id="pLogoImg" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:7px"></div>
     <div class="p-info">
       <div class="p-name" id="pName">Selecciona una emisora</div>
-      <div class="p-status" id="pStatus">Radio Jere Pro</div>
+      <div class="p-status" id="pStatus">Radio Jere</div>
     </div>
     <div class="p-controls">
       <div class="vol-wrap"><span>🔉</span><input type="range" min="0" max="1" step="0.05" value="0.8" id="volSlider" oninput="audio.volume=this.value"></div>
