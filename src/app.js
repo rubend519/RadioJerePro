@@ -1310,6 +1310,139 @@ const LANGS = {
   }
 };
 
+
+/* ==========================================================
+   RADIO JERE - TRADUCCIONES DE LA NUEVA INTERFAZ
+   ========================================================== */
+
+const RJ_UI_LANGS = {
+
+  all: {
+    heroTitle: "Tu música, tus emisoras.",
+    heroDesc: "Escucha tus emisoras favoritas, descubre nuevas señales y mantén siempre a mano las que más te gustan.",
+
+    syncKicker: "🔗 SINCRONIZA RADIO JERE",
+    syncTitle: "Lleva tus favoritos contigo",
+    syncDesc: "Aprende en menos de un minuto cómo pasar tus emisoras, países favoritos, ancladas y tema a otro dispositivo.",
+    syncNow: "🔗 Sincronizar ahora",
+
+    anchoredKicker: "⭐ TU SELECCIÓN",
+    anchoredTitle: "Tus emisoras ancladas",
+    anchoredDesc: "Yarigüies, Fundingue y La Guapachosa vienen ancladas inicialmente. Puedes agregar o quitar cualquier emisora.",
+
+    syncPanelTitle: "🔗 Sincronizar entre dispositivos",
+    syncSend: "Enviar desde este dispositivo",
+    syncGenerate: "Generar código",
+    syncReceive: "Recibir en este dispositivo",
+    syncPlaceholder: "Escribe el código de 9 dígitos",
+    syncApply: "Aplicar código",
+    close: "Cerrar",
+
+    themeTitle: "🎨 Elige tu tema",
+    ready: "Listo"
+  },
+
+  es: {
+    heroTitle: "Tu música, tus emisoras.",
+    heroDesc: "Escucha tus emisoras favoritas, descubre nuevas señales y mantén siempre a mano las que más te gustan.",
+
+    syncKicker: "🔗 SINCRONIZA RADIO JERE",
+    syncTitle: "Lleva tus favoritos contigo",
+    syncDesc: "Aprende en menos de un minuto cómo pasar tus emisoras, países favoritos, ancladas y tema a otro dispositivo.",
+    syncNow: "🔗 Sincronizar ahora",
+
+    anchoredKicker: "⭐ TU SELECCIÓN",
+    anchoredTitle: "Tus emisoras ancladas",
+    anchoredDesc: "Yarigüies, Fundingue y La Guapachosa vienen ancladas inicialmente. Puedes agregar o quitar cualquier emisora.",
+
+    syncPanelTitle: "🔗 Sincronizar entre dispositivos",
+    syncSend: "Enviar desde este dispositivo",
+    syncGenerate: "Generar código",
+    syncReceive: "Recibir en este dispositivo",
+    syncPlaceholder: "Escribe el código de 9 dígitos",
+    syncApply: "Aplicar código",
+    close: "Cerrar",
+
+    themeTitle: "🎨 Elige tu tema",
+    ready: "Listo"
+  },
+
+  en: {
+    heroTitle: "Your music, your stations.",
+    heroDesc: "Listen to your favorite stations, discover new signals and always keep the ones you love close at hand.",
+
+    syncKicker: "🔗 SYNC RADIO JERE",
+    syncTitle: "Take your favorites with you",
+    syncDesc: "Learn in under a minute how to move your stations, favorite countries, pinned stations and theme to another device.",
+    syncNow: "🔗 Sync now",
+
+    anchoredKicker: "⭐ YOUR SELECTION",
+    anchoredTitle: "Your pinned stations",
+    anchoredDesc: "Yarigüies, Fundingue and La Guapachosa are pinned by default. You can add or remove any station.",
+
+    syncPanelTitle: "🔗 Sync between devices",
+    syncSend: "Send from this device",
+    syncGenerate: "Generate code",
+    syncReceive: "Receive on this device",
+    syncPlaceholder: "Enter the 9-digit code",
+    syncApply: "Apply code",
+    close: "Close",
+
+    themeTitle: "🎨 Choose your theme",
+    ready: "Done"
+  },
+
+  fr: {
+    heroTitle: "Votre musique, vos radios.",
+    heroDesc: "Écoutez vos radios préférées, découvrez de nouvelles stations et gardez celles que vous aimez toujours à portée de main.",
+
+    syncKicker: "🔗 SYNCHRONISEZ RADIO JERE",
+    syncTitle: "Emportez vos favoris avec vous",
+    syncDesc: "Découvrez en moins d’une minute comment transférer vos radios, pays favoris, radios épinglées et thème vers un autre appareil.",
+    syncNow: "🔗 Synchroniser maintenant",
+
+    anchoredKicker: "⭐ VOTRE SÉLECTION",
+    anchoredTitle: "Vos radios épinglées",
+    anchoredDesc: "Yarigüies, Fundingue et La Guapachosa sont épinglées par défaut. Vous pouvez ajouter ou retirer n’importe quelle radio.",
+
+    syncPanelTitle: "🔗 Synchroniser entre appareils",
+    syncSend: "Envoyer depuis cet appareil",
+    syncGenerate: "Générer un code",
+    syncReceive: "Recevoir sur cet appareil",
+    syncPlaceholder: "Entrez le code à 9 chiffres",
+    syncApply: "Appliquer le code",
+    close: "Fermer",
+
+    themeTitle: "🎨 Choisissez votre thème",
+    ready: "Terminé"
+  },
+
+  pt: {
+    heroTitle: "Sua música, suas rádios.",
+    heroDesc: "Ouça suas rádios favoritas, descubra novas emissoras e mantenha sempre por perto as que você mais gosta.",
+
+    syncKicker: "🔗 SINCRONIZE O RADIO JERE",
+    syncTitle: "Leve seus favoritos com você",
+    syncDesc: "Aprenda em menos de um minuto como transferir suas rádios, países favoritos, rádios fixadas e tema para outro dispositivo.",
+    syncNow: "🔗 Sincronizar agora",
+
+    anchoredKicker: "⭐ SUA SELEÇÃO",
+    anchoredTitle: "Suas rádios fixadas",
+    anchoredDesc: "Yarigüies, Fundingue e La Guapachosa vêm fixadas por padrão. Você pode adicionar ou remover qualquer rádio.",
+
+    syncPanelTitle: "🔗 Sincronizar entre dispositivos",
+    syncSend: "Enviar deste dispositivo",
+    syncGenerate: "Gerar código",
+    syncReceive: "Receber neste dispositivo",
+    syncPlaceholder: "Digite o código de 9 dígitos",
+    syncApply: "Aplicar código",
+    close: "Fechar",
+
+    themeTitle: "🎨 Escolha seu tema",
+    ready: "Pronto"
+  }
+};
+
 function setLang(lang, btn) {
   currentLang = lang;
   localStorage.setItem('rjp_lang', lang);
@@ -1320,6 +1453,140 @@ function setLang(lang, btn) {
 
 function applyLang() {
   const t = LANGS[currentLang] || LANGS.all;
+
+  /* RJ_UI_TRANSLATION_V1 */
+  const rj = RJ_UI_LANGS[currentLang] || RJ_UI_LANGS.es;
+
+  document.documentElement.lang =
+    currentLang === 'all' ? 'es' : currentLang;
+
+  const heroTitle =
+    document.querySelector('.rj-hero h1');
+
+  if (heroTitle)
+    heroTitle.textContent = rj.heroTitle;
+
+  const heroDesc =
+    document.querySelector('.rj-hero-content > p');
+
+  if (heroDesc)
+    heroDesc.textContent = rj.heroDesc;
+
+
+  const syncKicker =
+    document.querySelector('.rj-sync-video-kicker');
+
+  if (syncKicker)
+    syncKicker.textContent = rj.syncKicker;
+
+  const syncTitle =
+    document.querySelector('.rj-sync-video-copy h3');
+
+  if (syncTitle)
+    syncTitle.textContent = rj.syncTitle;
+
+  const syncDesc =
+    document.querySelector('.rj-sync-video-copy p');
+
+  if (syncDesc)
+    syncDesc.textContent = rj.syncDesc;
+
+  const syncNow =
+    document.querySelector('.rj-sync-now');
+
+  if (syncNow)
+    syncNow.textContent = rj.syncNow;
+
+
+  const anchoredKicker =
+    document.querySelector(
+      '.rj-anchored-section .rj-section-kicker'
+    );
+
+  if (anchoredKicker)
+    anchoredKicker.textContent = rj.anchoredKicker;
+
+  const anchoredTitle =
+    document.querySelector(
+      '.rj-anchored-section h2'
+    );
+
+  if (anchoredTitle)
+    anchoredTitle.textContent = rj.anchoredTitle;
+
+  const anchoredDesc =
+    document.querySelector(
+      '.rj-anchored-section .rj-section-head p'
+    );
+
+  if (anchoredDesc)
+    anchoredDesc.textContent = rj.anchoredDesc;
+
+
+  const syncPanel =
+    document.getElementById('syncPanel');
+
+  if (syncPanel) {
+
+    const title =
+      syncPanel.querySelector('.panel-title');
+
+    if (title)
+      title.textContent = rj.syncPanelTitle;
+
+
+    const sections =
+      syncPanel.querySelectorAll('.sec-title');
+
+    if (sections[0])
+      sections[0].textContent = rj.syncSend;
+
+    if (sections[1])
+      sections[1].textContent = rj.syncReceive;
+
+
+    const actions =
+      syncPanel.querySelectorAll('.btn-nearby');
+
+    if (actions[0])
+      actions[0].textContent = rj.syncGenerate;
+
+    if (actions[1])
+      actions[1].textContent = rj.syncApply;
+
+
+    const codeInput =
+      document.getElementById('syncCodeIn');
+
+    if (codeInput)
+      codeInput.placeholder = rj.syncPlaceholder;
+
+
+    const close =
+      syncPanel.querySelector('.btn-panel-close');
+
+    if (close)
+      close.textContent = rj.close;
+  }
+
+
+  const themePanel =
+    document.getElementById('themePanel');
+
+  if (themePanel) {
+
+    const title =
+      themePanel.querySelector('.panel-title');
+
+    if (title)
+      title.textContent = rj.themeTitle;
+
+    const close =
+      themePanel.querySelector('.btn-panel-close');
+
+    if (close)
+      close.textContent = rj.ready;
+  }
   const tabs = document.querySelectorAll('.tab');
 
   const homeLabels = {
@@ -1386,6 +1653,11 @@ function setStStatus(msg,type){
 applyTheme(currentTheme);
 const savedLang = localStorage.getItem('rjp_lang') || 'all';
 currentLang = savedLang;
+
+/* RJ_APPLY_SAVED_LANG_V1 */
+setTimeout(function () {
+  applyLang();
+}, 0);
 const langBtns = document.querySelectorAll('.lang-btn');
 langBtns.forEach(b => {
   b.classList.remove('active');
@@ -1761,6 +2033,55 @@ function shazamManualPick(title, artist, art, album) {
 
 const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-027'];
 
+/* RJ_ANCHOR_DEFAULTS_FIX_V2
+   Repara una sola vez las tres ancladas iniciales.
+   No elimina otras emisoras que el usuario haya anclado.
+*/
+const RJ_ANCHOR_DEFAULTS_FIX_V2 = 'rjp_anchor_defaults_fix_v2';
+
+(function () {
+  try {
+    if (localStorage.getItem(RJ_ANCHOR_DEFAULTS_FIX_V2) === '1') {
+      return;
+    }
+
+    var list = [];
+
+    try {
+      list = JSON.parse(
+        localStorage.getItem('rjp_anchored') || '[]'
+      );
+    } catch (e) {
+      list = [];
+    }
+
+    if (!Array.isArray(list)) {
+      list = [];
+    }
+
+    DEFAULT_ANCHORED.forEach(function (id) {
+      if (list.indexOf(id) === -1) {
+        list.push(id);
+      }
+    });
+
+    localStorage.setItem(
+      'rjp_anchored',
+      JSON.stringify(list)
+    );
+
+    localStorage.setItem(
+      RJ_ANCHOR_DEFAULTS_FIX_V2,
+      '1'
+    );
+
+  } catch (e) {
+    console.warn(
+      '[Radio Jere] No se pudieron reparar las ancladas:',
+      e
+    );
+  }
+})();
 function getAnchorStore() {
   try {
     return JSON.parse(localStorage.getItem('rjp_anchor_store')) || {};

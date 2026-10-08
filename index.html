@@ -660,6 +660,938 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 
 </style>
 
+
+<style id="radio-jere-compact-final">
+
+/* ==========================================================
+   RADIO JERE - TARJETAS COMPACTAS DEFINITIVAS
+   ========================================================== */
+
+/* Banner: ahora parecen controles reales */
+.rj-feature{
+    cursor:pointer;
+    user-select:none;
+}
+
+.rj-feature:hover{
+    transform:translateY(-2px);
+    border-color:var(--accent);
+    box-shadow:0 10px 26px rgba(0,0,0,.18);
+}
+
+.rj-feature:focus{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+}
+
+
+/* ==========================================================
+   LISTADOS DE EMISORAS
+   3 columnas PC / 2 medianas / 1 móvil
+   ========================================================== */
+
+.stations-list,
+#stationsList,
+#favGlobalList,
+#nearbyStationsList{
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:12px !important;
+    align-items:stretch !important;
+}
+
+
+/* Elementos que no sean tarjetas ocupan toda la fila */
+#stationsList > :not(.scard),
+#favGlobalList > :not(.scard),
+#nearbyStationsList > :not(.scard){
+    grid-column:1 / -1 !important;
+}
+
+
+/* Tarjeta compacta */
+.stations-list .scard,
+#stationsList .scard,
+#favGlobalList .scard,
+#nearbyStationsList .scard{
+
+    width:auto !important;
+    max-width:none !important;
+
+    min-height:105px !important;
+    height:auto !important;
+
+    margin:0 !important;
+
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+
+    gap:12px !important;
+
+    padding:15px !important;
+
+    border-radius:15px !important;
+
+    overflow:hidden !important;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--card),
+            var(--bg2)
+        ) !important;
+}
+
+
+/* Logo */
+.stations-list .scard-logo,
+#stationsList .scard-logo,
+#favGlobalList .scard-logo,
+#nearbyStationsList .scard-logo{
+
+    width:62px !important;
+    height:62px !important;
+
+    min-width:62px !important;
+
+    flex:0 0 62px !important;
+
+    border-radius:13px !important;
+
+    background:var(--bg3) !important;
+}
+
+
+.stations-list .scard-logo img,
+#stationsList .scard-logo img,
+#favGlobalList .scard-logo img,
+#nearbyStationsList .scard-logo img{
+
+    width:100% !important;
+    height:100% !important;
+
+    object-fit:cover !important;
+
+    border-radius:13px !important;
+}
+
+
+/* Información central */
+.stations-list .scard-info,
+#stationsList .scard-info,
+#favGlobalList .scard-info,
+#nearbyStationsList .scard-info{
+
+    flex:1 1 auto !important;
+
+    min-width:0 !important;
+
+    align-self:center !important;
+}
+
+
+/* Nombre */
+.stations-list .scard-name,
+#stationsList .scard-name,
+#favGlobalList .scard-name,
+#nearbyStationsList .scard-name{
+
+    font-size:13px !important;
+
+    line-height:1.25 !important;
+
+    margin-bottom:5px !important;
+
+    white-space:nowrap !important;
+
+    overflow:hidden !important;
+
+    text-overflow:ellipsis !important;
+}
+
+
+/* Ciudad / categoría */
+.stations-list .scard-meta,
+#stationsList .scard-meta,
+#favGlobalList .scard-meta,
+#nearbyStationsList .scard-meta{
+
+    font-size:10px !important;
+
+    white-space:nowrap !important;
+
+    overflow:hidden !important;
+
+    text-overflow:ellipsis !important;
+}
+
+
+/* Botones horizontales */
+.stations-list .scard-actions,
+#stationsList .scard-actions,
+#favGlobalList .scard-actions,
+#nearbyStationsList .scard-actions{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    align-self:center !important;
+
+    gap:4px !important;
+
+    margin-left:auto !important;
+
+    flex:0 0 auto !important;
+}
+
+
+/* PLAY */
+.stations-list .btn-play,
+#stationsList .btn-play,
+#favGlobalList .btn-play,
+#nearbyStationsList .btn-play{
+
+    width:38px !important;
+    height:38px !important;
+
+    min-width:38px !important;
+
+    flex:0 0 38px !important;
+
+    font-size:14px !important;
+}
+
+
+/* Favorito / anclar / compartir */
+.stations-list .btn-fav,
+#stationsList .btn-fav,
+#favGlobalList .btn-fav,
+#nearbyStationsList .btn-fav{
+
+    width:29px !important;
+    height:29px !important;
+
+    min-width:29px !important;
+
+    flex:0 0 29px !important;
+
+    border-radius:8px !important;
+}
+
+
+/* Hover */
+.stations-list .scard:hover,
+#stationsList .scard:hover,
+#favGlobalList .scard:hover,
+#nearbyStationsList .scard:hover{
+
+    transform:translateY(-2px) !important;
+
+    border-color:var(--border2) !important;
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.20) !important;
+}
+
+
+/* Reproduciendo */
+.stations-list .scard.playing,
+#stationsList .scard.playing,
+#favGlobalList .scard.playing,
+#nearbyStationsList .scard.playing{
+
+    border-color:var(--accent) !important;
+
+    box-shadow:
+        0 0 0 1px var(--accent),
+        0 10px 26px rgba(0,0,0,.20) !important;
+}
+
+
+/* ==========================================================
+   MIS PAÍSES
+   ========================================================== */
+
+#favPaisGrid{
+
+    display:grid !important;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,230px)) !important;
+
+    gap:10px !important;
+
+    justify-content:start !important;
+}
+
+
+#favPaisGrid .country-card{
+
+    min-height:64px !important;
+
+    margin:0 !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media(max-width:1150px){
+
+    .stations-list,
+    #stationsList,
+    #favGlobalList,
+    #nearbyStationsList{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr)) !important;
+    }
+
+}
+
+
+@media(max-width:720px){
+
+    .stations-list,
+    #stationsList,
+    #favGlobalList,
+    #nearbyStationsList{
+
+        grid-template-columns:
+            1fr !important;
+    }
+
+
+    .stations-list .scard,
+    #stationsList .scard,
+    #favGlobalList .scard,
+    #nearbyStationsList .scard{
+
+        min-height:92px !important;
+
+        padding:11px !important;
+    }
+
+
+    .stations-list .scard-logo,
+    #stationsList .scard-logo,
+    #favGlobalList .scard-logo,
+    #nearbyStationsList .scard-logo{
+
+        width:50px !important;
+        height:50px !important;
+
+        min-width:50px !important;
+
+        flex-basis:50px !important;
+    }
+
+}
+
+</style>
+
+
+<script id="radio-jere-ux-final">
+
+(function () {
+
+    /* =====================================================
+       COLOMBIA EN MIS PAÍSES
+       Se ejecuta una sola vez.
+       ===================================================== */
+
+    try {
+
+        var countryKey =
+            'rjp_favpaises';
+
+        var migrationKey =
+            'rjp_colombia_country_v2';
+
+        if (
+            localStorage.getItem(migrationKey) !== '1'
+        ) {
+
+            var stored =
+                localStorage.getItem(countryKey);
+
+            var countries;
+
+            if (stored) {
+
+                try {
+
+                    countries =
+                        JSON.parse(stored);
+
+                } catch (e) {
+
+                    countries = [];
+
+                }
+
+            } else {
+
+                /*
+                  Conservamos los países que ya venían
+                  inicialmente y agregamos Colombia.
+                */
+
+                countries = [
+                    'Colombia',
+                    'Mexico',
+                    'Argentina',
+                    'Spain'
+                ];
+
+            }
+
+
+            if (
+                !Array.isArray(countries)
+            ) {
+
+                countries = [];
+
+            }
+
+
+            if (
+                countries.indexOf('Colombia') === -1
+            ) {
+
+                countries.unshift(
+                    'Colombia'
+                );
+
+            }
+
+
+            localStorage.setItem(
+                countryKey,
+                JSON.stringify(countries)
+            );
+
+
+            localStorage.setItem(
+                migrationKey,
+                '1'
+            );
+
+        }
+
+    } catch (e) {
+
+        console.log(
+            'Radio Jere: no se pudo migrar Colombia.'
+        );
+
+    }
+
+
+
+    /* =====================================================
+       FUNCIONES DE LOS TRES BLOQUES DEL HERO
+       ===================================================== */
+
+    function findFeature(target) {
+
+        while (
+            target &&
+            target !== document
+        ) {
+
+            if (
+                target.classList &&
+                target.classList.contains(
+                    'rj-feature'
+                )
+            ) {
+
+                return target;
+
+            }
+
+            target =
+                target.parentNode;
+
+        }
+
+        return null;
+
+    }
+
+
+    function activateFeature(card) {
+
+        if (!card) return;
+
+
+        var title =
+            card.querySelector(
+                'strong'
+            );
+
+        if (!title) return;
+
+
+        var text =
+            title.textContent
+                .replace(/\s+/g,' ')
+                .trim()
+                .toLowerCase();
+
+
+        /* EXPLORA */
+        if (
+            text.indexOf('explora') !== -1
+        ) {
+
+            var tabs =
+                document.querySelectorAll(
+                    '.tab'
+                );
+
+            if (
+                typeof showPage ===
+                'function'
+            ) {
+
+                showPage(
+                    'explorar',
+                    tabs[1]
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        /* FAVORITOS */
+        if (
+            text.indexOf('favorit') !== -1
+        ) {
+
+            var favTabs =
+                document.querySelectorAll(
+                    '.tab'
+                );
+
+            if (
+                typeof showPage ===
+                'function'
+            ) {
+
+                showPage(
+                    'favglobal',
+                    favTabs[2]
+                );
+
+            }
+
+            return;
+
+        }
+
+
+        /* ANCLADAS */
+        if (
+            text.indexOf('anclad') !== -1
+        ) {
+
+            var section =
+                document.querySelector(
+                    '.rj-anchored-section'
+                );
+
+            if (section) {
+
+                section.scrollIntoView(
+                    true
+                );
+
+            }
+
+        }
+
+    }
+
+
+    document.addEventListener(
+        'click',
+        function (event) {
+
+            var card =
+                findFeature(
+                    event.target
+                );
+
+            if (card) {
+
+                activateFeature(
+                    card
+                );
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+
+            if (
+                event.key !== 'Enter' &&
+                event.key !== ' '
+            ) {
+
+                return;
+
+            }
+
+            var card =
+                findFeature(
+                    event.target
+                );
+
+            if (card) {
+
+                event.preventDefault();
+
+                activateFeature(
+                    card
+                );
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            var cards =
+                document.querySelectorAll(
+                    '.rj-feature'
+                );
+
+            for (
+                var i = 0;
+                i < cards.length;
+                i++
+            ) {
+
+                cards[i].setAttribute(
+                    'role',
+                    'button'
+                );
+
+                cards[i].setAttribute(
+                    'tabindex',
+                    '0'
+                );
+
+            }
+
+        }
+    );
+
+})();
+
+</script>
+
+
+<style id="radio-jere-bottom-nav">
+
+/* ==========================================================
+   RADIO JERE - NAVEGACION INFERIOR UNIFICADA
+   ========================================================== */
+
+/* Ocultamos las dos navegaciones superiores duplicadas.
+   Permanecen en el DOM para no romper la lógica existente. */
+.nav-bar,
+.tabs{
+    display:none !important;
+}
+
+/* Más aire abajo para barra + reproductor */
+.content{
+    padding-bottom:175px !important;
+}
+
+/* Barra inferior */
+.rj-bottom-nav{
+    position:fixed;
+
+    left:50%;
+    bottom:72px;
+
+    transform:translateX(-50%);
+
+    z-index:210;
+
+    display:flex;
+    align-items:center;
+
+    gap:5px;
+
+    padding:6px;
+
+    max-width:calc(100vw - 24px);
+
+    border:1px solid var(--border2);
+
+    border-radius:16px;
+
+    background:var(--bg2);
+
+    box-shadow:
+        0 14px 38px rgba(0,0,0,.38);
+}
+
+/* Botones comunes */
+.rj-bottom-nav button{
+    height:42px;
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:0 13px;
+
+    background:transparent;
+
+    color:var(--text2);
+
+    font-family:'Syne',sans-serif;
+
+    font-size:11px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+        background .18s,
+        color .18s,
+        transform .18s;
+}
+
+.rj-bottom-nav button:hover:not(:disabled){
+    background:var(--bg4);
+    color:var(--text);
+    transform:translateY(-1px);
+}
+
+/* Página activa */
+.rj-bottom-nav .rj-page.active{
+    background:var(--bg4);
+    color:var(--text);
+
+    box-shadow:
+        inset 0 -2px 0 var(--accent);
+}
+
+/* Flechas */
+.rj-bottom-nav .rj-history{
+    width:42px;
+    min-width:42px;
+
+    padding:0;
+
+    font-size:20px;
+
+    border:1px solid var(--border);
+}
+
+/* Deshabilitado solo cuando realmente no existe historial */
+.rj-bottom-nav button:disabled{
+    opacity:.28;
+    cursor:default;
+}
+
+/* Mantener reproductor debajo */
+.player{
+    z-index:200;
+}
+
+/* Móvil */
+@media(max-width:650px){
+
+    .content{
+        padding-bottom:165px !important;
+    }
+
+    .rj-bottom-nav{
+        bottom:68px;
+
+        width:calc(100vw - 14px);
+
+        justify-content:space-between;
+
+        gap:2px;
+
+        padding:5px;
+    }
+
+    .rj-bottom-nav button{
+        height:39px;
+
+        padding:0 8px;
+
+        font-size:9px;
+    }
+
+    .rj-bottom-nav .rj-history{
+        width:36px;
+        min-width:36px;
+
+        font-size:17px;
+    }
+}
+
+</style>
+
+<style id="radio-jere-sync-video-css">
+
+.rj-sync-video-card{
+    display:grid;
+    grid-template-columns:minmax(250px,.85fr) minmax(420px,1.35fr);
+    gap:20px;
+    align-items:center;
+
+    margin-top:25px;
+    padding:15px;
+
+    border:1px solid var(--border2);
+    border-radius:17px;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(20,20,35,.76),
+        rgba(14,14,25,.92)
+      );
+
+    box-shadow:
+      0 12px 30px rgba(0,0,0,.20);
+}
+
+.rj-sync-video-copy{
+    min-width:0;
+    padding:7px 5px 7px 9px;
+}
+
+.rj-sync-video-kicker{
+    margin-bottom:7px;
+
+    color:var(--accent);
+
+    font-family:'Syne',sans-serif;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.4px;
+}
+
+.rj-sync-video-copy h3{
+    margin:0 0 8px;
+
+    font-family:'Syne',sans-serif;
+    font-size:19px;
+    line-height:1.15;
+}
+
+.rj-sync-video-copy p{
+    margin:0 0 14px;
+
+    max-width:390px;
+
+    color:var(--text2);
+    font-size:11px;
+    line-height:1.55;
+}
+
+.rj-sync-now{
+    min-height:38px;
+    padding:8px 14px;
+
+    border:0;
+    border-radius:10px;
+
+    background:var(--accent);
+    color:#fff;
+
+    font-family:'Syne',sans-serif;
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.rj-sync-now:hover{
+    transform:translateY(-1px);
+    opacity:.94;
+}
+
+.rj-sync-video-media{
+    overflow:hidden;
+
+    border:1px solid var(--border2);
+    border-radius:14px;
+
+    background:#070710;
+
+    box-shadow:
+      0 10px 26px rgba(0,0,0,.26);
+}
+
+.rj-sync-video-media video{
+    display:block;
+
+    width:100%;
+    aspect-ratio:16 / 9;
+
+    object-fit:cover;
+    background:#070710;
+}
+
+@media(max-width:900px){
+
+    .rj-sync-video-card{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .rj-sync-video-card{
+        margin-top:18px;
+        padding:10px;
+        gap:12px;
+    }
+
+    .rj-sync-video-copy h3{
+        font-size:17px;
+    }
+
+    .rj-sync-now{
+        width:100%;
+    }
+
+}
+
+</style>
 </head>
 <body>
 <div class="hdr">
@@ -832,34 +1764,57 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
         y mantén siempre a mano las que más te gustan.
       </p>
 
-      <div class="rj-hero-features">
+            <div class="rj-sync-video-card">
 
-        <div class="rj-feature">
-          <span class="rj-feature-icon">🌎</span>
-          <div>
-            <strong>Explora</strong>
-            <small>Emisoras de todo el mundo</small>
+        <div class="rj-sync-video-copy">
+
+          <div class="rj-sync-video-kicker">
+            🔗 SINCRONIZA RADIO JERE
           </div>
+
+          <h3>Lleva tus favoritos contigo</h3>
+
+          <p>
+            Aprende en menos de un minuto cómo pasar tus emisoras,
+            países favoritos, ancladas y tema a otro dispositivo.
+          </p>
+
+          <button
+            type="button"
+            class="rj-sync-now"
+            onclick="openSyncPanel()">
+            🔗 Sincronizar ahora
+          </button>
+
         </div>
 
-        <div class="rj-feature">
-          <span class="rj-feature-icon">⭐</span>
-          <div>
-            <strong>Favoritos</strong>
-            <small>Guarda tus preferidas</small>
-          </div>
-        </div>
+        <div class="rj-sync-video-media">
 
-        <div class="rj-feature">
-          <span class="rj-feature-icon">📌</span>
-          <div>
-            <strong>Ancladas</strong>
-            <small>Acceso rápido desde Inicio</small>
-          </div>
+          <video
+            id="rjSyncTutorial"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/media/tutorial-favoritos-poster.jpg">
+
+            <source
+              src="/media/tutorial-favoritos.mp4"
+              type="video/mp4">
+
+            <track
+              kind="captions"
+              srclang="es"
+              label="Español"
+              src="/media/tutorial-favoritos.vtt"
+              default>
+
+            Tu navegador no puede reproducir este video.
+
+          </video>
+
         </div>
 
       </div>
-
     </div>
 
     <div class="rj-hero-mic">🎙️</div>
@@ -1062,6 +2017,522 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
   script.async = false;
   document.body.appendChild(script);
 })();
+</script>
+
+<script id="radio-jere-bottom-nav-js">
+
+(function () {
+
+    function initRadioJereBottomNav() {
+
+        if (
+            document.getElementById(
+                'rjBottomNav'
+            )
+        ) {
+            return;
+        }
+
+        /*
+          Dejamos las tabs originales ocultas porque:
+          - applyLang() todavía las usa.
+          - showPage() todavía las usa.
+          - evitamos romper funciones existentes.
+        */
+        var originalTabs =
+            document.querySelectorAll(
+                '.tab'
+            );
+
+        if (
+            originalTabs.length < 3 ||
+            typeof window.showPage !== 'function'
+        ) {
+            setTimeout(
+                initRadioJereBottomNav,
+                150
+            );
+
+            return;
+        }
+
+
+        /* ================================================
+           BARRA
+           ================================================ */
+
+        var nav =
+            document.createElement(
+                'div'
+            );
+
+        nav.id =
+            'rjBottomNav';
+
+        nav.className =
+            'rj-bottom-nav';
+
+        nav.innerHTML =
+            '<button id="rjBottomBack" class="rj-history" title="Atrás">←</button>' +
+            '<button id="rjBottomInicio" class="rj-page"></button>' +
+            '<button id="rjBottomExplorar" class="rj-page"></button>' +
+            '<button id="rjBottomFavoritos" class="rj-page"></button>' +
+            '<button id="rjBottomForward" class="rj-history" title="Adelante">→</button>';
+
+        document.body.appendChild(
+            nav
+        );
+
+
+        var btnBack =
+            document.getElementById(
+                'rjBottomBack'
+            );
+
+        var btnForward =
+            document.getElementById(
+                'rjBottomForward'
+            );
+
+        var btnInicio =
+            document.getElementById(
+                'rjBottomInicio'
+            );
+
+        var btnExplorar =
+            document.getElementById(
+                'rjBottomExplorar'
+            );
+
+        var btnFavoritos =
+            document.getElementById(
+                'rjBottomFavoritos'
+            );
+
+
+        /* ================================================
+           HISTORIAL DE LAS 3 PÁGINAS PRINCIPALES
+           ================================================ */
+
+        var pageHistory = [
+            'inicio'
+        ];
+
+        var pageIndex = 0;
+
+        var suppressHistory = false;
+
+        var originalShowPage =
+            window.showPage;
+
+
+        function currentPage() {
+
+            var active =
+                document.querySelector(
+                    '.page.active'
+                );
+
+            if (!active) {
+                return 'inicio';
+            }
+
+            return active.id
+                .replace(
+                    'page-',
+                    ''
+                );
+
+        }
+
+
+        function tabForPage(page) {
+
+            if (
+                page === 'inicio'
+            ) {
+                return originalTabs[0];
+            }
+
+            if (
+                page === 'explorar'
+            ) {
+                return originalTabs[1];
+            }
+
+            if (
+                page === 'favglobal'
+            ) {
+                return originalTabs[2];
+            }
+
+            return null;
+
+        }
+
+
+        /*
+          Extendemos showPage sin reemplazar su comportamiento.
+          Solo añadimos historial de navegación.
+        */
+
+        window.showPage =
+            function (page, button) {
+
+                originalShowPage(
+                    page,
+                    button
+                );
+
+                if (
+                    !suppressHistory &&
+                    pageHistory[pageIndex] !== page
+                ) {
+
+                    pageHistory =
+                        pageHistory.slice(
+                            0,
+                            pageIndex + 1
+                        );
+
+                    pageHistory.push(
+                        page
+                    );
+
+                    pageIndex =
+                        pageHistory.length - 1;
+
+                }
+
+                syncBottomNav();
+
+            };
+
+
+        function goPage(page) {
+
+            var tab =
+                tabForPage(
+                    page
+                );
+
+            window.showPage(
+                page,
+                tab
+            );
+
+        }
+
+
+        /* ================================================
+           SINCRONIZACIÓN VISUAL
+           ================================================ */
+
+        function syncLabels() {
+
+            btnInicio.textContent =
+                originalTabs[0].textContent;
+
+            btnExplorar.textContent =
+                originalTabs[1].textContent;
+
+            btnFavoritos.textContent =
+                originalTabs[2].textContent;
+
+        }
+
+
+        function syncActive() {
+
+            var page =
+                currentPage();
+
+            btnInicio.classList.toggle(
+                'active',
+                page === 'inicio'
+            );
+
+            btnExplorar.classList.toggle(
+                'active',
+                page === 'explorar'
+            );
+
+            btnFavoritos.classList.toggle(
+                'active',
+                page === 'favglobal'
+            );
+
+        }
+
+
+        function internalBackAvailable() {
+
+            if (
+                currentPage() !==
+                'explorar'
+            ) {
+                return false;
+            }
+
+            var original =
+                document.getElementById(
+                    'btnBack'
+                );
+
+            return !!(
+                original &&
+                !original.disabled
+            );
+
+        }
+
+
+        function internalForwardAvailable() {
+
+            if (
+                currentPage() !==
+                'explorar'
+            ) {
+                return false;
+            }
+
+            var original =
+                document.getElementById(
+                    'btnForward'
+                );
+
+            return !!(
+                original &&
+                !original.disabled
+            );
+
+        }
+
+
+        function syncButtons() {
+
+            btnBack.disabled =
+                !internalBackAvailable() &&
+                pageIndex <= 0;
+
+            btnForward.disabled =
+                !internalForwardAvailable() &&
+                pageIndex >=
+                    pageHistory.length - 1;
+
+        }
+
+
+        function syncBottomNav() {
+
+            syncLabels();
+            syncActive();
+            syncButtons();
+
+        }
+
+
+        /* ================================================
+           ACCIONES
+           ================================================ */
+
+        btnInicio.onclick =
+            function () {
+
+                goPage(
+                    'inicio'
+                );
+
+            };
+
+
+        btnExplorar.onclick =
+            function () {
+
+                goPage(
+                    'explorar'
+                );
+
+            };
+
+
+        btnFavoritos.onclick =
+            function () {
+
+                goPage(
+                    'favglobal'
+                );
+
+            };
+
+
+        btnBack.onclick =
+            function () {
+
+                /*
+                  Si estamos dentro de un país/búsqueda,
+                  primero usamos el historial propio de Explorar.
+                */
+
+                if (
+                    internalBackAvailable() &&
+                    typeof window.navBack ===
+                        'function'
+                ) {
+
+                    window.navBack();
+
+                    setTimeout(
+                        syncBottomNav,
+                        30
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                  Si no, retrocedemos entre:
+                  Inicio / Explorar / Favoritos.
+                */
+
+                if (
+                    pageIndex > 0
+                ) {
+
+                    pageIndex--;
+
+                    suppressHistory =
+                        true;
+
+                    goPage(
+                        pageHistory[
+                            pageIndex
+                        ]
+                    );
+
+                    suppressHistory =
+                        false;
+
+                }
+
+                syncBottomNav();
+
+            };
+
+
+        btnForward.onclick =
+            function () {
+
+                if (
+                    internalForwardAvailable() &&
+                    typeof window.navForward ===
+                        'function'
+                ) {
+
+                    window.navForward();
+
+                    setTimeout(
+                        syncBottomNav,
+                        30
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    pageIndex <
+                    pageHistory.length - 1
+                ) {
+
+                    pageIndex++;
+
+                    suppressHistory =
+                        true;
+
+                    goPage(
+                        pageHistory[
+                            pageIndex
+                        ]
+                    );
+
+                    suppressHistory =
+                        false;
+
+                }
+
+                syncBottomNav();
+
+            };
+
+
+        /*
+          Los textos de las tabs cambian al cambiar idioma.
+          Observamos las tabs originales y reflejamos
+          automáticamente sus nuevos nombres abajo.
+        */
+
+        var observer =
+            new MutationObserver(
+                function () {
+
+                    syncBottomNav();
+
+                }
+            );
+
+        for (
+            var i = 0;
+            i < originalTabs.length;
+            i++
+        ) {
+
+            observer.observe(
+                originalTabs[i],
+                {
+                    childList:true,
+                    characterData:true,
+                    subtree:true,
+                    attributes:true
+                }
+            );
+
+        }
+
+
+        /*
+          navBack/navForward actualizan sus botones originales.
+          Sin tocar app.js, sincronizamos el dock.
+        */
+
+        setInterval(
+            syncBottomNav,
+            300
+        );
+
+
+        syncBottomNav();
+
+    }
+
+
+    window.addEventListener(
+        'load',
+        function () {
+
+            setTimeout(
+                initRadioJereBottomNav,
+                100
+            );
+
+        }
+    );
+
+})();
+
 </script>
 </body>
 </html>
