@@ -204,6 +204,7 @@ function filterUniqueStations(stations) {
 async function init(){
   setStatus('Conectando...','loading');
   await loadStationsJSON();
+  renderHomeAnchored(); // RJ_FIX_ANCLADAS_INICIO_V2
   try{
     allCountries=await apiFetch('/countries?hidebroken=true&order=name');
     setStatus(`${allCountries.length} países disponibles`,'');
