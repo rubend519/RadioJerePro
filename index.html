@@ -1592,6 +1592,92 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 }
 
 </style>
+<!-- RJ_TUTORIAL_ACCORDION_V1 : estilos -->
+<style id="rj-tutorial-accordion-css">
+html.rj-tutorial-ready .rj-hero{
+    min-height:0 !important;
+    margin-bottom:14px !important;
+}
+.rj-tutorial-fold{
+    margin:0 0 26px;
+    width:100%;
+    min-width:0;
+}
+.rj-tutorial-toggle{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    width:100%;
+    min-height:76px;
+    padding:15px 20px;
+    border:1px solid var(--border2);
+    border-radius:16px;
+    background:linear-gradient(105deg,rgba(24,23,42,.96),rgba(43,21,47,.88));
+    color:var(--text);
+    text-align:left;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    box-shadow:0 10px 26px rgba(0,0,0,.16);
+    transition:border-color .18s,background .18s;
+}
+.rj-tutorial-toggle:hover,.rj-tutorial-toggle:focus{
+    border-color:var(--accent);
+    outline:none;
+}
+.rj-tutorial-symbol{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:43px;
+    height:43px;
+    border:1px solid var(--accent);
+    border-radius:11px;
+    background:rgba(233,69,96,.12);
+    color:var(--accent);
+    font-size:20px;
+    flex-shrink:0;
+}
+.rj-tutorial-summary{display:block;min-width:0;flex:1}
+.rj-tutorial-summary strong{
+    display:block;
+    font:700 15px/1.3 'Syne',sans-serif;
+    margin-bottom:3px;
+}
+.rj-tutorial-summary small{
+    display:block;
+    color:var(--text2);
+    font-size:11px;
+    line-height:1.4;
+}
+.rj-tutorial-action{
+    border:1px solid var(--border2);
+    border-radius:9px;
+    padding:7px 10px;
+    font:700 11px/1.2 'Syne',sans-serif;
+    white-space:nowrap;
+}
+.rj-tutorial-chevron{
+    color:var(--text2);
+    font-size:22px;
+    line-height:1;
+    transition:transform .2s;
+}
+.rj-tutorial-fold.rj-open .rj-tutorial-chevron{transform:rotate(180deg)}
+.rj-tutorial-panel[hidden]{display:none !important}
+.rj-tutorial-panel{padding-top:12px}
+.rj-tutorial-panel .rj-sync-video-card{
+    margin-top:0 !important;
+    width:100%;
+}
+@media(max-width:600px){
+    .rj-tutorial-fold{margin-bottom:20px}
+    .rj-tutorial-toggle{gap:10px;padding:12px;min-height:70px}
+    .rj-tutorial-summary strong{font-size:13px}
+    .rj-tutorial-summary small{font-size:10px}
+    .rj-tutorial-symbol{width:36px;height:36px;font-size:16px}
+    .rj-tutorial-action{display:none}
+}
+</style>
 </head>
 <body>
 <div class="hdr">
@@ -2533,6 +2619,83 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
 
 })();
 
+</script>
+<!-- RJ_TUTORIAL_ACCORDION_V1 : comportamiento -->
+<script id="rj-tutorial-accordion-js">
+(function () {
+  'use strict';
+  var home = document.querySelector('.rj-home');
+  var hero = document.querySelector('.rj-hero');
+  var card = hero && hero.querySelector('.rj-sync-video-card');
+  var anchor = home && home.querySelector('.rj-anchored-section');
+  if (!home || !hero || !card || !anchor || document.getElementById('rjTutorialFold')) return;
+
+  var fold = document.createElement('section');
+  fold.id = 'rjTutorialFold';
+  fold.className = 'rj-tutorial-fold';
+  fold.setAttribute('aria-label','Tutorial de sincronización');
+  fold.innerHTML =
+    '<button id="rjTutorialToggle" class="rj-tutorial-toggle" type="button" aria-controls="rjTutorialPanel" aria-expanded="false">' +
+      '<span class="rj-tutorial-symbol" aria-hidden="true">&#9654;</span>' +
+      '<span class="rj-tutorial-summary">' +
+        '<strong id="rjTutorialTitle">Ver tutorial de sincronización</strong>' +
+        '<small id="rjTutorialDesc">Aprende a llevar tus favoritos a otro dispositivo.</small>' +
+      '</span>' +
+      '<span class="rj-tutorial-action" id="rjTutorialAction">Ver tutorial</span>' +
+      '<span class="rj-tutorial-chevron" aria-hidden="true">&#9662;</span>' +
+    '</button>' +
+    '<div class="rj-tutorial-panel" id="rjTutorialPanel" hidden></div>';
+
+  anchor.parentNode.insertBefore(fold, anchor);
+  var panel = document.getElementById('rjTutorialPanel');
+  var toggle = document.getElementById('rjTutorialToggle');
+  var video = card.querySelector('video');
+  panel.appendChild(card); // Conserva el video y el boton de sincronizacion existentes.
+  if (video) video.setAttribute('preload','none');
+
+  var key = 'rjp_tutorial_expanded_v1';
+  var translations = {
+    es: {title:'Ver tutorial de sincronización',desc:'Aprende en menos de un minuto a llevar tus emisoras y favoritos a otro dispositivo.',open:'Ver tutorial',close:'Ocultar'},
+    en: {title:'Watch the sync tutorial',desc:'Learn in under a minute how to move your stations and favorites to another device.',open:'Watch tutorial',close:'Hide'},
+    fr: {title:'Voir le tutoriel de synchronisation',desc:'Découvrez comment transférer vos radios et favoris vers un autre appareil.',open:'Voir le tutoriel',close:'Masquer'},
+    pt: {title:'Ver tutorial de sincronização',desc:'Aprenda a levar suas rádios e favoritos para outro dispositivo em menos de um minuto.',open:'Ver tutorial',close:'Ocultar'}
+  };
+  var expanded = false;
+  try { expanded = window.localStorage.getItem(key) === '1'; } catch (e) {}
+
+  function updateLabels() {
+    var lang = (document.documentElement.lang || 'es').toLowerCase().slice(0,2);
+    var t = translations[lang] || translations.es;
+    document.getElementById('rjTutorialTitle').textContent = t.title;
+    document.getElementById('rjTutorialDesc').textContent = t.desc;
+    document.getElementById('rjTutorialAction').textContent = expanded ? t.close : t.open;
+    fold.setAttribute('aria-label',t.title);
+  }
+
+  function setExpanded(next, save) {
+    expanded = !!next;
+    panel.hidden = !expanded;
+    fold.classList.toggle('rj-open',expanded);
+    toggle.setAttribute('aria-expanded',expanded ? 'true' : 'false');
+    if (!expanded && video && typeof video.pause === 'function') video.pause();
+    if (save) {
+      try { window.localStorage.setItem(key,expanded ? '1' : '0'); } catch (e) {}
+    }
+    updateLabels();
+  }
+
+  toggle.addEventListener('click',function () { setExpanded(!expanded,true); });
+  if (typeof MutationObserver !== 'undefined') {
+    var observer = new MutationObserver(updateLabels);
+    observer.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  }
+  window.addEventListener('storage',function (event) {
+    if (event.key === key) setExpanded(event.newValue === '1',false);
+  });
+
+  setExpanded(expanded,false);
+  document.documentElement.classList.add('rj-tutorial-ready');
+})();
 </script>
 </body>
 </html>
