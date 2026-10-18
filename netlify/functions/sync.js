@@ -10,7 +10,7 @@
  * vez (uso único) — nadie más puede reutilizarlo después de importarlo.
  */
 
-const { getStore } = require('@netlify/blobs');
+const { getStore, connectLambda } = require('@netlify/blobs');
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -32,6 +32,7 @@ exports.handler = async (event) => {
     return { statusCode: 204, headers: CORS, body: '' };
   }
 
+  connectLambda(event); // RJ_FIX_BLOBS_LAMBDA_V1
   const store = getStore('rjp-sync');
 
   if (event.httpMethod === 'POST') {
