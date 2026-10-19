@@ -87,6 +87,7 @@ const CONTINENTS = {
   'Oceanía': ['Australia','New Zealand','Papua New Guinea','Fiji','Samoa','Tonga','Vanuatu'],
 };
 
+const RJP_CURADAS_POR_PAIS = {}; // RJ_CUMBIAS_POR_PAIS_V1
 let _stationsLoaded = false;
 async function loadStationsJSON() {
   if (_stationsLoaded) return;
@@ -97,7 +98,14 @@ async function loadStationsJSON() {
     const arr = data.stations || data;
     if (Array.isArray(arr) && arr.length > 0) {
       COLOMBIA_CURADA.length = 0;
-      arr.forEach(s => COLOMBIA_CURADA.push(s));
+      arr.forEach(s => {
+        if (s.country === 'Colombia') COLOMBIA_CURADA.push(s);
+        else {
+          const key = String(s.country || '').toLowerCase().replace(/Ãº/g, 'u');
+          if (!RJP_CURADAS_POR_PAIS[key]) RJP_CURADAS_POR_PAIS[key] = [];
+          RJP_CURADAS_POR_PAIS[key].push(s);
+        }
+      });
       _stationsLoaded = true;
       console.log('[RJP] stations.json cargado:', arr.length, 'emisoras');
     }
@@ -329,7 +337,8 @@ async function selectCountry(name, continent, pushNav=true){
       );
       allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiFiltered]);
     } else {
-      allStations = filterUniqueStations(apiStations);
+      const curadasPais = RJP_CURADAS_POR_PAIS[String(name).toLowerCase().replace(/Ãº/g, 'u')] || [];
+            allStations = filterUniqueStations([...curadasPais, ...apiStations]);
     }
 
     filteredStations = [...allStations];
@@ -576,6 +585,253 @@ function getEffectiveUrl(station) {
 let retryAttempts = {};
 const MAX_RETRIES = 3;
 
+// RJ_MEDIASTREAM_AUTO_V1 — El Sol Bucaramanga (co-019)
+// Resuelve una sesión nueva por reproducción y ante cortes; nunca guarda URLs temporales.
+const RJP_MEDIASTREAM_IDS = { 'co-019': '632cc5d948f73909a614ab93' };
+let rjpPlaybackToken = 0;
+let rjpHlsInstance = null;
+let rjpHlsLibraryPromise = null;
+let rjpMdRetryTimer = null;
+let rjpMdStartupTimer = null;
+let rjpMdRetryQueued = false;
+let rjpMdPreparing = false;
+let rjpMdReady = false;
+let rjpMdNeedsTap = false;
+let rjpMdCounted = false;
+let rjpMdPlayingSince = 0;
+const RJP_MD_RETRY_DELAYS = [2000, 5000, 15000];
+
+function rjpIsMediastreamStation(station) {
+  return !!(station && RJP_MEDIASTREAM_IDS[station.stationuuid]);
+}
+
+function rjpCleanupMediastream() {
+  if (rjpMdRetryTimer) clearTimeout(rjpMdRetryTimer);
+  if (rjpMdStartupTimer) clearTimeout(rjpMdStartupTimer);
+  rjpMdRetryTimer = null;
+  rjpMdStartupTimer = null;
+  rjpMdRetryQueued = false;
+  rjpMdPreparing = false;
+  rjpMdReady = false;
+  rjpMdNeedsTap = false;
+  if (rjpHlsInstance) {
+    try { rjpHlsInstance.destroy(); } catch (e) {}
+    rjpHlsInstance = null;
+  }
+}
+
+function rjpMediastreamIsCurrent(station, token) {
+  return token === rjpPlaybackToken && !!currentStation &&
+    currentStation.stationuuid === station.stationuuid && playing;
+}
+
+function rjpLoadHlsLibrary() {
+  if (window.Hls && typeof window.Hls.isSupported === 'function') {
+    return Promise.resolve(window.Hls);
+  }
+  if (rjpHlsLibraryPromise) return rjpHlsLibraryPromise;
+  // Versión fijada: la actualización de la biblioteca requiere pruebas de regresión.
+  const cdns = [
+    'https://cdn.jsdelivr.net/npm/hls.js@1.7.3/dist/hls.min.js',
+    'https://unpkg.com/hls.js@1.7.3/dist/hls.min.js'
+  ];
+  rjpHlsLibraryPromise = new Promise(function(resolve, reject) {
+    function attempt(index) {
+      if (index >= cdns.length) {
+        reject(new Error('No se pudo cargar el motor HLS'));
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = cdns[index];
+      script.async = true;
+      script.onload = function() {
+        if (window.Hls && typeof window.Hls.isSupported === 'function') resolve(window.Hls);
+        else attempt(index + 1);
+      };
+      script.onerror = function() { attempt(index + 1); };
+      document.head.appendChild(script);
+    }
+    attempt(0);
+  }).catch(function(error) {
+    rjpHlsLibraryPromise = null;
+    throw error;
+  });
+  return rjpHlsLibraryPromise;
+}
+
+async function rjpGetMediastreamUrl(station) {
+  const id = RJP_MEDIASTREAM_IDS[station.stationuuid];
+  const response = await fetch('https://mdstrm.com/live-stream/' + id + '.json', {
+    cache: 'no-store',
+    signal: timeoutSignal(15000)
+  });
+  if (!response.ok) throw new Error('API Mediastream HTTP ' + response.status);
+  const data = await response.json();
+  if (!data || !data.src || !data.src.hls || !data.MDSTRMUID ||
+      !data.MDSTRMSID || !data.MDSTRMPID) {
+    throw new Error('La API no devolvió una sesión completa');
+  }
+  const url = new URL(data.src.hls);
+  if (url.protocol !== 'https:' || !/(^|\.)mdstrm\.com$/i.test(url.hostname)) {
+    throw new Error('La API devolvió una fuente inesperada');
+  }
+  url.searchParams.set('uid', data.MDSTRMUID);
+  url.searchParams.set('sid', data.MDSTRMSID);
+  url.searchParams.set('pid', data.MDSTRMPID);
+  url.searchParams.set('dnt', 'true');
+  url.searchParams.set('at', 'web-app');
+  return url.toString();
+}
+
+function rjpMdTryPlay(station, token) {
+  if (!rjpMediastreamIsCurrent(station, token)) return;
+  rjpMdReady = true;
+  const promise = audio.play();
+  if (promise && typeof promise.catch === 'function') {
+    promise.catch(function(error) {
+      if (!rjpMediastreamIsCurrent(station, token)) return;
+      if (error && error.name === 'NotAllowedError') {
+        // Algunos navegadores exigen otra pulsación después de cargar la sesión.
+        rjpMdNeedsTap = true;
+        document.getElementById('pStatus').textContent = '▶ Pulsa Play otra vez para escuchar';
+        updateStreamBadge(station.stationuuid, null);
+      } else if (error && error.name !== 'AbortError') {
+        rjpMdQueueRetry(station, token);
+      }
+    });
+  }
+}
+
+function rjpMdQueueRetry(station, token) {
+  if (!rjpMediastreamIsCurrent(station, token) || rjpMdRetryQueued || rjpMdNeedsTap) return;
+  rjpMdRetryQueued = true;
+  if (rjpMdStartupTimer) clearTimeout(rjpMdStartupTimer);
+  rjpMdStartupTimer = null;
+  if (rjpMdPlayingSince && (Date.now() - rjpMdPlayingSince) > 120000) {
+    retryAttempts[station.stationuuid] = 0;
+  }
+  const attempt = (retryAttempts[station.stationuuid] || 0) + 1;
+  retryAttempts[station.stationuuid] = attempt;
+  if (attempt > RJP_MD_RETRY_DELAYS.length) {
+    playing = false;
+    rjpCleanupMediastream();
+    document.getElementById('pStatus').textContent = '✗ El Sol sin señal; vuelve a intentar';
+    updateStreamBadge(station.stationuuid, 'error');
+    refreshCards();
+    return;
+  }
+  const delay = RJP_MD_RETRY_DELAYS[attempt - 1];
+  document.getElementById('pStatus').textContent =
+    '⟳ Renovando sesión de El Sol (' + attempt + '/3)...';
+  updateStreamBadge(station.stationuuid, 'retrying');
+  rjpMdRetryTimer = setTimeout(function() {
+    rjpMdRetryTimer = null;
+    rjpMdRetryQueued = false;
+    if (rjpMediastreamIsCurrent(station, token)) rjpPlayMediastream(station, token);
+  }, delay);
+}
+
+async function rjpPlayMediastream(station, token) {
+  if (!rjpMediastreamIsCurrent(station, token)) return;
+  // Destruir la sesión HLS anterior (sin alterar otras emisoras).
+  if (rjpHlsInstance) {
+    try { rjpHlsInstance.destroy(); } catch (e) {}
+    rjpHlsInstance = null;
+  }
+  if (rjpMdStartupTimer) clearTimeout(rjpMdStartupTimer);
+  rjpMdStartupTimer = null;
+  rjpMdPreparing = true;
+  rjpMdReady = false;
+  rjpMdNeedsTap = false;
+  document.getElementById('pStatus').textContent = '⟳ Obteniendo señal vigente de El Sol...';
+  updateStreamBadge(station.stationuuid, 'retrying');
+
+  try {
+    const streamUrl = await rjpGetMediastreamUrl(station);
+    if (!rjpMediastreamIsCurrent(station, token)) return;
+
+    const nativeHls = !!(audio.canPlayType('application/vnd.apple.mpegurl') ||
+      audio.canPlayType('application/x-mpegURL'));
+    let HlsClass = null;
+    try {
+      // El motor HLS se descarga solo para esta emisora y se comparte entre intentos.
+      // En navegadores antiguos con HLS nativo no hace falta descargarlo.
+      if (!nativeHls || typeof MediaSource !== 'undefined') {
+        HlsClass = await rjpLoadHlsLibrary();
+      }
+    } catch (e) {
+      if (!nativeHls) throw e;
+    }
+    if (!rjpMediastreamIsCurrent(station, token)) return;
+
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+    audio.volume = document.getElementById('volSlider').value;
+    document.getElementById('nowName').textContent = station.name;
+    document.getElementById('headerWave').classList.remove('idle');
+    const img = document.getElementById('pLogoImg');
+    img.onerror = function() { this.onerror = null; this.src = ICON; };
+    img.src = station.favicon || ICON;
+    document.getElementById('pStatus').textContent = '⟳ Cargando señal HLS...';
+    refreshCards();
+
+    if (HlsClass && HlsClass.isSupported()) {
+      const player = new HlsClass();
+      rjpHlsInstance = player;
+      player.on(HlsClass.Events.MANIFEST_PARSED, function() {
+        if (rjpMediastreamIsCurrent(station, token)) rjpMdTryPlay(station, token);
+      });
+      player.on(HlsClass.Events.ERROR, function(event, info) {
+        if (info && info.fatal && rjpMediastreamIsCurrent(station, token)) {
+          rjpMdQueueRetry(station, token);
+        }
+      });
+      player.loadSource(streamUrl);
+      player.attachMedia(audio);
+    } else if (nativeHls) {
+      audio.src = streamUrl;
+      audio.load();
+      rjpMdTryPlay(station, token);
+    } else {
+      throw new Error('El dispositivo no admite reproducción HLS');
+    }
+    rjpMdPreparing = false;
+    // Evita que se quede indefinidamente en "conectando" sin recibir audio.
+    rjpMdStartupTimer = setTimeout(function() {
+      rjpMdStartupTimer = null;
+      if (rjpMediastreamIsCurrent(station, token) && audio.paused && !rjpMdNeedsTap) {
+        rjpMdQueueRetry(station, token);
+      }
+    }, 22000);
+  } catch (error) {
+    rjpMdPreparing = false;
+    if (rjpMediastreamIsCurrent(station, token)) {
+      console.warn('[Radio Jere] Mediastream:', error.message);
+      rjpMdQueueRetry(station, token);
+    }
+  }
+}
+
+// Indicador de audio y conteo solo cuando el navegador realmente empieza a reproducir.
+audio.addEventListener('playing', function() {
+  if (!rjpIsMediastreamStation(currentStation) || !playing) return;
+  rjpMdNeedsTap = false;
+  rjpMdPlayingSince = Date.now();
+  if (rjpMdStartupTimer) clearTimeout(rjpMdStartupTimer);
+  rjpMdStartupTimer = null;
+  document.getElementById('pStatus').textContent = '▶ Reproduciendo El Sol';
+  updateStreamBadge(currentStation.stationuuid, 'ok');
+  if (!rjpMdCounted) {
+    rjpMdCounted = true;
+    playCounts[currentStation.stationuuid] =
+      (playCounts[currentStation.stationuuid] || 0) + 1;
+    localStorage.setItem('rjp_playcounts', JSON.stringify(playCounts));
+  }
+  refreshCards();
+});
+// FIN RJ_MEDIASTREAM_AUTO_V1
+
 async function getAlternativeUrl(station) {
   const urls = [station.url_resolved, station.url].filter(Boolean);
   try {
@@ -621,12 +877,27 @@ function updateStreamBadge(uuid, state) {
 
 async function playStation(s){
   if(typeof s==='string') s=JSON.parse(s);
+  // Si Edge bloqueó el inicio automático, la segunda pulsación activa el audio ya preparado.
+  if (rjpIsMediastreamStation(s) && rjpMdNeedsTap && rjpMdReady &&
+      currentStation && currentStation.stationuuid === s.stationuuid && playing) {
+    rjpMdTryPlay(s, rjpPlaybackToken);
+    return;
+  }
   _registerStation(s);
+  const rjpToken = ++rjpPlaybackToken;
+  rjpCleanupMediastream();
+  rjpMdCounted = false;
+  rjpMdPlayingSince = 0;
   currentStation=s; playing=true;
   retryAttempts[s.stationuuid] = 0;
 
   document.getElementById('pName').textContent = s.name;
   document.getElementById('pStatus').textContent = '⟳ Resolviendo stream...';
+
+  if (rjpIsMediastreamStation(s)) {
+    await rjpPlayMediastream(s, rjpToken);
+    return;
+  }
 
   let url = getEffectiveUrl(s);
 
@@ -650,6 +921,7 @@ async function playStation(s){
     playing = false;
     return;
   }
+  if (rjpToken !== rjpPlaybackToken || !playing) return;
   _loadStream(s, url);
 }
 
@@ -695,10 +967,22 @@ async function _loadStream(s, url) {
 }
 
 audio.addEventListener('error', () => {
+  if (rjpIsMediastreamStation(currentStation)) {
+    if (playing && !rjpMdPreparing) rjpMdQueueRetry(currentStation, rjpPlaybackToken);
+    return;
+  }
   if(currentStation && playing) _handleStreamError(currentStation);
 });
 
 audio.addEventListener('stalled', () => {
+  if (rjpIsMediastreamStation(currentStation)) {
+    const station = currentStation, token = rjpPlaybackToken;
+    if (playing) setTimeout(function() {
+      if (rjpMediastreamIsCurrent(station, token) && audio.readyState < 3 && !rjpMdNeedsTap)
+        rjpMdQueueRetry(station, token);
+    }, 10000);
+    return;
+  }
   if(currentStation && playing) {
     setTimeout(() => {
       if(currentStation && playing && (audio.readyState < 3)) _handleStreamError(currentStation);
@@ -792,6 +1076,8 @@ function _applyManualUrl(uuid) {
 }
 
 function stopRadio(){
+  ++rjpPlaybackToken;
+  rjpCleanupMediastream();
   audio.pause(); audio.src=''; playing=false;
   document.getElementById('pName').textContent='Selecciona una emisora';
   document.getElementById('pStatus').textContent='Radio Jere';
@@ -2032,7 +2318,50 @@ function shazamManualPick(title, artist, art, album) {
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
    ══════════════════════════════════════════════════════════════════ */
 
-const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-027'];
+const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-027', 'rj-cumbia-co-enrealidad', 'rj-cumbia-pe-nuevaq', 'co-019'];
+/* RJ_HOME_PINS_RELEASE_20261019_V1 - ancladas por defecto y migracion una sola vez */
+(function () {
+  try {
+    var clave = 'rjp_home_pins_el_sol_cumbias_20261019_v1';
+    if (localStorage.getItem(clave) === '1') return;
+    var lista = null;
+    try { lista = JSON.parse(localStorage.getItem('rjp_anchored') || 'null'); }
+    catch (e) {}
+    if (!Array.isArray(lista)) lista = DEFAULT_ANCHORED.slice();
+    ['rj-cumbia-co-enrealidad', 'rj-cumbia-pe-nuevaq', 'co-019'].forEach(function (id) {
+      if (lista.indexOf(id) === -1) lista.push(id);
+    });
+    localStorage.setItem('rjp_anchored', JSON.stringify(lista));
+    localStorage.setItem(clave, '1');
+  } catch (e) {
+    console.warn('[Radio Jere] Ancladas iniciales:', e);
+  }
+})();
+/* RJ_CUMBIAS_ANCLADAS_V1 */
+(function () {
+  try {
+    var key = 'rjp_cumbias_anchored_migration_v1';
+    if (localStorage.getItem(key) === '1') return;
+
+    var list = null;
+    try {
+      list = JSON.parse(localStorage.getItem('rjp_anchored') || 'null');
+    } catch (e) {}
+
+    if (!Array.isArray(list)) {
+      list = DEFAULT_ANCHORED.slice();
+    }
+
+    ['rj-cumbia-co-enrealidad', 'rj-cumbia-pe-nuevaq'].forEach(function (id) {
+      if (list.indexOf(id) === -1) list.push(id);
+    });
+
+    localStorage.setItem('rjp_anchored', JSON.stringify(list));
+    localStorage.setItem(key, '1');
+  } catch (e) {
+    console.warn('[Radio Jere] Migracion ancladas:', e);
+  }
+})();
 
 /* RJ_ANCHOR_DEFAULTS_FIX_V2
    Repara una sola vez las tres ancladas iniciales.
@@ -2142,6 +2471,13 @@ function findStationByUuid(uuid) {
   if (store[uuid]) return store[uuid];
   var found = COLOMBIA_CURADA.filter(function (s) { return s.stationuuid === uuid; })[0];
   if (found) return found;
+  // Las emisoras de Peru se cargan en un catalogo por pais, no en COLOMBIA_CURADA.
+  for (var pais in RJP_CURADAS_POR_PAIS) {
+    if (!Object.prototype.hasOwnProperty.call(RJP_CURADAS_POR_PAIS, pais)) continue;
+    var emisorasPais = RJP_CURADAS_POR_PAIS[pais];
+    var delPais = emisorasPais.filter(function (s) { return s.stationuuid === uuid; })[0];
+    if (delPais) return delPais;
+  }
   return allStations.filter(function (s) { return s.stationuuid === uuid; })[0];
 }
 
@@ -2171,7 +2507,8 @@ document.addEventListener('DOMContentLoaded', renderHomeAnchored);
    nunca deben sobreescribirse ni re-chequearse automáticamente.
    ══════════════════════════════════════════════════════════════════ */
 
-const HEALTH_CHECK_EXCLUDE = ['co-022', 'co-036'];
+// El Sol usa HLS: una prueba con Audio() del enlace antiguo da falsos negativos.
+const HEALTH_CHECK_EXCLUDE = ['co-022', 'co-036', 'co-019'];
 const HEALTH_CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 horas
 const HEALTH_CHECK_TIMEOUT_MS = 8000;
 const HEALTH_CHECK_BATCH_SIZE = 3; // no probar todas a la vez (cuida TVs viejos)

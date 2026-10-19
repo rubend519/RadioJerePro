@@ -1,9 +1,9 @@
-﻿{
+{
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-02",
-    "total": 169,
+    "last_updated": "2026-10-19",
+    "total": 171,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -1609,6 +1609,26 @@
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: BogotÃ¡",
       "favicon": ""
+    },
+    {
+      "stationuuid": "rj-cumbia-co-enrealidad",
+      "name": "Radio En Realidad 89.3",
+      "url": "https://stream.zeno.fm/uxru9mmkt81uv",
+      "country": "Colombia",
+      "state": "Málaga, Santander",
+      "tags": "cumbia,tropical",
+      "favicon": "",
+      "verified": true
+    },
+    {
+      "stationuuid": "rj-cumbia-pe-nuevaq",
+      "name": "Radio Nueva Q",
+      "url": "https://us-b4-p-e-zs14-audio.cdn.mdstrm.com/live-audio-aw/6839e1f153fcf56d988d5943",
+      "country": "Peru",
+      "state": "Peru",
+      "tags": "cumbia,cumbia peruana,tropical",
+      "favicon": "",
+      "verified": true
     }
   ]
 }
