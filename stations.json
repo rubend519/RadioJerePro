@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-19",
-    "total": 171,
+    "last_updated": "2026-10-20",
+    "total": 481,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -1629,6 +1629,2796 @@
       "tags": "cumbia,cumbia peruana,tropical",
       "favicon": "",
       "verified": true
+    },
+    {
+      "stationuuid": "co-170",
+      "name": "Azul Mar Caribe Radio“Azul Mar Caribe Radio: el sabor de Barranquilla que se escucha.”",
+      "url": "https://online.multimusic.com.co/8106/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-171",
+      "name": "Costerisima Stereo (Barranquilla)Vallenato y Más",
+      "url": "https://sc10.conectarhosting.com/proxy/costerisimastereo?mp=/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-172",
+      "name": "Digital Stereo (Barranquilla)Una Radio Diferente",
+      "url": "https://streaming.radiosenlinea.com.ar/9312/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-173",
+      "name": "MELAO STEREODESDE BARRANQUILLA, COLOMBIA CON MUSICA VARIDAD CON LA MEJOR DE LA MUSICA CON DJ RUBEN PARA EL MUNDO",
+      "url": "https://streaming.radiosenlinea.com.ar:10284",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-174",
+      "name": "Mi Bailable Stereo (Barranquilla)La Que Te Mueve",
+      "url": "https://sc10.conectarhosting.com/proxy/mibailablestereo/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-175",
+      "name": "ORION ESTEREOOrión estéreo estación De Radio De Barranquilla Colombia y Para Mundo Entero Radio Con Calidad",
+      "url": "https://radios.multimusic.com.co:8002",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-176",
+      "name": "Qrramba StereoLa Radio Q de Barranquilla",
+      "url": "https://sc10.conectarhosting.com/proxy/qrrambastereo/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-177",
+      "name": "Recticar Radio(Barranquilla)La Radio Que Te Gusta",
+      "url": "https://sc10.conectarhosting.com/proxy/recticarradio/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-178",
+      "name": "Rumbera Stereo (Barranquilla)La Primera En La Web",
+      "url": "https://sc10.conectarhosting.com/proxy/rumberastereo?mp=/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-179",
+      "name": "Sabor Stereo (Barranquilla)La Crossover Bailable",
+      "url": "https://sc10.conectarhosting.com/proxy/saborstereo/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-180",
+      "name": "Saoko Radio Quilla (Barranquilla)Música a otro Nivel",
+      "url": "https://sc10.conectarhosting.com/proxy/saokoradioquilla/stream",
+      "country": "Colombia",
+      "state": "Barranquilla",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-181",
+      "name": "Caracol Radio Medellin AM6AM W",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CR_AM_MEDELLIN.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjUwMTYyOCwiaXNzIjoidGlzcnYifQ.OQe1MSTyfe5VvA5-d86L8k58QXo1H3T_kboBx2t65Pg",
+      "country": "Colombia",
+      "state": "Medellín",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-182",
+      "name": "306RadioLa Radio Siempre Joven",
+      "url": "https://server01.heplayer.com/8120/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-183",
+      "name": "675 0onlinela radio que nos une",
+      "url": "https://stream.vocesparatumarca.net/8096/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-184",
+      "name": "AFRI CARIBE RADIOLA EMISORA DEL VACILE EN QUILLA",
+      "url": "https://eu8.fastcast4u.com/proxy/eddie08?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-185",
+      "name": "AMOR COLOMBIA STEREOLA RADIO CROSSOVER",
+      "url": "https://virtual6.estructuraweb.com/listen/amor_colombia_stereo/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-186",
+      "name": "AVIVA RADIO COLOMBIAFUEGO EN TUS OIDOS",
+      "url": "https://radio.cimaspeed.com:8240",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-187",
+      "name": "Accordionica fmLa Quesuena y Pega: Donde la música se siente y los éxitos nunca paran nunca",
+      "url": "https://lqp.laquesuenaypega.com:8020/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-188",
+      "name": "AdultocontemporaneaLa estación que nunca cambia. Te va a gustar!!!",
+      "url": "https://racstreaming.site:8050/estudio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-189",
+      "name": "Africa RadioSomos la estación web radio que te brinda lo mejor de la música",
+      "url": "https://stream.zeno.fm/udhh2v1itqxtv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-190",
+      "name": "Aldea Global Radio\"El Lado B de la Mente\": La Emisora que Siente y Suena Indie",
+      "url": "https://stream.zeno.fm/pfnbku3n6tzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-191",
+      "name": "Aliento de VidaAlientodeVida",
+      "url": "https://stream.zeno.fm/vx81kqjv9yevv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-192",
+      "name": "Amerikan RadioTe Transporta",
+      "url": "https://virtual4.emisorasvirtuales.com:8170/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-193",
+      "name": "Angelus Stereo SesquiléBogota, Colombia",
+      "url": "http://www.colombiaemite.com:10278/;",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-194",
+      "name": "AnimePOP! Online RadioNon-stop Anime Hits Songs 24/7, Born in Japan!",
+      "url": "https://stream.zeno.fm/1peyavabbl1tv.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-195",
+      "name": "AnimeRave - Hardcore Online RadioExtreme Sounds, Endless Energy",
+      "url": "https://stream.zeno.fm/aidejjdc0qcvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-196",
+      "name": "Arthurkingmusical\"Salsa, Sabor y Merengue\"",
+      "url": "https://node2.tunercloud.online/stream/arthur-king.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-197",
+      "name": "Asocomunal EstereoLa que más quieres escuchar",
+      "url": "https://audio1stream.com:8046/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-198",
+      "name": "Avivamiento - Aviva2 RadioCielos Abiertos",
+      "url": "https://stream.avivamientoradio.net/radio/8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-199",
+      "name": "Azul TricolrockSintoniza lo mejor de los sonidos rockeros, alternativos y nuevas propuestas de toda Colombia.",
+      "url": "https://cast.tricolrock.com/listen/azul_tricolrock/azul-tricolrock-sc",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-200",
+      "name": "BRAZOS DE MISERICORDIARadio Cristiana que edifica tú alma",
+      "url": "https://emisora.multimusic.com.co/8096/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-201",
+      "name": "BRISASDIGITA360* LA RADIO DEL FUTUROventa de servicios de radio",
+      "url": "https://radio17.servidorderadio.net:8028",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-202",
+      "name": "Baladas con sabor a SalsaLa Radio Crossover del Amor",
+      "url": "https://sc10.conectarhosting.com/proxy/baladasconsaborasals/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-203",
+      "name": "Bendicion RadioBendiciendo Tu Vida",
+      "url": "https://sonicpanel1.vpsempresa.com:8006",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-204",
+      "name": "Besos stereo fmLa Radio que enamora",
+      "url": "https://stream.zeno.fm/gym8bpyct18uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-205",
+      "name": "Blanco TricolrockEscucha lo mejor del pop rock y las propuestas más tropicales de la música alternativa colombiana",
+      "url": "https://cast.tricolrock.com/listen/blanco_tricolrock/blanco-tricolrock-sc",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-206",
+      "name": "Block Juvenil RadioJuntos hacemos el Cambio",
+      "url": "https://estructuraweb.com.co:2199/tunein/block.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-207",
+      "name": "BongostereoSalsa Dura Pal Que Sabe !!!",
+      "url": "https://cloudstream2036.conectarhosting.com/8130/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-208",
+      "name": "Buena StereoEl Universo de los exitos",
+      "url": "https://panel.virtualtecnologe.com:8100/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-209",
+      "name": "Bésame ArmeniaBésame en las Mañanas",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_ARMENIA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjUwMTYyMCwiaXNzIjoidGlzcnYifQ.c9dyvjNlkKVKVYKihNkvrHagIknKBuMZuNC1LqXAI8M",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-210",
+      "name": "CCB RadioDonde los negocios tiene voz y se oyen bien",
+      "url": "https://c21.radioboss.fm/stream/287",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-211",
+      "name": "CHRIST FM  La radio de todosLa radio de todos",
+      "url": "https://mars.streamerr.co/8543/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-212",
+      "name": "CIELOS ABIERTOS TU RADIOPASAPORTE A UNA NUEVA VIDA",
+      "url": "https://streaming.asilivehd.com/8218/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-213",
+      "name": "CMPlus Radio StreamMúsica Andina",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-214",
+      "name": "CONDOR VIRTUAL\"DE BOYACÁ PARA EL MUNDO\"",
+      "url": "http://www.colombiaemite.com:10056/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-215",
+      "name": "CSU Radio [Kol.FM]Una voz que eleva, una palabra que transforma. Tu conexión diaria con las raíces de nuestro Mesías.",
+      "url": "https://a11.asurahosting.com:6730/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-216",
+      "name": "Cadena UnirRadioTvLa Emisora sin Fronteras",
+      "url": "https://online.multimusic.com.co/8052/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-217",
+      "name": "Cafe Records RadioProyectando Calidad",
+      "url": "https://streaming01.shockmedia.com.ar/9054/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-218",
+      "name": "Calaima RadioCultura en tus oídos",
+      "url": "https://secure4.mkservers.space/calaimaradio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-219",
+      "name": "Camerino Juniorista RADIOLa radio de una pasión llamada Junior",
+      "url": "https://emisorasvirtuales.com.co:9297/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-220",
+      "name": "Caminando En SantidadOndas de amor celestial",
+      "url": "https://radio30.virtualtronics.com/proxy/caminodesantidad?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-221",
+      "name": "Canaan Radio Online\"Desde la palabra de Dios hacia la tierra prometida, sanando y liberando con Jesús.\"",
+      "url": "https://online.multimusic.com.co/8096/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-222",
+      "name": "Caribe EstereoEl Sonido del Caribe",
+      "url": "https://stream.zeno.fm/57e9kuf2dkhvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-223",
+      "name": "Carnavaleando RadioSolo Carnaval",
+      "url": "https://us3.streamingpulse.com/ssl/7218",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-224",
+      "name": "Casa de Dios RadioCasa de Dios es vida para el mundo",
+      "url": "https://radiohd2.streaminghd.co/tunein/casadedios.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-225",
+      "name": "Cecdsa Radioeducamos con valores, amor, sabiduria y principios cristianos",
+      "url": "https://virtual.multimusic.com.co/8004/;",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-226",
+      "name": "Champeta OnlineSólo Éxitos",
+      "url": "https://stream.zeno.fm/ptqtr8urtfiuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-227",
+      "name": "Champeta RadioLa emisora online que suena a Champeta. Música, noticias y cultura picotera 24/7. ¡Conéctate a www.c",
+      "url": "https://stream.zeno.fm/hf4qdqp1ey8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-228",
+      "name": "Ciènaga aun ClickCiènaga a un Click Las Noticias a un Click",
+      "url": "https://play14.tikast.com:20157",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-229",
+      "name": "Colombia RadioColombiaRadio.Co es la estación digital que mezcla noticias, farándula, deportes y música. Somos la",
+      "url": "https://stream.zeno.fm/pvw3w06yty8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-230",
+      "name": "Colombian Hip Hop CBtus temas tu relajo",
+      "url": "https://stream.zeno.fm/9zqrsl9hj1hvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-231",
+      "name": "Colombians USA RadioLa radio de los colombianos en USA: música, cultura y buena vibra 24/7",
+      "url": "https://streams.exeamedia.com/ColombiansUSAradio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-232",
+      "name": "Contravía radioVamos contra el mundo",
+      "url": "https://radiohd4.streaminghd.co:8070/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-233",
+      "name": "Cool D RadioLa emisora que te pone fresco.",
+      "url": "http://209.126.119.28:8031/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-234",
+      "name": "CoolTranceExperience unlimited trance, EDM, and electronic music all day, every day",
+      "url": "https://stream.cooltrance.net/listen/cooltrance_radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-235",
+      "name": "Corazon popularLa radio de la música popular colombiana",
+      "url": "https://lqp.laquesuenaypega.com:8010/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-236",
+      "name": "DC RADIOLa emisora virtual del distrito",
+      "url": "http://radio.hqs.com.co:8000/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-237",
+      "name": "DURISIMA STEREODURA Y FIRME",
+      "url": "https://stream.zeno.fm/43ud6ixt0izvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-238",
+      "name": "Def Leppard versus Bon JoviWhat rock band is better? Def Leppard or Bon Jovi?",
+      "url": "http://stream.zeno.fm/uhk2e2w8mbruv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-239",
+      "name": "Desafio MediosDesafiando tu fe, Transformando tu vida",
+      "url": "https://stream.zeno.fm/mkxm6x8v9gmuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-240",
+      "name": "Digital PentecostalEmisora",
+      "url": "https://sc10.conectarhosting.com/proxy/digitalpentecostal/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-241",
+      "name": "E M I T C La SalleRadio Lasallista en la Red con lo que Tú Quieres Oír",
+      "url": "http://emisora.itc.edu.co:8000",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-242",
+      "name": "EL ÉXITO DE LO NATURAL ONLINETodo un mundo de información en la web",
+      "url": "https://radio25.virtualtronics.com/proxy/exitonatural?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-243",
+      "name": "EMISORA LA QUINTA MUSICALSOMOS DE AQUI SONAMOS PARA TODOS",
+      "url": "https://stream-176.zeno.fm/i4u7xomcpaxtv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJpNHU3eG9tY3BheHR2IiwiaG9zdCI6InN0cmVhbS0xNzYuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IlVrVTNMdkdKVF9DektJUHg5WFpiM3ciLCJpYXQiOjE3Njg2NTkxNjksImV4cCI6MTc2ODY1OTIyOX0.VkKZ-jJeXU_e6gbabMSy_oaLLrIaDcpsA3SjwznvXI8",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-244",
+      "name": "ENC Radio (Nuevo Continente)Magazín Buen Día",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-245",
+      "name": "Eco RadioAlabando al Eterno en cada sonido!",
+      "url": "https://radio.ecocomunidad.com/listen/eco/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-246",
+      "name": "Eddie Ray Archivos SalserosSolo buena melodia",
+      "url": "https://node2.tunercloud.online/stream/archivos-salseros.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-247",
+      "name": "Educa Colombia NoticiasMúsica para estudiar",
+      "url": "https://servidor31.brlogic.com:7002/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-248",
+      "name": "Efecto FuzzRock & pop todo el día",
+      "url": "https://radio.cimaspeed.com/8022/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-249",
+      "name": "Ejército celestial 104.6 FMLa radio del ejército de Dios",
+      "url": "https://online.multimusic.com.co/8104/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-250",
+      "name": "Ekhoradio ElectrónicaSomos Ekhoradio Electrónica, Pasión por la música electrónica",
+      "url": "https://stream.zeno.fm/hr8aubx89yzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-251",
+      "name": "El Gato ChismosoOpinión Sin Filtro.",
+      "url": "https://usa3.fastcast4u.com/tunein/elgatochismoso1.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-252",
+      "name": "El Gran LoboAquí suena El Gran Lobo",
+      "url": "https://stream.radiojar.com/e42v4sbt08nwv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-253",
+      "name": "El Remanente Radio FusagasugáTransmitiendo el verdadero evangelio de cristo las 24 horas",
+      "url": "https://stream.zeno.fm/nkuzhp35bzzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-254",
+      "name": "Electro Vox24 horas de música electrónica",
+      "url": "https://online.multimusic.com.co/8012/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-255",
+      "name": "Emisora EncuentroNo te arrepentirás de escucharnos",
+      "url": "https://panel2.intermediahost.co:8230/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-256",
+      "name": "Emisora Exodoa una sola voz",
+      "url": "https://virtual.multimusic.com.co:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-257",
+      "name": "Emisora MarianaEVANGELIZACIÓN AL DIA (P. LUIS ANGEL CUENCA)",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-258",
+      "name": "Emoción 106Donde La Música Nunca Se Detiene",
+      "url": "https://sonicpanel.streaming10.net:8180/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-259",
+      "name": "Espectacular OnlineTú Preferida",
+      "url": "https://stream.zeno.fm/yxv692qc03zvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-260",
+      "name": "Estación Ibiza RadioEstación Ibiza RadioLa Esencia de Ibiza en tus oídosElectronica 24/7",
+      "url": "https://streamingmediaradio.live/8040/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-261",
+      "name": "Estilo Libre Arte OriginalEmisora de Rap y HipHop 24x7",
+      "url": "https://virtual.multimusic.com.co:8086/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-262",
+      "name": "Estudio RecordsAcademia Colombiana de Radio, doblaje, música y televisión, Estudio Records",
+      "url": "http://radios.estudiorecords.stream:51000/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-263",
+      "name": "Expresiones Colombia RadioAcuarela de talentos",
+      "url": "https://emisorasdigitales2.com/8036/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-264",
+      "name": "Expreso Latino LiveSolo exitos...",
+      "url": "https://listen.radioexpresolatino.com/radioexpresolatino",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-265",
+      "name": "FIESTANUESTRA RADIO",
+      "url": "http://stream.zeno.fm/4dpb8ku67gruv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-266",
+      "name": "Feaktiva¡Conectados con el Cielo!",
+      "url": "https://panel1.intermediahost.co:8000/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-267",
+      "name": "Fiesta mix 100 .9 fmTe prende",
+      "url": "https://virtual.multimusic.com.co:8106/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-268",
+      "name": "Flow Radio FmFlow Clasiccs",
+      "url": "http://radiohd.streaminghd.co:7014/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-269",
+      "name": "Flow Soledad RadioFlow Soledad Radio: la emisora online que vive y suena a champeta las 24/7, llevando música, cultura",
+      "url": "https://stream.zeno.fm/httarzb85scuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-270",
+      "name": "Folklorama Radio“Tradición que suena, cultura que vive.”",
+      "url": "https://node2.tunercloud.online/radio/folklorama-radio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-271",
+      "name": "FreeCover Radiola música que nos conecta",
+      "url": "https://emisora.multimusic.com.co:8082/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-272",
+      "name": "Fucha RadioOndas y voces que fluyen desde la montaña",
+      "url": "https://aizu.maritxusarea.eus/listen/fucha_radio/fucharadio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-273",
+      "name": "Furor Stereo PascaBogota, Colombia",
+      "url": "http://real2.streaming-co.com:8073/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-274",
+      "name": "GMC RADIODale Play A Tus Emociones",
+      "url": "https://stream.zeno.fm/e99b831p4dyvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-275",
+      "name": "GOTAS DE BENDICIONBENDICIONES DE LO ALTO, AGARRADOS DE LA MANO DE DIOS",
+      "url": "https://radio35.virtualtronics.com/proxy/gotasdebendicion?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-276",
+      "name": "Gambar Stereo - Valle de TenzaCon todo ritmo",
+      "url": "https://stream.zeno.fm/yojhfbvatdhvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-277",
+      "name": "Gambar StereoCon todo ritmo.",
+      "url": "https://stream.zeno.fm/smdjouxmdajuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-278",
+      "name": "Generación GSomos cazadores de tus canciones perdidas.",
+      "url": "https://online.multimusic.com.co/8086/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-279",
+      "name": "Goce Latino RadioMelodía Inoxidable sin Fecha de Vencimiento",
+      "url": "https://play10.tikast.com/proxy/gocelatinoradio?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-280",
+      "name": "Guarida Hip HopLo mejor de la nueva y vieja escuela",
+      "url": "http://stream.zenolive.com/sp1x3mye474tv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-281",
+      "name": "Guayabal StereoClásicos de Siempre",
+      "url": "https://stream.zeno.fm/5z8nx6b3mumtv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-282",
+      "name": "HanaPOP¡Todo lo que amas de Asia en un solo lugar!",
+      "url": "https://radio35.virtualtronics.com/proxy/bamm?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-283",
+      "name": "HeartLove RadioHeartLove Radio: Música romántica variada",
+      "url": "https://stream.zeno.fm/cr8evht2huruv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-284",
+      "name": "Herencia DigitalMúsica del Recuerdo",
+      "url": "https://hdradio.hanssoncorporation.com/listen/herenciadigital/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-285",
+      "name": "Hertz Stereo RadioSolo Artistas Musicales",
+      "url": "https://radio30.virtualtronics.com/proxy/hertz?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-286",
+      "name": "Hit Stereo 89.3La evolución de la radio",
+      "url": "http://163.172.77.142:8072/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-287",
+      "name": "IMPACTO FM ESTEREOLAS MAÑANAS INFORMATIVAS",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-288",
+      "name": "JESED RADIOLUZ QUE GUÍA TU CAMINO",
+      "url": "https://node2.tunercloud.online/radio/jesed-radio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-289",
+      "name": "JK Bogotana RadioOrgullo Boyacense",
+      "url": "https://radio.cimaspeed.com/8288/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-290",
+      "name": "Javeriana Estereo 91.9 BogotaSin fronteras",
+      "url": "https://radio06.cehis.net:9001/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-291",
+      "name": "Kalamary Radio Cultural OnlineRadio libre, Cultural Online, libre de estrés.",
+      "url": "https://stream.zeno.fm/clxflencimitv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-292",
+      "name": "KantineraPlay List Kantinera (Mañana)",
+      "url": "https://estructuraweb.com.co:9000/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-293",
+      "name": "Killa RadioLa Del Barrio",
+      "url": "https://stream.zeno.fm/5ycf3q8utxhvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-294",
+      "name": "Klan StereoLa Del Swing Caribeño",
+      "url": "https://online.multimusic.com.co/8070/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-295",
+      "name": "Kmusic RadioPlay List Kmusic (Mañana)",
+      "url": "https://virtual8.estructuraweb.com:8150/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-296",
+      "name": "Kradio coLa radio que conecta contigo 24/7",
+      "url": "https://streaming.radiosenlinea.com.ar/8866/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-297",
+      "name": "LA EMI STEREOUNA RADIO SIN LIMITES",
+      "url": "https://radiohd2.streaminghd.co/tunein/laemistereo.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-298",
+      "name": "LA GUSTOSISIMALa que a todos nos encanta",
+      "url": "https://radio.cimaspeed.com/8276/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-299",
+      "name": "LA MANADA URBAN RADIOLA MANADA URBAN ES TU RADIO",
+      "url": "https://stream.zeno.fm/d5jrajtrbgzvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-300",
+      "name": "LA OCHO RADIONO ES EL CARNAVAL DE LA OCHO EN BARRANQUILA; NO ES EL CARNAVAL DE LA OCHO EN MIAMI, ES LA OCHO LA EM",
+      "url": "https://stream.zeno.fm/g9n21kmdyevvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-301",
+      "name": "LA RADIO SC BARRANQUILLASIEMPRE CONTIGO",
+      "url": "https://sonicpanel.streaming10.net:8138/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-302",
+      "name": "LA VALLENATA RADIOla emisora del vallenato",
+      "url": "https://stream.zeno.fm/owx04qpv6exuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-303",
+      "name": "LATINA FM ONLINELA ESTACION DE LOS EXITOS",
+      "url": "https://stream.vocesparatumarca.net:7021",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-304",
+      "name": "LEO Radio BogotáLa lectura, la escritura y la oralidad están presentes en los sonidos de la radio de la Red de Bibli",
+      "url": "https://radioserver11.profesionalhosting.com/proxy/fwgdddlf?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-305",
+      "name": "LOQUESUENAENLACALLEMUSICA Y ENTRETENIMIENTO CON CUENTO",
+      "url": "https://play14.tikast.com:20106/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-306",
+      "name": "La 1160 AMLa Mañana es Nuestra",
+      "url": "https://stream.zeno.fm/ahn5c8k56wquv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-307",
+      "name": "La 50 radioPor encima del primer  lugar",
+      "url": "https://online.multimusic.com.co/8054/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-308",
+      "name": "La Barra Rock100% del mejor rock de todos los tiempos",
+      "url": "https://streaming01.shockmedia.com.ar/8530/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-309",
+      "name": "La Buena RadioBuenisima",
+      "url": "https://virtual3.emisorasvirtuales.com:8270/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-310",
+      "name": "La Caribeña Estereo¡La Verdadera Radio!",
+      "url": "https://stream.zeno.fm/fgtnvdddynquv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-311",
+      "name": "La Cosa RadioLa Radio que alegra",
+      "url": "https://emisora.multimusic.com.co:8060/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-312",
+      "name": "La Diez RadioBogota, Colombia",
+      "url": "http://server2.ejeserver.com:8078/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-313",
+      "name": "La Estacion MusicTu compañía en la web! Suena Diferente!",
+      "url": "http://stream.zeno.fm/t4ucv8abhv8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-314",
+      "name": "La Goma FMLa goma te engoma !!",
+      "url": "https://server1.intermediacolombia.com/8038/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-315",
+      "name": "La Grande del FmCreciendo en Sintonia",
+      "url": "https://sc10.conectarhosting.com/proxy/lagrandedelfm/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-316",
+      "name": "La Hermosa StereoLa radio del cielo",
+      "url": "https://stream.zeno.fm/h70l9babrtfvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-317",
+      "name": "La Luz Del Evangelio OnlineLa Luz Del Evangelio Online, Suena Bonito.",
+      "url": "https://virtual5.emisorasvirtuales.com:8180/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-318",
+      "name": "La Luz del EvangelioLa luz del evangelio online",
+      "url": "https://online.multimusic.com.co/8028/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-319",
+      "name": "La Max VallenataLa Del Buen Vallenato",
+      "url": "https://stream.zeno.fm/nbcpokz3q3wvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-320",
+      "name": "La Morena.FMLa Mamasita de La Radio",
+      "url": "https://stream.vocesparatumarca.net/8150/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-321",
+      "name": "La Máx PopularSiempre con tus éxitos",
+      "url": "https://stream.zeno.fm/thpvjfgwiuquv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-322",
+      "name": "La Pedagogica RadioVoces y sonidos que enseñan",
+      "url": "https://radio.cdnmedia.tv/listen/upnradio/upnradio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-323",
+      "name": "La Poderosa Radio Online BolerosLo mejor del Bolero",
+      "url": "https://radios.lapoderosacpanel.com/listen/boleros/mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-324",
+      "name": "La Poderosa Radio Online PopularLo mejor de la música Ranchera y Popular",
+      "url": "https://radios.lapoderosacpanel.com/listen/popular/mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-325",
+      "name": "La Poderosa Radio Online RomanticaLas mejores canciones Románticas de todos los Tiempos",
+      "url": "https://radios.lapoderosacpanel.com/listen/romanticas/mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-326",
+      "name": "La Poderosa Radio Online VallenatoLo mejor del Vallenato",
+      "url": "https://radios.lapoderosacpanel.com/listen/vallenato/mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-327",
+      "name": "La Quesuena\"En Dulzura FM, llenamos tus días de emoción y romance con las mejores baladas en español. Déjate en",
+      "url": "https://lqp.laquesuenaypega.com:8030/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-328",
+      "name": "La Quillera StereoLa del vasle efectivo",
+      "url": "https://play10.tikast.com:20001",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-329",
+      "name": "La Romantica RadioLa Radio que Enamora",
+      "url": "https://stream.zeno.fm/heel3mmghr7vv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-330",
+      "name": "La Vallenatala consentida",
+      "url": "https://virtual1.emisorasvirtuales.com:8200/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-331",
+      "name": "La Viejoteca de JulioLa de los clasicos bailables",
+      "url": "https://play14.tikast.com:20038/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-332",
+      "name": "La sureña 93.4 FMsiempre contigo",
+      "url": "https://node2.tunercloud.online/radio/la-surena",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-333",
+      "name": "La voz de mi barrio 7Tu voz, Mi voz, la voz de Todos y Todas",
+      "url": "https://virtual4.emisorasvirtuales.com:8060/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-334",
+      "name": "LaEVCRadio -Vocal School of ColumbiaLLena tu vida de música",
+      "url": "http://radiolatina.info:9876/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-335",
+      "name": "Latino GE Salsa JazzMusica para tu espiritu - Somos Latinos",
+      "url": "https://stream.zeno.fm/mzhzwsksfijtv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-336",
+      "name": "Latinos Online RadioEl Ritmo que te apasiona",
+      "url": "https://stream.zeno.fm/rwboddygm8kvv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-337",
+      "name": "Linda MusicaStand Up",
+      "url": "http://stream.zeno.fm/7fg6f1sw5ueuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-338",
+      "name": "MAGAR STEREOALEGRE Y DIFERENTE",
+      "url": "https://panel.virtualtecnologe.com:8050/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-339",
+      "name": "MARINA STEREOLA RADIO DE LA GENTE",
+      "url": "https://tustreamingradios2.com:7050",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-340",
+      "name": "MINISTERIO RADIAL JEHOVA ES MI PASTOR UNA VOZ DE ESPERANZASOMOS LA IGLESIA DE DIOS EN EL AIRE",
+      "url": "https://radiohd3.streaminghd.co/8076/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-341",
+      "name": "MUSICARIBERADIO.COM.CO¡ LA MUSICA LATINA ES MUSICA DIVINA ¡",
+      "url": "https://node2.tunercloud.online/radio/musi-caribe",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-342",
+      "name": "Marsella Estereo¡Vivir en Comunidad es Servir a los demás!",
+      "url": "https://virtual2.emisorasvirtuales.com:8160/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-343",
+      "name": "Mero Power FmQue Buena",
+      "url": "https://audioserverhd.com:8000/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-344",
+      "name": "Mi Gran BendiciónLa radio que te conecta",
+      "url": "https://panel1.intermediahost.co:8180/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-345",
+      "name": "Mi Voz FMMi Voz Es Tu Voz",
+      "url": "https://listen.usuarios.space/mivozfm/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-346",
+      "name": "Mia RadioLa nuestra",
+      "url": "https://emisora.multimusic.com.co/8142/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-347",
+      "name": "Minifutbol Colombia RadioFútbol Revoluciónado, Más Movimiento.",
+      "url": "https://emisora.multimusic.com.co/8132/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-348",
+      "name": "Morada Radio OnlineVive la Musica, Vive Morada Online",
+      "url": "https://online.multimusic.com.co/8018/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-349",
+      "name": "Mundo Hit RadioLA RADIO QUE TRANSFORMA",
+      "url": "https://online.multimusic.com.co/8118/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-350",
+      "name": "Musica RancheraEl Devocional",
+      "url": "https://radio013.gt.gt/radio/8070/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-351",
+      "name": "Más Flow ChampetaLa casa de la champeta",
+      "url": "https://stream-175.zeno.fm/httarzb85scuv?zt=eyJhbGciOiJIUzI1NiJ9.eyJzdHJlYW0iOiJodHRhcnpiODVzY3V2IiwiaG9zdCI6InN0cmVhbS0xNzUuemVuby5mbSIsInJ0dGwiOjUsImp0aSI6IlhGa2pPNDktVGttWXQ3MkctUGotbmciLCJpYXQiOjE3NTMxNTA0NjAsImV4cCI6MTc1MzE1MDUyMH0.TMkWcFnATLiD6B2-5fNOLL8yTUVSZLsytSCNzGs2NAw",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-352",
+      "name": "Más Música radioLa máquina del tiempo Rock y pop",
+      "url": "https://stream2.hazteunsitio.net/streams/ms_fb7dbe",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-353",
+      "name": "NOVA RADIONova Radio...una explosión de sentidos",
+      "url": "https://radiohd4.streaminghd.co:8193/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-354",
+      "name": "Negro TricolrockSintoniza lo mejor de las propuestas más extremas y virtuosas del metal colombiano",
+      "url": "https://cast.tricolrock.com/listen/negro_tricolrock/negro-tricolrock-sc",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-355",
+      "name": "Nevermore Radio - Nevermore Network24/7 Eclectic Dark Radio",
+      "url": "https://panel.nevermorenetwork.com/listen/nevermorenetwork.com/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-356",
+      "name": "Nexo RadioLo mejor de lo mejor",
+      "url": "https://stream-152.zeno.fm/gxypvqexbs1tv?zs=c5mvSu5uRTqfVIVrkrjyMg",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-357",
+      "name": "OBM RadioOBM Radio",
+      "url": "https://cloudstream2032.conectarhosting.com:8122/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-358",
+      "name": "Oasis de SantidadLa radio que bendice sacia y transforma tu vida",
+      "url": "http://fares.gospelmedios.com:20010/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-359",
+      "name": "Onda SónicaLa corriente alternativa vive en El Enchufe",
+      "url": "https://az11.yesstreaming.net:8460/bogota.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-360",
+      "name": "Ondas Del LimonarLa que siempre te acompaña",
+      "url": "https://radios.multimusic.com.co/8004/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-361",
+      "name": "PALLOTTI RADIOEMISORA CATOLICA QUE REAVIVA LA FE CRISTIANA",
+      "url": "http://colombiawebs.com.co:8000/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-362",
+      "name": "Palmeras RadioTropical y folclórica.",
+      "url": "https://stream.zeno.fm/drhufq0wx1zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-363",
+      "name": "Panorama Radio Total¡Música Deportes Noticias Y Mucho Más Con Aroma A Deporte!",
+      "url": "https://stream.zeno.fm/w7xgvrpes8quv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-364",
+      "name": "Paz StereoTu Radio Por Un Mundo Mejor",
+      "url": "http://server2.ejeserver.com:8826/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-365",
+      "name": "Planeta RetroViaja en el Tiempo...",
+      "url": "https://listen.radioexpresolatino.com/planetaretro",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-366",
+      "name": "Play FM ColombiaSolo, dale! Play",
+      "url": "http://streaming.capastudio.co:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-367",
+      "name": "Plenitud Estereo OnlinePlenitud estereo la radio cristiana que edificará tu vida.",
+      "url": "https://online.multimusic.com.co/8062/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-368",
+      "name": "Precursor RadioVivimos en la fe",
+      "url": "https://stream.zeno.fm/14zkzvzn7s8uv.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-369",
+      "name": "Principe de Paz (Radio Minuto)La Iglesia En El Aire",
+      "url": "https://stream.enter.church/8314/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-370",
+      "name": "QuillaSalsaLa Radio Del Poder Latino",
+      "url": "https://radio25.virtualtronics.com/proxy/quillasalsa?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-371",
+      "name": "RADIO CIUDAD DUITAMARadio Ciudad Duitama la emisora que ama la música Colombiana",
+      "url": "https://stream.zeno.fm/9d9y9g87t7ruv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-372",
+      "name": "RADIO EXITOS LATINOSEL SONIDO JOVEN DE LA RADIO",
+      "url": "http://stream.zeno.fm/0bu1q6g7ashvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-373",
+      "name": "RADIO FUEGO ENVOLVENTELa Radio Que Enciende Tu Fe",
+      "url": "https://sonicpanel1.vpsempresa.com:8018",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-374",
+      "name": "RADIO JARTU ESTACION PREFERIDA",
+      "url": "https://stream.zeno.fm/qu0sat2uzwzuv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-375",
+      "name": "RADIO MEDICINA PARA TU ALMABENDICIENDO TU VIDA",
+      "url": "https://radios0790.vegamultimedioshn.com:7067",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-376",
+      "name": "RADIO PRINCIPIOSR.C. Sproul - Renovando tu mente (✅RTUM) - La seguridad de la salvación",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-377",
+      "name": "RADIO UNCION MINISTERIALLA VOZ DE DIOS  EN TU HOGAR",
+      "url": "https://stream.zeno.fm/rclzbrxvhn8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-378",
+      "name": "RADIO VISIONradio vision la distinta vision de la radio",
+      "url": "https://stream.zeno.fm/avqchcfy0setv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-379",
+      "name": "RADIOMIX COLPASION MIX",
+      "url": "https://sonic.paulatina.co/9998/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-380",
+      "name": "RADIOMOTERADESDE USHUAIA HASTA ALASKA Y DESDE GUAYAQUIL HASTA KAMCHATKA, RADIOMOTERA, RODANDO CONTIGO",
+      "url": "https://node2.tunercloud.online/radio/la-motera",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-381",
+      "name": "REACTOR AL AIRE¡HAGAMOS RUIDO!",
+      "url": "https://play10.tikast.com/proxy/reactoralaire?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-382",
+      "name": "Radio AlbaSomos tu emisora cristiana en la web y un nuevo amanecer para tu vida Nuestra",
+      "url": "http://stream.zeno.fm/ac6gd7hmh48uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-383",
+      "name": "Radio Autentica BogotaVoz e Imagen de la verdad",
+      "url": "https://radiolatina.info/8132/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-384",
+      "name": "Radio Avivamiento StereoEmisora Cristiana transmitiendo 24/7",
+      "url": "https://streaminglatinos.com:8090/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-385",
+      "name": "Radio Bicentenario¡LA ONDA FRESCA PARA EL MUNDO!",
+      "url": "https://stream.zeno.fm/5endykwpuxmtv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-386",
+      "name": "Radio BoxTú Música En Internet",
+      "url": "https://node2.tunercloud.online/stream/radio-box.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-387",
+      "name": "Radio CECEPMueve tus sentidos",
+      "url": "https://stream.zeno.fm/q2f6zr67wreuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-388",
+      "name": "Radio Colombia EspiritaUna ventana a la Espiritualidad",
+      "url": "http://radiolatina.info:9350/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-389",
+      "name": "Radio ConexionTu Radio Amiga",
+      "url": "https://sonicpanel.streaming10.net:8154/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-390",
+      "name": "Radio Digital de Colombia¡La Radio del Futuro, Con la Música del Pasado!",
+      "url": "https://emisorasdigitales2.com/8188/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-391",
+      "name": "Radio Dimension Abierta FMInformación, Cultura y Comunidad sin Barreras",
+      "url": "https://sonicpanel.cloudstreaming.eu/8004/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-392",
+      "name": "Radio EvolucionMúsica que inspira. Ideas que transforman. Radio Evolución, sintoniza tu mejor versión.",
+      "url": "https://play14.tikast.com:20135",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-393",
+      "name": "Radio Familiar OnlineLa Radio De La Familia",
+      "url": "https://stream.zeno.fm/5ltjd3zzd1yvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-394",
+      "name": "Radio FamiliarLa Radio De Las Familias Colombianas",
+      "url": "https://sonicpanel.streaming10.net:8170/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-395",
+      "name": "Radio Fundingue.comProgramación Normal",
+      "url": "http://emisora.fundingue.com:8072",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-396",
+      "name": "Radio K Salsa¡Salsa De Verdad!",
+      "url": "https://audioserverhd.com:8150/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-397",
+      "name": "Radio Latina OnlineJossie Esteban y La Patrulla 15 - Qué? Aha!",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-398",
+      "name": "Radio Marching\"la emisora de nuestra pasion\"",
+      "url": "https://virtual.multimusic.com.co:8030/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-399",
+      "name": "Radio Misión FamiliaConectando A Las Familias Con Dios",
+      "url": "https://sonicpanel.streaming10.net:8050/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-400",
+      "name": "Radio Mundial 1370 AMMAS PASION POR JESUS",
+      "url": "https://radiolatina.info:10832",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-401",
+      "name": "Radio Mundial StereoCon Sabor Latino",
+      "url": "http://radiolatina.info:8548/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-402",
+      "name": "Radio Power UrbanaCon el poder de los clásicos urbanos",
+      "url": "https://stream.zeno.fm/cxf1r8zukyhuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-403",
+      "name": "Radio Power VallenatoCon el poder de los clásicos",
+      "url": "https://stream.zeno.fm/w3hzwbk99aatv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-404",
+      "name": "Radio Rey De GloriaA DIOS SEA LA GLORIA",
+      "url": "https://emisora.multimusic.com.co/8182/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-405",
+      "name": "Radio Sol CaribeSalsa dura para conocedores.",
+      "url": "https://stream.zeno.fm/t8fs33deyzzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-406",
+      "name": "Radio Tocarinda FmCOLOMBIAN SCHEDULE",
+      "url": "http://stream.zeno.fm/kbvay51w4tzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-407",
+      "name": "Radio Tuiteros BoyacáLa Radio Fresca en Boyacá",
+      "url": "https://rtbradio.tuiterosboyaca.com/listen/rtb-radio-tuiteros-boyaca/stream.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-408",
+      "name": "Radio UNAD VirtualPara la audiencia global en línea",
+      "url": "https://streaming.unad.edu.co:8000/RadioUNADVirtual-RUV",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-409",
+      "name": "Radio UnikLa radio que esta de moda!",
+      "url": "https://stream.zeno.fm/cjcolquvyslvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-410",
+      "name": "Radio Universal AMLa Radio de las Estrellas",
+      "url": "http://stream.zenolive.com/0yxapheyuueuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-411",
+      "name": "Radio UsmeSIEMPRE ME OYES",
+      "url": "https://emisora.multimusic.com.co/8162/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-412",
+      "name": "Radio Vallenato FMLa Eestacion Mundial del Vallenato",
+      "url": "http://colombiawebs.com.co/proxy/postales1/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-413",
+      "name": "Radio Viva Fenix OnlineBogota, Colombia",
+      "url": "https://radiolatina.info/8034/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-414",
+      "name": "RadioGraceRenewing Your Mind",
+      "url": "http://51.15.160.78:8288/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-415",
+      "name": "RadioamigaCultura Musical",
+      "url": "https://radiolatina.info/8160/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-416",
+      "name": "Red Guadalupana Estereo OficialRed Guadalupana Estéreo… ¡Sí suenaaa y se sienteee!",
+      "url": "https://stream.zeno.fm/fskbpxwfkemvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-417",
+      "name": "Refugio Mix!Refúgiate¡",
+      "url": "https://panel1.intermediahost.co:8290/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-418",
+      "name": "Relax Waves Radio - Sleep Calm ZenPure Calm And Sleep, More Relaxation!",
+      "url": "https://stream.zeno.fm/6490m3jzqsyvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-419",
+      "name": "Reminiscencias RadioUna cita con los recuerdos.",
+      "url": "https://stream.zeno.fm/v7zz6m6p7mzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-420",
+      "name": "Renace Stereo onlineViviendo la fe, compartiendo esperanza",
+      "url": "https://radios.multimusic.com.co/8008/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-421",
+      "name": "RetrolatinaTe hace vibrar",
+      "url": "https://racstreaming.site:8020/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-422",
+      "name": "Rick WakemanRick Wakeman 24 hours a day",
+      "url": "http://stream.zeno.fm/yn7k4mx8mbruv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-423",
+      "name": "Ritmo Salsa y SaborDonde se vive la Salsa",
+      "url": "http://stream.zeno.fm/wckzd0yhsrquv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-424",
+      "name": "Roble StereoLa fuerza que identifica la radio",
+      "url": "https://radio30.virtualtronics.com/proxy/roblestereo?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-425",
+      "name": "RocklatinoradioMas Musica tu Musica",
+      "url": "http://stream.zeno.fm/5drnc6hnskeuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-426",
+      "name": "RockstereoLa emisora oficial del rock en vivo 24/7",
+      "url": "https://stream.rockstereo.com/listen/rockstereo/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-427",
+      "name": "Rojo TricolrockSintoniza lo mejor de los sonidos más rebeldes de Colombia",
+      "url": "https://cast.tricolrock.com/listen/rojo_tricolrock/rojo-tricolrock-sc",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-428",
+      "name": "RomeromixMúsica sin miedo",
+      "url": "https://stream.zeno.fm/yw1w9zwtbc9uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-429",
+      "name": "SALSA PURA RADIOMúsica latina",
+      "url": "https://stream.zeno.fm/zue421q4h18uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-430",
+      "name": "SALSA Y CONTROL BARRANQUILLATU RADIO WEB ONLINE 24/7",
+      "url": "https://app.sonicpanelradio.com/8272/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-431",
+      "name": "SALSANROQUEDonde se vive la Buena musica",
+      "url": "https://cloudstream2032.conectarhosting.com:8108/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-432",
+      "name": "SAMPERISIMA RADIORadio sin Limites",
+      "url": "https://lavoz14.vitrinamusical.com/listen/samperisima/radio.mp3?fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExc0dZTHl2NmJFTHBSdW1FWHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7kIANDdMI4B60AZgCc1LCK0euwYrPqBtrfQcR9YSf9xHfCjQOC-eKhTtEU-Q_aem_0lyOWLGRYQZOYUS226Fu2A",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-433",
+      "name": "Salsa Pa TiCanciones que invitan al amor",
+      "url": "https://az13.yesstreaming.net:8070/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-434",
+      "name": "SalsaJazz RadioLatin Jazz, para conocedores.",
+      "url": "https://stream.zeno.fm/8x2egarq3f8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-435",
+      "name": "Sama EstéreoLa radio que te mueve",
+      "url": "https://samafm.online/listen/sama_radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-436",
+      "name": "San Miguel EstéreoSu nueva compañía",
+      "url": "https://srv3.dobitsoluciones.com:7700/;",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-437",
+      "name": "Santa fmCatólica y junto a nuestra madre santísima",
+      "url": "https://lqp.laquesuenaypega.com:8040/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-438",
+      "name": "Santoto Stereo¡Tú escape radiofónico universitario!",
+      "url": "https://edge.teveo.net/live/AeAAAgAzAAZlA1IAyADIUCAAAAAAAAAAAmili1lNb_YoAAAA/playlist.m3u8",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-439",
+      "name": "Sensacional WebTe pone bien",
+      "url": "https://stream.zeno.fm/n9p6tmnzs5quv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-440",
+      "name": "Ser Positivo EstereoPrepárate porque volvemos con la mejor programación.",
+      "url": "https://node2.tunercloud.online/radio/ser-positivo",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-441",
+      "name": "Señal del cielo onlineIglesia casa de Dios.",
+      "url": "https://online.multimusic.com.co/8050/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-442",
+      "name": "Shadday Estereo 88.5 FMTu Dial de Bendición.",
+      "url": "https://sonicpanel.streamsolutions.us:8120/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-443",
+      "name": "Shalom Stereo\"Shalom Stereo: Uniendo la fe con el progreso de Chía.\"",
+      "url": "https://virtual.multimusic.com.co:8034/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-444",
+      "name": "Sintonia en el AulaSintonia en el Aula",
+      "url": "https://node2.tunercloud.online/radio/sintonia-en-el-aula",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-445",
+      "name": "Sistema Alternativo RadioMúsica de moda",
+      "url": "http://radio30.virtualtronics.com:8603/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-446",
+      "name": "Soacha Radio online¡Tan Viva Como Tú!",
+      "url": "https://stream.zeno.fm/tvhvgugovlfvv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-447",
+      "name": "Solaz RadioTu refugio de paz.",
+      "url": "https://stream.zeno.fm/cg5yv8tz4mzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-448",
+      "name": "Sonoria F.M.Your Vibe, Your Music! 95.7 Online",
+      "url": "https://giss.tv:667/sonoriafm.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-449",
+      "name": "TIMBAL RADIOPuro Sabor",
+      "url": "https://cloudstream2032.conectarhosting.com:10756/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-450",
+      "name": "TIN TIN DEO RADIO - LA CASA DE LOS SONEROSLA CASA DE LOS SONEROS",
+      "url": "https://radio35.virtualtronics.com:20072/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-451",
+      "name": "TROPISALSA CRISTIANARadio con música 100% cristiana Tropical, Salsa, Bachata, reggae",
+      "url": "http://stream.zeno.fm/t4y7f2ev88quv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-452",
+      "name": "TU RADIO FM WEBRecordando con Mario Arteta",
+      "url": "https://stream.zeno.fm/ub471yfuv38uv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-453",
+      "name": "Ttifany Queen RadioPlay List Ttifany Queen Radio",
+      "url": "https://estructuraweb.com.co:9111/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-454",
+      "name": "Tu 95.5 FM﻿Elira y Fundavida - Despues del diagnóstico - ﻿Elira y Fundavida - Despues del diagnóstico",
+      "url": "https://stream20.usastreams.com:7094/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-455",
+      "name": "TunelatinoEl rock y pop en español que tus oidos quieren",
+      "url": "https://radio35.virtualtronics.com/proxy/tunelatino?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-456",
+      "name": "Tutogol RadioTu Fútbol, tu música, tus Hits",
+      "url": "https://play10.tikast.com:20076/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-457",
+      "name": "UB Virtual Radio(http://www.uniboyaca.edu.co)",
+      "url": "http://radio25.virtualtronics.com:8018",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-458",
+      "name": "UMB RADIO TVLa Música que Te Mueve",
+      "url": "https://stream.zeno.fm/3pjlggqrgbnuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-459",
+      "name": "Uninorte FM EstéreoNOTICIERO VOICE OF AMERICA",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-460",
+      "name": "VALAGUELA RADIOVALAGUELA",
+      "url": "https://stream.zeno.fm/unhnppr7sm0uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-461",
+      "name": "VALLENATO RADIOEL ALMA DEL ACORDEON",
+      "url": "https://stream.zeno.fm/87pxmdoubfmuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-462",
+      "name": "VINO TINTO RADIOEL SONIDO DE LA REBELDIA BIEN HECHA",
+      "url": "https://streaming0103.sonicpanelradio.com/8198/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-463",
+      "name": "VK Radio fmel sonido imponente",
+      "url": "https://stream.zeno.fm/kk3x5cventzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-464",
+      "name": "VenCristo Radio24 HORAS DE BENDICION, FORMACION Y CRECIMIENTO",
+      "url": "https://servidor23-5.brlogic.com:7114/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-465",
+      "name": "Verdades Eternas RadioLa Radio Que Edifica",
+      "url": "https://live.voltajedigital.com/listen/verdades_eternas_radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-466",
+      "name": "Violeta TricolrockSintoniza los sonidos electrónicos, sintéticos y lo mejor del hiphop creado en Colombia",
+      "url": "https://cast.tricolrock.com/listen/violeta_tricolrock/violeta_tricolrock",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-467",
+      "name": "Vive Mi RockEl Poder Absoluto De La Musica",
+      "url": "https://stream.zeno.fm/qqmns62gtreuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-468",
+      "name": "Voces CampesinasEl Campo Nos Une",
+      "url": "https://a1.asurahosting.com/listen/voces_campesinas/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-469",
+      "name": "Voces UDCAHistorias que conectan, ideas que transforman.",
+      "url": "https://c25.radioboss.fm:8423/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-470",
+      "name": "Voz Del LagoVoz del lago siempre más",
+      "url": "https://online.multimusic.com.co/8020/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-471",
+      "name": "W RADIO JADE DE COLOMBIAUN LUGAR PARA DISFRUTAR DE LA MEJOR MUSICA",
+      "url": "https://stream.zeno.fm/o9xaggtrr1xtv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-472",
+      "name": "Xtrategia RadioPoder empresarial",
+      "url": "https://emisora.multimusic.com.co:8042/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-473",
+      "name": "Zona RockLas leyendas del rock!",
+      "url": "https://a9.asurahosting.com/listen/zona_rock_/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-474",
+      "name": "gama Stéreo¡Con la mejor Salsa desde Colombia para el mundo!",
+      "url": "https://virtual1.emisorasvirtuales.com:8090/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-475",
+      "name": "gama Vintage¡Con la Mejor Música Balada de Todos los Tiempos!",
+      "url": "https://virtual1.emisorasvirtuales.com:8220/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-476",
+      "name": "ondambientalstereoRADIO SIN FRONTERAS",
+      "url": "https://panel.virtualtecnologe.com:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-477",
+      "name": "pasofinostereo.comCon el sonido de la brisa Antilla, La mejor música tropical",
+      "url": "https://a8.asurahosting.com:9440/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-478",
+      "name": "radio semillassembrando una semilla en tu corazón",
+      "url": "https://stream.zeno.fm/c6ceuguyty8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-479",
+      "name": "vallenata stereoCon sabor a vallenato",
+      "url": "https://stream.zeno.fm/9mpfs57pnc9uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
     }
   ]
 }
