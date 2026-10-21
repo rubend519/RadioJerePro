@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-20",
-    "total": 481,
+    "last_updated": "2026-10-21",
+    "total": 500,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -4418,6 +4418,177 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-480",
+      "name": "Nuestra Salsa¡La salsa de Cali para el mundo!",
+      "url": "https://cloudstream2032.conectarhosting.com/8132/stream",
+      "country": "Colombia",
+      "state": "Cali",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-481",
+      "name": "A 33 Revoluciones en el rockBogota, Colombia",
+      "url": "http://radio05.cehis.net:8015/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-482",
+      "name": "ACL Radio¡Una Sola Voz!",
+      "url": "https://radio.publikaya.com/aclradio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-483",
+      "name": "Amor Estéreo LatinoSuena Mejor",
+      "url": "https://radio.publikaya.com/amor-stereo-latino.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-484",
+      "name": "CMPlus Radio StreamRap & Hip Hop",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-485",
+      "name": "Electro Colombia RadioMusica",
+      "url": "https://servers58.com/proxy/sc_elect/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-486",
+      "name": "Escenario RadioFranja Musical",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-487",
+      "name": "IMC NUESTRA RADIOimc nuestra radio",
+      "url": "https://play8.tikast.com/proxy/imcnuestraradio?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-488",
+      "name": "La Sinvergüenza Radio¡La música sin pena, sin filtros y sin vergüenza!",
+      "url": "https://radio.publikaya.com/la-sinverguenza.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-489",
+      "name": "Punto4 RadioEncuentro virtual en la red",
+      "url": "http://78.129.224.21:32320/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-490",
+      "name": "RADIO PRINCIPIOS\"Promulgando y difundiendo la verdad bíblica.\"",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-491",
+      "name": "Radio City Latino¡Tu Frecuencia, Tu Música!",
+      "url": "https://radio.publikaya.com/radiocity-latino.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-492",
+      "name": "Radio Latina OnlineJ Balvin, Bad Bunny - Que Pretendes",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-493",
+      "name": "Radio On Line FusagasugaBogota, Colombia",
+      "url": "http://real2.streaming-co.com:8016/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-494",
+      "name": "Stream Music Radio#LaSeñalDeLaNuevaRadio",
+      "url": "http://stream.zeno.fm/klg3q5yrjp1vv.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-495",
+      "name": "Tu Salsa Radio¡Donde la salsa se siente, se vive y se baila!",
+      "url": "https://radio.publikaya.com/tusalsa-radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-496",
+      "name": "Unisabana RadioUnisabana Radio, Unisabana Medios",
+      "url": "https://unisabana.out.airtime.pro/unisabana_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-497",
+      "name": "VoiceVoz¡Cadena de Noticias!",
+      "url": "https://radio.publikaya.com/voicevoz.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-498",
+      "name": "playmixradioDONDE EL POP, ROCK Y DANCE VIVEN",
+      "url": "https://sonic.xtremacomunicaciones.com.mx:7009",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
