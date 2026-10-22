@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-21",
-    "total": 500,
+    "last_updated": "2026-10-22",
+    "total": 502,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -4589,6 +4589,24 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-499",
+      "name": "RADIO PRINCIPIOSDr. James Dobson - Hijos que rinden menos de lo esperado (EF0126)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-500",
+      "name": "Radio Latina OnlinePuerto Rican Power - Quiero Volver Contigo",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
       "favicon": ""
     }
   ]
