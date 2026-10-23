@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-22",
-    "total": 502,
+    "last_updated": "2026-10-23",
+    "total": 518,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -4607,6 +4607,150 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-501",
+      "name": "CMPlus Radio StreamTradición Mundo",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-502",
+      "name": "Corazón1220 AMLa Radio de los Dos",
+      "url": "http://stream.zeno.fm/ahn5c8k56wquv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-503",
+      "name": "Dix FMFranja Musical",
+      "url": "https://radio25.virtualtronics.com/proxy/dixfm?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-504",
+      "name": "Electro Colombia RadioLive Sessions",
+      "url": "https://servers58.com/proxy/sc_elect/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-505",
+      "name": "Escenario RadioRFI",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-506",
+      "name": "IMPACTO FM ESTEREOIMPACTO CAMPESINO",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-507",
+      "name": "INCIRadioThe radio for the visually impaired",
+      "url": "https://streaming0103.sonicpanelradio.com:8082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-508",
+      "name": "ITSA RadioFranja Musical",
+      "url": "http://itsaradio.itsa.edu.co:8000/ITSARadio106.6.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-509",
+      "name": "La Estacion MusicPlaylist",
+      "url": "http://stream.zeno.fm/t4ucv8abhv8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-510",
+      "name": "Musica RancheraTodo es Posible",
+      "url": "https://radio013.gt.gt/radio/8070/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-511",
+      "name": "PoliradioLa emisora del Poli",
+      "url": "https://poliradio.out.airtime.pro/poliradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-512",
+      "name": "RADIO PRINCIPIOSMarcos Vidal - Consejo",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-513",
+      "name": "Radio Latina OnlineRikarena - Merengue riko",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-514",
+      "name": "Uninorte FM EstéreoTERCERA MISIÓN",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-515",
+      "name": "Universal StereoCadena de Noticias",
+      "url": "http://stream.zeno.fm/zs01y0bv1reuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-516",
+      "name": "VideoGrafias OnlineBuenos Días Campesino",
+      "url": "https://estructuraweb.com.co:2199/tunein/videografias.ram",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
