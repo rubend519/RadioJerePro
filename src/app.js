@@ -88,6 +88,7 @@ const CONTINENTS = {
 };
 
 const RJP_CURADAS_POR_PAIS = {}; // RJ_CUMBIAS_POR_PAIS_V1
+const stationLogos = {};
 let _stationsLoaded = false;
 async function loadStationsJSON() {
   if (_stationsLoaded) return;
@@ -99,6 +100,10 @@ async function loadStationsJSON() {
     if (Array.isArray(arr) && arr.length > 0) {
       COLOMBIA_CURADA.length = 0;
       arr.forEach(s => {
+        if (s.favicon) {
+          stationLogos[s.stationuuid] = s.favicon;
+          if (s.source_stationuuid) stationLogos[s.source_stationuuid] = s.favicon;
+        }
         if (s.country === 'Colombia') COLOMBIA_CURADA.push(s);
         else {
           const key = String(s.country || '').toLowerCase().replace(/Ãº/g, 'u');
@@ -194,19 +199,61 @@ async function apiFetch(path,si=0){
 }
 
 // Función para filtrar emisoras repetidas por nombre/ciudad de forma limpia
+function searchKey(value) {
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+// Keep distinct local affiliates; a shared network stream can serve several cities.
 function filterUniqueStations(stations) {
-  const seenNames = new Set();
-  const seenUrls = new Set();
+  const ids = new Set(), names = new Set(), urls = new Set();
   return stations.filter(s => {
-    const cleanName = (s.name || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 18);
+    const city = searchKey(s.state).trim();
+    const name = searchKey(s.name).replace(/[^a-z0-9]/g, '');
+    const nameKey = name + '|' + city;
     const url = s.url_resolved || s.url || '';
-    if (!cleanName || (seenNames.has(cleanName) || (url && seenUrls.has(url)))) {
-      return false;
-    }
-    seenNames.add(cleanName);
-    if (url) seenUrls.add(url);
+    const urlKey = url + '|' + city;
+    if (!name || (s.stationuuid && ids.has(s.stationuuid)) || names.has(nameKey) || (url && urls.has(urlKey))) return false;
+    if (s.stationuuid) ids.add(s.stationuuid);
+    names.add(nameKey);
+    if (url) urls.add(urlKey);
     return true;
   });
+}
+
+const COLOMBIA_CITIES = ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Bucaramanga", "Barrancabermeja", "Tunja", "Manizales", "Pereira", "Armenia", "Cúcuta", "Pasto", "Popayán", "Neiva", "Ibagué", "Villavicencio", "Yopal", "Arauca", "Valledupar", "Montería", "Sincelejo", "Santa Marta", "Riohacha", "Quibdó", "Florencia", "Mocoa", "Leticia", "Inírida", "Mitú", "San José del Guaviare", "Puerto Carreño", "San Andrés", "Floridablanca", "Girón", "Fusagasugá", "Málaga, Santander"];
+function normalizeColombiaStation(station) {
+  const name = ' ' + searchKey(station.name);
+  const city = COLOMBIA_CITIES.find(c => name.includes(' ' + searchKey(c))) ||
+    COLOMBIA_CITIES.find(c => searchKey(station.state).includes(searchKey(c)));
+  return city ? Object.assign({}, station, { state: city }) : station;
+}
+
+function renderCityFilter() {
+  const select = document.getElementById('cityFilter');
+  if (!select) return;
+  const selected = select.value;
+  select.textContent = '';
+  select.add(new Option('Todas las ciudades', ''));
+  const counts = {};
+  allStations.forEach(s => {
+    const city = (s.state || '').trim();
+    if (COLOMBIA_CITIES.includes(city)) counts[city] = (counts[city] || 0) + 1;
+  });
+  Object.keys(counts).sort((a,b) => a.localeCompare(b, 'es')).forEach(city => {
+    select.add(new Option(city + ' (' + counts[city] + ')', city));
+  });
+  select.value = counts[selected] ? selected : '';
+  select.parentElement.style.display = currentCountry === 'Colombia' ? 'block' : 'none';
+}
+
+function applyStationFilters() {
+  const q = searchKey(document.getElementById('searchInput').value.trim());
+  const city = document.getElementById('cityFilter').value;
+  filteredStations = allStations.filter(s =>
+    (!city || s.state === city) && (!q || [s.name, s.state, s.tags].some(v => searchKey(v).includes(q)))
+  );
+  setStStatus(filteredStations.length + ' emisoras' + (city ? ' de ' + city : ''), '');
+  sortStations(currentSort, null);
 }
 
 async function init(){
@@ -296,6 +343,9 @@ function filterFavPaisPanel(q){
 async function selectCountry(name, continent, pushNav=true){
   if(pushNav) navPush({ type:'country', data:{ name, continent } });
   currentCountry=name;
+  document.getElementById('cityFilter').value = '';
+  document.getElementById('searchInput').value = '';
+  renderCityFilter();
   document.getElementById('view-continents').style.display='none';
   document.getElementById('view-stations').style.display='block';
   const bc=document.getElementById('breadcrumb');
@@ -309,6 +359,7 @@ async function selectCountry(name, continent, pushNav=true){
       await loadStationsJSON();
       allStations = filterUniqueStations([...COLOMBIA_CURADA]);
       filteredStations = [...allStations];
+      renderCityFilter();
       renderStations(filteredStations, 'stationsList');
       setStStatus(`Cargando más emisoras de Colombia...`, 'loading');
     }
@@ -329,13 +380,7 @@ async function selectCountry(name, continent, pushNav=true){
     });
 
     if(name === 'Colombia') {
-      const curadaIds = new Set(COLOMBIA_CURADA.map(s => s.stationuuid));
-      const curadaNames = new Set(COLOMBIA_CURADA.map(s => s.name.toLowerCase().slice(0,15)));
-      const apiFiltered = apiStations.filter(s =>
-        !curadaIds.has(s.stationuuid) &&
-        !curadaNames.has(s.name.toLowerCase().slice(0,15))
-      );
-      allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiFiltered]);
+      allStations = filterUniqueStations([...COLOMBIA_CURADA, ...apiStations.map(normalizeColombiaStation)]);
     } else {
       const curadasPais = RJP_CURADAS_POR_PAIS[String(name).toLowerCase().replace(/Ãº/g, 'u')] || [];
             allStations = filterUniqueStations([...curadasPais, ...apiStations]);
@@ -343,7 +388,8 @@ async function selectCountry(name, continent, pushNav=true){
 
     filteredStations = [...allStations];
     setStStatus(`${allStations.length} emisoras de ${name}`, '');
-    sortStations(currentSort, document.querySelector('.sort-btn.active'));
+    renderCityFilter();
+    applyStationFilters();
   }catch(e){
     setStStatus('Error al cargar emisoras','error');
     document.getElementById('stationsList').innerHTML=`<div class="loading-box">Error.<br><button class="btn-retry" onclick="selectCountry('${name}','${continent}')">🔄 Reintentar</button></div>`;
@@ -437,6 +483,11 @@ function backToMap(){
 let _searchDebounce;
 function filterStations(){
   const q=document.getElementById('searchInput').value.trim();
+  if(currentCountry === 'Colombia') {
+    clearTimeout(_searchDebounce);
+    applyStationFilters();
+    return;
+  }
   clearTimeout(_searchDebounce);
   _searchDebounce = setTimeout(async () => {
     const ql = q.toLowerCase();
@@ -485,18 +536,33 @@ function _playById(uuid){ const s=_stationRegistry[uuid]; if(s) playStation(s); 
 function _toggleFavById(uuid, btn){ const s=_stationRegistry[uuid]; if(s) toggleFav(uuid,btn,s); }
 function _shareById(uuid){ const s=_stationRegistry[uuid]; if(s) openShare(s); }
 
+// A neutral initials tile is used only when no station logo could be verified.
+function stationLogoFallback(station) {
+  const initials = String(station.name || 'Radio').split(/\s+/).filter(Boolean).slice(0, 2)
+    .map(word => word.charAt(0)).join('').toUpperCase().replace(/[^A-Z0-9ÁÉÍÓÚÑ]/g, '') || 'RJ';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"><rect width="96" height="96" rx="16" fill="#202b40"/><text x="48" y="59" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="bold" fill="#ffffff">' + initials + '</text></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg).replace(/'/g, '%27');
+}
+function stationLogo(station) {
+  return stationLogos[station.stationuuid] || station.favicon || stationLogoFallback(station);
+}
+function stationLogoHTML(station) {
+  const src = stationLogo(station).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  return `<img src="${src}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${stationLogoFallback(station)}'" alt="">`;
+}
+
 function stationCard(s){
   _registerStation(s);
   const isFav=favorites.includes(s.stationuuid);
   const isPlaying=currentStation&&currentStation.stationuuid===s.stationuuid&&playing;
   const id=s.stationuuid;
-  const logo=s.favicon?`<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">`:'📻';
+  const logo = stationLogoHTML(s);
   const tags=(s.tags||'').split(',').slice(0,1).filter(Boolean).map(t=>`<span class="tag">${t.trim()}</span>`).join('');
   return `<div class="scard${isPlaying?' playing':''}" id="card-${id}">
     <div class="scard-logo">${logo}</div>
     <div class="scard-info" onclick="_playById('${id}')">
       <div class="scard-name">${s.name}</div>
-      <div class="scard-meta">${id.startsWith('co-')?'<span style="color:var(--green);font-size:9px">✓ verificada</span> · ':''}${[s.state,tags].filter(Boolean).join(' · ')}</div>
+      <div class="scard-meta">${s.verified === true?'<span style="color:var(--green);font-size:9px">✓ verificada</span> · ':''}${[s.state,tags].filter(Boolean).join(' · ')}</div>
     </div>
     <div class="scard-actions">
       <button class="btn-play" onclick="_playById('${id}')">${isPlaying?'⏸':'▶'}</button>
@@ -771,8 +837,8 @@ async function rjpPlayMediastream(station, token) {
     document.getElementById('nowName').textContent = station.name;
     document.getElementById('headerWave').classList.remove('idle');
     const img = document.getElementById('pLogoImg');
-    img.onerror = function() { this.onerror = null; this.src = ICON; };
-    img.src = station.favicon || ICON;
+    img.onerror = function() { this.onerror = null; this.src = stationLogoFallback(station); };
+    img.src = stationLogo(station);
     document.getElementById('pStatus').textContent = '⟳ Cargando señal HLS...';
     refreshCards();
 
@@ -949,9 +1015,9 @@ async function _loadStream(s, url) {
   const img = document.getElementById('pLogoImg');
   img.onerror = function() {
     this.onerror = null;
-    this.src = ICON;
+    this.src = stationLogoFallback(s);
   };
-  img.src = s.favicon || ICON;
+  img.src = stationLogo(s);
   updateStreamBadge(s.stationuuid, null);
   
   try {
@@ -1172,7 +1238,7 @@ function favCard(s, idx, total) {
   _registerStation(s);
   const id = s.stationuuid;
   const isPlaying = currentStation && currentStation.stationuuid === id && playing;
-  const logo = s.favicon ? `<img src="${s.favicon}" onerror="this.onerror=null;this.src='${ICON}'" alt="">` : '📻';
+  const logo = stationLogoHTML(s);
   const playCount = playCounts[id] || 0;
   const playLabel = playCount > 0 ? `<span style="font-size:9px;color:var(--accent)">▶ ${playCount}×</span>` : '';
   const showReorder = currentFavSort === 'manual';
@@ -1426,15 +1492,15 @@ function sortStations(mode, btn) {
     sortedStations.sort((a,b) => b.name.localeCompare(a.name, 'es', {sensitivity:'base'}));
   } else if(mode === 'popular') {
     sortedStations.sort((a,b) => {
-      const aV = a.stationuuid && a.stationuuid.startsWith('co-') ? 1 : 0;
-      const bV = b.stationuuid && b.stationuuid.startsWith('co-') ? 1 : 0;
+      const aV = a.verified === true ? 1 : 0;
+      const bV = b.verified === true ? 1 : 0;
       if(aV !== bV) return bV - aV;
       return (b.votes||0) - (a.votes||0);
     });
   } else if(mode === 'verified') {
     sortedStations.sort((a,b) => {
-      const aV = a.stationuuid && a.stationuuid.startsWith('co-') ? 1 : 0;
-      const bV = b.stationuuid && b.stationuuid.startsWith('co-') ? 1 : 0;
+      const aV = a.verified === true ? 1 : 0;
+      const bV = b.verified === true ? 1 : 0;
       if(aV !== bV) return bV - aV;
       return a.name.localeCompare(b.name, 'es');
     });
