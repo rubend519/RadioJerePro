@@ -144,7 +144,7 @@ const COLOMBIA_CURADA = [
   {stationuuid:'co-022',name:'Yariguies Stereo 102.7 FM',url:'https://estructuraweb.com.co:9339/stream',country:'Colombia',state:'Barrancabermeja',tags:'noticias,pop',favicon:'https://images.zeno.fm/iqpxWu2NPq98GNfDgwP05w9QvePKl8AzyO0PoY5PFqY/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvYjM0NjJmZTYtM2YxZC00Nzc2LThkMDAtOTZjZDZmMTE1MzVmL2ltYWdlLz91PTE3MTM5MDUzNjMwMDA',geo_lat:7.0653,geo_long:-73.8547,verified:true},
   {stationuuid:'co-036',name:'Radio Fundingue.com',url:'https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3',country:'Colombia',state:'Barranquilla',tags:'vallenato',favicon:'https://images.zeno.fm/znlO1U-iRK909IIaN127niR1oqoN-bKbdXYm_icQYzs/rs:fill:152:152/q:75/g:ce:0:0/aHR0cHM6Ly9wcm94eS56ZW5vLmZtL2NvbnRlbnQvc3RhdGlvbnMvMjlhM2IwZTEtMmEwNC00MjVmLTk2MTYtMmUxZDg1OWQyZDgyL2ltYWdlLz91PTE3MzYzNDYxMTgwMDA',verified:true},
   {stationuuid:'co-037',name:'El Sol Medellín 107.9 FM',url:'https://mdstrm.com/audio/632c9d30aa9ace684913b853/icecast.audio',country:'Colombia',state:'Medellín',tags:'salsa',favicon:'https://elsol.rcnradio.com/wp-content/uploads/2021/09/cropped-favicon-32x32.png',verified:true},
-  {stationuuid:'co-038',name:'Radio Power Colombia',url:'https://stream.zeno.fm/radio-power',country:'Colombia',state:'Fusagasugá',tags:'80s,90s,dance',favicon:ICON,verified:false},
+  {stationuuid:'co-038',name:'Radio Fundingue',url:"https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3",country:'Colombia',state:'Barranquilla',tags:'vallenato,fundingue,fundingue.co',favicon:'/media/stations/fundingue-oficial.jpg',homepage:'https://fundingue.co/',verified:true},
   {stationuuid:'co-023',name:'Olímpica Stereo Bucaramanga 97.7 FM',url:'/stream-proxy?id=co-023',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_BUCARAMANGAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'vallenato,popular',favicon:'https://www.olimpica.com/wp-content/uploads/2021/09/cropped-olimpica-favicon-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-024',name:'Caracol Radio Bucaramanga',url:'/stream-proxy?id=co-024',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/CARACOL_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'noticias',favicon:'https://caracol.com.co/wp-content/uploads/2022/01/cropped-favicon-caracol-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
   {stationuuid:'co-025',name:'La Mega Bucaramanga',url:'/stream-proxy?id=co-025',url_resolved:'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_MEGA_BUCARAAAC_SC',country:'Colombia',state:'Bucaramanga',tags:'popular,vallenato',favicon:'https://lamega.com.co/wp-content/uploads/2021/09/cropped-favicon-mega-32x32.png',geo_lat:7.1198,geo_long:-73.1227},
@@ -2384,7 +2384,28 @@ function shazamManualPick(title, artist, art, album) {
    El usuario puede anclar/desanclar cualquier emisora desde su tarjeta.
    ══════════════════════════════════════════════════════════════════ */
 
-const DEFAULT_ANCHORED = ['co-022', 'co-036', 'co-027', 'rj-cumbia-co-enrealidad', 'rj-cumbia-pe-nuevaq', 'co-019'];
+const DEFAULT_ANCHORED = ['co-022', 'co-038', 'co-027', 'rj-cumbia-co-enrealidad', 'rj-cumbia-pe-nuevaq', 'co-019'];
+// Add the correct Fundingue ID once for existing installations. Later unpins are respected.
+(function migrateFundinguePin() {
+  try {
+    const key = 'rjp_fundingue_default_pin_20261024_v1';
+    if (localStorage.getItem(key) === '1') return;
+    let list;
+    try { list = JSON.parse(localStorage.getItem('rjp_anchored') || 'null'); } catch (e) {}
+    if (!Array.isArray(list)) list = DEFAULT_ANCHORED.slice();
+    if (list.indexOf('co-038') === -1) list.push('co-038');
+    // Discard only the cached copy of this station so Home uses the corrected catalog.
+    let store;
+    try { store = JSON.parse(localStorage.getItem('rjp_anchor_store') || '{}'); } catch (e) {}
+    if (store && typeof store === 'object') {
+      delete store['co-038'];
+      localStorage.setItem('rjp_anchor_store', JSON.stringify(store));
+    }
+    localStorage.setItem('rjp_anchored', JSON.stringify(list));
+    localStorage.setItem(key, '1');
+  } catch (e) { console.warn('[Radio Jere] Fundingue pin migration:', e); }
+})();
+
 /* RJ_HOME_PINS_RELEASE_20261019_V1 - ancladas por defecto y migracion una sola vez */
 (function () {
   try {

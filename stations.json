@@ -530,11 +530,17 @@
     {
       "stationuuid": "co-038",
       "name": "Radio Fundingue",
-      "url": "http://emisora.fundingue.com:8072",
+      "url": "https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3",
       "country": "Colombia",
       "state": "Barranquilla",
-      "tags": "Independiente",
-      "favicon": ""
+      "tags": "vallenato,fundingue,fundingue.co",
+      "favicon": "/media/stations/fundingue-oficial.jpg",
+      "homepage": "https://fundingue.co/",
+      "source": "https://fundingue.co/",
+      "verified": true,
+      "verified_at": "2026-10-24",
+      "logo_source": "https://fundingue.co/wp-content/uploads/2026/08/caratula-2.jpg",
+      "logo_source_page": "https://fundingue.co/"
     },
     {
       "stationuuid": "co-039",
@@ -4029,12 +4035,18 @@
     },
     {
       "stationuuid": "co-395",
-      "name": "Radio Fundingue.comProgramación Normal",
-      "url": "http://emisora.fundingue.com:8072",
+      "name": "Radio Fundingue",
+      "url": "https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3",
       "country": "Colombia",
-      "state": "Sin ciudad detectada",
-      "tags": "Ciudad: Barranquilla",
-      "favicon": ""
+      "state": "Barranquilla",
+      "tags": "vallenato,fundingue,fundingue.co",
+      "favicon": "/media/stations/fundingue-oficial.jpg",
+      "homepage": "https://fundingue.co/",
+      "source": "https://fundingue.co/",
+      "verified": true,
+      "verified_at": "2026-10-24",
+      "logo_source": "https://fundingue.co/wp-content/uploads/2026/08/caratula-2.jpg",
+      "logo_source_page": "https://fundingue.co/"
     },
     {
       "stationuuid": "co-396",
@@ -16917,18 +16929,19 @@
     },
     {
       "stationuuid": "rj-local-24173",
-      "name": "Fundingue",
+      "name": "Radio Fundingue",
       "url": "https://s1-ssl.vpsradio.com/listen/fundingue/radio.mp3",
       "country": "Colombia",
       "state": "Barranquilla",
-      "favicon": "/media/stations/a9c4196ba9729629fbee49f2.webp",
-      "tags": "local",
-      "source": "https://emisorasenvivo.com.co/697-fundingue-com.html",
+      "favicon": "/media/stations/fundingue-oficial.jpg",
+      "tags": "vallenato,fundingue,fundingue.co",
+      "source": "https://fundingue.co/",
       "verified": true,
       "verified_at": "2026-10-24",
       "verification": "HTTP audio response; playback not manually confirmed",
-      "logo_source": "https://cdn.radoxo.com/images/colombia/fundinguecom.webp?v=1791194402",
-      "logo_source_page": "https://emisorasenvivo.com.co/697-fundingue-com.html"
+      "logo_source": "https://fundingue.co/wp-content/uploads/2026/08/caratula-2.jpg",
+      "logo_source_page": "https://fundingue.co/",
+      "homepage": "https://fundingue.co/"
     }
   ]
 }
