@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-24",
-    "total": 1305,
+    "last_updated": "2026-10-25",
+    "total": 1345,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -16942,6 +16942,366 @@
       "logo_source": "https://fundingue.co/wp-content/uploads/2026/08/caratula-2.jpg",
       "logo_source_page": "https://fundingue.co/",
       "homepage": "https://fundingue.co/"
+    },
+    {
+      "stationuuid": "co-537",
+      "name": "BLU Radio BarranquillaMás que radio",
+      "url": "https://tunein-live-f.cdnstream1.com/4309_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjc3NCwiaXNzIjoidGlzcnYifQ.YZJTygWKrHkm6Ya26BAZCZ5PkFEJAW2pTPPxx0ZNGDg",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-538",
+      "name": "BLU Radio BogotáMás que radio",
+      "url": "https://tunein-live-f.cdnstream1.com/4309_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjYxNywiaXNzIjoidGlzcnYifQ.0PfbBJ2DUoDWlCFBTGpr8Hex2khrrboggFAdotH6HYY",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-539",
+      "name": "Buena-StereoLos Especiales de Buena Stereo",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-540",
+      "name": "Bésame ArmeniaMúsica Bésame",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_ARMENIA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjU5MiwiaXNzIjoidGlzcnYifQ.PcjnGfeWsQgCFeeNCgNxyUIxIlHPxTirtQtcv8YMpC0",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-541",
+      "name": "Bésame BogotáLeyendas Bésame",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/BESAME_BOGOTA.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjU5MCwiaXNzIjoidGlzcnYifQ.8gPYbmjZqfmvvJebJEw3Wdlb_q3HMUj3FV3a9Z87HSo",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-542",
+      "name": "Bésame CúcutaMúsica Bésame",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_CUCUTA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjYwMSwiaXNzIjoidGlzcnYifQ.W4_bmO7u59BFE1ew3z6bdPd6mOGgEpVe07YmFmfNP3U",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-543",
+      "name": "CMPlus Radio StreamMúsica Religiosa",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-544",
+      "name": "Cafe Records RadioProyectando Calidad",
+      "url": "https://streaming01.shockmedia.com.ar/9054/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-545",
+      "name": "Caracol Radio BarranquillaJuntos. Más compañía",
+      "url": "http://provisioning.streamtheworld.com/pls/CR_BARRANQ.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjc3NywiaXNzIjoidGlzcnYifQ.OrzgnC_3LLzziehVs5rNkWlNFYf5TKm_bxXyxk-ZPAI",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-546",
+      "name": "Caracol Radio BogotáJuntos. Más compañía",
+      "url": "https://tunein-live-f.cdnstream1.com/4436_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjYwMSwiaXNzIjoidGlzcnYifQ.W4_bmO7u59BFE1ew3z6bdPd6mOGgEpVe07YmFmfNP3U&aw_0_1st.skey=1792932601&lat=37.3388&lon=-121.8916&aw_0_1st.abtest=&aw_0_1st.stationId=s16182&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g255&aw_0_1st.class=talk&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-547",
+      "name": "Caracol Radio MedellínJuntos. Más compañía",
+      "url": "https://tunein-live-f.cdnstream1.com/10606_128.mp3?aw_0_1st.skey=1792932596&lat=37.3388&lon=-121.8916&aw_0_1st.abtest=&aw_0_1st.stationId=s144473&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g255&aw_0_1st.class=talk&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-548",
+      "name": "Carnavaleando RadioCarnavaleando Los 365 Dias del Año",
+      "url": "https://us3.streamingpulse.com/ssl/7218",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-549",
+      "name": "Champeta OnlineSólo Éxitos",
+      "url": "https://stream.zeno.fm/ptqtr8urtfiuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-550",
+      "name": "Colmundo Radio - BogotáLa radio que te acerca",
+      "url": "https://streaming.shoutcast.com/colmundo-radio-bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-551",
+      "name": "IMPACTO FM ESTEREOIMPACTO MUNDIAL",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-552",
+      "name": "JK Bogotana RadioOrgullo Boyacense",
+      "url": "https://radio.cimaspeed.com/8288/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-553",
+      "name": "LA RADIO SC BARRANQUILLASIEMPRE CONTIGO",
+      "url": "https://sonicpanel.streaming10.net:8138/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-554",
+      "name": "LEO Radio BogotáLa lectura, la escritura y la oralidad están presentes en los sonidos de la radio de la Red de Bibli",
+      "url": "https://radioserver11.profesionalhosting.com/proxy/fwgdddlf?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-555",
+      "name": "LOS40 Urban BogotáMúsica 40",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/LOS40_COLOMBIA.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjgwNiwiaXNzIjoidGlzcnYifQ.nu_rOmVqnoxiP_M1rhv5O5H4XY0s1mSFACWWvniZfkE",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-556",
+      "name": "La 1160 AMHoy es Domingo",
+      "url": "https://stream.zeno.fm/ahn5c8k56wquv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-557",
+      "name": "La Máx PopularSiempre con tus éxitos",
+      "url": "https://stream.zeno.fm/thpvjfgwiuquv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-558",
+      "name": "La Reina BarranquillaLa Emisora del Vallenato",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/RNA_BARRANQUILLA.mp3?dist=tune_in",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-559",
+      "name": "MINISTERIO RADIAL JEHOVA ES MI PASTOR UNA VOZ DE ESPERANZASOMOS LA IGLESIA DE DIOS EN EL AIRE",
+      "url": "https://radiohd3.streaminghd.co/8076/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-560",
+      "name": "Nevermore Radio - Nevermore Network24/7 Eclectic Dark Radio",
+      "url": "https://panel.nevermorenetwork.com/listen/nevermorenetwork.com/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-561",
+      "name": "Poliradio7clouds - Avril Lavigne - Complicated (Lyrics)",
+      "url": "https://poliradio.out.airtime.pro/poliradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-562",
+      "name": "Radio Autentica BogotaVoz e Imagen de la verdad",
+      "url": "https://radiolatina.info/8132/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-563",
+      "name": "Radio Fundingue.comProgramación Normal",
+      "url": "http://emisora.fundingue.com:8072",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-564",
+      "name": "Radio Latina OnlineDiomedes Díaz - Pasajeros de la vida",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-565",
+      "name": "RadioSur BogotaYo escucho radiosur",
+      "url": "https://stream20.usastreams.com/8160/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-566",
+      "name": "Radioacktiva BogotáToneladas de Rock",
+      "url": "https://playerservices.streamtheworld.com/pls/RADIO_ACTIVA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjU5NSwiaXNzIjoidGlzcnYifQ.OlVt7ctC4S6zRQHp3Ktjlm3GnTmyRIWTz3q9wlus8xg",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-567",
+      "name": "Radioacktiva MedellínEl Planeta ROCK",
+      "url": "https://playerservices.streamtheworld.com/pls/RADIOACKTIVA_MED.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjU5OCwiaXNzIjoidGlzcnYifQ.aVy-vfeXcwgPk9neJ3v8QBpizn16mJqa7Um43qqEupE",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-568",
+      "name": "SALSA Y CONTROL BARRANQUILLATU RADIO WEB ONLINE 24/7",
+      "url": "https://app.sonicpanelradio.com/8272/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-569",
+      "name": "Sistema Cardenal BarranquillaLa frecuencia de las noticias y el buen vallenato",
+      "url": "http://198.27.78.145:8086/stream/3/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-570",
+      "name": "Su Presencia RadioEmisora de la Iglesia El Lugar de Su Presencia",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-571",
+      "name": "TU RADIO FM WEBMusicales Tu Radio",
+      "url": "https://stream.zeno.fm/ub471yfuv38uv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-572",
+      "name": "Tropicana BarranquillaFranja Musical",
+      "url": "http://provisioning.streamtheworld.com/pls/TR_BARRANQUILLA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjYwMCwiaXNzIjoidGlzcnYifQ.Sm0w-_pYc7yB-jLM0UbA-TgNzyLN039itBvss4G7iuA",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-573",
+      "name": "Tropicana BogotáFranja Musical",
+      "url": "https://tunein-live-f.cdnstream1.com/10700_96.mp3?aw_0_1st.skey=1792932598&lat=37.3388&lon=-121.8916&aw_0_1st.abtest=&aw_0_1st.stationId=s16487&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g2829&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p1018415&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-574",
+      "name": "Tropicana ManizalesFranja Musical",
+      "url": "http://provisioning.streamtheworld.com/pls/TR_MANIZALES.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjU5NSwiaXNzIjoidGlzcnYifQ.OlVt7ctC4S6zRQHp3Ktjlm3GnTmyRIWTz3q9wlus8xg",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-575",
+      "name": "Tropicana MedellínFranja Musical",
+      "url": "https://tunein-live-f.cdnstream1.com/10699_96.mp3?aw_0_1st.skey=1792932594&lat=37.3388&lon=-121.8916&aw_0_1st.abtest=&aw_0_1st.stationId=s188226&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g2829&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p1018415&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-576",
+      "name": "Tropicana VillavicencioFranja Musical",
+      "url": "http://provisioning.streamtheworld.com/pls/TR_VILLAVICENCIO.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MjkzMjYwMiwiaXNzIjoidGlzcnYifQ.9YdW8bwjysvGCH0S4hmpiZUXHxGazesm01hYlWQTGVY",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
     }
   ]
 }
