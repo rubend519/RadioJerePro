@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-26",
-    "total": 1369,
+    "last_updated": "2026-10-27",
+    "total": 1375,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17514,6 +17514,60 @@
       "stationuuid": "co-600",
       "name": "Yovel RadioYovel Radio",
       "url": "https://estructuraweb.com.co:9036/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-601",
+      "name": "Bésame BarranquillaBésame en las Mañanas",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_BARRANQUILLA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MzEwODc5MSwiaXNzIjoidGlzcnYifQ.7vzSKhzjNJFyakYvSed9v1X4gXk48XV3C8jMOt1ADP4",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-602",
+      "name": "Bésame MedellínBésame en las Mañanas",
+      "url": "https://tunein-live-f.cdnstream1.com/10702_96.mp3?aw_0_1st.skey=1793108597&lat=39.0367&lon=-77.4209&aw_0_1st.abtest=&aw_0_1st.stationId=s142558&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g3&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p1306476&aw_0_1st.affiliateIds=a39100%2ca40075%2ca40084%2ca40115&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-603",
+      "name": "Poliradiosnippetlyrics - Kendrick Lamar \"HUMBLE.\" (AUDIO)",
+      "url": "https://poliradio.out.airtime.pro/poliradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-604",
+      "name": "RADIO PRINCIPIOSDavid Hormachea - Oct - El contrato. Cláusulas imprescindibles de un pacto bíblico (D1027)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-605",
+      "name": "Radio Latina OnlineSergio Vargas - Mala memoria",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-606",
+      "name": "Su Presencia RadioEspacio Comercial - Espacio Comercial",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
