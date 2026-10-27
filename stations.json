@@ -301,8 +301,9 @@
     {
       "stationuuid": "co-022",
       "name": "Yariguies Stereo 102.7 FM",
-      "url": "https://stream.zeno.fm/yariguies",
-      "url_resolved": "https://19843.live.streamtheworld.com/YARIGUIES_SC",
+      "url": "https://estructuraweb.com.co:9339/stream",
+      "homepage": "https://yariguies.com/",
+      "verified_at": "2026-10-27",
       "country": "Colombia",
       "state": "Barrancabermeja",
       "tags": "noticias,pop",
