@@ -1,12 +1,12 @@
-const { getStore, connectLambda } = require('@netlify/blobs');
-const crypto = require('node:crypto');
-const defaults = require('../../community.json');
+import { getStore } from '@netlify/blobs';
+import crypto from 'node:crypto';
+import defaults from '../../community.json';
 const COOKIE = 'rjp_admin';
 const TTL = 12 * 60 * 60;
 const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 function response(code, body, extra = {}) { return { statusCode: code, headers: { ...headers, ...extra }, body: JSON.stringify(body) }; }
 function digest(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
-function equal(a, b) { return typeof a === 'string' && typeof b === 'string' && a.length === b.length && crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b)); }
+function equal(a, b) { return typeof a === 'string' && typeof b === 'string' && Buffer.byteLength(a) === Buffer.byteLength(b) && crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b)); }
 function signature(value, key) { return crypto.createHmac('sha256', key).update('rjp-session:' + value).digest('hex'); }
 function authenticated(event, key) {
   const cookie = (event.headers.cookie || '').split(';').map(x => x.trim()).find(x => x.startsWith(COOKIE + '='));
@@ -21,10 +21,11 @@ function validate(data) {
   if (clean.greeting.length > 280 || clean.thanks.length > 1000 || (clean.showGreeting && !clean.greeting) || (clean.showThanks && !clean.thanks)) return null;
   return clean;
 }
-exports.handler = async event => {
+async function handle(event) {
   event.headers = Object.fromEntries(Object.entries(event.headers || {}).map(([k,v]) => [k.toLowerCase(),v]));
   const method = event.httpMethod;
-  const key = process.env.RJP_ADMIN_PASSWORD_SHA256;
+  const privatePassword = process.env.RJP_ADMIN_PASSWORD;
+  const key = process.env.RJP_ADMIN_PASSWORD_SHA256 || (typeof privatePassword === 'string' && privatePassword.length >= 16 ? digest(privatePassword) : '');
   const configured = /^[a-f0-9]{64}$/.test(key || '');
   if (method === 'GET' && event.queryStringParameters && event.queryStringParameters.session === '1') return response(configured && authenticated(event,key) ? 200 : 401, { authenticated: configured && authenticated(event,key) });
   if (method !== 'GET') {
@@ -47,7 +48,6 @@ exports.handler = async event => {
   const data = method === 'PUT' ? validate(input.data) : null;
   if (method === 'PUT' && !data) return response(400,{error:'Revisa los textos y sus límites de caracteres.'});
   try {
-    connectLambda(event);
     const store = getStore({name:'rjp-community',consistency:'strong'});
     const saved = await store.get('published', {type:'json'});
     const current = saved && saved.data || defaults;
@@ -59,3 +59,13 @@ exports.handler = async event => {
     return response(200,next);
   } catch { return response(503,{error:'No se pudo guardar o cargar el mensaje. Intenta de nuevo.'}); }
 };
+
+export default async function (request) {
+  const result = await handle({
+    httpMethod: request.method,
+    headers: { ...Object.fromEntries(request.headers.entries()), host: new URL(request.url).host },
+    queryStringParameters: Object.fromEntries(new URL(request.url).searchParams),
+    body: request.method === 'GET' ? '' : await request.text()
+  });
+  return new Response(result.body, {status:result.statusCode,headers:result.headers});
+}
