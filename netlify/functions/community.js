@@ -7,7 +7,29 @@ const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Cont
 function response(code, body, extra = {}) { return { statusCode: code, headers: { ...headers, ...extra }, body: JSON.stringify(body) }; }
 function digest(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
 function equal(a, b) { return typeof a === 'string' && typeof b === 'string' && Buffer.byteLength(a) === Buffer.byteLength(b) && crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b)); }
-function signature(value, key) { return crypto.createHmac('sha256', key).update('rjp-session:' + value).digest('hex'); }
+function signature(value, key) { return crypto.createHmac('sha256', process.env.ADMIN_SESSION_SECRET || key).update('rjp-session:' + value).digest('hex'); }
+function validTotp(code, secret) {
+  if (!secret) return true;
+  if (!/^\d{6}$/.test(String(code || ''))) return false;
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  let bits = '';
+  for (const char of secret.toUpperCase().replace(/[=\s]/g,'')) {
+    const value = alphabet.indexOf(char);
+    if (value < 0) return false;
+    bits += value.toString(2).padStart(5,'0');
+  }
+  const bytes = [];
+  for (let i=0;i+8<=bits.length;i+=8) bytes.push(parseInt(bits.slice(i,i+8),2));
+  const now = Math.floor(Date.now()/30000);
+  for (let offset=-1;offset<=1;offset++) {
+    const counter = Buffer.alloc(8); counter.writeBigUInt64BE(BigInt(now+offset));
+    const hmac = crypto.createHmac('sha1',Buffer.from(bytes)).update(counter).digest();
+    const start = hmac[19]&15;
+    const expected = String((hmac.readUInt32BE(start)&0x7fffffff)%1000000).padStart(6,'0');
+    if (equal(String(code),expected)) return true;
+  }
+  return false;
+}
 function authenticated(event, key) {
   const cookie = (event.headers.cookie || '').split(';').map(x => x.trim()).find(x => x.startsWith(COOKIE + '='));
   if (!cookie) return false;
@@ -24,8 +46,8 @@ function validate(data) {
 async function handle(event) {
   event.headers = Object.fromEntries(Object.entries(event.headers || {}).map(([k,v]) => [k.toLowerCase(),v]));
   const method = event.httpMethod;
-  const privatePassword = process.env.RJP_ADMIN_PASSWORD;
-  const key = process.env.RJP_ADMIN_PASSWORD_SHA256 || (typeof privatePassword === 'string' && privatePassword.length >= 16 ? digest(privatePassword) : '');
+  const privatePassword = process.env.RJP_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD;
+  const key = process.env.RJP_ADMIN_PASSWORD_SHA256 || (typeof privatePassword === 'string' && privatePassword.length >= 8 && privatePassword !== 'jere2025' ? digest(privatePassword) : '');
   const configured = /^[a-f0-9]{64}$/.test(key || '');
   if (method === 'GET' && event.queryStringParameters && event.queryStringParameters.session === '1') return response(configured && authenticated(event,key) ? 200 : 401, { authenticated: configured && authenticated(event,key) });
   if (method !== 'GET') {
@@ -40,7 +62,7 @@ async function handle(event) {
   if (method === 'POST' && input.action === 'logout') return response(200,{ok:true},{'Set-Cookie':cookie('',0)});
   if (method === 'POST' && input.action === 'login') {
     if (!configured) return response(503,{error:'El acceso privado de administrador aún no está configurado.'});
-    if (typeof input.password !== 'string' || input.password.length > 256 || !equal(digest(input.password),key)) return response(401,{error:'Contraseña incorrecta.'});
+    if (typeof input.password !== 'string' || input.password.length > 256 || !equal(digest(input.password),key) || !validTotp(input.code,process.env.ADMIN_TOTP_SECRET)) return response(401,{error:'Contraseña o código de autenticación incorrectos.'});
     const value = String(Date.now() + TTL * 1000) + '.' + crypto.randomBytes(16).toString('hex');
     return response(200,{ok:true},{'Set-Cookie':cookie(value + '.' + signature(value,key),TTL)});
   }
