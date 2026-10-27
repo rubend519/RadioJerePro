@@ -1,16 +1,27 @@
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const publicSource=fs.readFileSync('community.js','utf8');
-const adminSource=fs.readFileSync('community-admin.js','utf8');
-const tick=()=>new Promise(resolve=>setImmediate(resolve));
-function elements(){const els={};return {els,get:id=>els[id]||(els[id]={value:'',checked:true,textContent:'',hidden:false,disabled:false,listeners:{},addEventListener(name,fn){this.listeners[name]=fn;}})};}
-const initial={greeting:'¡Hola Colombia! 👋',thanks:'Gracias 💜',showGreeting:true,showThanks:true};
-async function publicTest(data){const dom=elements();vm.runInNewContext(publicSource,{document:{getElementById:dom.get},fetch:async()=>({ok:true,json:async()=>data}),Date});await tick();return dom;}
-async function adminTest(login,remote=initial){const dom=elements(),calls=[];const context={document:{getElementById:dom.get},ghConfig:{token:'test-only'},Date,JSON,Object,String,Error,encodeURIComponent,decodeURIComponent,escape,unescape,btoa:s=>Buffer.from(s,'binary').toString('base64'),atob:s=>Buffer.from(s,'base64').toString('binary'),fetch:async(url,options={})=>{calls.push({url,options});if(url.startsWith('/community.json'))return{ok:true,json:async()=>initial};if(url.endsWith('/user'))return{ok:true,json:async()=>({login})};if(options.method==='PUT')return{ok:true};return{ok:true,json:async()=>({sha:'old-version',content:Buffer.from(JSON.stringify(remote),'utf8').toString('base64')})}}};vm.runInNewContext(adminSource,context);await tick();dom.get('communityGreeting').value='¡Saludos desde España!';await dom.get('communitySave').listeners.click();return{dom,calls};}
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
+let stored=null,writes=0;
+const defaults=JSON.parse(fs.readFileSync('community.json','utf8'));
+const env={RJP_ADMIN_PASSWORD_SHA256:crypto.createHash('sha256').update('test-password-only').digest('hex')};
+const context={exports:{},process:{env},Buffer,URL,Date,require(name){if(name==='@netlify/blobs')return{connectLambda(){},getStore(){return{get:async()=>stored,setJSON:async(k,v)=>{stored=v;writes++}}}};if(name==='node:crypto')return crypto;if(name==='../../community.json')return defaults;throw Error(name)}};
+vm.runInNewContext(fs.readFileSync('netlify/functions/community.js','utf8'),context);
+const handler=context.exports.handler;
+function event(method,body,cookie,origin='https://radiojerepro.netlify.app'){return{httpMethod:method,body:typeof body==='string'?body:JSON.stringify(body),headers:{host:'radiojerepro.netlify.app',origin,'content-type':'application/json',cookie:cookie||''},queryStringParameters:{}}}
 (async()=>{
- let d=await publicTest({...initial,greeting:'<img src=x onerror=alert(1)>'});assert.equal(d.get('rjCommunityGreetingText').textContent,'<img src=x onerror=alert(1)>');assert.equal(d.get('rjCommunity').hidden,false);
- d=await publicTest({...initial,showGreeting:false,showThanks:false});assert.equal(d.get('rjCommunity').hidden,true);
- let t=await adminTest('someone-else');assert.ok(!t.calls.some(c=>c.options.method==='PUT'),'other users cannot publish through admin');
- t=await adminTest('rubend519',{...initial,greeting:'Changed elsewhere'});assert.ok(!t.calls.some(c=>c.options.method==='PUT'),'stale edit cannot overwrite another device');
- t=await adminTest('rubend519');const put=t.calls.find(c=>c.options.method==='PUT');assert.ok(put);const body=JSON.parse(put.options.body);assert.equal(body.sha,'old-version');assert.equal(JSON.parse(Buffer.from(body.content,'base64').toString('utf8')).greeting,'¡Saludos desde España!');assert.equal(body.branch,'main');
- console.log('Messages: safe public rendering, hide controls, owner validation, concurrent edits and Unicode publication passed');
+ let r=await handler(event('GET'));assert.equal(r.statusCode,200);const initial=JSON.parse(r.body);assert.deepEqual(initial.data,defaults);
+ r=await handler(event('PUT',{data:defaults,revision:initial.revision}));assert.equal(r.statusCode,401);assert.equal(writes,0);
+ r=await handler(event('POST',{action:'login',password:'wrong'}));assert.equal(r.statusCode,401);assert.ok(!r.headers['Set-Cookie']);
+ r=await handler(event('POST',{action:'login',password:'test-password-only'}));assert.equal(r.statusCode,200);const cookie=r.headers['Set-Cookie'].split(';')[0];assert.match(r.headers['Set-Cookie'],/HttpOnly; Secure; SameSite=Strict/);assert.ok(!r.body.includes('test-password-only'));
+ const session=event('GET',null,cookie);session.queryStringParameters.session='1';assert.equal((await handler(session)).statusCode,200);
+ assert.equal((await handler(event('PUT',null,cookie))).statusCode,400);
+ assert.equal((await handler(event('PUT','broken',cookie))).statusCode,400);
+ assert.equal((await handler(event('PUT',{data:defaults,revision:initial.revision},cookie,'https://evil.example'))).statusCode,403);
+ assert.equal((await handler(event('PUT',{data:{...defaults,greeting:'x'.repeat(281)},revision:initial.revision},cookie))).statusCode,400);
+ assert.equal((await handler(event('PUT',{data:defaults,revision:initial.revision},cookie+'tampered'))).statusCode,401);
+ const next={...defaults,greeting:'¡Un abrazo a España! 📻'};
+ r=await handler(event('PUT',{data:next,revision:initial.revision},cookie));assert.equal(r.statusCode,200);assert.equal(writes,1);assert.equal(JSON.parse((await handler(event('GET'))).body).data.greeting,next.greeting);
+ assert.equal((await handler(event('PUT',{data:defaults,revision:initial.revision},cookie))).statusCode,409);assert.equal(writes,1);
+ r=await handler(event('POST',{action:'logout'},cookie));assert.match(r.headers['Set-Cookie'],/Max-Age=0/);
+ delete env.RJP_ADMIN_PASSWORD_SHA256;assert.equal((await handler(event('POST',{action:'login',password:'test-password-only'}))).statusCode,503);assert.equal((await handler(event('PUT',{data:defaults},cookie))).statusCode,401);
+ const admin=fs.readFileSync('community-admin.js','utf8');assert.ok(!admin.includes('api.github.com'));assert.ok(!admin.includes('ghConfig'));assert.ok(!fs.readFileSync('admin.html','utf8').includes('const ADMIN_PASS'));
+ console.log('Direct publishing: private login, secure session, unauthorized writes, origin checks, validation, persistence, conflicts and logout passed');
 })().catch(e=>{console.error(e);process.exit(1)});
