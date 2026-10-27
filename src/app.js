@@ -643,7 +643,15 @@ async function resolveProxyUrl(station) {
   return station.url_resolved || station.url;
 }
 
+// La señal oficial debe prevalecer sobre las copias antiguas de favoritos/ancladas.
+const YARIGUIES_OFFICIAL_STREAM = 'https://estructuraweb.com.co:9339/stream';
 function getEffectiveUrl(station) {
+  if (station.stationuuid === 'co-022') {
+    const override = urlOverrides[station.stationuuid];
+    // Conserva enlaces personalizados, pero descarta los dos enlaces retirados.
+    if (override && !/^https?:\/\/(?:stream\.zeno\.fm\/yariguies|19843\.live\.streamtheworld\.com\/YARIGUIES_SC)(?:[/?#]|$)/i.test(override)) return override;
+    return YARIGUIES_OFFICIAL_STREAM;
+  }
   if(urlOverrides[station.stationuuid]) return urlOverrides[station.stationuuid];
   if(resolvedUrlCache[station.stationuuid]) return resolvedUrlCache[station.stationuuid];
   return station.url || station.url_resolved;
