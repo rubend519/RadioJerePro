@@ -25,5 +25,10 @@ function event(method,body,cookie,origin='https://radiojerepro.netlify.app'){ret
  r=await handler(event('POST',{action:'logout'},cookie));assert.match(r.headers['Set-Cookie'],/Max-Age=0/);
  delete env.RJP_ADMIN_PASSWORD_SHA256;assert.equal((await handler(event('POST',{action:'login',password:'test-password-only'}))).statusCode,503);assert.equal((await handler(event('PUT',{data:defaults},cookie))).statusCode,401);
  const admin=fs.readFileSync('community-admin.js','utf8');assert.ok(!admin.includes('api.github.com'));assert.ok(!admin.includes('ghConfig'));assert.ok(!fs.readFileSync('admin.html','utf8').includes('const ADMIN_PASS'));
+ env.ADMIN_PASSWORD='existing-private-password';env.ADMIN_TOTP_SECRET='GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ';context.Date={now:()=>59000};
+ assert.equal(context.validTotp('287082',env.ADMIN_TOTP_SECRET),true,'RFC 6238 compatible six digit TOTP');
+ assert.equal(context.validTotp('000000',env.ADMIN_TOTP_SECRET),false);
+ assert.equal((await handler(event('POST',{action:'login',password:'existing-private-password',code:'000000'}))).statusCode,401);
+ assert.equal((await handler(event('POST',{action:'login',password:'existing-private-password',code:'287082'}))).statusCode,200,'reuse existing private owner credentials and second factor');
  console.log('Direct publishing: private login, secure session, unauthorized writes, origin checks, validation, persistence, conflicts and logout passed');
 })().catch(e=>{console.error(e);process.exit(1)});
