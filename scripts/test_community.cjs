@@ -3,7 +3,9 @@ let stored=null,writes=0;
 const defaults=JSON.parse(fs.readFileSync('community.json','utf8'));
 const env={RJP_ADMIN_PASSWORD_SHA256:crypto.createHash('sha256').update('test-password-only').digest('hex')};
 const context={exports:{},process:{env},Buffer,URL,Date,require(name){if(name==='@netlify/blobs')return{connectLambda(){},getStore(){return{get:async()=>stored,setJSON:async(k,v)=>{stored=v;writes++}}}};if(name==='node:crypto')return crypto;if(name==='../../community.json')return defaults;throw Error(name)}};
-vm.runInNewContext(fs.readFileSync('netlify/functions/community.js','utf8'),context);
+let functionSource=fs.readFileSync('netlify/functions/community.js','utf8').split('export default async function')[0];
+functionSource=functionSource.replace("import { getStore } from '@netlify/blobs';","const {getStore}=require('@netlify/blobs');").replace("import crypto from 'node:crypto';","const crypto=require('node:crypto');").replace("import defaults from '../../community.json';","const defaults=require('../../community.json');");
+vm.runInNewContext(functionSource+'\nexports.handler=handle;',context);
 const handler=context.exports.handler;
 function event(method,body,cookie,origin='https://radiojerepro.netlify.app'){return{httpMethod:method,body:typeof body==='string'?body:JSON.stringify(body),headers:{host:'radiojerepro.netlify.app',origin,'content-type':'application/json',cookie:cookie||''},queryStringParameters:{}}}
 (async()=>{
