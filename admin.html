@@ -139,6 +139,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   .form-row,.form-row.three{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="/community.css?v=20261027">
 </head>
 <body>
 
@@ -169,6 +170,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
       <button class="tab active" id="tab-list" onclick="showTab('list')">📋 Emisoras</button>
       <button class="tab" id="tab-search" onclick="showTab('search')">🔍 Buscar y agregar</button>
       <button class="tab" id="tab-manual" onclick="showTab('manual')">✏️ Manual</button>
+      <button class="tab" id="tab-community" onclick="showTab('community')">💜 Mensajes</button>
       <button class="tab" id="tab-config" onclick="showTab('config')">⚙ GitHub</button>
     </div>
 
@@ -336,6 +338,30 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
           <button class="btn-cancel" onclick="clearManualForm()">Limpiar</button>
           <button class="btn-search" onclick="addManual()">➕ Agregar emisora</button>
         </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-community">
+      <div class="gh-form">
+        <h2 class="form-title">Saludos y agradecimiento</h2>
+        <p style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:18px">Publica tus mensajes en Inicio. Los visitantes solo pueden leerlos. Para guardar, utiliza tu acceso de escritura de GitHub configurado en la pestaña ⚙ GitHub.</p>
+        <div class="form-group" style="margin-bottom:16px">
+          <label for="communityGreeting">Saludo (máximo 280 caracteres)</label>
+          <textarea id="communityGreeting" maxlength="280" rows="3" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea>
+          <label style="text-transform:none"><input type="checkbox" id="communityShowGreeting" checked> Mostrar saludo en Inicio</label>
+        </div>
+        <div class="form-group" style="margin-bottom:16px">
+          <label for="communityThanks">Nota de agradecimiento (máximo 1000 caracteres)</label>
+          <textarea id="communityThanks" maxlength="1000" rows="5" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea>
+          <label style="text-transform:none"><input type="checkbox" id="communityShowThanks" checked> Mostrar agradecimiento en Inicio</label>
+        </div>
+        <h3 class="form-title">Vista previa</h3>
+        <div class="rj-community">
+          <div class="rj-community-row" id="communityGreetingRow"><span class="rj-community-icon" aria-hidden="true">👋</span><div class="rj-community-copy"><h2>Saludos de Radio Jere</h2><p id="communityGreetingPreview"></p></div></div>
+          <div class="rj-community-row" id="communityThanksRow"><span class="rj-community-icon" aria-hidden="true">💜</span><div class="rj-community-copy"><h2>Gracias por estar aquí</h2><p id="communityThanksPreview"></p></div></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn-search" id="communitySave" disabled>Publicar mensajes</button><button type="button" class="btn-cancel" id="communityReload">Recargar mensajes publicados</button></div>
+        <p id="communityStatus" role="status" style="color:var(--text2);font-size:13px;line-height:1.6;margin-top:14px"></p>
       </div>
     </div>
 
@@ -966,5 +992,6 @@ document.getElementById('loginPass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
 </script>
+<script src="/community-admin.js?v=20261027"></script>
 </body>
 </html>

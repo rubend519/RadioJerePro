@@ -1678,6 +1678,7 @@ html.rj-tutorial-ready .rj-hero{
     .rj-tutorial-action{display:none}
 }
 </style>
+<link rel="stylesheet" href="/community.css?v=20261027">
 </head>
 <body>
 <div class="hdr">
@@ -1907,6 +1908,17 @@ html.rj-tutorial-ready .rj-hero{
 
   </section>
 
+
+  <section class="rj-community" id="rjCommunity" aria-label="Mensajes de Radio Jere" hidden>
+    <div class="rj-community-row" id="rjCommunityGreeting">
+      <span class="rj-community-icon" aria-hidden="true">👋</span>
+      <div class="rj-community-copy"><h2>Saludos de Radio Jere</h2><p id="rjCommunityGreetingText"></p></div>
+    </div>
+    <div class="rj-community-row" id="rjCommunityThanks">
+      <span class="rj-community-icon" aria-hidden="true">💜</span>
+      <div class="rj-community-copy"><h2>Gracias por estar aquí</h2><p id="rjCommunityThanksText"></p></div>
+    </div>
+  </section>
 
   <section class="rj-anchored-section">
 
@@ -2703,5 +2715,6 @@ html.rj-tutorial-ready .rj-hero{
   document.documentElement.classList.add('rj-tutorial-ready');
 })();
 </script>
+<script src="/community.js?v=20261027"></script>
 </body>
 </html>
