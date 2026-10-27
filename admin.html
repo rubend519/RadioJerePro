@@ -344,7 +344,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="panel" id="panel-community">
       <div class="gh-form">
         <h2 class="form-title">Saludos y agradecimiento</h2>
-        <p style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:18px">Publica tus mensajes en Inicio. Los visitantes solo pueden leerlos. Para guardar, utiliza tu acceso de escritura de GitHub configurado en la pestaña ⚙ GitHub.</p>
+        <p style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:18px">Escribe tus saludos y tu agradecimiento, revisa la vista previa y pulsa Publicar mensajes. Los visitantes solo pueden leerlos; tus cambios se guardan con tu sesión privada de administrador.</p>
         <div class="form-group" style="margin-bottom:16px">
           <label for="communityGreeting">Saludo (máximo 280 caracteres)</label>
           <textarea id="communityGreeting" maxlength="280" rows="3" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea>
@@ -470,7 +470,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────
-const ADMIN_PASS = 'jere2025';
 const STATIONS_URL = '/stations.json';
 const RB_SERVERS = ['de1.api.radio-browser.info','nl1.api.radio-browser.info','at1.api.radio-browser.info'];
 
@@ -485,23 +484,36 @@ let listStateFilter = '';
 let listVerifiedFilter = '';
 
 // ─── LOGIN ────────────────────────────────────────────
-function doLogin() {
-  const pass = document.getElementById('loginPass').value;
-  if (pass === ADMIN_PASS) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    loadGhConfig();
-    loadStations();
-  } else {
-    document.getElementById('loginErr').style.display = 'block';
-    document.getElementById('loginPass').value = '';
-  }
+function openAdmin() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('loginPass').value = '';
+  loadGhConfig();
+  loadStations();
 }
-function doLogout() {
+async function doLogin() {
+  var error = document.getElementById('loginErr');
+  error.style.display = 'none';
+  try {
+    var response = await fetch('/.netlify/functions/community', {
+      method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'login', password: document.getElementById('loginPass').value })
+    });
+    var result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'No se pudo iniciar sesión.');
+    openAdmin();
+  } catch (e) { error.textContent = e.message; error.style.display = 'block'; }
+}
+async function doLogout() {
+  try {
+    var response = await fetch('/.netlify/functions/community', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({action:'logout'}) });
+    if (!response.ok) throw new Error();
+  } catch (e) { showToast('No se pudo cerrar la sesión. Intenta de nuevo.', 'err'); return; }
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginPass').value = '';
 }
+fetch('/.netlify/functions/community?session=1', {credentials:'same-origin',cache:'no-store'}).then(function (r) { if(r.ok) openAdmin(); }).catch(function () {});
 
 // ─── TABS ─────────────────────────────────────────────
 function showTab(name) {
@@ -988,10 +1000,8 @@ function showToast(msg, type = 'ok') {
 }
 
 // ─── INIT ─────────────────────────────────────────────
-document.getElementById('loginPass').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
+
 </script>
-<script src="/community-admin.js?v=20261027"></script>
+<script src="/community-admin.js?v=20261027-directo"></script>
 </body>
 </html>

@@ -10,8 +10,14 @@
     });
     section.hidden = document.getElementById('rjCommunityGreeting').hidden && document.getElementById('rjCommunityThanks').hidden;
   }
-  fetch('/community.json?_=' + Date.now(), { cache: 'no-store' })
-    .then(function (response) { if (!response.ok) throw new Error('HTTP ' + response.status); return response.json(); })
-    .then(render)
-    .catch(function () { section.hidden = true; });
+  function refresh() {
+    if (document.hidden) return;
+    fetch('/.netlify/functions/community?_=' + Date.now(), { cache: 'no-store' })
+      .then(function (response) { if (!response.ok) throw new Error('HTTP ' + response.status); return response.json(); })
+      .then(function (payload) { render(payload.data); })
+      .catch(function () {});
+  }
+  refresh();
+  setInterval(refresh, 15000);
+  document.addEventListener('visibilitychange', refresh);
 })();
