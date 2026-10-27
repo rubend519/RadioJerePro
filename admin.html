@@ -149,6 +149,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="login-logo">Radio Jere <span>Pro</span></div>
     <div class="login-sub">Panel de administración</div>
     <input type="password" id="loginPass" placeholder="Contraseña de admin" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="text" id="loginCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Código de autenticación (si está activado)" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="btn-primary" onclick="doLogin()">Entrar</button>
     <div class="login-err" id="loginErr">Contraseña incorrecta</div>
   </div>
@@ -488,6 +489,7 @@ function openAdmin() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   document.getElementById('loginPass').value = '';
+  document.getElementById('loginCode').value = '';
   loadGhConfig();
   loadStations();
 }
@@ -497,7 +499,7 @@ async function doLogin() {
   try {
     var response = await fetch('/.netlify/functions/community', {
       method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'login', password: document.getElementById('loginPass').value })
+      body: JSON.stringify({ action: 'login', password: document.getElementById('loginPass').value, code: document.getElementById('loginCode').value.trim() })
     });
     var result = await response.json();
     if (!response.ok) throw new Error(result.error || 'No se pudo iniciar sesión.');
@@ -512,6 +514,7 @@ async function doLogout() {
   document.getElementById('loginScreen').style.display = 'flex';
   document.getElementById('app').style.display = 'none';
   document.getElementById('loginPass').value = '';
+  document.getElementById('loginCode').value = '';
 }
 fetch('/.netlify/functions/community?session=1', {credentials:'same-origin',cache:'no-store'}).then(function (r) { if(r.ok) openAdmin(); }).catch(function () {});
 
