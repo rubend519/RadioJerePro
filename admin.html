@@ -139,7 +139,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   .form-row,.form-row.three{grid-template-columns:1fr}
 }
 </style>
-<link rel="stylesheet" href="/community.css?v=20261027">
+<link rel="stylesheet" href="/community.css?v=20261028-led">
 </head>
 <body>
 
@@ -347,20 +347,26 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
         <h2 class="form-title">Saludos y agradecimiento</h2>
         <p style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:18px">Escribe tus saludos y tu agradecimiento, revisa la vista previa y pulsa Publicar mensajes. Los visitantes solo pueden leerlos; tus cambios se guardan con tu sesión privada de administrador.</p>
         <div class="form-group" style="margin-bottom:16px">
-          <label for="communityGreeting">Saludo (máximo 280 caracteres)</label>
-          <textarea id="communityGreeting" maxlength="280" rows="3" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea>
+          <label for="communityGreeting">Saludos generales y personalizados (máximo 280 caracteres)</label>
+          <textarea id="communityGreeting" maxlength="280" rows="3" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea><span class="rj-char-count" id="communityGreetingCount"></span>
           <label style="text-transform:none"><input type="checkbox" id="communityShowGreeting" checked> Mostrar saludo en Inicio</label>
         </div>
         <div class="form-group" style="margin-bottom:16px">
           <label for="communityThanks">Nota de agradecimiento (máximo 1000 caracteres)</label>
-          <textarea id="communityThanks" maxlength="1000" rows="5" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea>
+          <textarea id="communityThanks" maxlength="1000" rows="5" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea><span class="rj-char-count" id="communityThanksCount"></span>
           <label style="text-transform:none"><input type="checkbox" id="communityShowThanks" checked> Mostrar agradecimiento en Inicio</label>
         </div>
-        <h3 class="form-title">Vista previa</h3>
-        <div class="rj-community">
-          <div class="rj-community-row" id="communityGreetingRow"><span class="rj-community-icon" aria-hidden="true">👋</span><div class="rj-community-copy"><h2>Saludos de Radio Jere</h2><p id="communityGreetingPreview"></p></div></div>
-          <div class="rj-community-row" id="communityThanksRow"><span class="rj-community-icon" aria-hidden="true">💜</span><div class="rj-community-copy"><h2>Gracias por estar aquí</h2><p id="communityThanksPreview"></p></div></div>
+        <div class="rj-emoji-picker" id="communityEmojiPicker">
+          <h3>✨ Dale vida a tus mensajes</h3>
+          <p>Elige primero el lugar del mensaje y después toca un emoji. Puedes combinar saludos, música, cariño y banderas.</p>
+          <p id="communityEmojiTarget" class="rj-emoji-target">Insertar en: Saludos generales y personalizados</p>
+          <label for="communityEmojiSearch">Buscar emojis o países</label>
+          <input id="communityEmojiSearch" type="search" placeholder="Colombia, España, corazón, fiesta…" autocomplete="off">
+          <div id="communityEmojiTabs" class="rj-emoji-tabs" aria-label="Categorías de emojis"></div>
+          <div id="communityEmojiGrid" class="rj-emoji-grid" aria-label="Emojis disponibles"></div>
         </div>
+        <h3 class="form-title">Vista previa LED · de izquierda a derecha</h3>
+        <div class="rj-community" id="communityLedPreview" aria-label="Vista previa de mensajes"></div>
         <div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn-search" id="communitySave" disabled>Publicar mensajes</button><button type="button" class="btn-cancel" id="communityReload">Recargar mensajes publicados</button></div>
         <p id="communityStatus" role="status" style="color:var(--text2);font-size:13px;line-height:1.6;margin-top:14px"></p>
       </div>
@@ -1005,6 +1011,7 @@ function showToast(msg, type = 'ok') {
 // ─── INIT ─────────────────────────────────────────────
 
 </script>
-<script src="/community-admin.js?v=20261027-directo"></script>
+<script src="/community.js?v=20261028-led"></script>
+<script src="/community-admin.js?v=20261028-led"></script>
 </body>
 </html>
