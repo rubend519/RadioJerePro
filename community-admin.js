@@ -12,13 +12,56 @@
   function read() {
     return { greeting: greeting.value.trim(), thanks: thanks.value.trim(), showGreeting: document.getElementById('communityShowGreeting').checked, showThanks: document.getElementById('communityShowThanks').checked };
   }
+  var renderPreview = window.RJCreateTicker(document.getElementById('communityLedPreview'));
   function preview() {
-    var data = read();
-    document.getElementById('communityGreetingPreview').textContent = data.greeting || 'Tu saludo aparecerá aquí.';
-    document.getElementById('communityThanksPreview').textContent = data.thanks || 'Tu nota aparecerá aquí.';
-    document.getElementById('communityGreetingRow').hidden = !data.showGreeting;
-    document.getElementById('communityThanksRow').hidden = !data.showThanks;
+    renderPreview(read());
+    [greeting, thanks].forEach(function (field) { document.getElementById(field.id + 'Count').textContent = field.value.length + ' / ' + field.maxLength; });
   }
+  var activeField = greeting;
+  var picker = document.getElementById('communityEmojiPicker');
+  var target = document.getElementById('communityEmojiTarget');
+  [greeting, thanks].forEach(function (field) {
+    field.addEventListener('focus', function () { activeField = field; target.textContent = 'Insertar en: ' + (field === greeting ? 'Saludos generales y personalizados' : 'Agradecimiento'); });
+  });
+  var categories = {
+    'Favoritos': [['👋','saludo hola'],['📻','radio'],['🎶','música'],['💜','corazón morado'],['✨','brillo'],['🥳','fiesta'],['🙏','gracias'],['🫶','cariño'],['🌎','mundo'],['🔥','fuego'],['😎','cool'],['⭐','estrella']],
+    'Banderas': [['🇨🇴','Colombia'],['🇪🇸','España'],['🇻🇪','Venezuela'],['🇪🇨','Ecuador'],['🇵🇪','Perú'],['🇲🇽','México'],['🇦🇷','Argentina'],['🇨🇱','Chile'],['🇧🇷','Brasil'],['🇺🇸','Estados Unidos'],['🇨🇦','Canadá'],['🇬🇧','Reino Unido'],['🇫🇷','Francia'],['🇩🇪','Alemania'],['🇮🇹','Italia'],['🇵🇹','Portugal'],['🇵🇦','Panamá'],['🇨🇷','Costa Rica'],['🇩🇴','República Dominicana'],['🇵🇷','Puerto Rico'],['🇺🇾','Uruguay'],['🇧🇴','Bolivia'],['🇵🇾','Paraguay'],['🇦🇺','Australia']],
+    'Música': [['🎵','nota'],['🎶','notas'],['🎧','audífonos'],['🎤','micrófono'],['🎸','guitarra'],['🥁','tambor'],['🎹','piano'],['🎷','saxofón'],['🎺','trompeta'],['💃','baile mujer'],['🕺','baile hombre'],['📡','señal']],
+    'Cariño': [['❤️','amor rojo'],['💜','corazón morado'],['💛','corazón amarillo'],['💙','corazón azul'],['💚','corazón verde'],['💕','corazones'],['😍','enamorado'],['🥰','cariño'],['🤗','abrazo'],['😘','beso'],['🌹','rosa'],['🙏','gracias']],
+    'Fiesta': [['🎉','celebración'],['🎊','confeti'],['🎂','cumpleaños'],['🎁','regalo'],['🎈','globo'],['🥳','fiesta'],['🍰','pastel'],['🥂','brindis'],['👏','aplausos'],['🙌','celebrar'],['🏆','trofeo'],['🚀','cohete']],
+    'Símbolos': [['✨','brillos'],['⭐','estrella'],['🌟','estrella brillante'],['🔥','fuego'],['✅','verificado'],['💯','cien'],['🌎','mundo'],['☀️','sol'],['🌙','luna'],['🌈','arcoíris'],['⚡','rayo'],['✦','separador']]
+  };
+  var category = 'Favoritos';
+  var tabs = document.getElementById('communityEmojiTabs');
+  var grid = document.getElementById('communityEmojiGrid');
+  var search = document.getElementById('communityEmojiSearch');
+  function drawEmojis() {
+    grid.textContent = '';
+    var query = search.value.toLocaleLowerCase();
+    var items = query ? Object.keys(categories).reduce(function (all, key) { return all.concat(categories[key]); }, []) : categories[category];
+    var seen = {};
+    items.forEach(function (item) {
+      if (seen[item[0]] || (query && item[1].toLocaleLowerCase().indexOf(query) < 0)) return;
+      seen[item[0]] = true;
+      var button = document.createElement('button'); button.type = 'button'; window.RJEmojiText(button, item[0]); button.title = item[1]; button.setAttribute('aria-label', 'Insertar ' + item[1]);
+      // Keep the text selection while clicking an emoji.
+      button.addEventListener('mousedown', function (event) { event.preventDefault(); });
+      button.addEventListener('click', function () {
+        var start = activeField.selectionStart, end = activeField.selectionEnd;
+        if (activeField.value.length - (end - start) + item[0].length > activeField.maxLength) { status.textContent = 'No queda espacio para este emoji. Acorta el mensaje.'; return; }
+        activeField.setRangeText(item[0], start, end, 'end'); activeField.focus(); preview();
+        status.textContent = 'Emoji añadido al borrador. Pulsa Publicar mensajes para compartirlo.';
+      });
+      grid.appendChild(button);
+    });
+    if (!grid.childNodes.length) grid.textContent = 'Sin resultados. Prueba otra palabra.';
+    Array.prototype.forEach.call(tabs.children, function (button) { button.setAttribute('aria-pressed', String(button.textContent === category && !query)); });
+  }
+  Object.keys(categories).forEach(function (name) {
+    var button = document.createElement('button'); button.type = 'button'; button.textContent = name;
+    button.addEventListener('click', function () { category = name; search.value = ''; drawEmojis(); }); tabs.appendChild(button);
+  });
+  search.addEventListener('input', drawEmojis); drawEmojis();
   async function load() {
     save.disabled = true;
     status.textContent = 'Cargando mensajes publicados…';
