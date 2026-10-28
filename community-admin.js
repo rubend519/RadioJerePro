@@ -23,6 +23,14 @@
   [greeting, thanks].forEach(function (field) {
     field.addEventListener('focus', function () { activeField = field; target.textContent = 'Insertar en: ' + (field === greeting ? 'Saludos generales y personalizados' : 'Agradecimiento'); });
   });
+  [greeting, thanks].forEach(function (field) {
+    document.getElementById(field.id + 'Emojis').addEventListener('click', function () {
+      activeField = field;
+      target.textContent = 'Insertar en: ' + (field === greeting ? 'Saludos generales y personalizados' : 'Agradecimiento');
+      picker.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('communityEmojiSearch').focus({ preventScroll: true });
+    });
+  });
   var categories = {
     'Favoritos': [['👋','saludo hola'],['📻','radio'],['🎶','música'],['💜','corazón morado'],['✨','brillo'],['🥳','fiesta'],['🙏','gracias'],['🫶','cariño'],['🌎','mundo'],['🔥','fuego'],['😎','cool'],['⭐','estrella']],
     'Banderas': [['🇨🇴','Colombia'],['🇪🇸','España'],['🇻🇪','Venezuela'],['🇪🇨','Ecuador'],['🇵🇪','Perú'],['🇲🇽','México'],['🇦🇷','Argentina'],['🇨🇱','Chile'],['🇧🇷','Brasil'],['🇺🇸','Estados Unidos'],['🇨🇦','Canadá'],['🇬🇧','Reino Unido'],['🇫🇷','Francia'],['🇩🇪','Alemania'],['🇮🇹','Italia'],['🇵🇹','Portugal'],['🇵🇦','Panamá'],['🇨🇷','Costa Rica'],['🇩🇴','República Dominicana'],['🇵🇷','Puerto Rico'],['🇺🇾','Uruguay'],['🇧🇴','Bolivia'],['🇵🇾','Paraguay'],['🇦🇺','Australia']],
