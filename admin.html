@@ -139,7 +139,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   .form-row,.form-row.three{grid-template-columns:1fr}
 }
 </style>
-<link rel="stylesheet" href="/community.css?v=20261028-led-izquierda">
+<link rel="stylesheet" href="/community.css?v=20261028-emoji-boton">
 </head>
 <body>
 
@@ -347,12 +347,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
         <h2 class="form-title">Saludos y agradecimiento</h2>
         <p style="color:var(--text2);font-size:13px;line-height:1.6;margin-bottom:18px">Escribe tus saludos y tu agradecimiento, revisa la vista previa y pulsa Publicar mensajes. Los visitantes solo pueden leerlos; tus cambios se guardan con tu sesión privada de administrador.</p>
         <div class="form-group" style="margin-bottom:16px">
-          <label for="communityGreeting">Saludos generales y personalizados (máximo 280 caracteres)</label>
+          <div class="rj-message-toolbar"><label for="communityGreeting">Saludos generales y personalizados (máximo 280 caracteres)</label><button class="rj-open-emojis" type="button" id="communityGreetingEmojis" aria-label="Elegir emojis para el saludo" aria-controls="communityEmojiPicker"><svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#FFD66B" stroke="#FFAF47" stroke-width="2"/><ellipse cx="11.5" cy="13" rx="1.6" ry="2" fill="#573326"/><ellipse cx="20.5" cy="13" rx="1.6" ry="2" fill="#573326"/><path d="M10 19c2 6 10 6 12 0" stroke="#573326" stroke-width="2.2" stroke-linecap="round"/><circle cx="8" cy="18" r="2" fill="#FF9A80"/><circle cx="24" cy="18" r="2" fill="#FF9A80"/><path d="m27 2 .9 2.8L31 6l-3.1 1.2L27 10l-.9-2.8L23 6l3.1-1.2L27 2Z" fill="#DAAEFF"/></svg><span>Emojis y banderas</span></button></div>
           <textarea id="communityGreeting" maxlength="280" rows="3" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea><span class="rj-char-count" id="communityGreetingCount"></span>
           <label style="text-transform:none"><input type="checkbox" id="communityShowGreeting" checked> Mostrar saludo en Inicio</label>
         </div>
         <div class="form-group" style="margin-bottom:16px">
-          <label for="communityThanks">Nota de agradecimiento (máximo 1000 caracteres)</label>
+          <div class="rj-message-toolbar"><label for="communityThanks">Nota de agradecimiento (máximo 1000 caracteres)</label><button class="rj-open-emojis" type="button" id="communityThanksEmojis" aria-label="Elegir emojis para el agradecimiento" aria-controls="communityEmojiPicker"><svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="#FFD66B" stroke="#FFAF47" stroke-width="2"/><ellipse cx="11.5" cy="13" rx="1.6" ry="2" fill="#573326"/><ellipse cx="20.5" cy="13" rx="1.6" ry="2" fill="#573326"/><path d="M10 19c2 6 10 6 12 0" stroke="#573326" stroke-width="2.2" stroke-linecap="round"/><circle cx="8" cy="18" r="2" fill="#FF9A80"/><circle cx="24" cy="18" r="2" fill="#FF9A80"/><path d="m27 2 .9 2.8L31 6l-3.1 1.2L27 10l-.9-2.8L23 6l3.1-1.2L27 2Z" fill="#DAAEFF"/></svg><span>Emojis y banderas</span></button></div>
           <textarea id="communityThanks" maxlength="1000" rows="5" style="width:100%;padding:12px;background:var(--bg3);color:var(--text);border:1px solid var(--border2);border-radius:9px;font:inherit;resize:vertical"></textarea><span class="rj-char-count" id="communityThanksCount"></span>
           <label style="text-transform:none"><input type="checkbox" id="communityShowThanks" checked> Mostrar agradecimiento en Inicio</label>
         </div>
@@ -1013,6 +1013,6 @@ function showToast(msg, type = 'ok') {
 
 </script>
 <script src="/community.js?v=20261028-led"></script>
-<script src="/community-admin.js?v=20261028-led"></script>
+<script src="/community-admin.js?v=20261028-emoji-boton"></script>
 </body>
 </html>
