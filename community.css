@@ -15,3 +15,5 @@
 .rj-emoji-picker input{width:100%;padding:10px 12px!important;border:1px solid #ffffff25!important;border-radius:10px!important;background:#100e19!important;color:#fff!important;box-sizing:border-box}
 .rj-emoji-target{color:#e2b0ff!important}.rj-char-count{display:block;text-align:right;font-size:11px;color:var(--text2);margin:5px 0}
 @media(max-width:600px){.rj-led-badge{padding:16px 9px;font-size:9px}.rj-led-track{font-size:15px}.rj-emoji-picker{padding:12px}.rj-led{min-height:56px}}
+
+.rj-flag{display:inline-block;vertical-align:middle;object-fit:contain;margin:0 2px}.rj-emoji-picker a{color:#d9abff}
