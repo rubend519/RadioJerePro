@@ -43,7 +43,7 @@
     items.forEach(function (item) {
       if (seen[item[0]] || (query && item[1].toLocaleLowerCase().indexOf(query) < 0)) return;
       seen[item[0]] = true;
-      var button = document.createElement('button'); button.type = 'button'; button.textContent = item[0]; button.title = item[1]; button.setAttribute('aria-label', 'Insertar ' + item[1]);
+      var button = document.createElement('button'); button.type = 'button'; window.RJEmojiText(button, item[0]); button.title = item[1]; button.setAttribute('aria-label', 'Insertar ' + item[1]);
       // Keep the text selection while clicking an emoji.
       button.addEventListener('mousedown', function (event) { event.preventDefault(); });
       button.addEventListener('click', function () {
