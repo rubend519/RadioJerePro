@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-27",
-    "total": 1375,
+    "last_updated": "2026-10-28",
+    "total": 1385,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17572,6 +17572,96 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-607",
+      "name": "Doble X RadioUna radio para escuchar...",
+      "url": "https://stream.intervalohost.com/doblex",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-608",
+      "name": "Ebenezer StereoLa Radio que bendice para La Gloria de Jehová.",
+      "url": "https://s30.myradiostream.com:32623/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-609",
+      "name": "Emisora La MorenaEstá Buenísima!!",
+      "url": "https://streamhdglobal.com/8008/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-610",
+      "name": "Escenario RadioSintonizate con la Paz",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-611",
+      "name": "Javeriana Estereo 91.9 BogotaConcierto de la Mañana",
+      "url": "https://radio06.cehis.net:9001/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-612",
+      "name": "La Campeona Stereo  Que MaravillaQue Maravilla",
+      "url": "https://usa14.fastcast4u.com/proxy/campeona1006?mp=/1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-613",
+      "name": "La X Más MúsicaMañanas X",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-614",
+      "name": "Pachanga mixPuro crossover",
+      "url": "https://stream.zeno.fm/is26zisvdvytv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-615",
+      "name": "RADIO PRINCIPIOSLuis Palau - ¿Que puedo hacer por mi padre? (LPR0164)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-616",
+      "name": "Radio Latina OnlineLuis Alberto Posada - Mal amor",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
       "favicon": ""
     }
   ]
