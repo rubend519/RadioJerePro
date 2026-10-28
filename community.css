@@ -17,3 +17,6 @@
 @media(max-width:600px){.rj-led-badge{padding:16px 9px;font-size:9px}.rj-led-track{font-size:15px}.rj-emoji-picker{padding:12px}.rj-led{min-height:56px}}
 
 .rj-flag{display:inline-block;vertical-align:middle;object-fit:contain;margin:0 2px}.rj-emoji-picker a{color:#d9abff}
+
+.rj-message-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:wrap}.rj-message-toolbar label{margin:0!important;flex:1;min-width:190px}
+.rj-open-emojis{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;background:linear-gradient(135deg,#503071,#2d2246);border:1px solid #be8cf080;border-radius:12px;color:#f6eaff;font-family:inherit;font-weight:600;font-size:12px;line-height:1.2;cursor:pointer;box-shadow:0 3px 12px #0003;transition:background .2s,transform .2s}.rj-open-emojis:hover{background:#654082;transform:translateY(-1px)}.rj-open-emojis:focus-visible{outline:2px solid #ffd66b;outline-offset:3px}.rj-open-emojis svg{flex:none;filter:drop-shadow(0 2px 3px #0003)}
