@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-28",
-    "total": 1385,
+    "last_updated": "2026-10-29",
+    "total": 1389,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17658,6 +17658,42 @@
     {
       "stationuuid": "co-616",
       "name": "Radio Latina OnlineLuis Alberto Posada - Mal amor",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-617",
+      "name": "ABBA Gold RadioABBA, pure gold! ABBA, oro puro!",
+      "url": "https://purchases-char-administered-duties.trycloudflare.com/abba",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-618",
+      "name": "La X Más MúsicaDivinyls - I Touch Myself",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-619",
+      "name": "RADIO PRINCIPIOSCasting Crowns - God of All My Days",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-620",
+      "name": "Radio Latina OnlineLos 50 de Joselito - El diario de un crudo",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
