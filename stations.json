@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-29",
-    "total": 1389,
+    "last_updated": "2026-10-30",
+    "total": 1395,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17698,6 +17698,60 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-621",
+      "name": "Emisora MarianaMUSICA BALADA/ROMÁNTICA",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-622",
+      "name": "Escenario RadioDeliberadamente",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-623",
+      "name": "RADIO PRINCIPIOSLuis Palau - Llevandose con el marido (LPR0046)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-624",
+      "name": "Radio Latina OnlineProyecto Uno - Te dejaron Flat",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-625",
+      "name": "Radio Portal de la OraciónAliento para Tu Vida",
+      "url": "https://node2.tunercloud.online/stream/portal-de.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-626",
+      "name": "Su Presencia RadioHillsong en Español - Todo Es Nuevo",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
