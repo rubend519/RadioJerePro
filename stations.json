@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-30",
-    "total": 1395,
+    "last_updated": "2026-10-31",
+    "total": 1406,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17749,6 +17749,105 @@
       "stationuuid": "co-626",
       "name": "Su Presencia RadioHillsong en Español - Todo Es Nuevo",
       "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-627",
+      "name": "Banca del Parque RadioMi nombre es Colombia",
+      "url": "https://radiolatina.info/8142/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-628",
+      "name": "Buena-StereoFolclor Llanero",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-629",
+      "name": "DigitalStereoFmMás que Música",
+      "url": "http://stream.zeno.fm/60q7sz1wgtzuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-630",
+      "name": "Dix FMNos Une La Música",
+      "url": "https://radio25.virtualtronics.com/proxy/dixfm?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-631",
+      "name": "ENC Radio (Nuevo Continente)Pedrito el Pulpo",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-632",
+      "name": "IMPACTO FM ESTEREOLOS 20 IMPACTOS DE LA SEMANA",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-633",
+      "name": "ITSA RadioFACE to FACE",
+      "url": "http://itsaradio.itsa.edu.co:8000/ITSARadio106.6.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-634",
+      "name": "Poliradio90s HipHop - Dr. Dre - The Next Episode (feat. Snoop Dogg, Nate Dogg & Kurupt)",
+      "url": "https://poliradio.out.airtime.pro/poliradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-635",
+      "name": "RADIO PRINCIPIOSPaco de Lucía & Enrique Montoya - Senor Del Amor",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-636",
+      "name": "Radio Latina OnlineGilberto Santa Rosa, Tito Rojas - Por la Calle del Medio",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-637",
+      "name": "VideoGrafias OnlineLos dos principales",
+      "url": "https://estructuraweb.com.co:2199/tunein/videografias.ram",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
