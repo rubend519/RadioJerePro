@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-10-31",
-    "total": 1406,
+    "last_updated": "2026-11-01",
+    "total": 1418,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -17847,6 +17847,114 @@
     {
       "stationuuid": "co-637",
       "name": "VideoGrafias OnlineLos dos principales",
+      "url": "https://estructuraweb.com.co:2199/tunein/videografias.ram",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-638",
+      "name": "Bésame ArmeniaEspecial del Domingo",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_ARMENIA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MzU0Mzc3NywiaXNzIjoidGlzcnYifQ.xce9I0g-2r410pkBMd_9-XsGZvtfLf4Zdow9rLA2X-Q",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-639",
+      "name": "Emisora MarianaEnvironmental reflections",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-640",
+      "name": "Javeriana Estereo 91.9 BogotaMañanas sin fronteras domingo 9am",
+      "url": "https://radio06.cehis.net:9001/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-641",
+      "name": "KantineraKantinera",
+      "url": "https://estructuraweb.com.co:9000/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-642",
+      "name": "La X Más MúsicaPaul Anka - (You’re) Having My Baby",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-643",
+      "name": "RADIO PRINCIPIOSQue amen a sus hijos (✅QAH) - Mamá: ¿Y si Dios no te creó para que fueras espectacular?",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-644",
+      "name": "Radio Latina OnlineReik, Ozuna, Wisin - Me Niego",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-645",
+      "name": "Radioacktiva BogotáDomingos de Resurección",
+      "url": "https://playerservices.streamtheworld.com/pls/RADIO_ACTIVA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MzU0Mzc4MCwiaXNzIjoidGlzcnYifQ.bUeGpk0NSeHni6ME6ONtTxI07XVsBnHVo9Z7OJeBZ2k",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-646",
+      "name": "Su Presencia Radio:undefined - \\\\TRANSMISIONIT\\AUDIO\\SEPARADORES\\IN - REUNIÓN EN VIVO.MP2",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-647",
+      "name": "Uninorte FM EstéreoAQUARELA DO BRASIL",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-648",
+      "name": "Universal StereoRock a Domicilio",
+      "url": "http://stream.zeno.fm/zs01y0bv1reuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-649",
+      "name": "VideoGrafias OnlineRecordar es vivir (bolero)",
       "url": "https://estructuraweb.com.co:2199/tunein/videografias.ram",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
