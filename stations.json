@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-02",
-    "total": 1445,
+    "last_updated": "2026-11-03",
+    "total": 1460,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18202,6 +18202,141 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-677",
+      "name": "Banca del Parque RadioProtesta e Instrumental",
+      "url": "https://radiolatina.info/8142/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-678",
+      "name": "Buena-StereoVoces Comunitarias",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-679",
+      "name": "Bésame ArmeniaQué disco te gusta",
+      "url": "http://provisioning.streamtheworld.com/pls/BESAME_ARMENIA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MzcyMDA3NiwiaXNzIjoidGlzcnYifQ.W3dvXBF7c6RxKTi2FQFXCsNeujpJGU0eO60aiYTkfYc",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-680",
+      "name": "CIELOS ABIERTOS TU RADIOTu Musica",
+      "url": "https://streaming.asilivehd.com/8218/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-681",
+      "name": "Champeta RadioDale Play",
+      "url": "https://stream.zeno.fm/hf4qdqp1ey8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-682",
+      "name": "Colmundo Radio - CartagenaPortal plus",
+      "url": "https://streaming.shoutcast.com/colmundo-radio-cartagena",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-683",
+      "name": "Emisora Lluvias Radio 1260 AMLa Buena Vida",
+      "url": "https://play14.tikast.com:20082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-684",
+      "name": "IMPACTO FM ESTEREOLAS MAÑANAS DE IMPACTO",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-685",
+      "name": "Kmusic RadioKmusic",
+      "url": "https://virtual8.estructuraweb.com:8150/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-686",
+      "name": "Musica RancheraAbre tu Corazón",
+      "url": "https://radio013.gt.gt/radio/8070/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-687",
+      "name": "RADIO PRINCIPIOSGracia Soberana Música - Somos Siempre Tuyos",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-688",
+      "name": "Radio Latina OnlineOzuna - Una Aventura",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-689",
+      "name": "Radioacktiva BogotáEl Planeta ROCK",
+      "url": "https://playerservices.streamtheworld.com/pls/RADIO_ACTIVA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5MzcyMDA4MCwiaXNzIjoidGlzcnYifQ.uyDQP3PXq_uiND7ykNiVKFCvc63yduNvyAxT5Vdziqs",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-690",
+      "name": "Sol Stereo RadioMás Anapoimuna Que Nunca",
+      "url": "https://radio25.virtualtronics.com/proxy/solstereo?mp=/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-691",
+      "name": "Tropicana BogotáUna combinación bacana",
+      "url": "https://tunein-live-f.cdnstream1.com/10700_96.mp3?aw_0_1st.skey=1793720082&lat=41.6015&lon=-93.6127&aw_0_1st.abtest=&aw_0_1st.stationId=s16487&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g2829&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p1306631&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
       "favicon": ""
     }
   ]
