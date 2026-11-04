@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-03",
-    "total": 1460,
+    "last_updated": "2026-11-04",
+    "total": 1467,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18337,6 +18337,69 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-692",
+      "name": "ENC Radio (Nuevo Continente)Najhar Abogados",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-693",
+      "name": "Emisora MarianaLA MERIENDA",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-694",
+      "name": "Escenario RadioTinta Roja",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-695",
+      "name": "La X Más MúsicaSilentó - Watch Me",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-696",
+      "name": "RADIO PRINCIPIOSLauren Daigle - These Are The Days",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-697",
+      "name": "Radio Latina OnlineLos Cadillac's, Alexis y Fido - Ponte Pa´ la Foto",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-698",
+      "name": "Radio Vallenato FMLas Celestiales",
+      "url": "http://colombiawebs.com.co/proxy/postales1/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
