@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-05",
-    "total": 1472,
+    "last_updated": "2026-11-06",
+    "total": 1477,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18441,6 +18441,51 @@
     {
       "stationuuid": "co-703",
       "name": "Radio Latina OnlineBinomio de Oro de América - Amigo el corazón",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-704",
+      "name": "Buena-StereoViernes de Musica",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-705",
+      "name": "ENC Radio (Nuevo Continente)Jacob Hurtado",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-706",
+      "name": "Escenario RadioVoces de la Tierra",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-707",
+      "name": "RADIO PRINCIPIOSHillsong en Español - Mi todo",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-708",
+      "name": "Radio Latina OnlineEl Alfa, Noriel, Trueno - Los Aparatos",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
