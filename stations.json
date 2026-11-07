@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-06",
-    "total": 1477,
+    "last_updated": "2026-11-07",
+    "total": 1487,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18490,6 +18490,96 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-709",
+      "name": "Emisora Lluvias Radio 1260 AMEl Tablero",
+      "url": "https://play14.tikast.com:20082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-710",
+      "name": "Emisora Minuto de Dios BarranquillaUna emisora católica para la gloria de Jesuscristo",
+      "url": "https://radio.minutodedios.co/barranquilla",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-711",
+      "name": "Escenario RadioTodas las Voces",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-712",
+      "name": "La Estacion MusicKe buena Música!",
+      "url": "http://stream.zeno.fm/t4ucv8abhv8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-713",
+      "name": "Poliradio7clouds - Kygo - Stole The Show (Lyrics) feat. Parson James",
+      "url": "https://poliradio.out.airtime.pro/poliradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-714",
+      "name": "RADIO PRINCIPIOSDavid Hormachea - Un ley divina que no se debe romper (CAJT05)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-715",
+      "name": "RCC RadioRenovación Católica Carismática",
+      "url": "https://radio.minutodedios.co/rccradio",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-716",
+      "name": "Radio Latina OnlineRodolfo Aicardi, La Tipica Ra7 - Vagabundo Soy",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-717",
+      "name": "TU RADIO FM WEBVibra Tu Radio",
+      "url": "https://stream.zeno.fm/ub471yfuv38uv.m3u",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-718",
+      "name": "Uninorte FM EstéreoCUERDAS AL AIRE",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
       "favicon": ""
     }
   ]
