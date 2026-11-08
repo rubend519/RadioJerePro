@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-07",
-    "total": 1487,
+    "last_updated": "2026-11-08",
+    "total": 1494,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18580,6 +18580,69 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-719",
+      "name": "Carnavaleando RadioRitmos Sabanero",
+      "url": "https://us3.streamingpulse.com/ssl/7218",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-720",
+      "name": "Emisora MarianaFESTIVAL LLANERO EN VIVO",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-721",
+      "name": "Emisora Minuto de Dios BogotáRedes y Saberes",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-722",
+      "name": "La X Más MúsicaBarbie Girl - Aqua",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-723",
+      "name": "RADIO PRINCIPIOSQue amen a sus hijos (✅QAH) - Prepara el camino al Señor como mamá",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-724",
+      "name": "Radio Latina Online¡Mueve Tu Vida!",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-725",
+      "name": "Su Presencia RadioUndefined - \\\\TRANSMISIONIT\\AUDIO\\PREDICACIONES\\2026 11 07 TRANSMISION AUDIO.MP2",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
