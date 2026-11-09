@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-08",
-    "total": 1494,
+    "last_updated": "2026-11-09",
+    "total": 1503,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18639,6 +18639,87 @@
     {
       "stationuuid": "co-725",
       "name": "Su Presencia RadioUndefined - \\\\TRANSMISIONIT\\AUDIO\\PREDICACIONES\\2026 11 07 TRANSMISION AUDIO.MP2",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-726",
+      "name": "Buena-StereoSentimiento Vallenato Buena Stereo",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-727",
+      "name": "CMPlus Radio StreamBlues & Jazz",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-728",
+      "name": "ENC Radio (Nuevo Continente)A Través de la Biblia",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-729",
+      "name": "Emisora Minuto de Dios BogotáNoticiero La Movida",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-730",
+      "name": "La Estacion MusicEl Cassette",
+      "url": "http://stream.zeno.fm/t4ucv8abhv8uv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-731",
+      "name": "La X Más MúsicaOn The Radio",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-732",
+      "name": "RADIO PRINCIPIOSRené González - No importa",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-733",
+      "name": "Radio Latina OnlinePablo Atuesta - Colegiala Eres Mi Amor",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-734",
+      "name": "Su Presencia RadioSu Presencia Radio - Que Ruede la Pelota",
       "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
