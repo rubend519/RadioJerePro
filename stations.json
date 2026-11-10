@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-09",
-    "total": 1503,
+    "last_updated": "2026-11-10",
+    "total": 1509,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18720,6 +18720,60 @@
     {
       "stationuuid": "co-734",
       "name": "Su Presencia RadioSu Presencia Radio - Que Ruede la Pelota",
+      "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-735",
+      "name": "Ciudad Rock and PopLa Ciudad que Suena",
+      "url": "https://radio.ciudadrockandpop.com/listen/ciudad_rock_and_pop/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-736",
+      "name": "Emisora Minuto de Dios BogotáMusica",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-737",
+      "name": "La X Más MúsicaRight Said Fred - I’m Too Sexy",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-738",
+      "name": "RADIO PRINCIPIOSLauren Daigle - Valuable",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-739",
+      "name": "Radio Latina OnlineBonny Cepeda - Tengo Que Llorar",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-740",
+      "name": "Su Presencia RadioNoël Mio - Comforter",
       "url": "https://supresenciaradio.out.airtime.pro/supresenciaradio_a",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
