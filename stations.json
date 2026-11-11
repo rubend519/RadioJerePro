@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-10",
-    "total": 1509,
+    "last_updated": "2026-11-11",
+    "total": 1512,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18778,6 +18778,33 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-741",
+      "name": "La X Más MúsicaMC Hammer - U Can't Touch This",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-742",
+      "name": "RADIO PRINCIPIOSEvan Craft - Tú Señor (Bilingual)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-743",
+      "name": "Radio Latina OnlineLos Hijos de Puerto Rico - Cuando Acaba El Placer",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
       "favicon": ""
     }
   ]
