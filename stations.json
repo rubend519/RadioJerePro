@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-11",
-    "total": 1512,
+    "last_updated": "2026-11-12",
+    "total": 1517,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18801,6 +18801,51 @@
     {
       "stationuuid": "co-743",
       "name": "Radio Latina OnlineLos Hijos de Puerto Rico - Cuando Acaba El Placer",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-744",
+      "name": "Escenario RadioEstamos Contigo",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-745",
+      "name": "KantineraEspacio Publicitario Kantinera",
+      "url": "https://estructuraweb.com.co:9000/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-746",
+      "name": "La X Más MúsicaBaha Men - Who Let the Dogs Out",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-747",
+      "name": "RADIO PRINCIPIOSStephen Davey - Sabiduría para el Corazón (✅SBCO)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-748",
+      "name": "Radio Latina OnlineLos Hermanos Rosario - Oleila",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
