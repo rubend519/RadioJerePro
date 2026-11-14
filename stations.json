@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-13",
-    "total": 1520,
+    "last_updated": "2026-11-14",
+    "total": 1527,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18877,6 +18877,69 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-752",
+      "name": "AnimePOP! Online RadioKroi - HAZE",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-753",
+      "name": "Emisora MarianaEncuentros Pedagógicos",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-754",
+      "name": "Emisora Minuto de Dios BogotáDiscipulandia - niños",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-755",
+      "name": "La X Más MúsicaLas Ketchup - Ketchup Song",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-756",
+      "name": "Olímpica Stereo BarranquillaLa del primer lugar",
+      "url": "https://tunein-live-e.cdnstream1.com/12337_128.mp3?aw_0_1st.skey=1794667231&lat=45.8401&lon=-119.705&aw_0_1st.abtest=&aw_0_1st.stationId=s99028&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g1&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.affiliateIds=a39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-757",
+      "name": "RADIO PRINCIPIOSDavid Hormachea - No confunda el amor con el enamoramiento, la lujuria o la infatuación (CAJT10)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-758",
+      "name": "Radio Latina OnlineAlejandro Palacio - Llora y me llama",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
       "favicon": ""
     }
   ]
