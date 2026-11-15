@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-14",
-    "total": 1527,
+    "last_updated": "2026-11-15",
+    "total": 1529,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18936,6 +18936,24 @@
     {
       "stationuuid": "co-758",
       "name": "Radio Latina OnlineAlejandro Palacio - Llora y me llama",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-759",
+      "name": "RADIO PRINCIPIOSDavid Hormachea / José Bravo - Matrimonio ¿En todos los casos es hasta que la muerte nos separe? (HG022)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-760",
+      "name": "Radio Latina OnlineHéctor Lavoe - El día de mi suerte",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
