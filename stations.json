@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-15",
-    "total": 1529,
+    "last_updated": "2026-11-16",
+    "total": 1534,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -18954,6 +18954,51 @@
     {
       "stationuuid": "co-760",
       "name": "Radio Latina OnlineHéctor Lavoe - El día de mi suerte",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-761",
+      "name": "AnimePOP! Online Radiokessoku band - Distortion!!",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-762",
+      "name": "La X Más MúsicaLos del Río - Macarena",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-763",
+      "name": "Olímpica Stereo BarranquillaCógela Suave",
+      "url": "https://tunein-live-e.cdnstream1.com/12337_128.mp3?aw_0_1st.skey=1794850946&lat=41.6015&lon=-93.6127&aw_0_1st.abtest=&aw_0_1st.stationId=s99028&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g1&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p353403&aw_0_1st.affiliateIds=a39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-764",
+      "name": "RADIO PRINCIPIOSMajo y Dan - Confiaré en tu amor",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-765",
+      "name": "Radio Latina OnlineNacho - F.O.K. Friends",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
