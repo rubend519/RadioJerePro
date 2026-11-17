@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-16",
-    "total": 1534,
+    "last_updated": "2026-11-17",
+    "total": 1541,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19003,6 +19003,69 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-766",
+      "name": "AnimePOP! Online RadioDiana Garnet - Spinning World",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-767",
+      "name": "ENC Radio (Nuevo Continente)Enfoque A La Familia",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-768",
+      "name": "Emisora Lluvias Radio 1260 AMMomentos con Dios",
+      "url": "https://play14.tikast.com:20082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-769",
+      "name": "La X Más MúsicaDavid Hasselhoff - Looking for Freedom",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-770",
+      "name": "RADIO PRINCIPIOSMomento Decisivo - D.Jermiah (✅MDTP)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-771",
+      "name": "Radio Latina OnlineLos Gigantes del Vallenato - Un solo corazón",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-772",
+      "name": "Ttifany Queen RadioLa Magia de Ser Con Natalia Tobon",
+      "url": "https://estructuraweb.com.co:9111/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
