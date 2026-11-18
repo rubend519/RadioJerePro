@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-17",
-    "total": 1541,
+    "last_updated": "2026-11-18",
+    "total": 1550,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19066,6 +19066,87 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-773",
+      "name": "AnimePOP! Online RadioJoris de Man, Julie Elven - Aloy's Theme - Forbidden West (feat. Julie Elven) (From \"Horizon Forbidden West\" Video Game Soundtrack)",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-774",
+      "name": "CMPlus Radio StreamHabilidades para la Vida y el Trabajo - Life and Work Skills",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-775",
+      "name": "ENC Radio (Nuevo Continente)The Word - CEDECOL",
+      "url": "http://99.198.110.162:7092/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-776",
+      "name": "Emisora MarianaCITA CON EL BOLERO (BOLERO ANTILLANO)",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-777",
+      "name": "Emisora Minuto de Dios BogotáMinutos de Evangelizacion",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-778",
+      "name": "Escenario RadioDebate Polifónico",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-779",
+      "name": "Olímpica Stereo BarranquillaLa Gozadera Olímpica",
+      "url": "https://tunein-live-e.cdnstream1.com/12337_128.mp3?aw_0_1st.skey=1795020720&lat=33.4532&lon=-112.0748&aw_0_1st.abtest=&aw_0_1st.stationId=s99028&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g1&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p353400&aw_0_1st.affiliateIds=a39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-780",
+      "name": "RADIO PRINCIPIOSDanilo Montero - Has aumentado",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-781",
+      "name": "Radio Latina OnlineAlzate, Johnny Rivera - Besitos Por Botellas",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
       "favicon": ""
     }
   ]
