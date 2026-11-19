@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-18",
-    "total": 1550,
+    "last_updated": "2026-11-19",
+    "total": 1553,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19143,6 +19143,33 @@
     {
       "stationuuid": "co-781",
       "name": "Radio Latina OnlineAlzate, Johnny Rivera - Besitos Por Botellas",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-782",
+      "name": "AnimePOP! Online RadioJanne Da Arc - Dry ?",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-783",
+      "name": "RADIO PRINCIPIOSMarcela Gándara - Girando hacia ti",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-784",
+      "name": "Radio Latina OnlinePrince Royce - How Deep Is Your Love",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
