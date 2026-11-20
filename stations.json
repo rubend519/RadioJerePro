@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-19",
-    "total": 1553,
+    "last_updated": "2026-11-20",
+    "total": 1557,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19170,6 +19170,42 @@
     {
       "stationuuid": "co-784",
       "name": "Radio Latina OnlinePrince Royce - How Deep Is Your Love",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-785",
+      "name": "AnimePOP! Online RadioBust A Groove - 17. Pander - Enka 1",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-786",
+      "name": "Escenario RadioMente y Realidad",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-787",
+      "name": "La X Más MúsicaLMFAO feat. Lil Jon - Shots",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-788",
+      "name": "Radio Latina OnlineGuayacán Orquesta - Fiesta navideña: El año viejo / Cantares de Navidad / Año nuevo / Aguinaldo",
       "url": "https://audioserverhd.com:8090/stream",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
