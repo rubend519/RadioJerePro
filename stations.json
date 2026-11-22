@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-21",
-    "total": 1569,
+    "last_updated": "2026-11-22",
+    "total": 1581,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19318,6 +19318,114 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-801",
+      "name": "AnimePOP! Online RadioNana Mizuki, Megumi Toyoguchi, Sanae Kobayashi, Mamiko Noto - Scarlet Knight",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-802",
+      "name": "Buena-StereoA Bailar con la Sonora Matancera",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-803",
+      "name": "Emisora Lluvias Radio 1260 AMCita con la Palabra",
+      "url": "https://play14.tikast.com:20082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-804",
+      "name": "Emisora Minuto de Dios BogotáLa Santa Eucaristía",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-805",
+      "name": "Flow Radio FmMucho Flow Radio",
+      "url": "http://radiohd.streaminghd.co:7014/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-806",
+      "name": "ITSA RadioSalsa all Star",
+      "url": "http://itsaradio.itsa.edu.co:8000/ITSARadio106.6.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-807",
+      "name": "Javeriana Estereo 91.9 BogotaUna Guitarra, Mil Mundos",
+      "url": "https://radio06.cehis.net:9001/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-808",
+      "name": "Olímpica Stereo BarranquillaProgramación Musical",
+      "url": "https://tunein-live-e.cdnstream1.com/12337_128.mp3?aw_0_1st.skey=1795362602&lat=36.6694&lon=-78.3877&aw_0_1st.abtest=&aw_0_1st.stationId=s99028&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g1&aw_0_1st.class=music&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p353408&aw_0_1st.affiliateIds=a39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-809",
+      "name": "RADIO PRINCIPIOSMarcos Vidal - No te quepa duda",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-810",
+      "name": "Radio Latina OnlinePablo Atuesta - Johana",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-811",
+      "name": "Radio Vallenato FMLa Elite del Vallenato",
+      "url": "http://colombiawebs.com.co/proxy/postales1/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-812",
+      "name": "Uninorte FM EstéreoJAZZ EN CLAVE CARIBE",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
       "favicon": ""
     }
   ]
