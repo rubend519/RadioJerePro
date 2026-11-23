@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-22",
-    "total": 1581,
+    "last_updated": "2026-11-23",
+    "total": 1598,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19422,6 +19422,159 @@
     {
       "stationuuid": "co-812",
       "name": "Uninorte FM EstéreoJAZZ EN CLAVE CARIBE",
+      "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-813",
+      "name": "AnimePOP! Online RadioAiko Aiko - Oyasuminasai",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-814",
+      "name": "Buena-StereoSalsa & Sonora",
+      "url": "https://panel.virtualtecnologe.com:8100/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-815",
+      "name": "Caracol Radio BarranquillaDos puntos",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CR_BARRANQ.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NTQ2MjgwOSwiaXNzIjoidGlzcnYifQ.io8Cv7L-GJn5l6TH2Q5CjYiSPiySRktdpylXRp_VlEE",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-816",
+      "name": "Caracol Radio BogotáDos puntos",
+      "url": "https://tunein-live-f.cdnstream1.com/4436_128.mp3?DIST=TuneIn&TGT=TuneIn&maxServers=2&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NTQ2MjYxNiwiaXNzIjoidGlzcnYifQ.FklhZfpLyDjcPS2ebZL9ajNskPgh-l0XfTCqVdNR_hE&aw_0_1st.skey=1795462616&lat=39.0367&lon=-77.4209&aw_0_1st.abtest=&aw_0_1st.stationId=s16182&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g255&aw_0_1st.class=talk&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p4703567&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-817",
+      "name": "Caracol Radio MedellínDos puntos",
+      "url": "https://tunein-live-f.cdnstream1.com/10606_128.mp3?aw_0_1st.skey=1795462610&lat=39.0367&lon=-77.4209&aw_0_1st.abtest=&aw_0_1st.stationId=s144473&aw_0_1st.premium=false&source=TuneIn&aw_0_1st.platform=tunein&aw_0_1st.genre_id=g255&aw_0_1st.class=talk&aw_0_1st.ads_partner_alias=ce.Other&aw_0_azn.planguage=en%2ces&aw_0_1st.is_ondemand=false&aw_0_1st.topicId=na&aw_0_1st.programId=p4703567&aw_0_1st.affiliateIds=a40115%2ca40084%2ca40075%2ca39100&aw_0_1st.bandId=2&delivery=1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-818",
+      "name": "Emisora Lluvias Radio 1260 AMYo Vivo la Tarde",
+      "url": "https://play14.tikast.com:20082",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-819",
+      "name": "Emisora MarianaMUSICA TROPICAL MODERNA (SALSA- MENRENGUE - VALLENATO)",
+      "url": "http://stream.zeno.fm/3rg36r3x81zuv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-820",
+      "name": "Emisora Minuto de Dios BogotáA Dios Gracias",
+      "url": "https://radio.minutodedios.co/bogota",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-821",
+      "name": "Escenario RadioDerecho a tu Alcance",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-822",
+      "name": "IMPACTO FM ESTEREODISCÓMETRO ROMÁNTICO",
+      "url": "http://163.172.198.16:8421/",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-823",
+      "name": "ITSA RadioA Todo Volumen: Franja Juvenil",
+      "url": "http://itsaradio.itsa.edu.co:8000/ITSARadio106.6.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-824",
+      "name": "Javeriana Estereo 91.9 BogotaTardes de Jazz",
+      "url": "https://radio06.cehis.net:9001/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-825",
+      "name": "La X Más MúsicaAce of Base - Wheel of Fortune",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-826",
+      "name": "RADIO PRINCIPIOSThe Eccos - Corazón Perforado (feat. Pablo Preciado)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-827",
+      "name": "Radio Vallenato FMVallenato Fin de año Pilas",
+      "url": "http://colombiawebs.com.co/proxy/postales1/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-828",
+      "name": "Radioacktiva BogotáTardes de Rock N' Roll",
+      "url": "https://playerservices.streamtheworld.com/pls/RADIO_ACTIVA.pls?DIST=TuneIn&TGT=TuneIn&maxServers=2&gdpr=0&partnertok=eyJhbGciOiJIUzI1NiIsImtpZCI6InR1bmVpbiIsInR5cCI6IkpXVCJ9.eyJ0cnVzdGVkX3BhcnRuZXIiOnRydWUsImlhdCI6MTc5NTQ2MjYwOSwiaXNzIjoidGlzcnYifQ.XPR0-TzywWMtpwwIyjYX8CaH0JlBenYQTd-AnC-JXME",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Caracol Radio / W Radio / Bésame / Tropicana / LOS40 / Radioacktiva",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-829",
+      "name": "Uninorte FM EstéreoTARDEANDO",
       "url": "http://cactus2.uninorte.edu.co:1755/listen.pls",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
