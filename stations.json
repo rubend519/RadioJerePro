@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-23",
-    "total": 1598,
+    "last_updated": "2026-11-24",
+    "total": 1605,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19579,6 +19579,69 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-830",
+      "name": "AnimePOP! Online RadioMarina Del Ray ft kacky - Pegasus Forever",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-831",
+      "name": "CMPlus Radio StreamMúsica de mundo",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-832",
+      "name": "Escenario RadioLa Caja de Pandora",
+      "url": "https://icecast.teveo.com.co/escenario",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-833",
+      "name": "La X Más MúsicaBlack Eyed Peas -  My Humps",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-834",
+      "name": "RADIO PRINCIPIOSAviva Nuestros Corazones - N.DeMoss (✅ANC)",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-835",
+      "name": "Radio Latina OnlineAlfredo Gutiérrez - Mujer que no jode es macho",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-836",
+      "name": "Ttifany Queen RadioLa Radio De La Queen",
+      "url": "https://estructuraweb.com.co:9111/live",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
