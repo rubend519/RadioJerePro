@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-25",
-    "total": 1619,
+    "last_updated": "2026-11-26",
+    "total": 1625,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19768,6 +19768,60 @@
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-851",
+      "name": "AnimePOP! Online RadioYasushi Ishii - Hellsing Logos Naki World (ft. Lzzy Hale)",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-852",
+      "name": "CMPlus Radio StreamBoleros",
+      "url": "https://sseg.us:2199/tunein/cmplusli.pls",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-853",
+      "name": "La X Más MúsicaNicki Minaj - Beez in the Trap",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-854",
+      "name": "RADIO PRINCIPIOSRené González - En su trono",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-855",
+      "name": "Radio Latina OnlineJorge Celedón - Lo perdí todo",
+      "url": "https://audioserverhd.com:8090/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-856",
+      "name": "TripMind RadioTo us for us.",
+      "url": "https://panel.tripmindradio.com/listen/tripmind_radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
       "favicon": ""
     }
   ]
