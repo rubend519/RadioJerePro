@@ -2,8 +2,8 @@
   "_meta": {
     "version": "1.0",
     "description": "Radio Jere Pro â€” emisoras curadas Colombia",
-    "last_updated": "2026-11-26",
-    "total": 1625,
+    "last_updated": "2026-11-27",
+    "total": 1633,
     "maintainer": "Radio Jere Pro Admin"
   },
   "stations": [
@@ -19819,6 +19819,78 @@
       "stationuuid": "co-856",
       "name": "TripMind RadioTo us for us.",
       "url": "https://panel.tripmindradio.com/listen/tripmind_radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-857",
+      "name": "AnimePOP! Online Radiooutrun coast 2 coast - passing breeze",
+      "url": "https://animepop-radio.online:8000/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-858",
+      "name": "ESTACION CENTRALESTACION CENTRAL CONECTA A TU VIDA CON LA MUSICA",
+      "url": "https://radiolatina.info/9410/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-859",
+      "name": "KILLA MIXEL SONIDO QUE TE MUEVE",
+      "url": "https://usa3.fastcast4u.com/proxy/negro10?mp=/1",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Barranquilla",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-860",
+      "name": "La X Más MúsicaTyga - Rack City",
+      "url": "https://s5.radio.co/s980fc5249/listen",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-861",
+      "name": "RADIO PRINCIPIOSGracia Soberana Música - Déjanos Ver",
+      "url": "https://stream.zeno.fm/2n2gnisptyltv",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-862",
+      "name": "RETRO DJSLa música que nunca muere",
+      "url": "https://retrodjs.online/listen/radio/radio.mp3",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Tunja",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-863",
+      "name": "Radio Vallenato FMEl Valletop",
+      "url": "http://colombiawebs.com.co/proxy/postales1/stream",
+      "country": "Colombia",
+      "state": "Sin ciudad detectada",
+      "tags": "Ciudad: Bogotá",
+      "favicon": ""
+    },
+    {
+      "stationuuid": "co-864",
+      "name": "Red Guadalupana Estereo Oficial BogotáRed Guadalupana Estéreo… ¡Qué Buenaaa!",
+      "url": "https://stream.zeno.fm/fskbpxwfkemvv",
       "country": "Colombia",
       "state": "Sin ciudad detectada",
       "tags": "Ciudad: Bogotá",
